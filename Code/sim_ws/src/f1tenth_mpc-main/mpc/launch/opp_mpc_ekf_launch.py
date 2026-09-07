@@ -27,7 +27,6 @@ def generate_launch_description():
             name='opp_ekf_tracker',
             parameters=[{
                 'measurement_source': 'lidar',
-                'measurement_topic': '/ego_racecar/opp_odom',
                 'scan_topic': '/scan',
                 'ego_odom_topic': '/ego_racecar/odom',
                 'lidar_fov_deg': 180.0,

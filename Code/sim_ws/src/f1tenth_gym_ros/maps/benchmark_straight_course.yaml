@@ -1,0 +1,49 @@
+course_id: benchmark_straight
+purpose: calibration and nominal following on two long straight sections
+size_m:
+- 24.0
+- 14.0
+geometry:
+  type: stadium
+  straight_length_m: 12.0
+  turn_radius_m: 4.0
+obstacle_station_m: 9.0
+zones:
+  warmup:
+  - 0.0
+  - 6.5
+  approach:
+  - 6.5
+  - 8.5
+  occlusion_obstacle:
+  - 8.5
+  - 10.5
+  rejoin:
+  - 10.5
+  - 13.0
+lap_length_m: 49.13271510548449
+track_width_m: 2.2
+boundary_thickness_m: 0.1
+resolution_m_per_pixel: 0.025
+spawn:
+  ego:
+  - 6.25
+  - 3.0
+  - 0.0
+  opponent:
+  - 7.75
+  - 3.0
+  - 0.0
+  ego_station_s_m: 0.25
+  opponent_station_s_m: 1.75
+  arc_separation_m: 1.5
+  center_distance_m: 1.5
+map_names:
+- benchmark_straight
+- benchmark_straight_obstacle_center
+- benchmark_straight_obstacle_left
+- benchmark_straight_obstacle_right
+- benchmark_straight_visibility_left
+- benchmark_straight_visibility_right
+centerline_file: benchmark_straight_centerline.csv
+waypoints_file: benchmark_straight_mpc.csv

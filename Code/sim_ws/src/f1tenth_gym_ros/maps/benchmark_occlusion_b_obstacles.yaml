@@ -1,0 +1,70 @@
+dimensions_m:
+  length: 0.32
+  width: 0.35
+  height: 0.3
+station_s_m: 3.9526970329169355
+lateral_offset_convention: positive is left of direction of travel
+variants:
+  center:
+    map_name: benchmark_occlusion_b_obstacle_center
+    lead_waypoints_file: benchmark_occlusion_b_obstacle_center_mpc.csv
+    lead_detour_peak_offset_m: 0.85
+    lead_detour_half_span_m: 3.0
+    label: center
+    station_s_m: 3.9526970329169355
+    lateral_offset_m: 0.0
+    center_world_m:
+    - 8.101309170616503
+    - 3.2354893572884738
+    yaw_rad: 1.1883699795465508
+    corners_world_m:
+    - - 8.203959884671518
+      - 3.0217422382342147
+    - - 8.32337512891201
+      - 3.3186260529546927
+    - - 7.998658456561488
+      - 3.449236476342733
+    - - 7.879243212320995
+      - 3.152352661622255
+  left:
+    map_name: benchmark_occlusion_b_obstacle_left
+    lead_waypoints_file: benchmark_occlusion_b_obstacle_left_mpc.csv
+    lead_detour_peak_offset_m: 0.0
+    lead_detour_half_span_m: 3.0
+    label: left
+    station_s_m: 3.9526970329169355
+    lateral_offset_m: 0.7
+    center_world_m:
+    - 7.451875825915457
+    - 3.496710204064555
+    yaw_rad: 1.1883699795465508
+    corners_world_m:
+    - - 7.554526539970471
+      - 3.2829630850102958
+    - - 7.673941784210966
+      - 3.5798468997307737
+    - - 7.349225111860443
+      - 3.710457323118814
+    - - 7.229809867619949
+      - 3.413573508398336
+  right:
+    map_name: benchmark_occlusion_b_obstacle_right
+    lead_waypoints_file: benchmark_occlusion_b_obstacle_right_mpc.csv
+    lead_detour_peak_offset_m: 0.0
+    lead_detour_half_span_m: 3.0
+    label: right
+    station_s_m: 3.9526970329169355
+    lateral_offset_m: -0.7
+    center_world_m:
+    - 8.75074251531755
+    - 2.9742685105123927
+    yaw_rad: 1.1883699795465508
+    corners_world_m:
+    - - 8.853393229372564
+      - 2.7605213914581337
+    - - 8.972808473613057
+      - 3.0574052061786117
+    - - 8.648091801262535
+      - 3.1880156295666517
+    - - 8.528676557022042
+      - 2.8911318148461738

@@ -21,6 +21,7 @@
 # SOFTWARE.
 
 import rclpy
+from rclpy.executors import ExternalShutdownException
 from rclpy.node import Node
 
 from sensor_msgs.msg import LaserScan
@@ -243,6 +244,8 @@ class GymBridge(Node):
         self._update_sim_state()
 
     def timer_callback(self):
+        if not rclpy.ok():
+            return
         ts = self.get_clock().now().to_msg()
 
         # pub scans
@@ -419,7 +422,19 @@ class GymBridge(Node):
 def main(args=None):
     rclpy.init(args=args)
     gym_bridge = GymBridge()
-    rclpy.spin(gym_bridge)
+    try:
+        rclpy.spin(gym_bridge)
+    except (KeyboardInterrupt, ExternalShutdownException):
+        pass
+    except Exception:
+        # ros2 launch can invalidate the context before spin sees the shutdown
+        # guard.  Suppress only this normal teardown race.
+        if rclpy.ok():
+            raise
+    finally:
+        gym_bridge.destroy_node()
+        if rclpy.ok():
+            rclpy.shutdown()
 
 if __name__ == '__main__':
     main()

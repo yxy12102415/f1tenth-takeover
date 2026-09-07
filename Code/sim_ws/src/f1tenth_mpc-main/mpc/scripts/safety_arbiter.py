@@ -3,6 +3,7 @@ import math
 
 import rclpy
 from ackermann_msgs.msg import AckermannDriveStamped
+from rclpy.executors import ExternalShutdownException
 from rclpy.node import Node
 
 
@@ -110,8 +111,12 @@ def main(args=None) -> None:
     node = SafetyArbiter()
     try:
         rclpy.spin(node)
-    except KeyboardInterrupt:
+    except (KeyboardInterrupt, ExternalShutdownException):
         pass
+    except Exception:
+        # Ignore only the normal ros2-launch context invalidation race.
+        if rclpy.ok():
+            raise
     finally:
         if rclpy.ok():
             node.publish_safe_stop('safety arbiter shutdown')

@@ -1,0 +1,6 @@
+image: benchmark_straight_visibility_left.png
+resolution: 0.025000
+origin: [0.0, 0.0, 0.0]
+negate: 0
+occupied_thresh: 0.45
+free_thresh: 0.196

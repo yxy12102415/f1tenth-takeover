@@ -1,0 +1,70 @@
+dimensions_m:
+  length: 0.32
+  width: 0.35
+  height: 0.3
+station_s_m: 6.0
+lateral_offset_convention: positive is left of direction of travel
+variants:
+  center:
+    map_name: benchmark_occlusion_a_obstacle_center
+    lead_waypoints_file: benchmark_occlusion_a_obstacle_center_mpc.csv
+    lead_detour_peak_offset_m: 0.85
+    lead_detour_half_span_m: 3.0
+    label: center
+    station_s_m: 6.0
+    lateral_offset_m: 0.0
+    center_world_m:
+    - 10.855106729898354
+    - 2.642347571096677
+    yaw_rad: 0.6666661635506991
+    corners_world_m:
+    - - 10.8375793647397
+      - 2.4058781407878205
+    - - 11.08906338774404
+      - 2.603756351244534
+    - - 10.872634095057009
+      - 2.8788170014055336
+    - - 10.621150072052668
+      - 2.68093879094882
+  left:
+    map_name: benchmark_occlusion_a_obstacle_left
+    lead_waypoints_file: benchmark_occlusion_a_obstacle_left_mpc.csv
+    lead_detour_peak_offset_m: 0.0
+    lead_detour_half_span_m: 3.0
+    label: left
+    station_s_m: 6.0
+    lateral_offset_m: 0.7
+    center_world_m:
+    - 10.422248144524294
+    - 3.192468871418676
+    yaw_rad: 0.6666661635506991
+    corners_world_m:
+    - - 10.40472077936564
+      - 2.9559994411098196
+    - - 10.656204802369981
+      - 3.153877651566533
+    - - 10.43977550968295
+      - 3.428938301727533
+    - - 10.188291486678608
+      - 3.231060091270819
+  right:
+    map_name: benchmark_occlusion_a_obstacle_right
+    lead_waypoints_file: benchmark_occlusion_a_obstacle_right_mpc.csv
+    lead_detour_peak_offset_m: 0.0
+    lead_detour_half_span_m: 3.0
+    label: right
+    station_s_m: 6.0
+    lateral_offset_m: -0.7
+    center_world_m:
+    - 11.287965315272414
+    - 2.092226270774678
+    yaw_rad: 0.6666661635506991
+    corners_world_m:
+    - - 11.27043795011376
+      - 1.8557568404658216
+    - - 11.5219219731181
+      - 2.053635050922535
+    - - 11.305492680431069
+      - 2.3286957010835345
+    - - 11.054008657426728
+      - 2.1308174906268214

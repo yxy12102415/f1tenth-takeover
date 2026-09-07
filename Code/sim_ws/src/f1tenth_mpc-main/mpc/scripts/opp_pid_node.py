@@ -9,6 +9,7 @@ import rclpy
 from ackermann_msgs.msg import AckermannDriveStamped
 from ament_index_python.packages import get_package_share_directory
 from nav_msgs.msg import Odometry
+from rclpy.executors import ExternalShutdownException
 from rclpy.node import Node
 from scipy.spatial.transform import Rotation
 
@@ -200,9 +201,18 @@ class OppPIDNode(Node):
 def main(args=None) -> None:
     rclpy.init(args=args)
     node = OppPIDNode()
-    rclpy.spin(node)
-    node.destroy_node()
-    rclpy.shutdown()
+    try:
+        rclpy.spin(node)
+    except (KeyboardInterrupt, ExternalShutdownException):
+        pass
+    except Exception:
+        # Ignore only the normal ros2-launch context invalidation race.
+        if rclpy.ok():
+            raise
+    finally:
+        node.destroy_node()
+        if rclpy.ok():
+            rclpy.shutdown()
 
 
 if __name__ == "__main__":

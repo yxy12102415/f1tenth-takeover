@@ -1,0 +1,405 @@
+{
+  "benchmark_version": "1.4",
+  "boundary_thickness_m": 0.1,
+  "coordinate_convention": "x right, y up; obstacle lateral offset l>0 is left of travel",
+  "files_sha256": {
+    "src/f1tenth_gym_ros/maps/benchmark_occlusion_a.png": "a64f0a689d01345594553ca03b55c1f2862414df66987d2e7894e9432d8cb755",
+    "src/f1tenth_gym_ros/maps/benchmark_occlusion_a.yaml": "90a6a84820b05f1ed168dcade50ffab526334b0642d6af0250ec6ca7aa55a907",
+    "src/f1tenth_gym_ros/maps/benchmark_occlusion_a_centerline.csv": "a05ecf1833b6a13308fb975daa78d1aad83dad5bef20b377c45176c1b8ac080a",
+    "src/f1tenth_gym_ros/maps/benchmark_occlusion_a_course.yaml": "9dd26427f92c40cd627179a5b247162ae87d8c65a25ebee7448533bb940b1dfe",
+    "src/f1tenth_gym_ros/maps/benchmark_occlusion_a_obstacle_center.png": "67b3e3e72404b1aebd5f013566dad212e817628abd0b17eb07ce463113a99fb5",
+    "src/f1tenth_gym_ros/maps/benchmark_occlusion_a_obstacle_center.yaml": "37fcc2b0ecd491fcb2dbaf0ca1e746b3239370ff6d37619e53334be0fd9eedac",
+    "src/f1tenth_gym_ros/maps/benchmark_occlusion_a_obstacle_left.png": "10490a96588a52e58418d7e6a96c0b79842ba839325ea3341a8582773801cdb2",
+    "src/f1tenth_gym_ros/maps/benchmark_occlusion_a_obstacle_left.yaml": "55e721f3ba1be2f704b4e267ae8f3b112e086ca1ef0b7c810b373247ebabbe4c",
+    "src/f1tenth_gym_ros/maps/benchmark_occlusion_a_obstacle_right.png": "cba0de1da4889219d15ab3192870ae86d315404e610c082ab02551c810f37ec4",
+    "src/f1tenth_gym_ros/maps/benchmark_occlusion_a_obstacle_right.yaml": "4cc6ac43bded6273739a3126cff4b0e9804300f85b0350b707d915a716730d33",
+    "src/f1tenth_gym_ros/maps/benchmark_occlusion_a_obstacles.yaml": "66e5545dc8c990ee39955390367e012b2a2ed033be3762d44d606271f63e1bd3",
+    "src/f1tenth_gym_ros/maps/benchmark_occlusion_b.png": "919dadaaad22188e53486d28a6a63a0e488cfac1df5a8d9d06bc18bbfbda3734",
+    "src/f1tenth_gym_ros/maps/benchmark_occlusion_b.yaml": "48a6cf0adadae3a380bfc71588ca97b272b5e08ec4fca6047f4a70ede53e82f2",
+    "src/f1tenth_gym_ros/maps/benchmark_occlusion_b_centerline.csv": "3daf646059cf1476f35b11cb37c05acae9d6e4a19c0989683edb23e7bc21038e",
+    "src/f1tenth_gym_ros/maps/benchmark_occlusion_b_course.yaml": "9f8f85dd9ad6c454757123bd5082129c3c3fa3a5133873d2060ea218198c0dd2",
+    "src/f1tenth_gym_ros/maps/benchmark_occlusion_b_obstacle_center.png": "9a3793ca3d37432d163aa6bb8be4fe6fa688cfd93f3369be36acb90ac6113551",
+    "src/f1tenth_gym_ros/maps/benchmark_occlusion_b_obstacle_center.yaml": "3b691c0205d2287fadad40a2fa24d5d8aefc75c9869e892d8871c0975b521c5f",
+    "src/f1tenth_gym_ros/maps/benchmark_occlusion_b_obstacle_left.png": "d8ef845544f0e0182b6a6d7f9e1f4ba466edb3492cc5f595231e9d902963988d",
+    "src/f1tenth_gym_ros/maps/benchmark_occlusion_b_obstacle_left.yaml": "9cd4d46a4a8a49adc3605dc5fab3cdcc183de7e093df15eeee3b35c76af309fb",
+    "src/f1tenth_gym_ros/maps/benchmark_occlusion_b_obstacle_right.png": "4b6c17a5554072c8ed3f6bcd7ef865f9d096af0a8ae0137cbe14f12c00661aa0",
+    "src/f1tenth_gym_ros/maps/benchmark_occlusion_b_obstacle_right.yaml": "57d74d6ff6c692fc2da11532dba31dac9cfb7239a9be4a15f79e8e69a9225a90",
+    "src/f1tenth_gym_ros/maps/benchmark_occlusion_b_obstacles.yaml": "540079b814987390d4d4c954732c635080e98cca0969d5efeed1154159af0ee8",
+    "src/f1tenth_gym_ros/maps/benchmark_straight.png": "ea0b1a6d55c6eedab8dffa64a0a39012a00c28d3255260fbaa23f72f6d170a9f",
+    "src/f1tenth_gym_ros/maps/benchmark_straight.yaml": "6ff4a6ec531f0621dd3e71bd6632388102e53821c6f50468f7cce4c65cc8fc9d",
+    "src/f1tenth_gym_ros/maps/benchmark_straight_centerline.csv": "5015166f236e4f25b76aeadd25a3c7875113d897eda65d1f483cc949bde92452",
+    "src/f1tenth_gym_ros/maps/benchmark_straight_course.yaml": "bc1f18a36af0a8aa6f3ae457a6edc35ddbe290e3ba2d9759a5de1c501854dd3d",
+    "src/f1tenth_gym_ros/maps/benchmark_straight_obstacle_center.png": "285bd59491ff030ae6c85575116e1ba424f1ab108afb1845ce79a89e24b41bf2",
+    "src/f1tenth_gym_ros/maps/benchmark_straight_obstacle_center.yaml": "d616e265340513dd5f4a2c9fc609a06ff4cbd3249f381e14404a42d4c89ccb92",
+    "src/f1tenth_gym_ros/maps/benchmark_straight_obstacle_left.png": "d486a109fd4174d65b41e9c57474d41aafd71f3215c0ba1d3aeb464a747e4e48",
+    "src/f1tenth_gym_ros/maps/benchmark_straight_obstacle_left.yaml": "e9e1f830a1c5e329e32296186292bed936dceb3d6104479e163156f594df12f2",
+    "src/f1tenth_gym_ros/maps/benchmark_straight_obstacle_right.png": "60cc230063472c268cea38c1474969ffd43f9c78a85386da03b5e2f25932d7da",
+    "src/f1tenth_gym_ros/maps/benchmark_straight_obstacle_right.yaml": "bef714da6a53d5af11477abe658e66b894e60349b2ff63e7fe5deaed971c4e22",
+    "src/f1tenth_gym_ros/maps/benchmark_straight_obstacles.yaml": "38a6840e8175b1a229da5b667504a8340ca3f366a342d37213d48ba55d57cdd9",
+    "src/f1tenth_gym_ros/maps/benchmark_straight_visibility_left.png": "ce0679cd0e02c9ec47ed92b4a30137266cdebe617cf98d3773e226e49cf608c4",
+    "src/f1tenth_gym_ros/maps/benchmark_straight_visibility_left.yaml": "172aba7f1f4d2a1aef49d21c36bd227d2683b90a3345c5f2eb0191da97d5db1d",
+    "src/f1tenth_gym_ros/maps/benchmark_straight_visibility_right.png": "ce0679cd0e02c9ec47ed92b4a30137266cdebe617cf98d3773e226e49cf608c4",
+    "src/f1tenth_gym_ros/maps/benchmark_straight_visibility_right.yaml": "2fa0a4f2fe33dccf28f040e321e82b8f7eb9bd231d9f9d3db397601050d31a45",
+    "src/f1tenth_mpc-main/mpc/waypoints/benchmark_occlusion_a_mpc.csv": "400ee0ccc5c65a135639353ddbbaa6b1b84e3a51fc45b580aa42cb7344ec7e8a",
+    "src/f1tenth_mpc-main/mpc/waypoints/benchmark_occlusion_a_obstacle_center_mpc.csv": "2a1a1f5500deefb92b07c704ce450391d241f510dfe0ce1e7e7225b7df00192b",
+    "src/f1tenth_mpc-main/mpc/waypoints/benchmark_occlusion_a_obstacle_left_mpc.csv": "400ee0ccc5c65a135639353ddbbaa6b1b84e3a51fc45b580aa42cb7344ec7e8a",
+    "src/f1tenth_mpc-main/mpc/waypoints/benchmark_occlusion_a_obstacle_right_mpc.csv": "400ee0ccc5c65a135639353ddbbaa6b1b84e3a51fc45b580aa42cb7344ec7e8a",
+    "src/f1tenth_mpc-main/mpc/waypoints/benchmark_occlusion_b_mpc.csv": "17caf1aa6742c27920d3ca2d4c0bab4d86e9d8082476fdd8d3267a9e903bf12e",
+    "src/f1tenth_mpc-main/mpc/waypoints/benchmark_occlusion_b_obstacle_center_mpc.csv": "60d0d11b9cbc45daea2fefe82535bdcfebaaef5240b61f182d2fc0d130f88e4b",
+    "src/f1tenth_mpc-main/mpc/waypoints/benchmark_occlusion_b_obstacle_left_mpc.csv": "17caf1aa6742c27920d3ca2d4c0bab4d86e9d8082476fdd8d3267a9e903bf12e",
+    "src/f1tenth_mpc-main/mpc/waypoints/benchmark_occlusion_b_obstacle_right_mpc.csv": "17caf1aa6742c27920d3ca2d4c0bab4d86e9d8082476fdd8d3267a9e903bf12e",
+    "src/f1tenth_mpc-main/mpc/waypoints/benchmark_straight_mpc.csv": "10154804f5dfc5fcb022c158e97d01f65d04300ab67004fa6105b55e084fb07f",
+    "src/f1tenth_mpc-main/mpc/waypoints/benchmark_straight_obstacle_center_mpc.csv": "f7063023753ec563cfd1653c066bfaf92295997454f31c04bd93e62b425e12a1",
+    "src/f1tenth_mpc-main/mpc/waypoints/benchmark_straight_obstacle_left_mpc.csv": "10154804f5dfc5fcb022c158e97d01f65d04300ab67004fa6105b55e084fb07f",
+    "src/f1tenth_mpc-main/mpc/waypoints/benchmark_straight_obstacle_right_mpc.csv": "10154804f5dfc5fcb022c158e97d01f65d04300ab67004fa6105b55e084fb07f",
+    "src/f1tenth_mpc-main/mpc/waypoints/benchmark_straight_visibility_left_mpc.csv": "aaa1f213d286e2f837b912972596c213b6f5cfe716392917a0baa323b2d22fa0",
+    "src/f1tenth_mpc-main/mpc/waypoints/benchmark_straight_visibility_right_mpc.csv": "ca0f5d1e56ad7b4725c033276696de5b1ca7babdce0917221489c7e8fd2caefa"
+  },
+  "maps": {
+    "benchmark_occlusion_a": {
+      "course_id": "benchmark_occlusion_a",
+      "course_spec": "benchmark_occlusion_a_course.yaml",
+      "obstacle_label": null,
+      "obstacle_spec": "benchmark_occlusion_a_obstacles.yaml",
+      "purpose": "primary large rounded-square turning benchmark",
+      "spawn": {
+        "arc_separation_m": 1.5,
+        "center_distance_m": 1.5,
+        "ego": [
+          5.25,
+          2.0,
+          0.0
+        ],
+        "ego_station_s_m": 0.25,
+        "opponent": [
+          6.75,
+          2.0,
+          0.0
+        ],
+        "opponent_station_s_m": 1.75
+      },
+      "waypoints_file": "benchmark_occlusion_a_mpc.csv"
+    },
+    "benchmark_occlusion_a_obstacle_center": {
+      "course_id": "benchmark_occlusion_a",
+      "course_spec": "benchmark_occlusion_a_course.yaml",
+      "obstacle_label": "center",
+      "obstacle_spec": "benchmark_occlusion_a_obstacles.yaml",
+      "purpose": "primary large rounded-square turning benchmark",
+      "spawn": {
+        "arc_separation_m": 1.5,
+        "center_distance_m": 1.5,
+        "ego": [
+          5.25,
+          2.0,
+          0.0
+        ],
+        "ego_station_s_m": 0.25,
+        "opponent": [
+          6.75,
+          2.0,
+          0.0
+        ],
+        "opponent_station_s_m": 1.75
+      },
+      "waypoints_file": "benchmark_occlusion_a_obstacle_center_mpc.csv"
+    },
+    "benchmark_occlusion_a_obstacle_left": {
+      "course_id": "benchmark_occlusion_a",
+      "course_spec": "benchmark_occlusion_a_course.yaml",
+      "obstacle_label": "left",
+      "obstacle_spec": "benchmark_occlusion_a_obstacles.yaml",
+      "purpose": "primary large rounded-square turning benchmark",
+      "spawn": {
+        "arc_separation_m": 1.5,
+        "center_distance_m": 1.5,
+        "ego": [
+          5.25,
+          2.0,
+          0.0
+        ],
+        "ego_station_s_m": 0.25,
+        "opponent": [
+          6.75,
+          2.0,
+          0.0
+        ],
+        "opponent_station_s_m": 1.75
+      },
+      "waypoints_file": "benchmark_occlusion_a_obstacle_left_mpc.csv"
+    },
+    "benchmark_occlusion_a_obstacle_right": {
+      "course_id": "benchmark_occlusion_a",
+      "course_spec": "benchmark_occlusion_a_course.yaml",
+      "obstacle_label": "right",
+      "obstacle_spec": "benchmark_occlusion_a_obstacles.yaml",
+      "purpose": "primary large rounded-square turning benchmark",
+      "spawn": {
+        "arc_separation_m": 1.5,
+        "center_distance_m": 1.5,
+        "ego": [
+          5.25,
+          2.0,
+          0.0
+        ],
+        "ego_station_s_m": 0.25,
+        "opponent": [
+          6.75,
+          2.0,
+          0.0
+        ],
+        "opponent_station_s_m": 1.75
+      },
+      "waypoints_file": "benchmark_occlusion_a_obstacle_right_mpc.csv"
+    },
+    "benchmark_occlusion_b": {
+      "course_id": "benchmark_occlusion_b",
+      "course_spec": "benchmark_occlusion_b_course.yaml",
+      "obstacle_label": null,
+      "obstacle_spec": "benchmark_occlusion_b_obstacles.yaml",
+      "purpose": "held-out asymmetric-curvature generalization benchmark",
+      "spawn": {
+        "arc_separation_m": 1.5,
+        "center_distance_m": 1.4880429109757092,
+        "ego": [
+          4.995061342299557,
+          1.8007578723983433,
+          -0.16698865503434865
+        ],
+        "ego_station_s_m": 0.25,
+        "opponent": [
+          6.48181938554113,
+          1.862582024325818,
+          0.2718339594065517
+        ],
+        "opponent_station_s_m": 1.75
+      },
+      "waypoints_file": "benchmark_occlusion_b_mpc.csv"
+    },
+    "benchmark_occlusion_b_obstacle_center": {
+      "course_id": "benchmark_occlusion_b",
+      "course_spec": "benchmark_occlusion_b_course.yaml",
+      "obstacle_label": "center",
+      "obstacle_spec": "benchmark_occlusion_b_obstacles.yaml",
+      "purpose": "held-out asymmetric-curvature generalization benchmark",
+      "spawn": {
+        "arc_separation_m": 1.5,
+        "center_distance_m": 1.4880429109757092,
+        "ego": [
+          4.995061342299557,
+          1.8007578723983433,
+          -0.16698865503434865
+        ],
+        "ego_station_s_m": 0.25,
+        "opponent": [
+          6.48181938554113,
+          1.862582024325818,
+          0.2718339594065517
+        ],
+        "opponent_station_s_m": 1.75
+      },
+      "waypoints_file": "benchmark_occlusion_b_obstacle_center_mpc.csv"
+    },
+    "benchmark_occlusion_b_obstacle_left": {
+      "course_id": "benchmark_occlusion_b",
+      "course_spec": "benchmark_occlusion_b_course.yaml",
+      "obstacle_label": "left",
+      "obstacle_spec": "benchmark_occlusion_b_obstacles.yaml",
+      "purpose": "held-out asymmetric-curvature generalization benchmark",
+      "spawn": {
+        "arc_separation_m": 1.5,
+        "center_distance_m": 1.4880429109757092,
+        "ego": [
+          4.995061342299557,
+          1.8007578723983433,
+          -0.16698865503434865
+        ],
+        "ego_station_s_m": 0.25,
+        "opponent": [
+          6.48181938554113,
+          1.862582024325818,
+          0.2718339594065517
+        ],
+        "opponent_station_s_m": 1.75
+      },
+      "waypoints_file": "benchmark_occlusion_b_obstacle_left_mpc.csv"
+    },
+    "benchmark_occlusion_b_obstacle_right": {
+      "course_id": "benchmark_occlusion_b",
+      "course_spec": "benchmark_occlusion_b_course.yaml",
+      "obstacle_label": "right",
+      "obstacle_spec": "benchmark_occlusion_b_obstacles.yaml",
+      "purpose": "held-out asymmetric-curvature generalization benchmark",
+      "spawn": {
+        "arc_separation_m": 1.5,
+        "center_distance_m": 1.4880429109757092,
+        "ego": [
+          4.995061342299557,
+          1.8007578723983433,
+          -0.16698865503434865
+        ],
+        "ego_station_s_m": 0.25,
+        "opponent": [
+          6.48181938554113,
+          1.862582024325818,
+          0.2718339594065517
+        ],
+        "opponent_station_s_m": 1.75
+      },
+      "waypoints_file": "benchmark_occlusion_b_obstacle_right_mpc.csv"
+    },
+    "benchmark_straight": {
+      "course_id": "benchmark_straight",
+      "course_spec": "benchmark_straight_course.yaml",
+      "obstacle_label": null,
+      "obstacle_spec": "benchmark_straight_obstacles.yaml",
+      "purpose": "calibration and nominal following on two long straight sections",
+      "spawn": {
+        "arc_separation_m": 1.5,
+        "center_distance_m": 1.5,
+        "ego": [
+          6.25,
+          3.0,
+          0.0
+        ],
+        "ego_station_s_m": 0.25,
+        "opponent": [
+          7.75,
+          3.0,
+          0.0
+        ],
+        "opponent_station_s_m": 1.75
+      },
+      "waypoints_file": "benchmark_straight_mpc.csv"
+    },
+    "benchmark_straight_obstacle_center": {
+      "course_id": "benchmark_straight",
+      "course_spec": "benchmark_straight_course.yaml",
+      "obstacle_label": "center",
+      "obstacle_spec": "benchmark_straight_obstacles.yaml",
+      "purpose": "calibration and nominal following on two long straight sections",
+      "spawn": {
+        "arc_separation_m": 1.5,
+        "center_distance_m": 1.5,
+        "ego": [
+          6.25,
+          3.0,
+          0.0
+        ],
+        "ego_station_s_m": 0.25,
+        "opponent": [
+          7.75,
+          3.0,
+          0.0
+        ],
+        "opponent_station_s_m": 1.75
+      },
+      "waypoints_file": "benchmark_straight_obstacle_center_mpc.csv"
+    },
+    "benchmark_straight_obstacle_left": {
+      "course_id": "benchmark_straight",
+      "course_spec": "benchmark_straight_course.yaml",
+      "obstacle_label": "left",
+      "obstacle_spec": "benchmark_straight_obstacles.yaml",
+      "purpose": "calibration and nominal following on two long straight sections",
+      "spawn": {
+        "arc_separation_m": 1.5,
+        "center_distance_m": 1.5,
+        "ego": [
+          6.25,
+          3.0,
+          0.0
+        ],
+        "ego_station_s_m": 0.25,
+        "opponent": [
+          7.75,
+          3.0,
+          0.0
+        ],
+        "opponent_station_s_m": 1.75
+      },
+      "waypoints_file": "benchmark_straight_obstacle_left_mpc.csv"
+    },
+    "benchmark_straight_obstacle_right": {
+      "course_id": "benchmark_straight",
+      "course_spec": "benchmark_straight_course.yaml",
+      "obstacle_label": "right",
+      "obstacle_spec": "benchmark_straight_obstacles.yaml",
+      "purpose": "calibration and nominal following on two long straight sections",
+      "spawn": {
+        "arc_separation_m": 1.5,
+        "center_distance_m": 1.5,
+        "ego": [
+          6.25,
+          3.0,
+          0.0
+        ],
+        "ego_station_s_m": 0.25,
+        "opponent": [
+          7.75,
+          3.0,
+          0.0
+        ],
+        "opponent_station_s_m": 1.75
+      },
+      "waypoints_file": "benchmark_straight_obstacle_right_mpc.csv"
+    },
+    "benchmark_straight_visibility_left": {
+      "course_id": "benchmark_straight",
+      "course_spec": "benchmark_straight_course.yaml",
+      "obstacle_label": "visibility_left",
+      "obstacle_spec": "benchmark_straight_obstacles.yaml",
+      "purpose": "calibration and nominal following on two long straight sections",
+      "spawn": {
+        "arc_separation_m": 1.5,
+        "center_distance_m": 1.5,
+        "ego": [
+          6.25,
+          3.0,
+          0.0
+        ],
+        "ego_station_s_m": 0.25,
+        "opponent": [
+          7.75,
+          3.0,
+          0.0
+        ],
+        "opponent_station_s_m": 1.75
+      },
+      "waypoints_file": "benchmark_straight_visibility_left_mpc.csv"
+    },
+    "benchmark_straight_visibility_right": {
+      "course_id": "benchmark_straight",
+      "course_spec": "benchmark_straight_course.yaml",
+      "obstacle_label": "visibility_right",
+      "obstacle_spec": "benchmark_straight_obstacles.yaml",
+      "purpose": "calibration and nominal following on two long straight sections",
+      "spawn": {
+        "arc_separation_m": 1.5,
+        "center_distance_m": 1.5,
+        "ego": [
+          6.25,
+          3.0,
+          0.0
+        ],
+        "ego_station_s_m": 0.25,
+        "opponent": [
+          7.75,
+          3.0,
+          0.0
+        ],
+        "opponent_station_s_m": 1.75
+      },
+      "waypoints_file": "benchmark_straight_visibility_right_mpc.csv"
+    }
+  },
+  "online_map_policy": "evaluation/environment only; never an ego planning input",
+  "resolution_m_per_pixel": 0.025,
+  "track_width_m": 2.2,
+  "waypoint_speed_profile": {
+    "formula": "v_ref=clip(sqrt(a_lat/max(abs(curvature),1e-3)),v_min,v_max)",
+    "lateral_acceleration_limit_mps2": 0.65,
+    "maximum_speed_mps": 2.4,
+    "minimum_speed_mps": 0.8
+  }
+}

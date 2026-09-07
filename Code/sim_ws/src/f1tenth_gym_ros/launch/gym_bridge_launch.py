@@ -44,12 +44,32 @@ def generate_launch_description():
         get_package_share_directory('f1tenth_gym_ros'), 'maps', map_name
     ])
     ld.add_action(DeclareLaunchArgument('map_name', default_value='Melbourne_map'))
+    start_defaults = config_dict['bridge']['ros__parameters']
+    for argument, parameter in (
+        ('ego_start_x', 'sx'),
+        ('ego_start_y', 'sy'),
+        ('ego_start_yaw', 'stheta'),
+        ('opp_start_x', 'sx1'),
+        ('opp_start_y', 'sy1'),
+        ('opp_start_yaw', 'stheta1'),
+    ):
+        ld.add_action(
+            DeclareLaunchArgument(argument, default_value=str(start_defaults[parameter]))
+        )
 
     bridge_node = Node(
         package='f1tenth_gym_ros',
         executable='gym_bridge',
         name='bridge',
-        parameters=[config, {'map_path': ParameterValue(map_path, value_type=str)}]
+        parameters=[config, {
+            'map_path': ParameterValue(map_path, value_type=str),
+            'sx': ParameterValue(LaunchConfiguration('ego_start_x'), value_type=float),
+            'sy': ParameterValue(LaunchConfiguration('ego_start_y'), value_type=float),
+            'stheta': ParameterValue(LaunchConfiguration('ego_start_yaw'), value_type=float),
+            'sx1': ParameterValue(LaunchConfiguration('opp_start_x'), value_type=float),
+            'sy1': ParameterValue(LaunchConfiguration('opp_start_y'), value_type=float),
+            'stheta1': ParameterValue(LaunchConfiguration('opp_start_yaw'), value_type=float),
+        }]
     )
     rviz_node = Node(
         package='rviz2',

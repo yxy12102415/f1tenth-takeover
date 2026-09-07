@@ -1,0 +1,46 @@
+course_id: benchmark_occlusion_b
+purpose: held-out asymmetric-curvature generalization benchmark
+size_m:
+- 10.0
+- 8.0
+geometry:
+  type: asymmetric_closed_curve
+  equation: x=5+3cos(t)+0.25cos(2t), y=4+2.15sin(t)+0.35sin(2t)
+obstacle_station_m: 3.9526970329169355
+zones:
+  warmup:
+  - 0.0
+  - 2.3057399358682127
+  approach:
+  - 2.3057399358682127
+  - 3.2939141940974466
+  occlusion_obstacle:
+  - 3.2939141940974466
+  - 5.270262710555914
+  rejoin:
+  - 5.270262710555914
+  - 7.411306936719255
+lap_length_m: 16.469570970487233
+track_width_m: 2.2
+boundary_thickness_m: 0.1
+resolution_m_per_pixel: 0.025
+spawn:
+  ego:
+  - 4.995061342299557
+  - 1.8007578723983433
+  - -0.16698865503434865
+  opponent:
+  - 6.48181938554113
+  - 1.862582024325818
+  - 0.2718339594065517
+  ego_station_s_m: 0.25
+  opponent_station_s_m: 1.75
+  arc_separation_m: 1.5
+  center_distance_m: 1.4880429109757092
+map_names:
+- benchmark_occlusion_b
+- benchmark_occlusion_b_obstacle_center
+- benchmark_occlusion_b_obstacle_left
+- benchmark_occlusion_b_obstacle_right
+centerline_file: benchmark_occlusion_b_centerline.csv
+waypoints_file: benchmark_occlusion_b_mpc.csv

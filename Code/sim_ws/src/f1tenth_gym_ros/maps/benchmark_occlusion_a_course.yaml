@@ -1,0 +1,52 @@
+course_id: benchmark_occlusion_a
+purpose: primary large rounded-square turning benchmark
+size_m:
+- 14.0
+- 14.0
+geometry:
+  type: rounded_square
+  bounds_m:
+  - 2.0
+  - 2.0
+  - 12.0
+  - 12.0
+  side_length_m: 10.0
+  turn_radius_m: 3.0
+obstacle_station_m: 6.0
+zones:
+  warmup:
+  - 0.0
+  - 4.0
+  approach:
+  - 4.0
+  - 5.5
+  occlusion_obstacle:
+  - 5.5
+  - 8.0
+  rejoin:
+  - 8.0
+  - 11.0
+lap_length_m: 34.84952112745632
+track_width_m: 2.2
+boundary_thickness_m: 0.1
+resolution_m_per_pixel: 0.025
+spawn:
+  ego:
+  - 5.25
+  - 2.0
+  - 0.0
+  opponent:
+  - 6.75
+  - 2.0
+  - 0.0
+  ego_station_s_m: 0.25
+  opponent_station_s_m: 1.75
+  arc_separation_m: 1.5
+  center_distance_m: 1.5
+map_names:
+- benchmark_occlusion_a
+- benchmark_occlusion_a_obstacle_center
+- benchmark_occlusion_a_obstacle_left
+- benchmark_occlusion_a_obstacle_right
+centerline_file: benchmark_occlusion_a_centerline.csv
+waypoints_file: benchmark_occlusion_a_mpc.csv
