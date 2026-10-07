@@ -1,0 +1,45 @@
+{
+  "route": "/home/f1tenth/f1tenth_real_migration_ws_20260829/routes/Fitzpatrick_fixed_start_arc_straight_v2.csv",
+  "placements": [
+    {
+      "name": "A",
+      "center_xy": [
+        6.022211142155291,
+        1.8324089029725348
+      ],
+      "route_distance_m": 5.97609567766336,
+      "desired_diameter_m": 0.1
+    },
+    {
+      "name": "B",
+      "center_xy": [
+        -1.1722115060661185,
+        7.275825176937007
+      ],
+      "route_distance_m": 36.003091661015134,
+      "desired_diameter_m": 0.1
+    }
+  ],
+  "physical_placement_confirmed": true,
+  "validation_pending": false,
+  "obstacle_A": "Opaque oatmeal cylinder, diameter approximately 0.10 m, height 0.20 m",
+  "obstacle_B": "Bottle wrapped with opaque cylinder, outer diameter approximately 0.10 m, height covering laser scan plane",
+  "operator_accepted_B_wrap": true,
+  "candidate_release": "ground_fitzpatrick_joint_20260927_v8",
+  "model_passed": true,
+  "ros_validation_passed": true,
+  "physical_tested": true,
+  "reset_heading_L1_released_confirmed": true,
+  "confirmation_unix": 1790562584.055366,
+  "physical_run": "/home/f1tenth/f1tenth_real_migration_ws_20260829/candidate_cpp_gpu_20260909/ground_fitzpatrick_joint_20260927_v8/run_logs/20260927_232018-closed-frenet-ground-attempt",
+  "both_avoidance_phases_logged": true,
+  "route_completed": true,
+  "field_feedback_pending": false,
+  "endpoint_distance_m": 0.0745272958,
+  "operator_feedback": "两处都没碰到，基本不摆动，终点自然停稳",
+  "position_review": "/home/f1tenth/f1tenth_real_migration_ws_20260829/candidate_cpp_gpu_20260909/ground_fitzpatrick_joint_20260927_v6/run_logs/20260927_223901-closed-frenet-ground-attempt/obstacle_position_review.json",
+  "latest_release": "ground_fitzpatrick_joint_20260927_v8",
+  "latest_result": "v8 full lap passed; A/B no collision, little oscillation, natural stop confirmed by operator",
+  "previous_failure": "joint_mpc_solver_4 on B return",
+  "position_review_note": "Historical v6 review; latest measured positions and trajectory are in results/fitzpatrick_v8_20260927."
+}

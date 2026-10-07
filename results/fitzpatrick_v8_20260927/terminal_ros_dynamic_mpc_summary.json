@@ -1,0 +1,41 @@
+[
+  {
+    "case": "normal",
+    "passed": true,
+    "route_complete": true,
+    "failure": null,
+    "final_distance_m": 0.035122843986701985,
+    "final_heading_rad": -0.0243921703468575,
+    "completion_speed_mps": 0.0,
+    "coast_cut_speed_mps": 0.5023088751095599,
+    "minimum_actual_positive_after_start_mps": 0.5,
+    "zero_latched": true,
+    "standstill_completion_verified": true
+  },
+  {
+    "case": "zero_feedback",
+    "passed": true,
+    "route_complete": true,
+    "failure": null,
+    "final_distance_m": 0.0322524115127925,
+    "final_heading_rad": -0.039266079166292905,
+    "completion_speed_mps": 0.0,
+    "coast_cut_speed_mps": 0.5940570742349741,
+    "minimum_actual_positive_after_start_mps": 0.5038529887519871,
+    "zero_latched": true,
+    "standstill_completion_verified": true
+  },
+  {
+    "case": "wrong_endpoint",
+    "passed": true,
+    "route_complete": false,
+    "failure": "terminal_stop_outside_endpoint",
+    "final_distance_m": 0.03278033829793556,
+    "final_heading_rad": -0.022385082136948033,
+    "completion_speed_mps": 0.0,
+    "coast_cut_speed_mps": 0.5021677497103934,
+    "minimum_actual_positive_after_start_mps": 0.5,
+    "zero_latched": true,
+    "standstill_completion_verified": false
+  }
+]

@@ -1,0 +1,18 @@
+{
+  "passed": true,
+  "input_count": 287,
+  "source": "/home/f1tenth/f1tenth_real_migration_ws_20260829/candidate_cpp_gpu_20260909/ground_fitzpatrick_joint_20260927_v2/run_logs/20260927_213237-closed-frenet-ground-attempt/tracking_trace.json",
+  "source_sha256": "b6a06090bf01b04084b78f1d98d27914febffbe1989a55e4d87dd417f88cd220",
+  "modes": [
+    "wrapped",
+    "continuous",
+    "alternating_equivalent"
+  ],
+  "maximum_command_difference": {
+    "wrapped": 0.0,
+    "continuous": 0.0,
+    "alternating_equivalent": 1.6124879209655774e-12
+  },
+  "known_old_failure": "joint_mpc_solver_4 at +pi to -pi crossing",
+  "physical_retest_pending": true
+}

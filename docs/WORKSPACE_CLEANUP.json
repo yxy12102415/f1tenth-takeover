@@ -1,0 +1,1453 @@
+{
+  "scope": "/home/f1tenth/f1tenth_real_migration_ws_20260829",
+  "date": "2026-10-06",
+  "policy": "Only rebuildable build/log caches and Python bytecode; preserve installed binaries, all run_logs, maps, routes, source releases, reference_sources, manifest paths and symlink targets.",
+  "candidates": [
+    {
+      "path": "__pycache__",
+      "bytes": 48620
+    },
+    {
+      "path": "build",
+      "bytes": 6967203
+    },
+    {
+      "path": "baseline_pf_pp_20260908/__pycache__",
+      "bytes": 29150
+    },
+    {
+      "path": "baseline_pf_pp_20260908/build_groundprep_v1",
+      "bytes": 28321
+    },
+    {
+      "path": "baseline_pf_pp_20260908/build_groundprep_v2",
+      "bytes": 30102
+    },
+    {
+      "path": "baseline_pf_pp_20260908/build_groundprep_v3",
+      "bytes": 30261
+    },
+    {
+      "path": "baseline_pf_pp_20260908/build_pose_timeout_v1",
+      "bytes": 27951
+    },
+    {
+      "path": "baseline_pf_pp_20260908/build_v1",
+      "bytes": 84375
+    },
+    {
+      "path": "baseline_pf_pp_20260908/build_v2",
+      "bytes": 85437
+    },
+    {
+      "path": "baseline_pf_pp_20260908/build_v3",
+      "bytes": 73114
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/build_v1",
+      "bytes": 3421889
+    },
+    {
+      "path": "coast_log/build_2026-09-04_12-33-42",
+      "bytes": 44733
+    },
+    {
+      "path": "coast_log/build_2026-09-04_12-37-50",
+      "bytes": 39799
+    },
+    {
+      "path": "coast_log/build_2026-09-04_12-47-33",
+      "bytes": 38955
+    },
+    {
+      "path": "coast_log/build_2026-09-04_12-48-11",
+      "bytes": 38985
+    },
+    {
+      "path": "coast_log/build_2026-09-04_16-55-38",
+      "bytes": 40383
+    },
+    {
+      "path": "coast_log/build_2026-09-04_17-06-25",
+      "bytes": 39735
+    },
+    {
+      "path": "coast_log/build_2026-09-04_17-09-09",
+      "bytes": 39735
+    },
+    {
+      "path": "coast_log/build_2026-09-04_21-13-47",
+      "bytes": 39143
+    },
+    {
+      "path": "current_diagnostic_20260909/__pycache__",
+      "bytes": 6501
+    },
+    {
+      "path": "ground_straight_1s_candidate/__pycache__",
+      "bytes": 7817
+    },
+    {
+      "path": "log/build_2026-08-29_11-31-11",
+      "bytes": 125769
+    },
+    {
+      "path": "log/build_2026-09-04_11-39-34",
+      "bytes": 76977
+    },
+    {
+      "path": "push_diagnostic_20260909/__pycache__",
+      "bytes": 8241
+    },
+    {
+      "path": "stage1_log_ros/build_2026-08-29_12-07-06",
+      "bytes": 64405
+    },
+    {
+      "path": "stage1_log_ros/build_2026-08-29_12-08-07",
+      "bytes": 42407
+    },
+    {
+      "path": "stage1_log_ros/build_2026-08-29_12-09-28",
+      "bytes": 42227
+    },
+    {
+      "path": "stage1_log_ros/build_2026-08-29_12-10-14",
+      "bytes": 42257
+    },
+    {
+      "path": "stage1_log_ros/build_2026-08-29_12-18-14",
+      "bytes": 45485
+    },
+    {
+      "path": "stage1_log_ros/build_2026-08-30_10-43-26",
+      "bytes": 42392
+    },
+    {
+      "path": "stage1_log_ros/build_2026-08-30_10-48-12",
+      "bytes": 40099
+    },
+    {
+      "path": "stage1_log_ros/build_2026-08-30_10-51-30",
+      "bytes": 39675
+    },
+    {
+      "path": "stand_softstart_v1/__pycache__",
+      "bytes": 37848
+    },
+    {
+      "path": "stand_speed_15_monitor_v1/__pycache__",
+      "bytes": 8618
+    },
+    {
+      "path": "stand_speed_15_monitor_v1/build_clean_v2",
+      "bytes": 3507097
+    },
+    {
+      "path": "stand_speed_15_monitor_v1/build_v1",
+      "bytes": 3513846
+    },
+    {
+      "path": "baseline_pf_pp_20260908/dependencies/build_v1",
+      "bytes": 14434344
+    },
+    {
+      "path": "baseline_pf_pp_20260908/test/__pycache__",
+      "bytes": 14364
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/closed_loop_frenet_v1_20260919/__pycache__",
+      "bytes": 61959
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/closed_loop_frenet_v2_20260921/__pycache__",
+      "bytes": 64490
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/closed_loop_frenet_v3_20260921/__pycache__",
+      "bytes": 39940
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/closed_loop_frenet_v4_20260922/__pycache__",
+      "bytes": 42592
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/closed_loop_lattice_v1_20260917/__pycache__",
+      "bytes": 47385
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/diagnostics_v1/__pycache__",
+      "bytes": 6736
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/fitzpatrick_dynamic_mpc_workflow_20260912/__pycache__",
+      "bytes": 8364
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/fitzpatrick_dynamic_mpc_workflow_v2_20260912/__pycache__",
+      "bytes": 8370
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/fitzpatrick_dynamic_mpc_workflow_v3_20260913/__pycache__",
+      "bytes": 8370
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/fitzpatrick_mpc_workflow_20260912/__pycache__",
+      "bytes": 8356
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/fitzpatrick_mpc_workflow_v2_20260912/__pycache__",
+      "bytes": 8362
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/fitzpatrick_pid_workflow_20260912/__pycache__",
+      "bytes": 8389
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/fitzpatrick_pid_workflow_v2_20260912/__pycache__",
+      "bytes": 8395
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/fitzpatrick_pp_workflow_20260912/__pycache__",
+      "bytes": 8398
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/fitzpatrick_pp_workflow_v2_20260912/__pycache__",
+      "bytes": 8425
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/fitzpatrick_pp_workflow_v3_20260912/__pycache__",
+      "bytes": 8452
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/fixed_route_avoidance_v1_20260915/__pycache__",
+      "bytes": 36594
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/ground_381_2_0_frenet_cpp_20260925_v1/__pycache__",
+      "bytes": 95760
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/ground_381_2_0_frenet_cpp_20260925_v1/build_cpp",
+      "bytes": 8622059
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/ground_381_2_0_frenet_dynamic_mpc_20260923_v2/__pycache__",
+      "bytes": 6190
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/ground_381_2_0_frenet_dynamic_mpc_20260923_v3/__pycache__",
+      "bytes": 6190
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/ground_381_2_0_frenet_mpc_20260923_v1/__pycache__",
+      "bytes": 165477
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/ground_381_2_0_frenet_pid_20260923_v1/__pycache__",
+      "bytes": 135872
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/ground_381_2_0_frenet_pp_20260923_v1/__pycache__",
+      "bytes": 136408
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/ground_381_2_0_joint_cpp_20260926_v1/__pycache__",
+      "bytes": 47693
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/ground_381_2_0_joint_cpp_20260926_v1/build_cpp",
+      "bytes": 8818748
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/ground_381_2_0_joint_dmpc_20260927_v2/__pycache__",
+      "bytes": 74403
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/ground_381_2_0_joint_dmpc_20260927_v2/build_cpp",
+      "bytes": 8911624
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/ground_381_2_0_joint_pid_20260926_v2/__pycache__",
+      "bytes": 87044
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/ground_381_2_0_joint_pid_20260926_v2/build_cpp",
+      "bytes": 8839804
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/ground_381_2_0_joint_pid_20260926_v3/__pycache__",
+      "bytes": 66791
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/ground_381_2_0_joint_pid_20260926_v3/build_cpp",
+      "bytes": 8861292
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/ground_381_2_0_joint_pid_20260926_v4/__pycache__",
+      "bytes": 64137
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/ground_381_2_0_joint_pid_20260926_v4/build_cpp",
+      "bytes": 8867596
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/ground_381_2_0_joint_pid_20260926_v5/__pycache__",
+      "bytes": 69688
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/ground_381_2_0_joint_pid_20260926_v5/build_cpp",
+      "bytes": 8889004
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/ground_closed_loop_frenet_20260919_v1/__pycache__",
+      "bytes": 136740
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/ground_closed_loop_frenet_20260921_v2/__pycache__",
+      "bytes": 125920
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/ground_closed_loop_frenet_20260921_v3/__pycache__",
+      "bytes": 126492
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/ground_closed_loop_frenet_20260922_v4/__pycache__",
+      "bytes": 130325
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/ground_closed_loop_frenet_mpc_20260922_v1/__pycache__",
+      "bytes": 141067
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/ground_closed_loop_frenet_pid_20260922_v1/__pycache__",
+      "bytes": 140141
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/ground_closed_loop_lattice_20260918_v1/__pycache__",
+      "bytes": 109015
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/ground_fitzpatrick_dynamic_mpc_20260912_v1/__pycache__",
+      "bytes": 91319
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/ground_fitzpatrick_dynamic_mpc_20260912_v1/build_v1",
+      "bytes": 5216954
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/ground_fitzpatrick_dynamic_mpc_20260912_v2/__pycache__",
+      "bytes": 38903
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/ground_fitzpatrick_dynamic_mpc_20260912_v2/build_v1",
+      "bytes": 8511312
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/ground_fitzpatrick_dynamic_mpc_20260913_v3/__pycache__",
+      "bytes": 38903
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/ground_fitzpatrick_dynamic_mpc_20260913_v3/build_v1",
+      "bytes": 8511280
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/ground_fitzpatrick_joint_20260927_v1/__pycache__",
+      "bytes": 50937
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/ground_fitzpatrick_joint_20260927_v1/build_cpp",
+      "bytes": 8911772
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/ground_fitzpatrick_joint_20260927_v2/__pycache__",
+      "bytes": 55590
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/ground_fitzpatrick_joint_20260927_v2/build_cpp",
+      "bytes": 8923036
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/ground_fitzpatrick_joint_20260927_v3/__pycache__",
+      "bytes": 55628
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/ground_fitzpatrick_joint_20260927_v3/build_cpp",
+      "bytes": 8924076
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/ground_fitzpatrick_joint_20260927_v4/__pycache__",
+      "bytes": 55628
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/ground_fitzpatrick_joint_20260927_v4/build_cpp",
+      "bytes": 8921724
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/ground_fitzpatrick_joint_20260927_v5/__pycache__",
+      "bytes": 55698
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/ground_fitzpatrick_joint_20260927_v5/build_cpp",
+      "bytes": 8932860
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/ground_fitzpatrick_joint_20260927_v6/__pycache__",
+      "bytes": 55698
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/ground_fitzpatrick_joint_20260927_v6/build_cpp",
+      "bytes": 8932588
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/ground_fitzpatrick_joint_20260927_v7/__pycache__",
+      "bytes": 39604
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/ground_fitzpatrick_joint_20260927_v7/build_cpp",
+      "bytes": 8940316
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/ground_fitzpatrick_joint_20260927_v8/__pycache__",
+      "bytes": 48149
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/ground_fitzpatrick_joint_20260927_v8/build_cpp",
+      "bytes": 8946220
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/ground_fitzpatrick_mpc_20260912_v1/__pycache__",
+      "bytes": 90881
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/ground_fitzpatrick_mpc_20260912_v1/build_v1",
+      "bytes": 5138378
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/ground_fitzpatrick_mpc_20260912_v2/__pycache__",
+      "bytes": 39022
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/ground_fitzpatrick_pid_20260912_v1/__pycache__",
+      "bytes": 90461
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/ground_fitzpatrick_pid_20260912_v1/build_v1",
+      "bytes": 5035448
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/ground_fitzpatrick_pid_20260912_v2/__pycache__",
+      "bytes": 38552
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/ground_fitzpatrick_pp_20260912_v1/__pycache__",
+      "bytes": 91354
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/ground_fitzpatrick_pp_20260912_v1/build_v1",
+      "bytes": 5034710
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/ground_fitzpatrick_pp_20260912_v2/__pycache__",
+      "bytes": 38537
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/ground_fitzpatrick_pp_20260912_v2/build_v1",
+      "bytes": 5032110
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/ground_fitzpatrick_pp_20260912_v3/__pycache__",
+      "bytes": 38537
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/ground_fitzpatrick_pp_20260912_v3/build_v1",
+      "bytes": 5033070
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/ground_new_site_dynamic_mpc_20260912_v1/__pycache__",
+      "bytes": 91368
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/ground_new_site_mpc_20260912_v1/__pycache__",
+      "bytes": 90930
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/ground_new_site_pid_20260912_v1/__pycache__",
+      "bytes": 90482
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/ground_new_site_pp_20260912_v1/__pycache__",
+      "bytes": 90827
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/ground_route_avoidance_20260917_v1/__pycache__",
+      "bytes": 60191
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/ground_route_dynamic_mpc_20260912_v5/__pycache__",
+      "bytes": 38849
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/ground_route_dynamic_mpc_20260912_v5/build_v1",
+      "bytes": 5215382
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/ground_route_mpc_20260911_v3/__pycache__",
+      "bytes": 79695
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/ground_route_mpc_20260911_v3/build_v1",
+      "bytes": 5131854
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/ground_route_pid_20260910_v1/__pycache__",
+      "bytes": 79266
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/ground_route_pid_20260910_v1/build_v1",
+      "bytes": 5038532
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/ground_route_pp_20260910_v25/__pycache__",
+      "bytes": 79257
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/ground_straight_08_3s_v1/__pycache__",
+      "bytes": 26619
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/ground_straight_08_3s_v1/build_v1",
+      "bytes": 3283526
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/ground_straight_1s_v1/__pycache__",
+      "bytes": 12318
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/ground_straight_1s_v1/build_v1",
+      "bytes": 3282893
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/integration_v1/__pycache__",
+      "bytes": 37773
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/integration_v1/build_v1",
+      "bytes": 3289179
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/log_v1/build_2026-09-09_11-02-00",
+      "bytes": 98103
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/log_v1/build_2026-09-09_11-04-53",
+      "bytes": 76452
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/mpc_test_workflow_20260910/__pycache__",
+      "bytes": 4583
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/new_site_dynamic_mpc_workflow_20260912/__pycache__",
+      "bytes": 8355
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/new_site_mpc_workflow_20260912/__pycache__",
+      "bytes": 8347
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/new_site_pid_workflow_20260912/__pycache__",
+      "bytes": 8380
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/new_site_pp_workflow_20260912/__pycache__",
+      "bytes": 8389
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/open_route_frenet_v1_20260923/__pycache__",
+      "bytes": 45145
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/performance_15w_v1/__pycache__",
+      "bytes": 6795
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/performance_20w_v1/__pycache__",
+      "bytes": 12349
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/pid_test_workflow_20260910/__pycache__",
+      "bytes": 4580
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/pp_test_workflow_20260910/__pycache__",
+      "bytes": 7833
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/stand_integration_10s_v4/__pycache__",
+      "bytes": 21605
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/stand_integration_150ms_v3/__pycache__",
+      "bytes": 20584
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/stand_integration_quick10_v5/__pycache__",
+      "bytes": 21727
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/stand_integration_v2/__pycache__",
+      "bytes": 11732
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/stand_integration_v2/build_v1",
+      "bytes": 3281674
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/stand_straight_15_2s_v1/__pycache__",
+      "bytes": 66588
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/stand_straight_15_2s_v1/build_v1",
+      "bytes": 3280416
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/straight_integration_1s_v1/__pycache__",
+      "bytes": 28468
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/timeout_stand_v1/__pycache__",
+      "bytes": 32733
+    },
+    {
+      "path": "route_build/f1tenth_safety_migration/build",
+      "bytes": 104167
+    },
+    {
+      "path": "route_build_v10/f1tenth_safety_migration/build",
+      "bytes": 112173
+    },
+    {
+      "path": "route_build_v11/f1tenth_safety_migration/build",
+      "bytes": 116192
+    },
+    {
+      "path": "route_build_v12/f1tenth_safety_migration/build",
+      "bytes": 117962
+    },
+    {
+      "path": "route_build_v2/f1tenth_safety_migration/build",
+      "bytes": 104167
+    },
+    {
+      "path": "route_build_v3/f1tenth_safety_migration/build",
+      "bytes": 105218
+    },
+    {
+      "path": "route_build_v9/f1tenth_safety_migration/build",
+      "bytes": 110790
+    },
+    {
+      "path": "stage1_build/f1tenth_safety_migration/build",
+      "bytes": 34033
+    },
+    {
+      "path": "stage1_build_ros/f1tenth_safety_migration/build",
+      "bytes": 52863
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/comparison_figures/dmpc_381_20260923/__pycache__",
+      "bytes": 9725
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/ground_381_2_0_frenet_cpp_20260925_v1/log_cpp/build_2026-09-25_12-41-44",
+      "bytes": 43160
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/ground_381_2_0_frenet_cpp_20260925_v1/log_cpp/build_2026-09-25_12-44-17",
+      "bytes": 125291
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/ground_381_2_0_frenet_cpp_20260925_v1/log_cpp/build_2026-09-25_12-49-07",
+      "bytes": 132015
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/ground_381_2_0_frenet_cpp_20260925_v1/log_cpp/build_2026-09-25_12-53-50",
+      "bytes": 87416
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/ground_381_2_0_joint_cpp_20260926_v1/log_cpp/build_2026-09-26_12-24-12",
+      "bytes": 125200
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/ground_381_2_0_joint_cpp_20260926_v1/log_cpp/build_2026-09-26_12-29-20",
+      "bytes": 94909
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/ground_381_2_0_joint_dmpc_20260927_v2/log_cpp/build_2026-09-27_00-20-54",
+      "bytes": 122895
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/ground_381_2_0_joint_dmpc_20260927_v2/log_cpp/build_2026-09-27_00-28-40",
+      "bytes": 88414
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/ground_381_2_0_joint_pid_20260926_v2/log_cpp/build_2026-09-26_22-07-51",
+      "bytes": 127250
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/ground_381_2_0_joint_pid_20260926_v3/log_cpp/build_2026-09-26_22-40-34",
+      "bytes": 123762
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/ground_fitzpatrick_joint_20260927_v1/log_cpp/build_2026-09-27_20-14-59",
+      "bytes": 127090
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/ground_fitzpatrick_pp_20260912_v1/log_v1/build_2026-09-12_22-14-21",
+      "bytes": 108992
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/ground_fitzpatrick_pp_20260912_v1/log_v1/build_2026-09-12_22-17-18",
+      "bytes": 55534
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/ground_fitzpatrick_pp_20260912_v2/log_v1/build_2026-09-12_22-41-04",
+      "bytes": 108277
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/ground_route_mpc_20260911_v3/log_v1/build_2026-09-11_00-03-17",
+      "bytes": 55253
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/ground_route_mpc_20260911_v3/log_v1/build_2026-09-11_11-28-19",
+      "bytes": 67638
+    },
+    {
+      "path": "coast_build/f1tenth_safety_migration/prefix_override/__pycache__",
+      "bytes": 371
+    },
+    {
+      "path": "route_build/f1tenth_safety_migration/prefix_override/__pycache__",
+      "bytes": 371
+    },
+    {
+      "path": "route_build_v10/f1tenth_safety_migration/prefix_override/__pycache__",
+      "bytes": 379
+    },
+    {
+      "path": "route_build_v11/f1tenth_safety_migration/prefix_override/__pycache__",
+      "bytes": 379
+    },
+    {
+      "path": "route_build_v12/f1tenth_safety_migration/prefix_override/__pycache__",
+      "bytes": 379
+    },
+    {
+      "path": "route_build_v2/f1tenth_safety_migration/prefix_override/__pycache__",
+      "bytes": 377
+    },
+    {
+      "path": "route_build_v3/f1tenth_safety_migration/prefix_override/__pycache__",
+      "bytes": 377
+    },
+    {
+      "path": "route_build_v4/f1tenth_safety_migration/prefix_override/__pycache__",
+      "bytes": 377
+    },
+    {
+      "path": "route_build_v5/f1tenth_safety_migration/prefix_override/__pycache__",
+      "bytes": 377
+    },
+    {
+      "path": "route_build_v6/f1tenth_safety_migration/prefix_override/__pycache__",
+      "bytes": 377
+    },
+    {
+      "path": "route_build_v7/f1tenth_safety_migration/prefix_override/__pycache__",
+      "bytes": 377
+    },
+    {
+      "path": "route_build_v8/f1tenth_safety_migration/prefix_override/__pycache__",
+      "bytes": 377
+    },
+    {
+      "path": "route_build_v9/f1tenth_safety_migration/prefix_override/__pycache__",
+      "bytes": 377
+    },
+    {
+      "path": "src/f1tenth_safety_migration/f1tenth_safety_migration/__pycache__",
+      "bytes": 102355
+    },
+    {
+      "path": "src/f1tenth_safety_migration/test/__pycache__",
+      "bytes": 97737
+    },
+    {
+      "path": "stage1_build/f1tenth_safety_migration/prefix_override/__pycache__",
+      "bytes": 373
+    },
+    {
+      "path": "stage1_build_ros/f1tenth_safety_migration/prefix_override/__pycache__",
+      "bytes": 381
+    },
+    {
+      "path": "baseline_pf_pp_20260908/src/baseline_pf_pp/baseline_pf_pp/__pycache__",
+      "bytes": 20636
+    },
+    {
+      "path": "baseline_pf_pp_20260908/src/particle_filter/particle_filter/__pycache__",
+      "bytes": 27424
+    },
+    {
+      "path": "coast_install/f1tenth_safety_migration/lib/python3.8/site-packages/__pycache__",
+      "bytes": 1548
+    },
+    {
+      "path": "route_install_v4/f1tenth_safety_migration/lib/python3.8/site-packages/__pycache__",
+      "bytes": 1551
+    },
+    {
+      "path": "route_install_v5/f1tenth_safety_migration/lib/python3.8/site-packages/__pycache__",
+      "bytes": 1551
+    },
+    {
+      "path": "route_install_v6/f1tenth_safety_migration/lib/python3.8/site-packages/__pycache__",
+      "bytes": 1551
+    },
+    {
+      "path": "route_install_v7/f1tenth_safety_migration/lib/python3.8/site-packages/__pycache__",
+      "bytes": 1551
+    },
+    {
+      "path": "route_install_v8/f1tenth_safety_migration/lib/python3.8/site-packages/__pycache__",
+      "bytes": 1551
+    },
+    {
+      "path": "stage1_install_ros/f1tenth_safety_migration/lib/python3.8/site-packages/__pycache__",
+      "bytes": 1553
+    },
+    {
+      "path": "install/f1tenth_safety_migration/lib/python3.8/site-packages/f1tenth_safety_migration/__pycache__",
+      "bytes": 32695
+    },
+    {
+      "path": "install/mpc/lib/python3.8/site-packages/mpc/__pycache__",
+      "bytes": 195
+    },
+    {
+      "path": "route_install/f1tenth_safety_migration/lib/python3.8/site-packages/f1tenth_safety_migration/__pycache__",
+      "bytes": 92282
+    },
+    {
+      "path": "route_install_v10/f1tenth_safety_migration/lib/python3.8/site-packages/f1tenth_safety_migration/__pycache__",
+      "bytes": 97022
+    },
+    {
+      "path": "route_install_v11/f1tenth_safety_migration/lib/python3.8/site-packages/f1tenth_safety_migration/__pycache__",
+      "bytes": 100832
+    },
+    {
+      "path": "route_install_v12/f1tenth_safety_migration/lib/python3.8/site-packages/f1tenth_safety_migration/__pycache__",
+      "bytes": 102584
+    },
+    {
+      "path": "route_install_v2/f1tenth_safety_migration/lib/python3.8/site-packages/f1tenth_safety_migration/__pycache__",
+      "bytes": 92324
+    },
+    {
+      "path": "route_install_v3/f1tenth_safety_migration/lib/python3.8/site-packages/f1tenth_safety_migration/__pycache__",
+      "bytes": 92935
+    },
+    {
+      "path": "route_install_v9/f1tenth_safety_migration/lib/python3.8/site-packages/f1tenth_safety_migration/__pycache__",
+      "bytes": 96433
+    },
+    {
+      "path": "stage1_install/f1tenth_safety_migration/lib/python3.8/site-packages/f1tenth_safety_migration/__pycache__",
+      "bytes": 32737
+    },
+    {
+      "path": "stage1_install_ros/f1tenth_safety_migration/lib/python3.8/site-packages/f1tenth_safety_migration/__pycache__",
+      "bytes": 47648
+    },
+    {
+      "path": "baseline_pf_pp_20260908/install_v1/baseline_pf_pp/lib/python3.8/site-packages/baseline_pf_pp/__pycache__",
+      "bytes": 20335
+    },
+    {
+      "path": "baseline_pf_pp_20260908/install_v1/particle_filter/lib/python3.8/site-packages/particle_filter/__pycache__",
+      "bytes": 27529
+    },
+    {
+      "path": "baseline_pf_pp_20260908/install_v2/baseline_pf_pp/lib/python3.8/site-packages/baseline_pf_pp/__pycache__",
+      "bytes": 20776
+    },
+    {
+      "path": "baseline_pf_pp_20260908/install_v2/particle_filter/lib/python3.8/site-packages/particle_filter/__pycache__",
+      "bytes": 27529
+    }
+  ],
+  "skipped": [
+    {
+      "path": "log",
+      "reason": "manifest or symlink target",
+      "references": 3
+    },
+    {
+      "path": "log_stage1",
+      "reason": "manifest or symlink target",
+      "references": 1
+    },
+    {
+      "path": "baseline_pf_pp_20260908/log_groundprep_v1",
+      "reason": "manifest or symlink target",
+      "references": 1
+    },
+    {
+      "path": "baseline_pf_pp_20260908/log_groundprep_v2",
+      "reason": "manifest or symlink target",
+      "references": 1
+    },
+    {
+      "path": "baseline_pf_pp_20260908/log_groundprep_v3",
+      "reason": "manifest or symlink target",
+      "references": 1
+    },
+    {
+      "path": "baseline_pf_pp_20260908/log_pose_timeout_v1",
+      "reason": "manifest or symlink target",
+      "references": 1
+    },
+    {
+      "path": "baseline_pf_pp_20260908/log_v1",
+      "reason": "manifest or symlink target",
+      "references": 1
+    },
+    {
+      "path": "baseline_pf_pp_20260908/log_v2",
+      "reason": "manifest or symlink target",
+      "references": 1
+    },
+    {
+      "path": "baseline_pf_pp_20260908/log_v3",
+      "reason": "manifest or symlink target",
+      "references": 1
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/log_v1",
+      "reason": "manifest or symlink target",
+      "references": 1
+    },
+    {
+      "path": "coast_log/build_2026-09-04_22-06-45",
+      "reason": "manifest or symlink target",
+      "references": 1
+    },
+    {
+      "path": "log/build_2026-09-04_12-26-37",
+      "reason": "manifest or symlink target",
+      "references": 1
+    },
+    {
+      "path": "log_stage1/build_2026-08-29_12-04-23",
+      "reason": "manifest or symlink target",
+      "references": 1
+    },
+    {
+      "path": "route_log/build_2026-09-08_11-32-57",
+      "reason": "manifest or symlink target",
+      "references": 1
+    },
+    {
+      "path": "route_log_v10/build_2026-09-08_20-08-14",
+      "reason": "manifest or symlink target",
+      "references": 1
+    },
+    {
+      "path": "route_log_v11/build_2026-09-08_20-13-32",
+      "reason": "manifest or symlink target",
+      "references": 1
+    },
+    {
+      "path": "route_log_v12/build_2026-09-08_20-38-51",
+      "reason": "manifest or symlink target",
+      "references": 1
+    },
+    {
+      "path": "route_log_v2/build_2026-09-08_11-35-44",
+      "reason": "manifest or symlink target",
+      "references": 1
+    },
+    {
+      "path": "route_log_v3/build_2026-09-08_11-40-35",
+      "reason": "manifest or symlink target",
+      "references": 1
+    },
+    {
+      "path": "route_log_v4/build_2026-09-08_13-08-47",
+      "reason": "manifest or symlink target",
+      "references": 1
+    },
+    {
+      "path": "route_log_v5/build_2026-09-08_13-11-37",
+      "reason": "manifest or symlink target",
+      "references": 1
+    },
+    {
+      "path": "route_log_v6/build_2026-09-08_13-14-15",
+      "reason": "manifest or symlink target",
+      "references": 1
+    },
+    {
+      "path": "route_log_v7/build_2026-09-08_16-42-45",
+      "reason": "manifest or symlink target",
+      "references": 1
+    },
+    {
+      "path": "route_log_v8/build_2026-09-08_16-44-41",
+      "reason": "manifest or symlink target",
+      "references": 1
+    },
+    {
+      "path": "route_log_v9/build_2026-09-08_17-07-08",
+      "reason": "manifest or symlink target",
+      "references": 1
+    },
+    {
+      "path": "stage1_log/build_2026-08-29_12-05-24",
+      "reason": "manifest or symlink target",
+      "references": 1
+    },
+    {
+      "path": "stage1_log_ros/build_2026-08-30_11-38-39",
+      "reason": "manifest or symlink target",
+      "references": 1
+    },
+    {
+      "path": "stand_speed_15_monitor_v1/log_clean_v2",
+      "reason": "manifest or symlink target",
+      "references": 1
+    },
+    {
+      "path": "stand_speed_15_monitor_v1/log_v1",
+      "reason": "manifest or symlink target",
+      "references": 1
+    },
+    {
+      "path": "baseline_pf_pp_20260908/log_groundprep_v1/build_2026-09-09_00-27-03",
+      "reason": "manifest or symlink target",
+      "references": 1
+    },
+    {
+      "path": "baseline_pf_pp_20260908/log_groundprep_v2/build_2026-09-09_00-53-51",
+      "reason": "manifest or symlink target",
+      "references": 1
+    },
+    {
+      "path": "baseline_pf_pp_20260908/log_groundprep_v3/build_2026-09-09_00-57-06",
+      "reason": "manifest or symlink target",
+      "references": 1
+    },
+    {
+      "path": "baseline_pf_pp_20260908/log_pose_timeout_v1/build_2026-09-09_00-13-26",
+      "reason": "manifest or symlink target",
+      "references": 1
+    },
+    {
+      "path": "baseline_pf_pp_20260908/log_v1/build_2026-09-08_21-20-36",
+      "reason": "manifest or symlink target",
+      "references": 1
+    },
+    {
+      "path": "baseline_pf_pp_20260908/log_v2/build_2026-09-08_21-29-27",
+      "reason": "manifest or symlink target",
+      "references": 1
+    },
+    {
+      "path": "baseline_pf_pp_20260908/log_v3/build_2026-09-08_21-58-08",
+      "reason": "manifest or symlink target",
+      "references": 1
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/ground_381_2_0_frenet_cpp_20260925_v1/log_cpp",
+      "reason": "manifest or symlink target",
+      "references": 1
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/ground_381_2_0_joint_cpp_20260926_v1/log_cpp",
+      "reason": "manifest or symlink target",
+      "references": 1
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/ground_381_2_0_joint_dmpc_20260927_v2/log_cpp",
+      "reason": "manifest or symlink target",
+      "references": 1
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/ground_381_2_0_joint_pid_20260926_v2/log_cpp",
+      "reason": "manifest or symlink target",
+      "references": 1
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/ground_381_2_0_joint_pid_20260926_v3/log_cpp",
+      "reason": "manifest or symlink target",
+      "references": 1
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/ground_381_2_0_joint_pid_20260926_v4/log_cpp",
+      "reason": "manifest or symlink target",
+      "references": 1
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/ground_381_2_0_joint_pid_20260926_v5/log_cpp",
+      "reason": "manifest or symlink target",
+      "references": 1
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/ground_fitzpatrick_dynamic_mpc_20260912_v1/log_v1",
+      "reason": "manifest or symlink target",
+      "references": 1
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/ground_fitzpatrick_dynamic_mpc_20260912_v2/log_v1",
+      "reason": "manifest or symlink target",
+      "references": 1
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/ground_fitzpatrick_dynamic_mpc_20260913_v3/log_v1",
+      "reason": "manifest or symlink target",
+      "references": 1
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/ground_fitzpatrick_joint_20260927_v1/log_cpp",
+      "reason": "manifest or symlink target",
+      "references": 1
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/ground_fitzpatrick_joint_20260927_v2/log_cpp",
+      "reason": "manifest or symlink target",
+      "references": 1
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/ground_fitzpatrick_joint_20260927_v3/log_cpp",
+      "reason": "manifest or symlink target",
+      "references": 1
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/ground_fitzpatrick_joint_20260927_v4/log_cpp",
+      "reason": "manifest or symlink target",
+      "references": 1
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/ground_fitzpatrick_joint_20260927_v5/log_cpp",
+      "reason": "manifest or symlink target",
+      "references": 1
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/ground_fitzpatrick_joint_20260927_v6/log_cpp",
+      "reason": "manifest or symlink target",
+      "references": 1
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/ground_fitzpatrick_joint_20260927_v7/log_cpp",
+      "reason": "manifest or symlink target",
+      "references": 1
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/ground_fitzpatrick_joint_20260927_v8/log_cpp",
+      "reason": "manifest or symlink target",
+      "references": 1
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/ground_fitzpatrick_mpc_20260912_v1/log_v1",
+      "reason": "manifest or symlink target",
+      "references": 1
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/ground_fitzpatrick_pid_20260912_v1/log_v1",
+      "reason": "manifest or symlink target",
+      "references": 1
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/ground_fitzpatrick_pp_20260912_v1/log_v1",
+      "reason": "manifest or symlink target",
+      "references": 1
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/ground_fitzpatrick_pp_20260912_v2/log_v1",
+      "reason": "manifest or symlink target",
+      "references": 1
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/ground_fitzpatrick_pp_20260912_v3/log_v1",
+      "reason": "manifest or symlink target",
+      "references": 1
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/ground_route_dynamic_mpc_20260912_v5/log_v1",
+      "reason": "manifest or symlink target",
+      "references": 1
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/ground_route_mpc_20260911_v3/log_v1",
+      "reason": "manifest or symlink target",
+      "references": 1
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/ground_route_pid_20260910_v1/log_v1",
+      "reason": "manifest or symlink target",
+      "references": 1
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/ground_straight_08_3s_v1/log_v1",
+      "reason": "manifest or symlink target",
+      "references": 1
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/ground_straight_1s_v1/log_v1",
+      "reason": "manifest or symlink target",
+      "references": 1
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/integration_v1/log_v1",
+      "reason": "manifest or symlink target",
+      "references": 1
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/log_v1/build_2026-09-09_11-12-38",
+      "reason": "manifest or symlink target",
+      "references": 1
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/stand_integration_v2/log_v1",
+      "reason": "manifest or symlink target",
+      "references": 1
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/stand_straight_15_2s_v1/log_v1",
+      "reason": "manifest or symlink target",
+      "references": 1
+    },
+    {
+      "path": "stand_speed_15_monitor_v1/log_clean_v2/build_2026-09-09_23-17-11",
+      "reason": "manifest or symlink target",
+      "references": 1
+    },
+    {
+      "path": "stand_speed_15_monitor_v1/log_v1/build_2026-09-09_23-14-23",
+      "reason": "manifest or symlink target",
+      "references": 1
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/ground_381_2_0_frenet_cpp_20260925_v1/log_cpp/build_2026-09-25_13-00-13",
+      "reason": "manifest or symlink target",
+      "references": 1
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/ground_381_2_0_joint_cpp_20260926_v1/log_cpp/build_2026-09-26_12-38-10",
+      "reason": "manifest or symlink target",
+      "references": 1
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/ground_381_2_0_joint_dmpc_20260927_v2/log_cpp/build_2026-09-27_00-34-06",
+      "reason": "manifest or symlink target",
+      "references": 1
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/ground_381_2_0_joint_pid_20260926_v2/log_cpp/build_2026-09-26_22-15-01",
+      "reason": "manifest or symlink target",
+      "references": 1
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/ground_381_2_0_joint_pid_20260926_v3/log_cpp/build_2026-09-26_22-45-15",
+      "reason": "manifest or symlink target",
+      "references": 1
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/ground_381_2_0_joint_pid_20260926_v4/log_cpp/build_2026-09-26_23-10-59",
+      "reason": "manifest or symlink target",
+      "references": 1
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/ground_381_2_0_joint_pid_20260926_v5/log_cpp/build_2026-09-26_23-39-09",
+      "reason": "manifest or symlink target",
+      "references": 1
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/ground_fitzpatrick_dynamic_mpc_20260912_v1/log_v1/build_2026-09-12_22-25-48",
+      "reason": "manifest or symlink target",
+      "references": 1
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/ground_fitzpatrick_dynamic_mpc_20260912_v2/log_v1/build_2026-09-12_23-08-13",
+      "reason": "manifest or symlink target",
+      "references": 1
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/ground_fitzpatrick_dynamic_mpc_20260913_v3/log_v1/build_2026-09-13_11-49-00",
+      "reason": "manifest or symlink target",
+      "references": 1
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/ground_fitzpatrick_joint_20260927_v1/log_cpp/build_2026-09-27_20-19-04",
+      "reason": "manifest or symlink target",
+      "references": 1
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/ground_fitzpatrick_joint_20260927_v2/log_cpp/build_2026-09-27_21-16-45",
+      "reason": "manifest or symlink target",
+      "references": 1
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/ground_fitzpatrick_joint_20260927_v3/log_cpp/build_2026-09-27_21-40-02",
+      "reason": "manifest or symlink target",
+      "references": 1
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/ground_fitzpatrick_joint_20260927_v4/log_cpp/build_2026-09-27_21-54-16",
+      "reason": "manifest or symlink target",
+      "references": 1
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/ground_fitzpatrick_joint_20260927_v5/log_cpp/build_2026-09-27_22-07-00",
+      "reason": "manifest or symlink target",
+      "references": 1
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/ground_fitzpatrick_joint_20260927_v6/log_cpp/build_2026-09-27_22-23-28",
+      "reason": "manifest or symlink target",
+      "references": 1
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/ground_fitzpatrick_joint_20260927_v7/log_cpp/build_2026-09-27_22-55-41",
+      "reason": "manifest or symlink target",
+      "references": 1
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/ground_fitzpatrick_joint_20260927_v8/log_cpp/build_2026-09-27_23-14-21",
+      "reason": "manifest or symlink target",
+      "references": 1
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/ground_fitzpatrick_mpc_20260912_v1/log_v1/build_2026-09-12_22-25-48",
+      "reason": "manifest or symlink target",
+      "references": 1
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/ground_fitzpatrick_pid_20260912_v1/log_v1/build_2026-09-12_22-25-47",
+      "reason": "manifest or symlink target",
+      "references": 1
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/ground_fitzpatrick_pp_20260912_v1/log_v1/build_2026-09-12_22-18-00",
+      "reason": "manifest or symlink target",
+      "references": 1
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/ground_fitzpatrick_pp_20260912_v2/log_v1/build_2026-09-12_22-46-43",
+      "reason": "manifest or symlink target",
+      "references": 1
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/ground_fitzpatrick_pp_20260912_v3/log_v1/build_2026-09-12_22-59-32",
+      "reason": "manifest or symlink target",
+      "references": 1
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/ground_route_dynamic_mpc_20260912_v5/log_v1/build_2026-09-12_11-05-10",
+      "reason": "manifest or symlink target",
+      "references": 1
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/ground_route_mpc_20260911_v3/log_v1/build_2026-09-11_11-31-02",
+      "reason": "manifest or symlink target",
+      "references": 1
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/ground_route_pid_20260910_v1/log_v1/build_2026-09-10_13-17-59",
+      "reason": "manifest or symlink target",
+      "references": 1
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/ground_straight_08_3s_v1/log_v1/build_2026-09-09_22-27-28",
+      "reason": "manifest or symlink target",
+      "references": 1
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/ground_straight_1s_v1/log_v1/build_2026-09-09_22-12-42",
+      "reason": "manifest or symlink target",
+      "references": 1
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/integration_v1/log_v1/build_2026-09-09_11-21-29",
+      "reason": "manifest or symlink target",
+      "references": 1
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/stand_integration_v2/log_v1/build_2026-09-09_12-23-15",
+      "reason": "manifest or symlink target",
+      "references": 1
+    },
+    {
+      "path": "candidate_cpp_gpu_20260909/stand_straight_15_2s_v1/log_v1/build_2026-09-09_23-25-45",
+      "reason": "manifest or symlink target",
+      "references": 1
+    }
+  ],
+  "total_bytes": 253949250,
+  "deleted": true,
+  "runtime_before": {
+    "v8": {
+      "fingerprint": "fad04bba379c2df07447c82fd3b67317f2123d0570b72e8e58979619b2617d73",
+      "manifests": [
+        "/home/f1tenth/f1tenth_real_migration_ws_20260829/candidate_cpp_gpu_20260909/runtime_manifest.sha256",
+        "/home/f1tenth/f1tenth_real_migration_ws_20260829/baseline_pf_pp_20260908/groundprep_runtime_v3_manifest.sha256",
+        "/home/f1tenth/f1tenth_real_migration_ws_20260829/candidate_cpp_gpu_20260909/integration_v1/runtime_manifest.sha256",
+        "/home/f1tenth/f1tenth_real_migration_ws_20260829/candidate_cpp_gpu_20260909/ground_fitzpatrick_joint_20260927_v8/runtime_manifest.sha256"
+      ],
+      "physical_motion_scope": "one_ground_fitzpatrick_frenet_cpp_dynamic_mpc_single_lap_max_90s_0.70_to_2.00mps",
+      "max_steering_rad": 0.27,
+      "route_completion_requires_logged_endpoint": true
+    },
+    "v2": {
+      "fingerprint": "245ec257e37c1b9907e39e1a447e27ac509880f43d001ccd9467f6afc07e623d",
+      "manifests": [
+        "/home/f1tenth/f1tenth_real_migration_ws_20260829/candidate_cpp_gpu_20260909/runtime_manifest.sha256",
+        "/home/f1tenth/f1tenth_real_migration_ws_20260829/baseline_pf_pp_20260908/groundprep_runtime_v3_manifest.sha256",
+        "/home/f1tenth/f1tenth_real_migration_ws_20260829/candidate_cpp_gpu_20260909/integration_v1/runtime_manifest.sha256",
+        "/home/f1tenth/f1tenth_real_migration_ws_20260829/candidate_cpp_gpu_20260909/ground_fitzpatrick_joint_20260927_v2/runtime_manifest.sha256"
+      ],
+      "physical_motion_scope": "one_ground_fitzpatrick_frenet_cpp_pid_single_lap_max_90s_0.70_to_2.00mps",
+      "max_steering_rad": 0.27,
+      "route_completion_requires_logged_endpoint": true
+    }
+  },
+  "runtime_after": {
+    "v8": {
+      "fingerprint": "fad04bba379c2df07447c82fd3b67317f2123d0570b72e8e58979619b2617d73",
+      "manifests": [
+        "/home/f1tenth/f1tenth_real_migration_ws_20260829/candidate_cpp_gpu_20260909/runtime_manifest.sha256",
+        "/home/f1tenth/f1tenth_real_migration_ws_20260829/baseline_pf_pp_20260908/groundprep_runtime_v3_manifest.sha256",
+        "/home/f1tenth/f1tenth_real_migration_ws_20260829/candidate_cpp_gpu_20260909/integration_v1/runtime_manifest.sha256",
+        "/home/f1tenth/f1tenth_real_migration_ws_20260829/candidate_cpp_gpu_20260909/ground_fitzpatrick_joint_20260927_v8/runtime_manifest.sha256"
+      ],
+      "physical_motion_scope": "one_ground_fitzpatrick_frenet_cpp_dynamic_mpc_single_lap_max_90s_0.70_to_2.00mps",
+      "max_steering_rad": 0.27,
+      "route_completion_requires_logged_endpoint": true
+    },
+    "v2": {
+      "fingerprint": "245ec257e37c1b9907e39e1a447e27ac509880f43d001ccd9467f6afc07e623d",
+      "manifests": [
+        "/home/f1tenth/f1tenth_real_migration_ws_20260829/candidate_cpp_gpu_20260909/runtime_manifest.sha256",
+        "/home/f1tenth/f1tenth_real_migration_ws_20260829/baseline_pf_pp_20260908/groundprep_runtime_v3_manifest.sha256",
+        "/home/f1tenth/f1tenth_real_migration_ws_20260829/candidate_cpp_gpu_20260909/integration_v1/runtime_manifest.sha256",
+        "/home/f1tenth/f1tenth_real_migration_ws_20260829/candidate_cpp_gpu_20260909/ground_fitzpatrick_joint_20260927_v2/runtime_manifest.sha256"
+      ],
+      "physical_motion_scope": "one_ground_fitzpatrick_frenet_cpp_pid_single_lap_max_90s_0.70_to_2.00mps",
+      "max_steering_rad": 0.27,
+      "route_completion_requires_logged_endpoint": true
+    }
+  },
+  "runtime_unchanged": true
+}

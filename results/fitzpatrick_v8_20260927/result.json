@@ -1,0 +1,619 @@
+{
+  "passed": true,
+  "offline": false,
+  "zero_only": false,
+  "motion_permission": true,
+  "pose_timeout_sec": 0.5,
+  "continuous_localization_passed": false,
+  "zero_joy": false,
+  "zero_rviz": false,
+  "initialization_mode": "operator_confirmed_route_start",
+  "route_seed": [
+    0.6138574242591857,
+    -0.34711861550807943,
+    2.7755575615628914e-17
+  ],
+  "baseline_code_fingerprint": "e4e46894660db255fc26a21669c7f12e194e17b1a25b93687d6fef91ff8a527f",
+  "code_fingerprint": "fad04bba379c2df07447c82fd3b67317f2123d0570b72e8e58979619b2617d73",
+  "candidate_zero_binary": false,
+  "integration_release": "ground_fitzpatrick_joint_20260927_v8",
+  "controller": "closed_loop_frenet_cpp_dynamic_mpc",
+  "tracker_config": {
+    "type": "dynamic_mpc",
+    "model": "joint_dynamic_bicycle_with_low_speed_blend_and_actuator_lag",
+    "horizon": 24,
+    "prediction_dt_s": 0.05,
+    "states": [
+      "x",
+      "y",
+      "yaw",
+      "vx",
+      "vy",
+      "yaw_rate",
+      "previous_acceleration",
+      "previous_steering",
+      "command_speed",
+      "servo_estimate"
+    ],
+    "controls": [
+      "command_acceleration",
+      "steering_angle"
+    ],
+    "iteration_backend": "acados_0.4.0_sqp_rti_hpipm",
+    "longitudinal_control": "joint_optimization",
+    "prediction_jerk_limit_mps3": 3.0,
+    "prediction_steering_rate_limit_rad_s": 0.8,
+    "speed_command_max_mps": 2.0,
+    "acceleration_min_mps2": -0.8,
+    "acceleration_max_mps2": 1.0,
+    "jerk_limit_mps3": 4.0,
+    "steering_rate_limit_rad_s": 1.0,
+    "stage_weights": [
+      3.0,
+      160.0,
+      140.0,
+      18.0,
+      1.0,
+      0.5,
+      0.3,
+      1.2,
+      2.0,
+      180.0
+    ],
+    "terminal_weights": [
+      5.0,
+      240.0,
+      210.0,
+      30.0,
+      1.0,
+      0.5
+    ],
+    "mass_kg": 3.74,
+    "yaw_inertia_kg_m2": 0.04712,
+    "front_length_m": 0.12,
+    "rear_length_m": 0.13,
+    "front_cornering_stiffness_n_rad": 90.0,
+    "rear_cornering_stiffness_n_rad": 96.0,
+    "motor_response_time_s": 0.15,
+    "servo_response_time_s": 0.2,
+    "state_source": "vesc_speed_continuous_dynamic_lateral_observer",
+    "minimum_drivable_speed_mps": 0.5,
+    "continuous_path_projection": true,
+    "terminal_deceleration_mps2": 0.55,
+    "terminal_response_allowance_s": 0.3,
+    "terminal_floor_settle_distance_m": 0.25,
+    "terminal_coast_deceleration_estimate_mps2": 0.6,
+    "terminal_coast_transport_allowance_s": 0.05,
+    "terminal_cut_is_latched": true,
+    "terminal_completion_requires_standstill": true,
+    "stop_stationary_observation_max_s": 3.0,
+    "stop_stationary_dwell_s": 0.2,
+    "minimum_speed_implementation": "optimizer_future_command_bounds_after_launch",
+    "terminal_coast_command_band_max_mps": 0.6,
+    "planning_preferred_tracking_reserve_m": 0.03,
+    "planning_reserve_policy": "prefer_buffered_candidate_before_hysteresis_hard_collision_guard_unchanged",
+    "cruise_minimum_speed_mps": 0.7,
+    "candidate_site": "Fitzpatrick",
+    "physical_validation_pending": true,
+    "predicted_lateral_acceleration_limit_mps2": 1.65,
+    "curve_speed_lateral_acceleration_mps2": 1.2,
+    "implementation": "cpp",
+    "selected_tracker": "dynamic_mpc"
+  },
+  "initialization_snapshot_timeout_sec": 0.5,
+  "health_source_timeout_sec": 0.5,
+  "health_receipt_timeout_sec": 0.5,
+  "window_command_timeout_sec": 0.5,
+  "window_duration_sec": 90.0,
+  "min_curve_speed_mps": 0.7,
+  "max_command_speed_mps": 2.0,
+  "avoidance_speed_max_mps": 2.0,
+  "longitudinal_control": "joint_dynamic_mpc",
+  "longitudinal_command_acceleration_bounds_mps2": [
+    -0.8,
+    1.0
+  ],
+  "longitudinal_command_jerk_limit_mps3": 4.0,
+  "driver_speed_cap_erpm": 15000.0,
+  "driver_speed_cap_mps": 2.0,
+  "endpoint_position_tolerance_m": 0.1,
+  "endpoint_heading_tolerance_rad": 0.2,
+  "return_path_policy": "fixed_spatial_center_recovery_with_fresh_collision_checks",
+  "curvature_preview_m": 1.0,
+  "speed_profile_lookahead_m": 0.2,
+  "actuator_start_acceleration_mps2": 1.0,
+  "static_center_clearance_m": 0.25,
+  "dynamic_center_clearance_m": 0.15,
+  "proactive_avoidance_clearance_m": 0.22,
+  "physical_zero_required_sec": 5.0,
+  "offline_zero_required_sec": 5.0,
+  "offline_observation_seconds": 5.0,
+  "operator_start_wait_seconds": 120.0,
+  "power_mode_record": "pmode:0008",
+  "physical_mode": "ground",
+  "motor_temperature_used_for_protection": false,
+  "pf_cpu_affinity": "4-5",
+  "planner_cpu_affinity": "1-2",
+  "controller_cpu_affinity": "3",
+  "safety_cpu_affinity": "0",
+  "numeric_library_threads": 1,
+  "physical_motion_authorized_by_cli": true,
+  "post_stop_observation": {
+    "limit_sec": 3.0,
+    "stationary_dwell_sec": 0.2,
+    "window_reason": "upstream_stop",
+    "final_reason": "",
+    "stationary_confirmed": true,
+    "elapsed_sec": 0.8376345100000435
+  },
+  "physical_stop_reason": "upstream_stop",
+  "physical_final_stop_reason": "",
+  "route_completed": true,
+  "test_outcome": "route_complete",
+  "window": {
+    "reason": "upstream_stop",
+    "latched": true,
+    "started": 2905.035006532,
+    "speed": 0.0,
+    "steering": 0.0,
+    "diagnostic": {},
+    "source_age_s": 0.017356395721435547,
+    "health_ready": true,
+    "ready_for_permission": false
+  },
+  "final": {
+    "arm_state": "ARMED",
+    "armed": true,
+    "input_age_sec": {
+      "belief": 1000000000.0,
+      "deadman": 0.001279,
+      "nominal": 0.046235,
+      "odom": 0.013816,
+      "planner": 0.045865,
+      "scan": 0.015269
+    },
+    "latched": false,
+    "real_vehicle_profile": true,
+    "stop_reason": "",
+    "straight_line_fallback_allowed": false
+  },
+  "health": {
+    "erpm": -11.0,
+    "fault": 0,
+    "motor_current": 0.0,
+    "input_current": 0.0,
+    "duty_cycle": 0.0,
+    "voltage": 11.8,
+    "fet_temp": 29.6,
+    "motor_temp": -78.1,
+    "motor_temperature_used": false,
+    "stamp": 1790565688.0183215,
+    "bridge_ros": 1790565688.0194693,
+    "bridge_mono": 2932.562416442
+  },
+  "last_statuses": {
+    "actuator": {
+      "current": 0.0,
+      "input_age_sec": 0.990658,
+      "motor_mode": "coast",
+      "rpm": 0.0,
+      "servo": 0.4304,
+      "stop_reason": "final_command_timeout"
+    },
+    "pp": {
+      "blocked_confirmation_scans": 0,
+      "candidate_reason_counts": {
+        "terminal_path_too_short": 5
+      },
+      "candidate_score": 0.8381999972391942,
+      "candidate_score_terms": {
+        "continuity": 0.7120000000000002,
+        "curvature_jerk": 0.12619999723919406,
+        "obstacle": 0,
+        "reference": 0,
+        "wall": 0
+      },
+      "candidate_switch_count": 4,
+      "center_path_reused": true,
+      "commit_age_scans": 0,
+      "complete": true,
+      "confirmed_cluster_count": 3,
+      "confirmed_dynamic_point_count": 40,
+      "confirmed_obstacle_tracks": [
+        {
+          "extent_m": 0.18690921170658498,
+          "hits": 17,
+          "id": 78,
+          "misses": 0,
+          "x": 6.061867759596347,
+          "y": 1.7460613479080984
+        },
+        {
+          "extent_m": 0.1581876812630486,
+          "hits": 5,
+          "id": 92,
+          "misses": 0,
+          "x": -0.035391582204305376,
+          "y": 1.3105745480609299
+        },
+        {
+          "extent_m": 0.1724655604550103,
+          "hits": 2,
+          "id": 94,
+          "misses": 0,
+          "x": 0.22857766013368574,
+          "y": 1.094548652530877
+        }
+      ],
+      "control_period_s": 0.05,
+      "controller": "closed_loop_frenet_cpp_dynamic_mpc",
+      "detected_cluster_count": 3,
+      "dynamic_scan_point_count": 42,
+      "endpoint_distance_m": 0.08941619367723523,
+      "endpoint_heading_error_rad": -0.0058674598463328825,
+      "footprint_collision": false,
+      "frame_id": "map",
+      "generated_mono": 2932.841566172,
+      "implementation": "cpp_separate_planner_controller",
+      "input_age": {
+        "odom": {
+          "receipt_age_s": 0.003457475999766757,
+          "source_age_s": 0.00464177131652832,
+          "timeout_s": 0.5
+        },
+        "pose": {
+          "receipt_age_s": 0.00236515500000678,
+          "source_age_s": 0.02150416374206543,
+          "timeout_s": 0.5
+        },
+        "scan": {
+          "receipt_age_s": 0.020957946999715205,
+          "source_age_s": 0.02150416374206543,
+          "timeout_s": 0.5
+        }
+      },
+      "input_pose_stamp": 1790565688.2446258,
+      "input_scan_stamp": 1790565688.2947953,
+      "lap_length_m": 44.73153929638099,
+      "lap_progress_m": 44.73153929638099,
+      "last_plan_duration_s": 0.0005838729998686176,
+      "last_plan_stages": {
+        "compute_wall_s": 0.0005888649998269102,
+        "lattice_search_s": 0.00017020799987221835,
+        "scan_processing_s": 0.00019740900006581796,
+        "total_wall_s": 0.0005900490000385616
+      },
+      "lateral_jerk_cost": 1.0678396938236274,
+      "local_path_endpoint_xy": [
+        0.6138574242591857,
+        -0.34711861550807943
+      ],
+      "minimum_footprint_point_distance_m": 1.438485011922667,
+      "minimum_obstacle_clearance_m": 1.4547542545640095,
+      "minimum_static_clearance_m": 1.0606601717798214,
+      "nearest_dynamic_point_m": 1.4816782511435138,
+      "obstacle_points": [
+        [
+          6.053387668241163,
+          1.652339442593123
+        ],
+        [
+          6.090198393221328,
+          1.6925662430412443
+        ],
+        [
+          6.074792487204203,
+          1.7122717498980626
+        ],
+        [
+          6.055607016549493,
+          1.730373840775345
+        ],
+        [
+          6.048381161390598,
+          1.7533000785148278
+        ],
+        [
+          6.052126764594913,
+          1.7808221689084558
+        ],
+        [
+          6.064940765468292,
+          1.812306544389767
+        ],
+        [
+          6.055507820100783,
+          1.8345107151439617
+        ],
+        [
+          0.03691627579349577,
+          1.2709003156103402
+        ],
+        [
+          0.00207766453628766,
+          1.314249638988276
+        ],
+        [
+          -0.002066324298021893,
+          1.3048421629529168
+        ],
+        [
+          -0.012307853590367124,
+          1.3057277850894804
+        ],
+        [
+          -0.01895540123103434,
+          1.3005639359132317
+        ],
+        [
+          -0.029743833502936745,
+          1.3022024901093971
+        ],
+        [
+          -0.04318834542532968,
+          1.308034590365448
+        ],
+        [
+          -0.05564606284844409,
+          1.3120823400973896
+        ],
+        [
+          -0.07081842318001352,
+          1.3202862122250942
+        ],
+        [
+          -0.0909032078401284,
+          1.3359885302382972
+        ],
+        [
+          -0.10467189266086674,
+          1.3414420270803558
+        ],
+        [
+          0.28153783084940964,
+          1.1482802255514384
+        ],
+        [
+          0.28907788769255216,
+          1.115382370796152
+        ],
+        [
+          0.28274082006977364,
+          1.1123912998392789
+        ],
+        [
+          0.2785806051348799,
+          1.1048650380802938
+        ],
+        [
+          0.2735995193978612,
+          1.0991294993204832
+        ],
+        [
+          0.26468995357830394,
+          1.1014572000694502
+        ],
+        [
+          0.24952364484246825,
+          1.11627528963265
+        ],
+        [
+          0.24587352131479057,
+          1.1077487431086304
+        ],
+        [
+          0.2517826322916411,
+          1.0804889568539897
+        ],
+        [
+          0.24651055730303073,
+          1.0755557549759935
+        ],
+        [
+          0.24080771515488442,
+          1.0714915144447101
+        ],
+        [
+          0.22538367568648898,
+          1.086007480866876
+        ],
+        [
+          0.21683634657096063,
+          1.0871579174225228
+        ],
+        [
+          0.21203810952546354,
+          1.0812065434885842
+        ],
+        [
+          0.2063264205051335,
+          1.0769998944461046
+        ],
+        [
+          0.19871959341480538,
+          1.0762810293941105
+        ],
+        [
+          0.18578970017031526,
+          1.0851535535051156
+        ],
+        [
+          0.18445528558552815,
+          1.0729779561727986
+        ],
+        [
+          0.1753595712668905,
+          1.0747584084068988
+        ],
+        [
+          0.15584711918804528,
+          1.0947381478188325
+        ],
+        [
+          0.13465035326417296,
+          1.1171748789534948
+        ]
+      ],
+      "offset_m": 0,
+      "plan_id": 323,
+      "plan_interval_s": 0.2,
+      "planning_active": false,
+      "preferred_tracking_reserve_m": 0.03,
+      "progress_index": 898,
+      "raw_scan_point_count": 641,
+      "reason": "route_complete",
+      "return_m": 1.2,
+      "route_mode": "closed_single_lap_stop",
+      "runtime_timing": {
+        "publish_mono": 2932.909138514,
+        "sequence": 3183,
+        "tick_start_mono": 2932.908958034
+      },
+      "scan_pose_alignment_span_s": 0.05016946792602539,
+      "side": "center",
+      "speed_command": 0,
+      "state": "FOLLOWING",
+      "steering_command": 0,
+      "switch_reason": "center_clear",
+      "tracker_config": {
+        "state_dimension": 10,
+        "state_source": "vesc_speed_continuous_dynamic_lateral_observer",
+        "type": "dynamic_mpc"
+      },
+      "tracker_diagnostics": null,
+      "tracking_reserve_satisfied": true,
+      "transition_m": 2.4,
+      "valid": true
+    },
+    "relay": {
+      "source_stamp": 1790565689.3449388,
+      "relay_receive_ros": 1790565689.3438215,
+      "input_source_age_s": -0.0011172294616699219,
+      "callback_publish_s": 0.00021081599970784737,
+      "count": 1321
+    },
+    "final": {
+      "arm_state": "LATCHED",
+      "armed": false,
+      "input_age_sec": {
+        "belief": 1000000000.0,
+        "deadman": 0.624359,
+        "nominal": 0.286394,
+        "odom": 0.010296,
+        "planner": 0.285623,
+        "scan": 0.009114
+      },
+      "latched": true,
+      "real_vehicle_profile": true,
+      "stop_reason": "teleop_deadman_released",
+      "straight_line_fallback_allowed": false
+    },
+    "window": {
+      "reason": "upstream_stop",
+      "latched": true,
+      "started": 2905.035006532,
+      "speed": 0.0,
+      "steering": 0.0,
+      "diagnostic": {},
+      "source_age_s": 0.3807511329650879,
+      "health_ready": true,
+      "ready_for_permission": false
+    },
+    "health": {
+      "erpm": 0.0,
+      "fault": 0,
+      "motor_current": 0.0,
+      "input_current": 0.0,
+      "duty_cycle": 0.0,
+      "voltage": 11.8,
+      "fet_temp": 29.3,
+      "motor_temp": -74.3,
+      "motor_temperature_used": false,
+      "stamp": 1790565689.8614223,
+      "bridge_ros": 1790565689.8626075,
+      "bridge_mono": 2934.405561721
+    },
+    "pf": {
+      "valid": false,
+      "reason": "scan_stale",
+      "pose_count": 1250,
+      "compute_ms": 13.66670500010514,
+      "pose_frame": "map/base_link",
+      "scan_stamp": 1790565689.3449388,
+      "odom_stamp": 1790565689.76131,
+      "pipeline_timing": {
+        "source_stamp": 1790565689.3449388,
+        "pf_receive_ros": 1790565689.345348,
+        "pf_input_age_s": 0.00040912628173828125,
+        "pf_output_check_ros": 1790565689.3599627,
+        "pf_output_age_s": 0.015023946762084961,
+        "compute_ms": 13.66670500010514
+      }
+    },
+    "operator": {
+      "active": true,
+      "arm": true,
+      "deadman": true,
+      "enable": true,
+      "joy_age_sec": 0.007747,
+      "mpc_ready": true,
+      "mpc_stable_for_sec": 28.039925,
+      "nominal_age_sec": 0.043498,
+      "planner_age_sec": 0.042766,
+      "reason": "",
+      "release_latched": false
+    },
+    "health_guard": {
+      "healthy": true,
+      "motor_temperature_used": false,
+      "qualified": true,
+      "reason": "healthy",
+      "receipt_age_s": 0.020268888999908086,
+      "samples": 2985,
+      "source_age_s": 0.022454500198364258,
+      "startup_rejected_samples": 0
+    }
+  },
+  "timing": {
+    "health_samples": 3171,
+    "max_source_age_s": 0.27361083030700684,
+    "max_bridge_age_s": 0.017397403717041016,
+    "max_bridge_to_supervisor_s": 0.27202360600040265,
+    "max_spin_gap_s": 0.2347244170000522,
+    "max_abs_erpm": 15586.0,
+    "last_health": {
+      "source_age_s": 0.0024573802947998047,
+      "bridge_age_s": 0.0011851787567138672,
+      "bridge_to_supervisor_s": 0.0011845779999930528,
+      "ros_now": 1790565689.8638797,
+      "source_stamp": 1790565689.8614223
+    },
+    "strict_health_started_mono": 2873.392713747
+  },
+  "pp_delivery": {
+    "samples": 2949,
+    "max_tick_gap_s": 0.0,
+    "max_delivery_s": 0.05462175599996044,
+    "max_receipt_gap_s": 0.1471959949999473,
+    "last": {
+      "publish_mono": 2932.909138514,
+      "sequence": 3183,
+      "tick_start_mono": 2932.908958034,
+      "delivery_s": 0.009658955999839236
+    }
+  },
+  "localization_monitor": {
+    "active": false,
+    "pp_samples": 0,
+    "max_pose_source_age_s": 0.0
+  },
+  "supervisor_lease_expired": false,
+  "supervisor_lease_diagnostics": {
+    "timeout_s": 0.5,
+    "expired": false,
+    "max_active_age_s": 0.0696964220001064,
+    "failure": null,
+    "time_sampled_under_lock": true
+  },
+  "completed_unix": 1790565690.8727024
+}

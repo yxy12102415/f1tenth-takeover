@@ -1,0 +1,9 @@
+{
+  "passed": true,
+  "legacy_false_stale_reproduced": true,
+  "fixed_snapshot_passed": true,
+  "genuine_fault_cases_rejected": 7,
+  "timeout_unchanged_s": 0.5,
+  "new_source_sha256": "d2c7e52d467e216807f4669ac8a576d7a89deec3ee9c563bb68d01bf5cf8cc3c",
+  "scope": "deterministic reproduction of code-level race, not proof of unrecorded physical planner inputs"
+}

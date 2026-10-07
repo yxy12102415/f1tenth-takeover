@@ -1,0 +1,62 @@
+{
+  "date": "2026-10-06",
+  "scope": "Non-actuating export validation; no new physical test performed.",
+  "source_files_verified": 349,
+  "syntax_checks": {
+    "python": 188,
+    "shell": 33,
+    "json": 4
+  },
+  "native_build": "tools/build_native.sh, acados v0.4.0, aarch64 Linux",
+  "native_model_tests": [
+    {
+      "case": "nominal",
+      "obstacles": true,
+      "passed": true,
+      "final_distance_m": 0.022245246031585716
+    },
+    {
+      "case": "slow",
+      "obstacles": true,
+      "passed": true,
+      "final_distance_m": 0.012183711661000053
+    },
+    {
+      "case": "recorded_approx",
+      "obstacles": true,
+      "passed": true,
+      "final_distance_m": 0.019275142101535334
+    },
+    {
+      "case": "recorded_response",
+      "obstacles": true,
+      "passed": true,
+      "final_distance_m": 0.03153180181603429
+    },
+    {
+      "case": "fast",
+      "obstacles": false,
+      "passed": true,
+      "final_distance_m": 0.015892390929311193
+    },
+    {
+      "case": "slow",
+      "obstacles": false,
+      "passed": true,
+      "final_distance_m": 0.02224551432751657
+    },
+    {
+      "case": "steering_gain",
+      "obstacles": false,
+      "passed": true,
+      "final_distance_m": 0.023140067729094792
+    }
+  ],
+  "runtime_assets_numerically_match_vehicle": true,
+  "runtime_assets_only_difference": "sources provenance paths/hash for relative map YAML",
+  "physical_evidence_run": "20260927_232018-closed-frenet-ground-attempt",
+  "source_cpp_unchanged": true,
+  "native_build_passed": true,
+  "workspace_runtime_unchanged": true,
+  "whitespace_check": "New docs/tools pass; verbatim source snapshots retain upstream/generated whitespace."
+}

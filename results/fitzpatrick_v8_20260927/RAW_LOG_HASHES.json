@@ -1,0 +1,12 @@
+{
+  "local_run": "/home/f1tenth/f1tenth_real_migration_ws_20260829/candidate_cpp_gpu_20260909/ground_fitzpatrick_joint_20260927_v8/run_logs/20260927_232018-closed-frenet-ground-attempt",
+  "sha256": {
+    "trajectory_plot_sources.json": "543643eb44d3164f7510b8dcda9523f1baa0f521fa4d70d13423c30104e4cce4",
+    "status_events.json": "b4d4ccb5056061161a9e8b586292df696873758befd39bb4178213faee7fe29f",
+    "runtime.json": "c35442091ac99ad795b4a9a64b0d6cd4f8457627f933f51579d61c9503da9540",
+    "tracking_trace.json": "345cb2d35dce8344071f57408359e07bdec5e6af605fa8916a3c4e9b11112b2f",
+    "command_trace.json": "56b56dfe19232c909df7755b4d7ccc1f896fc7e4ec52b5cc01eff466f2f85249",
+    "result.json": "7869032a72624289aa45ffb2162766fa9654669e1fbdda34f133c73a4d139cb2",
+    "analysis_summary.json": "8f5010757750ce77f2df38705467be3a8b5cf27bcd5315ebb1b73bee1c3962b0"
+  }
+}

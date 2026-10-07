@@ -1,0 +1,10 @@
+{
+  "passed": true,
+  "changed_fields": [
+    "lh",
+    "lh_e",
+    "uh",
+    "uh_e"
+  ],
+  "only_lateral_acceleration_changed": true
+}

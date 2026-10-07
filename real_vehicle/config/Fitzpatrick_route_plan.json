@@ -1,0 +1,19 @@
+{
+  "status": "dynamic_mpc_v8_AB_full_lap_passed_operator_confirmed",
+  "route": "/home/f1tenth/f1tenth_real_migration_ws_20260829/routes/Fitzpatrick_fixed_start_arc_straight_v2.csv",
+  "speed_profile": "/home/f1tenth/f1tenth_real_migration_ws_20260829/routes/Fitzpatrick_fixed_start_arc_straight_v2_speed_profile.csv",
+  "map": "/home/f1tenth/f1tenth_real_migration_ws_20260829/maps/Fitzpatrick.yaml",
+  "fixed_start": "/home/f1tenth/f1tenth_real_migration_ws_20260829/config/Fitzpatrick_fixed_start.json",
+  "figure": "/home/f1tenth/f1tenth_real_migration_ws_20260829/routes/Fitzpatrick_fixed_start_arc_straight_v2_map.png",
+  "lap_mode": "one_lap_then_stop",
+  "physical_launch_enabled": true,
+  "route_sha256": "759067c229598ed608a4ab47a11c67342836eb727d2b3dd26105fd3118baa83b",
+  "note": "v8 completed the full lap with A/B; operator confirmed no contact, little oscillation and natural stop. Prior v7 stopped on B return; that failure is historical.",
+  "release": "/home/f1tenth/f1tenth_real_migration_ws_20260829/candidate_cpp_gpu_20260909/ground_fitzpatrick_joint_20260927_v2",
+  "pid_launcher": "fitzpatrick_avoidance_pid.sh",
+  "dynamic_mpc_launcher": "fitzpatrick_avoidance_dynamic_mpc.sh",
+  "latest_pid_run": "candidate_cpp_gpu_20260909/ground_fitzpatrick_joint_20260927_v2/run_logs/20260927_212615-closed-frenet-ground-attempt",
+  "latest_dynamic_mpc_run": "/home/f1tenth/f1tenth_real_migration_ws_20260829/candidate_cpp_gpu_20260909/ground_fitzpatrick_joint_20260927_v8/run_logs/20260927_232018-closed-frenet-ground-attempt",
+  "dynamic_mpc_release": "/home/f1tenth/f1tenth_real_migration_ws_20260829/candidate_cpp_gpu_20260909/ground_fitzpatrick_joint_20260927_v8",
+  "candidate_dynamic_mpc_release": "/home/f1tenth/f1tenth_real_migration_ws_20260829/candidate_cpp_gpu_20260909/ground_fitzpatrick_joint_20260927_v8"
+}

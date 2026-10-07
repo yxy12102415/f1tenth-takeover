@@ -1,0 +1,1095 @@
+{
+  "base_commit": "93283b4d057f4b5273cb691baf153112753fa934",
+  "removed": [
+    {
+      "path": "Code/Yolov5/Box_Obstacle/data.yaml",
+      "bytes": 95
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/images/IMG_3788.JPG",
+      "bytes": 2899287
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/images/IMG_3789.JPG",
+      "bytes": 2947147
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/images/IMG_3790.JPG",
+      "bytes": 2787974
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/images/IMG_3791.JPG",
+      "bytes": 2760151
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/images/IMG_3792.JPG",
+      "bytes": 2599210
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/images/IMG_3793.JPG",
+      "bytes": 3204685
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/images/IMG_3798.JPG",
+      "bytes": 2992903
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/images/IMG_3799.JPG",
+      "bytes": 2826439
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/images/IMG_3800.JPG",
+      "bytes": 2882265
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/images/IMG_3801.JPG",
+      "bytes": 2883054
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/images/IMG_3802.JPG",
+      "bytes": 2907609
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/images/IMG_3803.JPG",
+      "bytes": 2990940
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/images/IMG_3804.JPG",
+      "bytes": 3001813
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/images/IMG_3805.JPG",
+      "bytes": 3052126
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/images/IMG_3806.JPG",
+      "bytes": 2956465
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/images/IMG_3807.JPG",
+      "bytes": 2797460
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/images/IMG_3808.JPG",
+      "bytes": 2526909
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/images/IMG_3809.JPG",
+      "bytes": 3111784
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/images/IMG_3810.JPG",
+      "bytes": 2915673
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/images/IMG_3811.JPG",
+      "bytes": 3031622
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/images/IMG_3812.JPG",
+      "bytes": 2982723
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/images/IMG_3813.JPG",
+      "bytes": 3003417
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/images/IMG_3814.JPG",
+      "bytes": 2860390
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/images/IMG_3815.JPG",
+      "bytes": 2873941
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/images/IMG_3816.JPG",
+      "bytes": 3009071
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/images/IMG_3817.JPG",
+      "bytes": 2917330
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/images/IMG_3818.JPG",
+      "bytes": 3008862
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/images/IMG_3819.JPG",
+      "bytes": 2731580
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/images/IMG_3820.JPG",
+      "bytes": 2309249
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/images/IMG_3821.JPG",
+      "bytes": 2563602
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/images/IMG_3822.JPG",
+      "bytes": 2769843
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/images/IMG_3823.JPG",
+      "bytes": 2631757
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/images/IMG_3824.JPG",
+      "bytes": 2938396
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/images/IMG_3825.JPG",
+      "bytes": 2761188
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/images/IMG_3826.JPG",
+      "bytes": 2761068
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/images/IMG_3827.JPG",
+      "bytes": 2835641
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/images/IMG_3828.JPG",
+      "bytes": 2740427
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/images/IMG_3829.JPG",
+      "bytes": 3097571
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/images/IMG_3830.JPG",
+      "bytes": 3023310
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/images/IMG_3831.JPG",
+      "bytes": 2857077
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/images/IMG_3832.JPG",
+      "bytes": 2977185
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/images/IMG_3833.JPG",
+      "bytes": 3075953
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/images/IMG_3834.JPG",
+      "bytes": 2972913
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/images/IMG_3835.JPG",
+      "bytes": 2877326
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/images/IMG_3836.JPG",
+      "bytes": 2818152
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/images/IMG_3837.JPG",
+      "bytes": 2945536
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/images/IMG_3838.JPG",
+      "bytes": 2929695
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/images/IMG_3839.JPG",
+      "bytes": 2866492
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/images/IMG_3840.JPG",
+      "bytes": 2763508
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/images/IMG_3841.JPG",
+      "bytes": 2725033
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/images/IMG_3842.JPG",
+      "bytes": 3012342
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/images/IMG_3843.JPG",
+      "bytes": 3112268
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/images/IMG_3844.JPG",
+      "bytes": 3072495
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/images/IMG_3845.JPG",
+      "bytes": 3025350
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/images/IMG_3846.JPG",
+      "bytes": 3120529
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/images/IMG_3847.JPG",
+      "bytes": 2763087
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/images/IMG_3848.JPG",
+      "bytes": 2970502
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/images/IMG_3849.JPG",
+      "bytes": 2858095
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/images/IMG_3850.JPG",
+      "bytes": 2443166
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/images/IMG_3851.JPG",
+      "bytes": 2197176
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/images/IMG_3852.JPG",
+      "bytes": 2385590
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/images/IMG_3853.JPG",
+      "bytes": 2595142
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/images/IMG_3854.JPG",
+      "bytes": 1805163
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/images/IMG_3855.JPG",
+      "bytes": 2555007
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/images/IMG_3856.JPG",
+      "bytes": 2868799
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/images/IMG_3857.JPG",
+      "bytes": 2501829
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/images/IMG_3858.JPG",
+      "bytes": 2562240
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/images/IMG_3859.JPG",
+      "bytes": 2727375
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/images/IMG_3860.JPG",
+      "bytes": 2872406
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/images/IMG_3861.JPG",
+      "bytes": 2710632
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/images/IMG_3862.JPG",
+      "bytes": 2591983
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/images/IMG_3863.JPG",
+      "bytes": 2931517
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/images/IMG_3864.JPG",
+      "bytes": 3004173
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/images/IMG_3865.JPG",
+      "bytes": 2561159
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/images/IMG_3866.JPG",
+      "bytes": 2750691
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/images/IMG_3867.JPG",
+      "bytes": 2829926
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/images/IMG_3868.JPG",
+      "bytes": 2821803
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/images/IMG_3869.JPG",
+      "bytes": 3058385
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/images/IMG_3870.JPG",
+      "bytes": 2892224
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/images/IMG_3871.JPG",
+      "bytes": 3130387
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/images/IMG_3872.JPG",
+      "bytes": 2979234
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/images/IMG_3873.JPG",
+      "bytes": 3230746
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/images/IMG_3874.JPG",
+      "bytes": 3045973
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/images/IMG_3875.JPG",
+      "bytes": 3207476
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/images/IMG_3876.JPG",
+      "bytes": 3013551
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/images/IMG_3877.JPG",
+      "bytes": 3227485
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/images/IMG_3878.JPG",
+      "bytes": 3435927
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/images/IMG_3879.JPG",
+      "bytes": 2446466
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/images/IMG_3880.JPG",
+      "bytes": 2772837
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/images/IMG_3881.JPG",
+      "bytes": 2924915
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/images/IMG_3882.JPG",
+      "bytes": 2647663
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/images/IMG_3883.JPG",
+      "bytes": 2563688
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/images/IMG_3884.JPG",
+      "bytes": 2531417
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/images/IMG_3885.JPG",
+      "bytes": 2463683
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/images/IMG_3886.JPG",
+      "bytes": 2615711
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/images/IMG_3887.JPG",
+      "bytes": 2648821
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/images/IMG_3888.JPG",
+      "bytes": 2732890
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/images/IMG_3889.JPG",
+      "bytes": 2574657
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/images/IMG_3890.JPG",
+      "bytes": 2719623
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/images/IMG_3891.JPG",
+      "bytes": 2512443
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/images/IMG_3892.JPG",
+      "bytes": 2642042
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/images/IMG_3893.JPG",
+      "bytes": 2597240
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/images/IMG_3894.JPG",
+      "bytes": 2254784
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/images/IMG_3895.JPG",
+      "bytes": 2754400
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/images/IMG_3896.JPG",
+      "bytes": 2328477
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/images/IMG_3897.JPG",
+      "bytes": 2225405
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/images/IMG_3898.JPG",
+      "bytes": 2763865
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/images/IMG_3899.JPG",
+      "bytes": 2954112
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/images/IMG_3900.JPG",
+      "bytes": 3023245
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/images/IMG_3901.JPG",
+      "bytes": 3161046
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/images/IMG_3902.JPG",
+      "bytes": 2785241
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/images/IMG_3903.JPG",
+      "bytes": 2668396
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/images/IMG_3904.JPG",
+      "bytes": 3024163
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/images/IMG_3905.JPG",
+      "bytes": 2996516
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/images/IMG_3906.JPG",
+      "bytes": 2865053
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/images/IMG_3907.jpg",
+      "bytes": 3297991
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/images/IMG_3908.jpg",
+      "bytes": 2901904
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/images/IMG_3909.jpg",
+      "bytes": 2344873
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/images/IMG_3910.jpg",
+      "bytes": 2770698
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/images/IMG_3911.jpg",
+      "bytes": 2607407
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/images/IMG_3912.jpg",
+      "bytes": 2382677
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/images/IMG_3913.jpg",
+      "bytes": 2557836
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/images/IMG_3914.jpg",
+      "bytes": 2958368
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/images/IMG_3915.jpg",
+      "bytes": 2848076
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/labels/IMG_3788.txt",
+      "bytes": 39
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/labels/IMG_3789.txt",
+      "bytes": 39
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/labels/IMG_3790.txt",
+      "bytes": 39
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/labels/IMG_3791.txt",
+      "bytes": 39
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/labels/IMG_3792.txt",
+      "bytes": 39
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/labels/IMG_3793.txt",
+      "bytes": 39
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/labels/IMG_3798.txt",
+      "bytes": 39
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/labels/IMG_3799.txt",
+      "bytes": 39
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/labels/IMG_3800.txt",
+      "bytes": 39
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/labels/IMG_3801.txt",
+      "bytes": 39
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/labels/IMG_3802.txt",
+      "bytes": 39
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/labels/IMG_3803.txt",
+      "bytes": 39
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/labels/IMG_3804.txt",
+      "bytes": 39
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/labels/IMG_3805.txt",
+      "bytes": 39
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/labels/IMG_3806.txt",
+      "bytes": 39
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/labels/IMG_3807.txt",
+      "bytes": 39
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/labels/IMG_3808.txt",
+      "bytes": 39
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/labels/IMG_3809.txt",
+      "bytes": 39
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/labels/IMG_3810.txt",
+      "bytes": 39
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/labels/IMG_3811.txt",
+      "bytes": 39
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/labels/IMG_3812.txt",
+      "bytes": 39
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/labels/IMG_3813.txt",
+      "bytes": 39
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/labels/IMG_3814.txt",
+      "bytes": 39
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/labels/IMG_3815.txt",
+      "bytes": 39
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/labels/IMG_3816.txt",
+      "bytes": 39
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/labels/IMG_3817.txt",
+      "bytes": 39
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/labels/IMG_3818.txt",
+      "bytes": 39
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/labels/IMG_3819.txt",
+      "bytes": 39
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/labels/IMG_3820.txt",
+      "bytes": 39
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/labels/IMG_3821.txt",
+      "bytes": 39
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/labels/IMG_3822.txt",
+      "bytes": 39
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/labels/IMG_3823.txt",
+      "bytes": 39
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/labels/IMG_3824.txt",
+      "bytes": 39
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/labels/IMG_3825.txt",
+      "bytes": 39
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/labels/IMG_3826.txt",
+      "bytes": 39
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/labels/IMG_3827.txt",
+      "bytes": 39
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/labels/IMG_3828.txt",
+      "bytes": 39
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/labels/IMG_3829.txt",
+      "bytes": 39
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/labels/IMG_3830.txt",
+      "bytes": 39
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/labels/IMG_3831.txt",
+      "bytes": 39
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/labels/IMG_3832.txt",
+      "bytes": 39
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/labels/IMG_3833.txt",
+      "bytes": 39
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/labels/IMG_3834.txt",
+      "bytes": 39
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/labels/IMG_3835.txt",
+      "bytes": 39
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/labels/IMG_3836.txt",
+      "bytes": 39
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/labels/IMG_3837.txt",
+      "bytes": 39
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/labels/IMG_3838.txt",
+      "bytes": 39
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/labels/IMG_3839.txt",
+      "bytes": 39
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/labels/IMG_3840.txt",
+      "bytes": 39
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/labels/IMG_3841.txt",
+      "bytes": 39
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/labels/IMG_3842.txt",
+      "bytes": 39
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/labels/IMG_3843.txt",
+      "bytes": 39
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/labels/IMG_3844.txt",
+      "bytes": 39
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/labels/IMG_3845.txt",
+      "bytes": 39
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/labels/IMG_3846.txt",
+      "bytes": 39
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/labels/IMG_3847.txt",
+      "bytes": 39
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/labels/IMG_3848.txt",
+      "bytes": 39
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/labels/IMG_3849.txt",
+      "bytes": 39
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/labels/IMG_3850.txt",
+      "bytes": 39
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/labels/IMG_3851.txt",
+      "bytes": 39
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/labels/IMG_3852.txt",
+      "bytes": 39
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/labels/IMG_3853.txt",
+      "bytes": 39
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/labels/IMG_3854.txt",
+      "bytes": 39
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/labels/IMG_3855.txt",
+      "bytes": 39
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/labels/IMG_3856.txt",
+      "bytes": 39
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/labels/IMG_3857.txt",
+      "bytes": 39
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/labels/IMG_3858.txt",
+      "bytes": 39
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/labels/IMG_3859.txt",
+      "bytes": 39
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/labels/IMG_3860.txt",
+      "bytes": 39
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/labels/IMG_3861.txt",
+      "bytes": 39
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/labels/IMG_3862.txt",
+      "bytes": 39
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/labels/IMG_3863.txt",
+      "bytes": 39
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/labels/IMG_3864.txt",
+      "bytes": 39
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/labels/IMG_3865.txt",
+      "bytes": 39
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/labels/IMG_3866.txt",
+      "bytes": 39
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/labels/IMG_3867.txt",
+      "bytes": 39
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/labels/IMG_3868.txt",
+      "bytes": 39
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/labels/IMG_3869.txt",
+      "bytes": 39
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/labels/IMG_3870.txt",
+      "bytes": 39
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/labels/IMG_3871.txt",
+      "bytes": 39
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/labels/IMG_3872.txt",
+      "bytes": 39
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/labels/IMG_3873.txt",
+      "bytes": 39
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/labels/IMG_3874.txt",
+      "bytes": 39
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/labels/IMG_3875.txt",
+      "bytes": 39
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/labels/IMG_3876.txt",
+      "bytes": 39
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/labels/IMG_3877.txt",
+      "bytes": 39
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/labels/IMG_3878.txt",
+      "bytes": 39
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/labels/IMG_3879.txt",
+      "bytes": 39
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/labels/IMG_3880.txt",
+      "bytes": 39
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/labels/IMG_3881.txt",
+      "bytes": 39
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/labels/IMG_3882.txt",
+      "bytes": 39
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/labels/IMG_3883.txt",
+      "bytes": 39
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/labels/IMG_3884.txt",
+      "bytes": 39
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/labels/IMG_3885.txt",
+      "bytes": 39
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/labels/IMG_3886.txt",
+      "bytes": 39
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/labels/IMG_3887.txt",
+      "bytes": 39
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/labels/IMG_3888.txt",
+      "bytes": 39
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/labels/IMG_3889.txt",
+      "bytes": 39
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/labels/IMG_3890.txt",
+      "bytes": 39
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/labels/IMG_3891.txt",
+      "bytes": 39
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/labels/IMG_3892.txt",
+      "bytes": 39
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/labels/IMG_3893.txt",
+      "bytes": 39
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/labels/IMG_3894.txt",
+      "bytes": 39
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/labels/IMG_3895.txt",
+      "bytes": 39
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/labels/IMG_3896.txt",
+      "bytes": 39
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/labels/IMG_3897.txt",
+      "bytes": 39
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/labels/IMG_3898.txt",
+      "bytes": 39
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/labels/IMG_3899.txt",
+      "bytes": 39
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/labels/IMG_3900.txt",
+      "bytes": 39
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/labels/IMG_3901.txt",
+      "bytes": 39
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/labels/IMG_3902.txt",
+      "bytes": 39
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/labels/IMG_3903.txt",
+      "bytes": 39
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/labels/IMG_3904.txt",
+      "bytes": 39
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/labels/IMG_3905.txt",
+      "bytes": 39
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/labels/IMG_3906.txt",
+      "bytes": 39
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/labels/IMG_3907.txt",
+      "bytes": 39
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/labels/IMG_3908.txt",
+      "bytes": 39
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/labels/IMG_3909.txt",
+      "bytes": 39
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/labels/IMG_3910.txt",
+      "bytes": 39
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/labels/IMG_3911.txt",
+      "bytes": 39
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/labels/IMG_3912.txt",
+      "bytes": 39
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/labels/IMG_3913.txt",
+      "bytes": 39
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/labels/IMG_3914.txt",
+      "bytes": 39
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/labels/IMG_3915.txt",
+      "bytes": 39
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/labels/classes.txt",
+      "bytes": 14
+    },
+    {
+      "path": "Code/Yolov5/Box_Obstacle/train/labels.cache",
+      "bytes": 24540
+    },
+    {
+      "path": "Code/Yolov5/best.pt",
+      "bytes": 14376694
+    },
+    {
+      "path": "Code/Yolov5/RealSenseD415/obstacle_detection/best.pt",
+      "bytes": 14376694
+    },
+    {
+      "path": "Code/Yolov5/RealSenseD415/obstacle_detection/yolov5s.pt",
+      "bytes": 14795158
+    },
+    {
+      "path": "Code/Yolov5/RealSenseD415/obstacle_detection/weights/best.pt",
+      "bytes": 14376694
+    },
+    {
+      "path": "Code/Yolov5/RealSenseD415/obstacle_detection/weights/yolov5s.pt",
+      "bytes": 14808437
+    },
+    {
+      "path": "Code/Yolov5/RealSenseD415/obstacle_detection/utils/__pycache__/metrics.cpython-38.pyc",
+      "bytes": 10644
+    },
+    {
+      "path": "Code/Yolov5/RealSenseD415/obstacle_detection/utils/__pycache__/general.cpython-38.pyc",
+      "bytes": 29804
+    },
+    {
+      "path": "Code/Yolov5/RealSenseD415/obstacle_detection/utils/__pycache__/augmentations.cpython-38.pyc",
+      "bytes": 8918
+    },
+    {
+      "path": "Code/Yolov5/RealSenseD415/obstacle_detection/utils/__pycache__/autoanchor.cpython-38.pyc",
+      "bytes": 6251
+    },
+    {
+      "path": "Code/Yolov5/RealSenseD415/obstacle_detection/utils/__pycache__/__init__.cpython-38.pyc",
+      "bytes": 354
+    },
+    {
+      "path": "Code/Yolov5/RealSenseD415/obstacle_detection/utils/__pycache__/torch_utils.cpython-38.pyc",
+      "bytes": 12835
+    },
+    {
+      "path": "Code/Yolov5/RealSenseD415/obstacle_detection/utils/__pycache__/downloads.cpython-38.pyc",
+      "bytes": 3907
+    },
+    {
+      "path": "Code/Yolov5/RealSenseD415/obstacle_detection/utils/__pycache__/plots.cpython-38.pyc",
+      "bytes": 16456
+    },
+    {
+      "path": "Code/Yolov5/RealSenseD415/obstacle_detection/utils/__pycache__/datasets.cpython-38.pyc",
+      "bytes": 34368
+    },
+    {
+      "path": "Code/Yolov5/RealSenseD415/obstacle_detection/models/__pycache__/experimental.cpython-38.pyc",
+      "bytes": 4894
+    },
+    {
+      "path": "Code/Yolov5/RealSenseD415/obstacle_detection/models/__pycache__/common.cpython-38.pyc",
+      "bytes": 21766
+    },
+    {
+      "path": "Code/Yolov5/RealSenseD415/obstacle_detection/models/__pycache__/yolo.cpython-38.pyc",
+      "bytes": 12583
+    },
+    {
+      "path": "Code/Yolov5/RealSenseD415/obstacle_detection/models/__pycache__/__init__.cpython-38.pyc",
+      "bytes": 170
+    },
+    {
+      "path": "Code/sim_ws/src/f1tenth_mpc-main/mpc/.DS_Store",
+      "bytes": 6148
+    },
+    {
+      "path": "tatus",
+      "bytes": 20480
+    },
+    {
+      "path": ".codex",
+      "bytes": 0
+    }
+  ],
+  "total_removed_bytes": 421396954,
+  "reason": "Obsolete YOLO training data/checkpoints, tracked caches and accidental status dump; recoverable from prior commit. No Git history rewrite."
+}

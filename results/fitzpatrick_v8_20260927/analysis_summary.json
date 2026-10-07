@@ -1,0 +1,88 @@
+{
+  "passed": true,
+  "route_completed": true,
+  "elapsed_to_complete_s": 27.98337969699969,
+  "lap_length_m": 44.73153929638099,
+  "endpoint_distance_m": 0.07452729579619251,
+  "endpoint_heading_error_rad": -0.008220835003296118,
+  "active_invalid_reasons": {},
+  "local_path_cte_rms_m": 0.034254943132016685,
+  "local_path_cte_p95_m": 0.07602927147771674,
+  "local_path_cte_max_m": 0.0987366282410801,
+  "max_controller_compute_ms": 28.36058499997307,
+  "obstacle_phases": {
+    "A": {
+      "states": {
+        "AVOIDING": 24,
+        "RETURNING": 4,
+        "FOLLOWING": 25
+      },
+      "offsets_m": [
+        0.3
+      ],
+      "avoidance_command_min_max_mps": [
+        1.9395358750141476,
+        1.9991486362893631
+      ]
+    },
+    "B": {
+      "states": {
+        "AVOIDING": 34,
+        "RETURNING": 4,
+        "FOLLOWING": 33
+      },
+      "offsets_m": [
+        -0.4
+      ],
+      "avoidance_command_min_max_mps": [
+        1.9795957281621315,
+        1.999999999931701
+      ]
+    }
+  },
+  "physical_stop_reason": "upstream_stop",
+  "physical_final_stop_reason": "",
+  "post_stop_observation": {
+    "limit_sec": 3.0,
+    "stationary_dwell_sec": 0.2,
+    "window_reason": "upstream_stop",
+    "final_reason": "",
+    "stationary_confirmed": true,
+    "elapsed_sec": 0.8376345100000435
+  },
+  "operator_feedback_pending": false,
+  "notes": "Single physical lap; local-path error is relative to moving avoidance path, not fixed route. Collision and perceived oscillation require operator feedback. Passing endpoint once does not establish repeated short-stop robustness.",
+  "operator_feedback": "\u4e24\u5904\u90fd\u6ca1\u78b0\u5230\uff0c\u57fa\u672c\u4e0d\u6446\u52a8\uff0c\u7ec8\u70b9\u81ea\u7136\u505c\u7a33",
+  "operator_reports_no_collision": true,
+  "operator_reports_steady": true,
+  "operator_reports_natural_stop": true,
+  "completion_health": {
+    "erpm": -11.0,
+    "fault": 0,
+    "motor_current": 0.0,
+    "input_current": 0.0,
+    "duty_cycle": 0.0,
+    "voltage": 11.8,
+    "fet_temp": 29.6,
+    "motor_temp": -78.1,
+    "motor_temperature_used": false,
+    "stamp": 1790565688.0183215,
+    "bridge_ros": 1790565688.0194693,
+    "bridge_mono": 2932.562416442
+  },
+  "final_health": {
+    "erpm": 0.0,
+    "fault": 0,
+    "motor_current": 0.0,
+    "input_current": 0.0,
+    "duty_cycle": 0.0,
+    "voltage": 11.8,
+    "fet_temp": 29.3,
+    "motor_temp": -74.3,
+    "motor_temperature_used": false,
+    "stamp": 1790565689.8614223,
+    "bridge_ros": 1790565689.8626075,
+    "bridge_mono": 2934.405561721
+  },
+  "stationary_confirmed": true
+}

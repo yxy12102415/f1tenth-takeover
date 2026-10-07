@@ -1,0 +1,122 @@
+[
+  {
+    "release": "ground_fitzpatrick_joint_20260927_v8",
+    "box": false,
+    "box_center": [
+      2.7497,
+      -0.2355
+    ],
+    "box_half": 0.0786,
+    "scan_noise_m": 0.0,
+    "lag": 0.05,
+    "servo_lag": 0.1,
+    "coast_deceleration": 0.6,
+    "steering_delay_s": 0.0,
+    "steering_gain": 1.0,
+    "pose_delay_s": 0.0,
+    "initial_offset_m": 0.0,
+    "initial_heading_rad": 0.0,
+    "complete": {
+      "t": 26.150000000000002,
+      "speed": 0.0,
+      "distance": 0.01589239092931928,
+      "heading": -0.08019638551719258
+    },
+    "coast_cut": {
+      "t": 25.150000000000002,
+      "x": 0.39477954637996243,
+      "y": -0.32027969479553137,
+      "speed": 0.5000817211054385,
+      "remaining": 0.22033714214506858
+    },
+    "failure": null,
+    "final_distance_m": 0.01589239092931928,
+    "final_heading_rad": -0.08019638551719258,
+    "minimum_obstacle_point_clearance_m": null,
+    "return_cross_track_peak_m": 0.004186155038810615,
+    "return_cross_track_rms_m": 0.002497172659551988,
+    "max_compute_ms": 12.20405899994148,
+    "passed": true,
+    "case": "fast"
+  },
+  {
+    "release": "ground_fitzpatrick_joint_20260927_v8",
+    "box": false,
+    "box_center": [
+      2.7497,
+      -0.2355
+    ],
+    "box_half": 0.0786,
+    "scan_noise_m": 0.0,
+    "lag": 0.25,
+    "servo_lag": 0.3,
+    "coast_deceleration": 0.6,
+    "steering_delay_s": 0.0,
+    "steering_gain": 1.0,
+    "pose_delay_s": 0.0,
+    "initial_offset_m": 0.0,
+    "initial_heading_rad": 0.0,
+    "complete": {
+      "t": 26.25,
+      "speed": 0.0,
+      "distance": 0.022245514327512535,
+      "heading": -0.03592180136628833
+    },
+    "coast_cut": {
+      "t": 25.200000000000003,
+      "x": 0.37408550131642165,
+      "y": -0.3259398239637222,
+      "speed": 0.5159952786922505,
+      "remaining": 0.2408113843476679
+    },
+    "failure": null,
+    "final_distance_m": 0.022245514327512535,
+    "final_heading_rad": -0.03592180136628833,
+    "minimum_obstacle_point_clearance_m": null,
+    "return_cross_track_peak_m": 0.003971856495040855,
+    "return_cross_track_rms_m": 0.002363647099101067,
+    "max_compute_ms": 12.799198000266188,
+    "passed": true,
+    "case": "slow"
+  },
+  {
+    "release": "ground_fitzpatrick_joint_20260927_v8",
+    "box": false,
+    "box_center": [
+      2.7497,
+      -0.2355
+    ],
+    "box_half": 0.0786,
+    "scan_noise_m": 0.0,
+    "lag": 0.2,
+    "servo_lag": 0.2,
+    "coast_deceleration": 0.6,
+    "steering_delay_s": 0.0,
+    "steering_gain": 1.1,
+    "pose_delay_s": 0.0,
+    "initial_offset_m": 0.0,
+    "initial_heading_rad": 0.0,
+    "complete": {
+      "t": 26.0,
+      "speed": 0.0,
+      "distance": 0.02314006772909242,
+      "heading": -0.0656878588806278
+    },
+    "coast_cut": {
+      "t": 24.950000000000003,
+      "x": 0.3779151962896005,
+      "y": -0.3108502271483995,
+      "speed": 0.5218142181604715,
+      "remaining": 0.237721265659511
+    },
+    "failure": null,
+    "final_distance_m": 0.02314006772909242,
+    "final_heading_rad": -0.0656878588806278,
+    "minimum_obstacle_point_clearance_m": null,
+    "return_cross_track_peak_m": 0.00781622729082557,
+    "return_cross_track_rms_m": 0.005349947339271769,
+    "max_compute_ms": 13.073533999886422,
+    "passed": true,
+    "case": "steering_gain"
+  }
+]

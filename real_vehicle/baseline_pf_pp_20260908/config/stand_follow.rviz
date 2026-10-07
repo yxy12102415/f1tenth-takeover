@@ -1,0 +1,55 @@
+Panels:
+  - Class: rviz_common/Displays
+    Name: Displays
+Visualization Manager:
+  Class: ""
+  Global Options:
+    Background Color: 48; 48; 48
+    Fixed Frame: map
+    Frame Rate: 5
+  Displays:
+    - Class: rviz_default_plugins/Map
+      Name: Map
+      Enabled: true
+      Topic:
+        Value: /baseline/map
+        Durability Policy: Transient Local
+        Reliability Policy: Reliable
+    - Class: rviz_default_plugins/Path
+      Name: Open route - start required
+      Enabled: true
+      Topic:
+        Value: /baseline/route
+        Durability Policy: Transient Local
+      Color: 0; 120; 255
+      Line Width: 0.04
+    - Class: rviz_default_plugins/Pose
+      Name: PF base pose
+      Enabled: true
+      Topic:
+        Value: /baseline/visual_pose
+      Shape: Arrow
+      Color: 0; 255; 0
+    - Class: rviz_default_plugins/PointCloud2
+      Name: Matched scan in map
+      Enabled: true
+      Topic:
+        Value: /baseline/visual_scan
+      Size (m): 0.035
+      Style: Points
+      Color Transformer: FlatColor
+      Color: 255; 60; 60
+      Decay Time: 0
+  Tools:
+    - Class: rviz_default_plugins/Interact
+    - Class: rviz_default_plugins/MoveCamera
+    - Class: rviz_default_plugins/SetInitialPose
+      Topic: /initialpose
+  Views:
+    Current:
+      Class: rviz_default_plugins/TopDownOrtho
+      Scale: 50
+      Target Frame: map
+Window Geometry:
+  Width: 1000
+  Height: 700

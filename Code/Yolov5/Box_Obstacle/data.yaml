@@ -1,5 +1,0 @@
-names:
-- Box_Obstacle
-nc: 1
-train: Box_Obstacle/train/images
-val: Box_Obstacle/val/images

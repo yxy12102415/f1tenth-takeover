@@ -1,0 +1,23 @@
+{
+  "scope": "Model comparison with observer fix in both variants; surface-point distance, not vehicle hull gap.",
+  "cases": [
+    {
+      "case": "nominal",
+      "strict_passed": true,
+      "relaxed_passed": true,
+      "strict_end_distance_m": 0.022631380039779672,
+      "relaxed_end_distance_m": 0.02224524603151684,
+      "strict_min_point_distance_m": 0.27340388087077255,
+      "relaxed_min_point_distance_m": 0.2733844458688926
+    },
+    {
+      "case": "slow",
+      "strict_passed": true,
+      "relaxed_passed": true,
+      "strict_end_distance_m": 0.021870710054759112,
+      "relaxed_end_distance_m": 0.01218371166096934,
+      "strict_min_point_distance_m": 0.29084871126211786,
+      "relaxed_min_point_distance_m": 0.29511683347763146
+    }
+  ]
+}

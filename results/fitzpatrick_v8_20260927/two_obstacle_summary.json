@@ -1,0 +1,226 @@
+[
+  {
+    "release": "ground_fitzpatrick_joint_20260927_v8",
+    "box": true,
+    "box_center": [
+      2.7497,
+      -0.2355
+    ],
+    "box_half": 0.0786,
+    "scan_noise_m": 0.0,
+    "lag": 0.2,
+    "servo_lag": 0.2,
+    "coast_deceleration": 0.6,
+    "steering_delay_s": 0.0,
+    "steering_gain": 1.0,
+    "pose_delay_s": 0.0,
+    "initial_offset_m": 0.0,
+    "initial_heading_rad": 0.0,
+    "complete": {
+      "t": 26.3,
+      "speed": 0.0,
+      "distance": 0.02224524603151684,
+      "heading": -0.058015497468937555
+    },
+    "coast_cut": {
+      "t": 25.25,
+      "x": 0.3772710809585457,
+      "y": -0.32375533166070225,
+      "speed": 0.5116254056047128,
+      "remaining": 0.23767048462730606
+    },
+    "failure": null,
+    "final_distance_m": 0.02224524603151684,
+    "final_heading_rad": -0.058015497468937555,
+    "minimum_obstacle_point_clearance_m": 0.2733844458688926,
+    "return_cross_track_peak_m": 0.006606313742020102,
+    "return_cross_track_rms_m": 0.004432467495498383,
+    "max_compute_ms": 9.33909000013955,
+    "passed": true,
+    "case": "nominal",
+    "box_centers": [
+      [
+        6.022211142155291,
+        1.8324089029725348
+      ],
+      [
+        -1.1722115060661185,
+        7.275825176937007
+      ]
+    ],
+    "diameters_m": [
+      0.1,
+      0.1
+    ],
+    "perception": "1081 angular samples, native clustering and temporal confirmation, map occlusion",
+    "physical_tested": false
+  },
+  {
+    "release": "ground_fitzpatrick_joint_20260927_v8",
+    "box": true,
+    "box_center": [
+      2.7497,
+      -0.2355
+    ],
+    "box_half": 0.0786,
+    "scan_noise_m": 0.0,
+    "lag": 0.25,
+    "servo_lag": 0.3,
+    "coast_deceleration": 0.6,
+    "steering_delay_s": 0.0,
+    "steering_gain": 1.0,
+    "pose_delay_s": 0.0,
+    "initial_offset_m": 0.0,
+    "initial_heading_rad": 0.0,
+    "complete": {
+      "t": 26.450000000000003,
+      "speed": 0.0,
+      "distance": 0.01218371166096934,
+      "heading": -0.03349798603367951
+    },
+    "coast_cut": {
+      "t": 25.400000000000002,
+      "x": 0.3900131914474208,
+      "y": -0.32641160608204806,
+      "speed": 0.5141122534770974,
+      "remaining": 0.19999898379712988
+    },
+    "failure": null,
+    "final_distance_m": 0.01218371166096934,
+    "final_heading_rad": -0.03349798603367951,
+    "minimum_obstacle_point_clearance_m": 0.29511683347763146,
+    "return_cross_track_peak_m": 0.00845291586044468,
+    "return_cross_track_rms_m": 0.004118916284785063,
+    "max_compute_ms": 11.110906000340037,
+    "passed": true,
+    "case": "slow",
+    "box_centers": [
+      [
+        6.022211142155291,
+        1.8324089029725348
+      ],
+      [
+        -1.1722115060661185,
+        7.275825176937007
+      ]
+    ],
+    "diameters_m": [
+      0.1,
+      0.1
+    ],
+    "perception": "1081 angular samples, native clustering and temporal confirmation, map occlusion",
+    "physical_tested": false
+  },
+  {
+    "release": "ground_fitzpatrick_joint_20260927_v8",
+    "box": true,
+    "box_center": [
+      2.7497,
+      -0.2355
+    ],
+    "box_half": 0.0786,
+    "scan_noise_m": 0.0,
+    "lag": 0.2,
+    "servo_lag": 0.2,
+    "coast_deceleration": 0.6,
+    "steering_delay_s": 0.0,
+    "steering_gain": 1.0,
+    "pose_delay_s": 0.0,
+    "initial_offset_m": 0.0,
+    "initial_heading_rad": 0.0,
+    "complete": {
+      "t": 26.150000000000002,
+      "speed": 0.0,
+      "distance": 0.0192751421015613,
+      "heading": -0.05782051222215426
+    },
+    "coast_cut": {
+      "t": 25.1,
+      "x": 0.3809339558127284,
+      "y": -0.3239727050284467,
+      "speed": 0.5111481630861179,
+      "remaining": 0.23381895265739555
+    },
+    "failure": null,
+    "final_distance_m": 0.0192751421015613,
+    "final_heading_rad": -0.05782051222215426,
+    "minimum_obstacle_point_clearance_m": 0.23408478667296592,
+    "return_cross_track_peak_m": 0.003485060481869374,
+    "return_cross_track_rms_m": 0.002076598381187551,
+    "max_compute_ms": 11.084567999660067,
+    "passed": true,
+    "case": "recorded_approx",
+    "box_centers": [
+      [
+        6.11684,
+        1.60322
+      ],
+      [
+        -1.24711,
+        7.58771
+      ]
+    ],
+    "diameters_m": [
+      0.1,
+      0.1
+    ],
+    "perception": "1081 angular samples, native clustering and temporal confirmation, map occlusion",
+    "physical_tested": false
+  },
+  {
+    "release": "ground_fitzpatrick_joint_20260927_v8",
+    "box": true,
+    "box_center": [
+      2.7497,
+      -0.2355
+    ],
+    "box_half": 0.0786,
+    "scan_noise_m": 0.0,
+    "lag": 0.25,
+    "servo_lag": 0.3,
+    "coast_deceleration": 0.6,
+    "steering_delay_s": 0.05,
+    "steering_gain": 1.1,
+    "pose_delay_s": 0.0,
+    "initial_offset_m": 0.0,
+    "initial_heading_rad": 0.0,
+    "complete": {
+      "t": 26.150000000000002,
+      "speed": 0.0,
+      "distance": 0.03153180181465394,
+      "heading": -0.03057958901396354
+    },
+    "coast_cut": {
+      "t": 25.1,
+      "x": 0.359490585227489,
+      "y": -0.3128228405860808,
+      "speed": 0.5322088709915008,
+      "remaining": 0.256247961599922
+    },
+    "failure": null,
+    "final_distance_m": 0.03153180181465394,
+    "final_heading_rad": -0.03057958901396354,
+    "minimum_obstacle_point_clearance_m": 0.25380106290581317,
+    "return_cross_track_peak_m": 0.007978118611747508,
+    "return_cross_track_rms_m": 0.003393631688019807,
+    "max_compute_ms": 12.224669000261201,
+    "passed": true,
+    "case": "recorded_response",
+    "box_centers": [
+      [
+        6.11684,
+        1.60322
+      ],
+      [
+        -1.24711,
+        7.58771
+      ]
+    ],
+    "diameters_m": [
+      0.1,
+      0.1
+    ],
+    "perception": "1081 angular samples, native clustering and temporal confirmation, map occlusion",
+    "physical_tested": false
+  }
+]

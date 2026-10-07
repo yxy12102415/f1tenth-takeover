@@ -1,0 +1,172 @@
+{
+  "rejected_command_snapshot_verified": true,
+  "path_snapshots_verified": 30,
+  "fixture": "1081-beam map/box scan, fixed ground-truth pose; no drivers",
+  "reference_tracker": "None",
+  "seconds": 5.0,
+  "valid_commands": 90,
+  "invalid_reasons": {},
+  "planner": {
+    "count": 21,
+    "median_ms": 17.8629719998753,
+    "p99_ms": 20.773945200198796,
+    "max_ms": 21.066727000288665
+  },
+  "tracker": {
+    "count": 90,
+    "median_ms": 7.074920000150087,
+    "p99_ms": 9.996749310175801,
+    "max_ms": 10.204227000031096
+  },
+  "command_intervals": {
+    "count": 89,
+    "median_ms": 49.90464799993788,
+    "p99_ms": 52.20713535993128,
+    "max_ms": 52.98494799990294
+  },
+  "candidate_count_max": 155,
+  "planning_stages": [
+    {
+      "compute_wall_s": 0.017966461000014533,
+      "lattice_search_s": 0.017113049999807117,
+      "scan_processing_s": 0.0003783380002460035,
+      "total_wall_s": 0.017967772999782028
+    },
+    {
+      "compute_wall_s": 0.018882784000197717,
+      "lattice_search_s": 0.018187997000040923,
+      "scan_processing_s": 0.0002735690000008617,
+      "total_wall_s": 0.01888416000019788
+    },
+    {
+      "compute_wall_s": 0.019607425999765837,
+      "lattice_search_s": 0.01889427199967031,
+      "scan_processing_s": 0.00037020899981143884,
+      "total_wall_s": 0.01960886599999867
+    },
+    {
+      "compute_wall_s": 0.017885468000258697,
+      "lattice_search_s": 0.017330585999843606,
+      "scan_processing_s": 0.00023539299991170992,
+      "total_wall_s": 0.01788684400025886
+    },
+    {
+      "compute_wall_s": 0.017251929999929416,
+      "lattice_search_s": 0.016681367999808572,
+      "scan_processing_s": 0.00019798499988610274,
+      "total_wall_s": 0.017253497999718093
+    },
+    {
+      "compute_wall_s": 0.01829826899984255,
+      "lattice_search_s": 0.017776795999907335,
+      "scan_processing_s": 0.0001992319998862513,
+      "total_wall_s": 0.018299708999620634
+    },
+    {
+      "compute_wall_s": 0.01799129199980598,
+      "lattice_search_s": 0.01748127500013652,
+      "scan_processing_s": 0.00020435199985513464,
+      "total_wall_s": 0.017992732000038814
+    },
+    {
+      "compute_wall_s": 0.017867580000256567,
+      "lattice_search_s": 0.01731727400010641,
+      "scan_processing_s": 0.00019875299994964735,
+      "total_wall_s": 0.017868987999918318
+    },
+    {
+      "compute_wall_s": 0.017869467999844346,
+      "lattice_search_s": 0.01735138599997299,
+      "scan_processing_s": 0.0001984330001505441,
+      "total_wall_s": 0.017870684000172332
+    },
+    {
+      "compute_wall_s": 0.017262169999867183,
+      "lattice_search_s": 0.0167271600003005,
+      "scan_processing_s": 0.00019814500001302804,
+      "total_wall_s": 0.01726351400020576
+    },
+    {
+      "compute_wall_s": 0.02107149500034211,
+      "lattice_search_s": 0.020505348999904527,
+      "scan_processing_s": 0.00021654500005752197,
+      "total_wall_s": 0.021072871000342275
+    },
+    {
+      "compute_wall_s": 0.016565111000090837,
+      "lattice_search_s": 0.01604821399996581,
+      "scan_processing_s": 0.00020064000000274973,
+      "total_wall_s": 0.016566487000091
+    },
+    {
+      "compute_wall_s": 0.01656101500020668,
+      "lattice_search_s": 0.015973813000073278,
+      "scan_processing_s": 0.00025763299981917953,
+      "total_wall_s": 0.0165624870001011
+    },
+    {
+      "compute_wall_s": 0.015027667000140355,
+      "lattice_search_s": 0.014549264999914158,
+      "scan_processing_s": 0.00020089700001335586,
+      "total_wall_s": 0.015028851000352006
+    },
+    {
+      "compute_wall_s": 0.016989656999612635,
+      "lattice_search_s": 0.01646840700004759,
+      "scan_processing_s": 0.00020134499982304987,
+      "total_wall_s": 0.016991064999729133
+    },
+    {
+      "compute_wall_s": 0.016964472999916325,
+      "lattice_search_s": 0.016421590999925684,
+      "scan_processing_s": 0.0001996169999074482,
+      "total_wall_s": 0.0169658170002549
+    },
+    {
+      "compute_wall_s": 0.018975167000007787,
+      "lattice_search_s": 0.018456445999618154,
+      "scan_processing_s": 0.00020105600015085656,
+      "total_wall_s": 0.018976510999891616
+    },
+    {
+      "compute_wall_s": 0.01763337100010176,
+      "lattice_search_s": 0.016894552999929147,
+      "scan_processing_s": 0.00021376099994085962,
+      "total_wall_s": 0.017634810999879846
+    },
+    {
+      "compute_wall_s": 0.01625039000009565,
+      "lattice_search_s": 0.01565336500016201,
+      "scan_processing_s": 0.00023593600008098292,
+      "total_wall_s": 0.01625170200031789
+    },
+    {
+      "compute_wall_s": 0.016736375000164116,
+      "lattice_search_s": 0.016141653999966366,
+      "scan_processing_s": 0.00019993600017187418,
+      "total_wall_s": 0.016737814999942202
+    },
+    {
+      "compute_wall_s": 0.01817199700008132,
+      "lattice_search_s": 0.017656986999554647,
+      "scan_processing_s": 0.00020524900037344196,
+      "total_wall_s": 0.018173436999859405
+    }
+  ],
+  "release_zero_verified": true,
+  "controller": "closed_loop_frenet_cpp_dynamic_mpc",
+  "tracker_runtime_verified": true,
+  "planner_loss_zero_verified": true,
+  "input_fault_zero_verified": {
+    "localization_lost": true,
+    "invalid_odom": true,
+    "stale_odom": true,
+    "empty_scan": true
+  },
+  "passed": true,
+  "confirmed_avoidance_frames": 169,
+  "obstacle_center_xy": [
+    6.022211142155291,
+    1.8324089029725348
+  ]
+}
