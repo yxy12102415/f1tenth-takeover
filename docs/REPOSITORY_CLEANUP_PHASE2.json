@@ -1,0 +1,2639 @@
+{
+  "date": "2026-10-06",
+  "base_commit": "84828275e0817388cc956ae9eedde86ec8534c1d",
+  "scope": "Remove obsolete legacy assets and duplicated workspaces from current Git tree; preserve history.",
+  "removed_paths": [
+    "BOM",
+    "Hokuyo_Lidar",
+    "Images",
+    "Pages",
+    "Trajectory",
+    "VESC",
+    "map",
+    "powerboardV9",
+    "refine5.csv",
+    "README_LEGACY.md",
+    ".gitmodules",
+    "Code/Raceline_Optimization",
+    "Code/Yolov5",
+    "Code/autonomous_drive",
+    "Code/f1tenth-ws",
+    "Code/particle_filter"
+  ],
+  "files": [
+    {
+      "path": ".gitmodules",
+      "type": "blob",
+      "git_object": "2e2b4f7ae04153ac4a215c2b3c39996960764cba",
+      "bytes": 274
+    },
+    {
+      "path": "BOM/Master BOM.xlsx",
+      "type": "blob",
+      "git_object": "cd3c5ac9f992758a9fbc553e12114c18eee26529",
+      "bytes": 32955
+    },
+    {
+      "path": "Code/Raceline_Optimization/main_gen_frictionmap.py",
+      "type": "blob",
+      "git_object": "b23113152cb1dc9966db77da0b603bfe564a562a",
+      "bytes": 9139
+    },
+    {
+      "path": "Code/Raceline_Optimization/main_globaltraj.py",
+      "type": "blob",
+      "git_object": "315d329a55eaa2f6690984444e7b5c0e74164132",
+      "bytes": 34199
+    },
+    {
+      "path": "Code/Raceline_Optimization/main_globaltraj_f110.py",
+      "type": "blob",
+      "git_object": "717742356d21ec55f51b58a2195de41cdda1829a",
+      "bytes": 35144
+    },
+    {
+      "path": "Code/Raceline_Optimization/map_converter.ipynb",
+      "type": "blob",
+      "git_object": "5effc2930dffdea730d1ace6dcc60ec0078a36fc",
+      "bytes": 481663
+    },
+    {
+      "path": "Code/Raceline_Optimization/sanity_check.ipynb",
+      "type": "blob",
+      "git_object": "d095e6a1dd66957af934da022cdec33edfd6e6ae",
+      "bytes": 120576
+    },
+    {
+      "path": "Code/Raceline_Optimization/visualize_raceline.ipynb",
+      "type": "blob",
+      "git_object": "5b839714252f06a30bb75c4dbbad53765c51f82d",
+      "bytes": 422993
+    },
+    {
+      "path": "Code/Yolov5/RealSenseD415/obstacle_detection/.idea/.gitignore",
+      "type": "blob",
+      "git_object": "eaf91e2ac647df635a09f01b8a2a254252aae8d7",
+      "bytes": 50
+    },
+    {
+      "path": "Code/Yolov5/RealSenseD415/obstacle_detection/.idea/inspectionProfiles/Project_Default.xml",
+      "type": "blob",
+      "git_object": "0e84d2e2a60dae749f2bc58a263d6c6350885f84",
+      "bytes": 1725
+    },
+    {
+      "path": "Code/Yolov5/RealSenseD415/obstacle_detection/.idea/inspectionProfiles/profiles_settings.xml",
+      "type": "blob",
+      "git_object": "20fc29e7a85e1af4cdab6fc32d2197bfd9cc1d27",
+      "bytes": 179
+    },
+    {
+      "path": "Code/Yolov5/RealSenseD415/obstacle_detection/.idea/misc.xml",
+      "type": "blob",
+      "git_object": "6ca656e0fa72f3940d87190766d52c7ba7e1d5d9",
+      "bytes": 204
+    },
+    {
+      "path": "Code/Yolov5/RealSenseD415/obstacle_detection/.idea/modules.xml",
+      "type": "blob",
+      "git_object": "ef235decd182a0b46db0869906bc0e8fcf19f97c",
+      "bytes": 303
+    },
+    {
+      "path": "Code/Yolov5/RealSenseD415/obstacle_detection/.idea/vcs.xml",
+      "type": "blob",
+      "git_object": "9661ac713428efbad557d3ba3a62216b5bb7d226",
+      "bytes": 185
+    },
+    {
+      "path": "Code/Yolov5/RealSenseD415/obstacle_detection/.idea/yolov5_d435i_detection.iml",
+      "type": "blob",
+      "git_object": "39e7e13b46d3b37f3d73e0891682a4c78d951614",
+      "bytes": 501
+    },
+    {
+      "path": "Code/Yolov5/RealSenseD415/obstacle_detection/LICENSE",
+      "type": "blob",
+      "git_object": "29f81d812f3e768fa89638d1f72920dbfd1413a8",
+      "bytes": 11558
+    },
+    {
+      "path": "Code/Yolov5/RealSenseD415/obstacle_detection/config/yolov5s.yaml",
+      "type": "blob",
+      "git_object": "b893a05c35bc3591b0d202606ba825d45d639b6b",
+      "bytes": 343
+    },
+    {
+      "path": "Code/Yolov5/RealSenseD415/obstacle_detection/image/image-20220213143921695.png",
+      "type": "blob",
+      "git_object": "2be00282fd984a54a9f3975f39cdbb40639b3574",
+      "bytes": 1406240
+    },
+    {
+      "path": "Code/Yolov5/RealSenseD415/obstacle_detection/image/image-20220213144406079.png",
+      "type": "blob",
+      "git_object": "b0b9c1a71bc41436d42852adb36d295dd4b0ad51",
+      "bytes": 1957732
+    },
+    {
+      "path": "Code/Yolov5/RealSenseD415/obstacle_detection/models/__init__.py",
+      "type": "blob",
+      "git_object": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "bytes": 0
+    },
+    {
+      "path": "Code/Yolov5/RealSenseD415/obstacle_detection/models/common.py",
+      "type": "blob",
+      "git_object": "c9e73b3d5e3c7eba6fd5c494a27f67946c22aa9a",
+      "bytes": 20614
+    },
+    {
+      "path": "Code/Yolov5/RealSenseD415/obstacle_detection/models/experimental.py",
+      "type": "blob",
+      "git_object": "5e06fbb0fb55a020e1f2a87dd4b90047a4ef8074",
+      "bytes": 4640
+    },
+    {
+      "path": "Code/Yolov5/RealSenseD415/obstacle_detection/models/hub/anchors.yaml",
+      "type": "blob",
+      "git_object": "f85db42c54e0e1d8ecc2594c04e12bba94949c2e",
+      "bytes": 3394
+    },
+    {
+      "path": "Code/Yolov5/RealSenseD415/obstacle_detection/models/hub/yolov3-spp.yaml",
+      "type": "blob",
+      "git_object": "299d76669e0b9f07f711a0c216b99c659be893e2",
+      "bytes": 1618
+    },
+    {
+      "path": "Code/Yolov5/RealSenseD415/obstacle_detection/models/hub/yolov3-tiny.yaml",
+      "type": "blob",
+      "git_object": "f9ac6b17734d7464a02149fdbc81d62018621b6d",
+      "bytes": 1273
+    },
+    {
+      "path": "Code/Yolov5/RealSenseD415/obstacle_detection/models/hub/yolov3.yaml",
+      "type": "blob",
+      "git_object": "21fe309735de736025da8e2f28a79fb74628397d",
+      "bytes": 1611
+    },
+    {
+      "path": "Code/Yolov5/RealSenseD415/obstacle_detection/models/hub/yolov5-bifpn.yaml",
+      "type": "blob",
+      "git_object": "764e2d46954b45d03f0d644d0c57068aac7c0e40",
+      "bytes": 1452
+    },
+    {
+      "path": "Code/Yolov5/RealSenseD415/obstacle_detection/models/hub/yolov5-fpn.yaml",
+      "type": "blob",
+      "git_object": "17c21b2c2f089cbd43ee22b47c5305445807fa15",
+      "bytes": 1323
+    },
+    {
+      "path": "Code/Yolov5/RealSenseD415/obstacle_detection/models/hub/yolov5-p2.yaml",
+      "type": "blob",
+      "git_object": "58f65d4a2bc4de91d31a10d529b84cd45b9f3d3d",
+      "bytes": 1660
+    },
+    {
+      "path": "Code/Yolov5/RealSenseD415/obstacle_detection/models/hub/yolov5-p6.yaml",
+      "type": "blob",
+      "git_object": "30325a57edcebfd0fefabc57428485557a3d0572",
+      "bytes": 1715
+    },
+    {
+      "path": "Code/Yolov5/RealSenseD415/obstacle_detection/models/hub/yolov5-p7.yaml",
+      "type": "blob",
+      "git_object": "1abb111fa7312fbebc210473e268b513a7d75dba",
+      "bytes": 2100
+    },
+    {
+      "path": "Code/Yolov5/RealSenseD415/obstacle_detection/models/hub/yolov5-panet.yaml",
+      "type": "blob",
+      "git_object": "5c828845f9f377ca102551681cadd855af4b22d5",
+      "bytes": 1543
+    },
+    {
+      "path": "Code/Yolov5/RealSenseD415/obstacle_detection/models/hub/yolov5l6.yaml",
+      "type": "blob",
+      "git_object": "5cb9aefeea1f630442a3c041fe0c2fd75d84ade7",
+      "bytes": 1880
+    },
+    {
+      "path": "Code/Yolov5/RealSenseD415/obstacle_detection/models/hub/yolov5m6.yaml",
+      "type": "blob",
+      "git_object": "881c5ff897712be2915d13e6d662c3dac0003d93",
+      "bytes": 1882
+    },
+    {
+      "path": "Code/Yolov5/RealSenseD415/obstacle_detection/models/hub/yolov5n6.yaml",
+      "type": "blob",
+      "git_object": "beccb57e9fb732abf45208dca420caf264c746bf",
+      "bytes": 1882
+    },
+    {
+      "path": "Code/Yolov5/RealSenseD415/obstacle_detection/models/hub/yolov5s-ghost.yaml",
+      "type": "blob",
+      "git_object": "8db9f3836164e38becbf1112bfe556d7d5cb656b",
+      "bytes": 1531
+    },
+    {
+      "path": "Code/Yolov5/RealSenseD415/obstacle_detection/models/hub/yolov5s-transformer.yaml",
+      "type": "blob",
+      "git_object": "1e6ac7b668ddc8c4f2747ef9ffd824d2fcba9b18",
+      "bytes": 1490
+    },
+    {
+      "path": "Code/Yolov5/RealSenseD415/obstacle_detection/models/hub/yolov5s6.yaml",
+      "type": "blob",
+      "git_object": "8fe18d396bbe19c8d89dc87bce2498b0873a522f",
+      "bytes": 1882
+    },
+    {
+      "path": "Code/Yolov5/RealSenseD415/obstacle_detection/models/hub/yolov5x6.yaml",
+      "type": "blob",
+      "git_object": "df405f71f44d5511062bec8322725313bc5e5615",
+      "bytes": 1882
+    },
+    {
+      "path": "Code/Yolov5/RealSenseD415/obstacle_detection/models/tf.py",
+      "type": "blob",
+      "git_object": "285885b68da3f83c8c23d54b2303495e0a6d1618",
+      "bytes": 21255
+    },
+    {
+      "path": "Code/Yolov5/RealSenseD415/obstacle_detection/models/yolo.py",
+      "type": "blob",
+      "git_object": "4d2e394505cd36f34db2c0acc0a43456a099eda7",
+      "bytes": 15020
+    },
+    {
+      "path": "Code/Yolov5/RealSenseD415/obstacle_detection/models/yolov5l.yaml",
+      "type": "blob",
+      "git_object": "4543d762689a50282464e5fce1d015adafa82393",
+      "bytes": 1449
+    },
+    {
+      "path": "Code/Yolov5/RealSenseD415/obstacle_detection/models/yolov5m.yaml",
+      "type": "blob",
+      "git_object": "72ea4c3229309ff890b7ed6887ccf6b76a51638c",
+      "bytes": 1451
+    },
+    {
+      "path": "Code/Yolov5/RealSenseD415/obstacle_detection/models/yolov5n.yaml",
+      "type": "blob",
+      "git_object": "eea9aa417f021369c0b06fc50eeab4b9ae015168",
+      "bytes": 1450
+    },
+    {
+      "path": "Code/Yolov5/RealSenseD415/obstacle_detection/models/yolov5s.yaml",
+      "type": "blob",
+      "git_object": "270da1fde778119f565b6884a019b3b9eeef15fc",
+      "bytes": 1458
+    },
+    {
+      "path": "Code/Yolov5/RealSenseD415/obstacle_detection/models/yolov5x.yaml",
+      "type": "blob",
+      "git_object": "9546b214a61e5b44aaf80bf31ac4995dfa166bc2",
+      "bytes": 1451
+    },
+    {
+      "path": "Code/Yolov5/RealSenseD415/obstacle_detection/obstacle_detect.py",
+      "type": "blob",
+      "git_object": "01389b1c0ba27ab00a8ac007197946b175314a9b",
+      "bytes": 11471
+    },
+    {
+      "path": "Code/Yolov5/RealSenseD415/obstacle_detection/requirements.txt",
+      "type": "blob",
+      "git_object": "4fcf8f2984dc3c2dbdc99bbe6d511b99d1a140a3",
+      "bytes": 630
+    },
+    {
+      "path": "Code/Yolov5/RealSenseD415/obstacle_detection/utils/__init__.py",
+      "type": "blob",
+      "git_object": "e1581d0757dfd0966f0429759ff1ae721fcf1f1f",
+      "bytes": 456
+    },
+    {
+      "path": "Code/Yolov5/RealSenseD415/obstacle_detection/utils/activations.py",
+      "type": "blob",
+      "git_object": "7096ab1fa535f041f872911b2db651631980059e",
+      "bytes": 3875
+    },
+    {
+      "path": "Code/Yolov5/RealSenseD415/obstacle_detection/utils/augmentations.py",
+      "type": "blob",
+      "git_object": "c16bf77034f188336e3926404a4744ac9a9ab134",
+      "bytes": 11816
+    },
+    {
+      "path": "Code/Yolov5/RealSenseD415/obstacle_detection/utils/autoanchor.py",
+      "type": "blob",
+      "git_object": "e3feeb0a6a0926f9d422df914d5e6ab5fe6fad7e",
+      "bytes": 7352
+    },
+    {
+      "path": "Code/Yolov5/RealSenseD415/obstacle_detection/utils/aws/__init__.py",
+      "type": "blob",
+      "git_object": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "bytes": 0
+    },
+    {
+      "path": "Code/Yolov5/RealSenseD415/obstacle_detection/utils/aws/mime.sh",
+      "type": "blob",
+      "git_object": "4a4de18ece85b6d83675e0fddd321aada707239d",
+      "bytes": 806
+    },
+    {
+      "path": "Code/Yolov5/RealSenseD415/obstacle_detection/utils/aws/resume.py",
+      "type": "blob",
+      "git_object": "c16e94ef192281aa8f52ba8dacc2221fc3380401",
+      "bytes": 1129
+    },
+    {
+      "path": "Code/Yolov5/RealSenseD415/obstacle_detection/utils/aws/userdata.sh",
+      "type": "blob",
+      "git_object": "53527ab84c1d4cbfa2a5f55ecb86496b28d42031",
+      "bytes": 1274
+    },
+    {
+      "path": "Code/Yolov5/RealSenseD415/obstacle_detection/utils/callbacks.py",
+      "type": "blob",
+      "git_object": "0375dd83bc80d3b8f5bde45e6c37d62d3a7134db",
+      "bytes": 5954
+    },
+    {
+      "path": "Code/Yolov5/RealSenseD415/obstacle_detection/utils/datasets.py",
+      "type": "blob",
+      "git_object": "0158f15c7fa130b9da7b23556cd21cea6c31f818",
+      "bytes": 43649
+    },
+    {
+      "path": "Code/Yolov5/RealSenseD415/obstacle_detection/utils/downloads.py",
+      "type": "blob",
+      "git_object": "a38eed7bdd36802b82b4ee5b20db3731821e5915",
+      "bytes": 6227
+    },
+    {
+      "path": "Code/Yolov5/RealSenseD415/obstacle_detection/utils/flask_rest_api/README.md",
+      "type": "blob",
+      "git_object": "9de4da4703ed1188966cdc7297a1cec075250471",
+      "bytes": 1783
+    },
+    {
+      "path": "Code/Yolov5/RealSenseD415/obstacle_detection/utils/flask_rest_api/example_request.py",
+      "type": "blob",
+      "git_object": "bdfe0399a7c90853b3332a00139df1ba1a56c47f",
+      "bytes": 312
+    },
+    {
+      "path": "Code/Yolov5/RealSenseD415/obstacle_detection/utils/flask_rest_api/restapi.py",
+      "type": "blob",
+      "git_object": "395ad3796563a6b8b738f191616f47441797c728",
+      "bytes": 1115
+    },
+    {
+      "path": "Code/Yolov5/RealSenseD415/obstacle_detection/utils/general.py",
+      "type": "blob",
+      "git_object": "b354b6b785938ef7f105a5c24974626e980da8a8",
+      "bytes": 34975
+    },
+    {
+      "path": "Code/Yolov5/RealSenseD415/obstacle_detection/utils/google_app_engine/Dockerfile",
+      "type": "blob",
+      "git_object": "d889610b14ad13f6632cb61e05975f4fa19f1a6c",
+      "bytes": 846
+    },
+    {
+      "path": "Code/Yolov5/RealSenseD415/obstacle_detection/utils/google_app_engine/additional_requirements.txt",
+      "type": "blob",
+      "git_object": "c3778d39909157348cab779e24e9b73dfc56d93d",
+      "bytes": 109
+    },
+    {
+      "path": "Code/Yolov5/RealSenseD415/obstacle_detection/utils/google_app_engine/app.yaml",
+      "type": "blob",
+      "git_object": "c4cef35541f0c8648dc99da50c25c2a638d98ae2",
+      "bytes": 186
+    },
+    {
+      "path": "Code/Yolov5/RealSenseD415/obstacle_detection/utils/loggers/__init__.py",
+      "type": "blob",
+      "git_object": "c373b7883ad719a8602ed2adf444ee386f5ef659",
+      "bytes": 6600
+    },
+    {
+      "path": "Code/Yolov5/RealSenseD415/obstacle_detection/utils/loggers/wandb/README.md",
+      "type": "blob",
+      "git_object": "c87fe8c1f64c00fcfcc828a22d16618a983854a8",
+      "bytes": 10534
+    },
+    {
+      "path": "Code/Yolov5/RealSenseD415/obstacle_detection/utils/loggers/wandb/__init__.py",
+      "type": "blob",
+      "git_object": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "bytes": 0
+    },
+    {
+      "path": "Code/Yolov5/RealSenseD415/obstacle_detection/utils/loggers/wandb/log_dataset.py",
+      "type": "blob",
+      "git_object": "582493db5531bb53a052c2fb0467e6d72014f63d",
+      "bytes": 914
+    },
+    {
+      "path": "Code/Yolov5/RealSenseD415/obstacle_detection/utils/loggers/wandb/sweep.py",
+      "type": "blob",
+      "git_object": "60351b79b57184c753378b3878153deaea5db70e",
+      "bytes": 899
+    },
+    {
+      "path": "Code/Yolov5/RealSenseD415/obstacle_detection/utils/loggers/wandb/sweep.yaml",
+      "type": "blob",
+      "git_object": "c974f856808fe597db7066e803ff89a8a475272e",
+      "bytes": 2627
+    },
+    {
+      "path": "Code/Yolov5/RealSenseD415/obstacle_detection/utils/loggers/wandb/wandb_utils.py",
+      "type": "blob",
+      "git_object": "9a2c1cde8ba3bd5a191b79b0ba0c0cd73a5079d0",
+      "bytes": 25848
+    },
+    {
+      "path": "Code/Yolov5/RealSenseD415/obstacle_detection/utils/loss.py",
+      "type": "blob",
+      "git_object": "3ffd8c38f1e2576fc587df43ceefc7f8d01620dd",
+      "bytes": 9986
+    },
+    {
+      "path": "Code/Yolov5/RealSenseD415/obstacle_detection/utils/metrics.py",
+      "type": "blob",
+      "git_object": "71d76d7a74f639494d6f72b56366d160bf31c548",
+      "bytes": 13836
+    },
+    {
+      "path": "Code/Yolov5/RealSenseD415/obstacle_detection/utils/plots.py",
+      "type": "blob",
+      "git_object": "faea37131028b9551709772eee455873ab7019e4",
+      "bytes": 18544
+    },
+    {
+      "path": "Code/Yolov5/RealSenseD415/obstacle_detection/utils/torch_utils.py",
+      "type": "blob",
+      "git_object": "3943de4cb899e7513d888e2f20185373e1853b8b",
+      "bytes": 14529
+    },
+    {
+      "path": "Code/Yolov5/yolov5-5.0/.dockerignore",
+      "type": "blob",
+      "git_object": "f39bc30b4a9dd974ec87e94c4621417b3ff16cb3",
+      "bytes": 3826
+    },
+    {
+      "path": "Code/Yolov5/yolov5-5.0/.gitattributes",
+      "type": "blob",
+      "git_object": "7b26080b7b59bd229c90de36ccc85b0a46d47a92",
+      "bytes": 77
+    },
+    {
+      "path": "Code/Yolov5/yolov5-5.0/.github/ISSUE_TEMPLATE/bug-report.md",
+      "type": "blob",
+      "git_object": "700767fdcb41d6a3492ce4842c54d465856ce6a6",
+      "bytes": 1593
+    },
+    {
+      "path": "Code/Yolov5/yolov5-5.0/.github/ISSUE_TEMPLATE/feature-request.md",
+      "type": "blob",
+      "git_object": "4b473d38d73078cef56ebc2d53876b4b25464fee",
+      "bytes": 764
+    },
+    {
+      "path": "Code/Yolov5/yolov5-5.0/.github/ISSUE_TEMPLATE/question.md",
+      "type": "blob",
+      "git_object": "496d76dc2eaf9df6bb8073b7858a72b682b27883",
+      "bytes": 153
+    },
+    {
+      "path": "Code/Yolov5/yolov5-5.0/.github/dependabot.yml",
+      "type": "blob",
+      "git_object": "1ad1bcee6940800c4c2057765403a8a1fb974e85",
+      "bytes": 213
+    },
+    {
+      "path": "Code/Yolov5/yolov5-5.0/.github/workflows/ci-testing.yml",
+      "type": "blob",
+      "git_object": "44a64ca6298f2c4a970cbec7e6f1d910b25474b6",
+      "bytes": 3100
+    },
+    {
+      "path": "Code/Yolov5/yolov5-5.0/.github/workflows/codeql-analysis.yml",
+      "type": "blob",
+      "git_object": "337fa72f2937b166e5413b12bd5569f5e2765eb8",
+      "bytes": 2058
+    },
+    {
+      "path": "Code/Yolov5/yolov5-5.0/.github/workflows/greetings.yml",
+      "type": "blob",
+      "git_object": "2a85170cb699829deb2ac8ea098c759c33191d52",
+      "bytes": 4967
+    },
+    {
+      "path": "Code/Yolov5/yolov5-5.0/.github/workflows/rebase.yml",
+      "type": "blob",
+      "git_object": "de5cfd0baf07ef4f636d1fc279f94b7e3abf4491",
+      "bytes": 563
+    },
+    {
+      "path": "Code/Yolov5/yolov5-5.0/.github/workflows/stale.yml",
+      "type": "blob",
+      "git_object": "e87e51d7854f74f0ff40bf155b173ce7fcf89d66",
+      "bytes": 870
+    },
+    {
+      "path": "Code/Yolov5/yolov5-5.0/.gitignore",
+      "type": "blob",
+      "git_object": "81a02b8bd92e5ae56cb5acbbd18723ec1d49b95f",
+      "bytes": 4228
+    },
+    {
+      "path": "Code/Yolov5/yolov5-5.0/Dockerfile",
+      "type": "blob",
+      "git_object": "98da0ee2ebf90d2382ff73e2048484317d836f06",
+      "bytes": 1861
+    },
+    {
+      "path": "Code/Yolov5/yolov5-5.0/LICENSE",
+      "type": "blob",
+      "git_object": "001b337a463a6b01cfab00439ecb568147176f36",
+      "bytes": 35799
+    },
+    {
+      "path": "Code/Yolov5/yolov5-5.0/README.md",
+      "type": "blob",
+      "git_object": "a9c9f6ae7aae115806b8a7b557fb5c7de6b6bd6a",
+      "bytes": 11361
+    },
+    {
+      "path": "Code/Yolov5/yolov5-5.0/detect.py",
+      "type": "blob",
+      "git_object": "211267730d526a97555850729988e91b0d1e3114",
+      "bytes": 8747
+    },
+    {
+      "path": "Code/Yolov5/yolov5-5.0/download_weights.sh",
+      "type": "blob",
+      "git_object": "7e50409302d69c7397b6fad2444091a0195d02cb",
+      "bytes": 289
+    },
+    {
+      "path": "Code/Yolov5/yolov5-5.0/hubconf.py",
+      "type": "blob",
+      "git_object": "778c6f98b7def5f22f7c532ab663443f75fdf590",
+      "bytes": 5647
+    },
+    {
+      "path": "Code/Yolov5/yolov5-5.0/models/__init__.py",
+      "type": "blob",
+      "git_object": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "bytes": 0
+    },
+    {
+      "path": "Code/Yolov5/yolov5-5.0/models/common.py",
+      "type": "blob",
+      "git_object": "9f2abfb2ab120ac6dd6e3e7f13740305508ee139",
+      "bytes": 16656
+    },
+    {
+      "path": "Code/Yolov5/yolov5-5.0/models/experimental.py",
+      "type": "blob",
+      "git_object": "09dd7bad669e4ef65010cb69164f396c0b4d29c6",
+      "bytes": 5268
+    },
+    {
+      "path": "Code/Yolov5/yolov5-5.0/models/export.py",
+      "type": "blob",
+      "git_object": "3319c3420ae5960c20fab0e98234d6cf1ce83f44",
+      "bytes": 4526
+    },
+    {
+      "path": "Code/Yolov5/yolov5-5.0/models/hub/anchors.yaml",
+      "type": "blob",
+      "git_object": "7fcdf3e4ad7a1baa537e4f4a2656c3c19125b0ed",
+      "bytes": 3414
+    },
+    {
+      "path": "Code/Yolov5/yolov5-5.0/models/hub/yolov3-spp.yaml",
+      "type": "blob",
+      "git_object": "db42b73d23682d232382b22a1d32ce03b42a3f71",
+      "bytes": 1582
+    },
+    {
+      "path": "Code/Yolov5/yolov5-5.0/models/hub/yolov3-tiny.yaml",
+      "type": "blob",
+      "git_object": "d6520ea6993ccd0fffdc38e0d1a17e17e48767f2",
+      "bytes": 1237
+    },
+    {
+      "path": "Code/Yolov5/yolov5-5.0/models/hub/yolov3.yaml",
+      "type": "blob",
+      "git_object": "961e3d7be96950fddfc2bd926750367f94d911f5",
+      "bytes": 1575
+    },
+    {
+      "path": "Code/Yolov5/yolov5-5.0/models/hub/yolov5-fpn.yaml",
+      "type": "blob",
+      "git_object": "37bb2f86a6efb9c661cd23fc80dcdb9d63cf9181",
+      "bytes": 1287
+    },
+    {
+      "path": "Code/Yolov5/yolov5-5.0/models/hub/yolov5-p2.yaml",
+      "type": "blob",
+      "git_object": "ff7dea1873c6e58b34f1b682fb284166dc8a94d9",
+      "bytes": 1792
+    },
+    {
+      "path": "Code/Yolov5/yolov5-5.0/models/hub/yolov5-p6.yaml",
+      "type": "blob",
+      "git_object": "c30e6e7d8896b3cab3e4078ae266e063acfec94a",
+      "bytes": 1865
+    },
+    {
+      "path": "Code/Yolov5/yolov5-5.0/models/hub/yolov5-p7.yaml",
+      "type": "blob",
+      "git_object": "b45fec45cca51f8cbf90824d99224565be58887d",
+      "bytes": 2299
+    },
+    {
+      "path": "Code/Yolov5/yolov5-5.0/models/hub/yolov5-panet.yaml",
+      "type": "blob",
+      "git_object": "47ef4c88901653601563dd6c86a443bd2dcd669e",
+      "bytes": 1507
+    },
+    {
+      "path": "Code/Yolov5/yolov5-5.0/models/hub/yolov5l6.yaml",
+      "type": "blob",
+      "git_object": "1fb6c74e62dbffbfc0fd2c20a5e1ff998552841c",
+      "bytes": 2037
+    },
+    {
+      "path": "Code/Yolov5/yolov5-5.0/models/hub/yolov5m6.yaml",
+      "type": "blob",
+      "git_object": "0c030f66f2e54abcd27c6bb593cbb8d4ac9b1d4b",
+      "bytes": 2039
+    },
+    {
+      "path": "Code/Yolov5/yolov5-5.0/models/hub/yolov5s-transformer.yaml",
+      "type": "blob",
+      "git_object": "a292b3e3cb2d1987ddf4153bf226b39063648351",
+      "bytes": 1454
+    },
+    {
+      "path": "Code/Yolov5/yolov5-5.0/models/hub/yolov5s6.yaml",
+      "type": "blob",
+      "git_object": "2c81c155258b3d213e193da06dcfeea5479d0da7",
+      "bytes": 2039
+    },
+    {
+      "path": "Code/Yolov5/yolov5-5.0/models/hub/yolov5x6.yaml",
+      "type": "blob",
+      "git_object": "8a6f1edae889faad85aefff6a3580788e2223668",
+      "bytes": 2039
+    },
+    {
+      "path": "Code/Yolov5/yolov5-5.0/models/yolo.py",
+      "type": "blob",
+      "git_object": "b63affc8c9a709476f3ef232dad1b298a0635c99",
+      "bytes": 12381
+    },
+    {
+      "path": "Code/Yolov5/yolov5-5.0/models/yolov5l.yaml",
+      "type": "blob",
+      "git_object": "af71f3f8b71ab2b2a69645c970bdb7582d075ee3",
+      "bytes": 1413
+    },
+    {
+      "path": "Code/Yolov5/yolov5-5.0/models/yolov5m.yaml",
+      "type": "blob",
+      "git_object": "8d4a9672df463db9317f6f9f0cc2bd37e0544624",
+      "bytes": 1415
+    },
+    {
+      "path": "Code/Yolov5/yolov5-5.0/models/yolov5s.yaml",
+      "type": "blob",
+      "git_object": "6745b9090d4c80b5506a40e85083648d54966448",
+      "bytes": 1414
+    },
+    {
+      "path": "Code/Yolov5/yolov5-5.0/models/yolov5x.yaml",
+      "type": "blob",
+      "git_object": "4c7f1e8ccafe80314f64862213bf2d771a02e68d",
+      "bytes": 1415
+    },
+    {
+      "path": "Code/Yolov5/yolov5-5.0/requirements.txt",
+      "type": "blob",
+      "git_object": "e4d1dbc8b938a3757d418a445846c6b42ebca712",
+      "bytes": 628
+    },
+    {
+      "path": "Code/Yolov5/yolov5-5.0/test.py",
+      "type": "blob",
+      "git_object": "23c6ab5ef6b7ad62fec2a43e4e5db4b15f18d39a",
+      "bytes": 17321
+    },
+    {
+      "path": "Code/Yolov5/yolov5-5.0/train.py",
+      "type": "blob",
+      "git_object": "255bc62c3d6f2d19d9e7b4f2850a2abcbf493d7f",
+      "bytes": 34422
+    },
+    {
+      "path": "Code/Yolov5/yolov5-5.0/tutorial.ipynb",
+      "type": "blob",
+      "git_object": "8feb1173c4056fc367f4fa8bcd35d72a122af1dc",
+      "bytes": 395294
+    },
+    {
+      "path": "Code/Yolov5/yolov5-5.0/utils/__init__.py",
+      "type": "blob",
+      "git_object": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "bytes": 0
+    },
+    {
+      "path": "Code/Yolov5/yolov5-5.0/utils/activations.py",
+      "type": "blob",
+      "git_object": "f99475259318bd323b56d227ef71d7110f131685",
+      "bytes": 2320
+    },
+    {
+      "path": "Code/Yolov5/yolov5-5.0/utils/autoanchor.py",
+      "type": "blob",
+      "git_object": "5ec97f263bb6aed2fa8bc68cb307b0414381e75b",
+      "bytes": 7312
+    },
+    {
+      "path": "Code/Yolov5/yolov5-5.0/utils/aws/__init__.py",
+      "type": "blob",
+      "git_object": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "bytes": 0
+    },
+    {
+      "path": "Code/Yolov5/yolov5-5.0/utils/aws/mime.sh",
+      "type": "blob",
+      "git_object": "4a4de18ece85b6d83675e0fddd321aada707239d",
+      "bytes": 806
+    },
+    {
+      "path": "Code/Yolov5/yolov5-5.0/utils/aws/resume.py",
+      "type": "blob",
+      "git_object": "4d58a32d26c1c040641ca07c765f563328233809",
+      "bytes": 1151
+    },
+    {
+      "path": "Code/Yolov5/yolov5-5.0/utils/aws/userdata.sh",
+      "type": "blob",
+      "git_object": "77c051c353d6ccc0bce07f25af507f168feaaa1d",
+      "bytes": 1264
+    },
+    {
+      "path": "Code/Yolov5/yolov5-5.0/utils/datasets.py",
+      "type": "blob",
+      "git_object": "e2c7df49eb3e64df97339ee82106f4d642e1b931",
+      "bytes": 45611
+    },
+    {
+      "path": "Code/Yolov5/yolov5-5.0/utils/general.py",
+      "type": "blob",
+      "git_object": "7c9c115d92e262022c32d991b277eaf3a9d065d2",
+      "bytes": 25731
+    },
+    {
+      "path": "Code/Yolov5/yolov5-5.0/utils/google_app_engine/Dockerfile",
+      "type": "blob",
+      "git_object": "d889610b14ad13f6632cb61e05975f4fa19f1a6c",
+      "bytes": 846
+    },
+    {
+      "path": "Code/Yolov5/yolov5-5.0/utils/google_app_engine/additional_requirements.txt",
+      "type": "blob",
+      "git_object": "6690354c431988c839cbe20b470aee62fe3914a6",
+      "bytes": 109
+    },
+    {
+      "path": "Code/Yolov5/yolov5-5.0/utils/google_app_engine/app.yaml",
+      "type": "blob",
+      "git_object": "c4cef35541f0c8648dc99da50c25c2a638d98ae2",
+      "bytes": 186
+    },
+    {
+      "path": "Code/Yolov5/yolov5-5.0/utils/google_utils.py",
+      "type": "blob",
+      "git_object": "a1e8036d8e14b88c3527b189da8c98c2396ae30f",
+      "bytes": 4992
+    },
+    {
+      "path": "Code/Yolov5/yolov5-5.0/utils/loss.py",
+      "type": "blob",
+      "git_object": "a0ace37b8ed46c999eb12c4a778cde3d758d7b8f",
+      "bytes": 10358
+    },
+    {
+      "path": "Code/Yolov5/yolov5-5.0/utils/metrics.py",
+      "type": "blob",
+      "git_object": "0c25cba41c5060355ddd1db8102c8f10a71dfb37",
+      "bytes": 9192
+    },
+    {
+      "path": "Code/Yolov5/yolov5-5.0/utils/plots.py",
+      "type": "blob",
+      "git_object": "fb32179eedeb25436abfba42cac2caf8a0ec662c",
+      "bytes": 18758
+    },
+    {
+      "path": "Code/Yolov5/yolov5-5.0/utils/torch_utils.py",
+      "type": "blob",
+      "git_object": "ae4a0250f4bf5f09d257890dfa023f868337cb5b",
+      "bytes": 12741
+    },
+    {
+      "path": "Code/Yolov5/yolov5-5.0/utils/wandb_logging/__init__.py",
+      "type": "blob",
+      "git_object": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "bytes": 0
+    },
+    {
+      "path": "Code/Yolov5/yolov5-5.0/utils/wandb_logging/log_dataset.py",
+      "type": "blob",
+      "git_object": "b33fc10d77bedeadb9fc08ba7d7948c62f3222f1",
+      "bytes": 843
+    },
+    {
+      "path": "Code/Yolov5/yolov5-5.0/utils/wandb_logging/wandb_utils.py",
+      "type": "blob",
+      "git_object": "dd79233a498b25d3a9f0eb91743d3f70803ba8b5",
+      "bytes": 16574
+    },
+    {
+      "path": "Code/autonomous_drive/autonomous_drive/autonomous_drive/__init__.py",
+      "type": "blob",
+      "git_object": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "bytes": 0
+    },
+    {
+      "path": "Code/autonomous_drive/autonomous_drive/autonomous_drive/autonomous_drive.py",
+      "type": "blob",
+      "git_object": "def436a377f310e86b32c27d03ea7835d05b6e6e",
+      "bytes": 2483
+    },
+    {
+      "path": "Code/autonomous_drive/autonomous_drive/package.xml",
+      "type": "blob",
+      "git_object": "88f85ae579c535a7e3e305548a881ccd70486956",
+      "bytes": 650
+    },
+    {
+      "path": "Code/autonomous_drive/autonomous_drive/resource/autonomous_drive",
+      "type": "blob",
+      "git_object": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "bytes": 0
+    },
+    {
+      "path": "Code/autonomous_drive/autonomous_drive/setup.cfg",
+      "type": "blob",
+      "git_object": "d3e1fe982d229dc888a1586db62118b402f43a00",
+      "bytes": 105
+    },
+    {
+      "path": "Code/autonomous_drive/autonomous_drive/setup.py",
+      "type": "blob",
+      "git_object": "3d58662d5e5bc17a9b21ee9b14f1587b4825dd07",
+      "bytes": 721
+    },
+    {
+      "path": "Code/autonomous_drive/autonomous_drive/test/test_copyright.py",
+      "type": "blob",
+      "git_object": "7c5c06b53e0c3a8c334c947b61b52062eecba752",
+      "bytes": 813
+    },
+    {
+      "path": "Code/autonomous_drive/autonomous_drive/test/test_flake8.py",
+      "type": "blob",
+      "git_object": "625324e084a436d51078f040d0e03093fd32237a",
+      "bytes": 909
+    },
+    {
+      "path": "Code/autonomous_drive/autonomous_drive/test/test_pep257.py",
+      "type": "blob",
+      "git_object": "45697170f6cc63743786230b4a1bd17489e5edbb",
+      "bytes": 826
+    },
+    {
+      "path": "Code/f1tenth-ws/src/autonomous_drive/autonomous_drive/__init__.py",
+      "type": "blob",
+      "git_object": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "bytes": 0
+    },
+    {
+      "path": "Code/f1tenth-ws/src/autonomous_drive/autonomous_drive/autonomous_drive.py",
+      "type": "blob",
+      "git_object": "09cf8c86b9bbaaaed4ffbc80e80d39f6d49f0896",
+      "bytes": 2470
+    },
+    {
+      "path": "Code/f1tenth-ws/src/autonomous_drive/package.xml",
+      "type": "blob",
+      "git_object": "88f85ae579c535a7e3e305548a881ccd70486956",
+      "bytes": 650
+    },
+    {
+      "path": "Code/f1tenth-ws/src/autonomous_drive/resource/autonomous_drive",
+      "type": "blob",
+      "git_object": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "bytes": 0
+    },
+    {
+      "path": "Code/f1tenth-ws/src/autonomous_drive/setup.cfg",
+      "type": "blob",
+      "git_object": "d3e1fe982d229dc888a1586db62118b402f43a00",
+      "bytes": 105
+    },
+    {
+      "path": "Code/f1tenth-ws/src/autonomous_drive/setup.py",
+      "type": "blob",
+      "git_object": "3d58662d5e5bc17a9b21ee9b14f1587b4825dd07",
+      "bytes": 721
+    },
+    {
+      "path": "Code/f1tenth-ws/src/autonomous_drive/test/test_copyright.py",
+      "type": "blob",
+      "git_object": "7c5c06b53e0c3a8c334c947b61b52062eecba752",
+      "bytes": 813
+    },
+    {
+      "path": "Code/f1tenth-ws/src/autonomous_drive/test/test_flake8.py",
+      "type": "blob",
+      "git_object": "625324e084a436d51078f040d0e03093fd32237a",
+      "bytes": 909
+    },
+    {
+      "path": "Code/f1tenth-ws/src/autonomous_drive/test/test_pep257.py",
+      "type": "blob",
+      "git_object": "45697170f6cc63743786230b4a1bd17489e5edbb",
+      "bytes": 826
+    },
+    {
+      "path": "Code/f1tenth-ws/src/f1tenth_system",
+      "type": "commit",
+      "git_object": "b4a5a3dd2d6af8665fd007885b769e26f84c0e74",
+      "bytes": 0
+    },
+    {
+      "path": "Code/f1tenth-ws/src/particle_filter/.gitignore",
+      "type": "blob",
+      "git_object": "9168c40e2fc3e49be874eeddb92015db34b2f7f1",
+      "bytes": 2171
+    },
+    {
+      "path": "Code/f1tenth-ws/src/particle_filter/README.md",
+      "type": "blob",
+      "git_object": "0316069788a0a1486cf36486247547821e243f0d",
+      "bytes": 2595
+    },
+    {
+      "path": "Code/f1tenth-ws/src/particle_filter/config/localize.yaml",
+      "type": "blob",
+      "git_object": "70356850d5f11c30cc631ef0482fa902ff2ed973",
+      "bytes": 919
+    },
+    {
+      "path": "Code/f1tenth-ws/src/particle_filter/deprecated/CMakeLists.txt",
+      "type": "blob",
+      "git_object": "f408736b9a865ad8da119e033d30a72cb02e8b92",
+      "bytes": 7057
+    },
+    {
+      "path": "Code/f1tenth-ws/src/particle_filter/deprecated/localize.launch",
+      "type": "blob",
+      "git_object": "7e6f8cb6160629f90fa085c8367b594f9ab07120",
+      "bytes": 4031
+    },
+    {
+      "path": "Code/f1tenth-ws/src/particle_filter/deprecated/map_server.launch",
+      "type": "blob",
+      "git_object": "165a271f27eaf934df9ecd4388a5c9e68a726220",
+      "bytes": 180
+    },
+    {
+      "path": "Code/f1tenth-ws/src/particle_filter/deprecated/old_package.xml",
+      "type": "blob",
+      "git_object": "fd0450c92e07f5efc9f61fbbbf6d2e6c2fcf5a7b",
+      "bytes": 2425
+    },
+    {
+      "path": "Code/f1tenth-ws/src/particle_filter/deprecated/slime.launch",
+      "type": "blob",
+      "git_object": "cafb1290bee9ba90d01427dce2d2779237176223",
+      "bytes": 690
+    },
+    {
+      "path": "Code/f1tenth-ws/src/particle_filter/deprecated/src/particle_filter.py",
+      "type": "blob",
+      "git_object": "4804c323d95b297694bcd7772fb1520e4588ce1e",
+      "bytes": 32502
+    },
+    {
+      "path": "Code/f1tenth-ws/src/particle_filter/deprecated/src/utils.py",
+      "type": "blob",
+      "git_object": "7d515da136dff391a6f2259ab4932b0ca3a4ad6b",
+      "bytes": 7090
+    },
+    {
+      "path": "Code/f1tenth-ws/src/particle_filter/docs/Lab5.pdf",
+      "type": "blob",
+      "git_object": "d98c317130ce5b003db1d597b2c56ddaf1b07ce1",
+      "bytes": 613023
+    },
+    {
+      "path": "Code/f1tenth-ws/src/particle_filter/docs/RangeLibcUsageandInformation.pdf",
+      "type": "blob",
+      "git_object": "80259b2332cb314dcd692190f979651d7857f4b5",
+      "bytes": 300011
+    },
+    {
+      "path": "Code/f1tenth-ws/src/particle_filter/launch/localize_launch.py",
+      "type": "blob",
+      "git_object": "c834e38bcc0597a31a940fb10d905d9218a93028",
+      "bytes": 3069
+    },
+    {
+      "path": "Code/f1tenth-ws/src/particle_filter/maps/Hudson_map.png",
+      "type": "blob",
+      "git_object": "7649dbd990135e13ecb1bee824e1a4f09814d19d",
+      "bytes": 30108
+    },
+    {
+      "path": "Code/f1tenth-ws/src/particle_filter/maps/Hudson_map.yaml",
+      "type": "blob",
+      "git_object": "9570a4c5a3ee84e843ac7e166bbb6002919edad3",
+      "bytes": 186
+    },
+    {
+      "path": "Code/f1tenth-ws/src/particle_filter/maps/basement_fixed.map.yaml",
+      "type": "blob",
+      "git_object": "5bc1c09f07a2b8da877cb989fe216a3eff0f9f33",
+      "bytes": 137
+    },
+    {
+      "path": "Code/f1tenth-ws/src/particle_filter/maps/basement_fixed.png",
+      "type": "blob",
+      "git_object": "caa93ca33c58ec44c2bad9767eaa059ee72d78fd",
+      "bytes": 45848
+    },
+    {
+      "path": "Code/f1tenth-ws/src/particle_filter/maps/levine.pgm",
+      "type": "blob",
+      "git_object": "4fe4857330adf1f3c23f954ac3c3f19a101672b0",
+      "bytes": 4194321
+    },
+    {
+      "path": "Code/f1tenth-ws/src/particle_filter/maps/levine.yaml",
+      "type": "blob",
+      "git_object": "f836281fb489f8a23a9e0d63994c3e95f62e5162",
+      "bytes": 141
+    },
+    {
+      "path": "Code/f1tenth-ws/src/particle_filter/maps/map_1710722828.pgm",
+      "type": "blob",
+      "git_object": "26eb42c4118a9a7a3ed88907aaec767f7b252c4e",
+      "bytes": 168536
+    },
+    {
+      "path": "Code/f1tenth-ws/src/particle_filter/maps/map_1710722828.yaml",
+      "type": "blob",
+      "git_object": "5449a0c5420ad5ed260a44344384ee2baad62be6",
+      "bytes": 138
+    },
+    {
+      "path": "Code/f1tenth-ws/src/particle_filter/media/comparison.png",
+      "type": "blob",
+      "git_object": "ba8b040cf93bc8f32919b3ac1f1277750bd581e4",
+      "bytes": 74354
+    },
+    {
+      "path": "Code/f1tenth-ws/src/particle_filter/media/thumb.jpg",
+      "type": "blob",
+      "git_object": "6199a2ea8e5dd0b2a0a40c5091aaaa5d5cb19123",
+      "bytes": 68405
+    },
+    {
+      "path": "Code/f1tenth-ws/src/particle_filter/package.xml",
+      "type": "blob",
+      "git_object": "c00ab7afdadd1b2aa084c2cceaebd760ed935933",
+      "bytes": 1107
+    },
+    {
+      "path": "Code/f1tenth-ws/src/particle_filter/particle_filter/__init__.py",
+      "type": "blob",
+      "git_object": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "bytes": 0
+    },
+    {
+      "path": "Code/f1tenth-ws/src/particle_filter/particle_filter/particle_filter.py",
+      "type": "blob",
+      "git_object": "b2e1c881427f6886c03d1f0df1ff203d93a8b6e9",
+      "bytes": 33600
+    },
+    {
+      "path": "Code/f1tenth-ws/src/particle_filter/particle_filter/utils.py",
+      "type": "blob",
+      "git_object": "89ecf6e6c42ebc6cb6586853796330caf54f1e6e",
+      "bytes": 7215
+    },
+    {
+      "path": "Code/f1tenth-ws/src/particle_filter/resource/particle_filter",
+      "type": "blob",
+      "git_object": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "bytes": 0
+    },
+    {
+      "path": "Code/f1tenth-ws/src/particle_filter/rviz/pf.rviz",
+      "type": "blob",
+      "git_object": "e286743f9498b30aad69addc2b97e0e5afe72412",
+      "bytes": 6841
+    },
+    {
+      "path": "Code/f1tenth-ws/src/particle_filter/setup.cfg",
+      "type": "blob",
+      "git_object": "3842f9d248d226f90c9c003d48a491d794c86fc2",
+      "bytes": 103
+    },
+    {
+      "path": "Code/f1tenth-ws/src/particle_filter/setup.py",
+      "type": "blob",
+      "git_object": "c23ed9e93b9af90498da66c6e1a4335a07af3a38",
+      "bytes": 1022
+    },
+    {
+      "path": "Code/f1tenth-ws/src/particle_filter/test/test_copyright.py",
+      "type": "blob",
+      "git_object": "7c5c06b53e0c3a8c334c947b61b52062eecba752",
+      "bytes": 813
+    },
+    {
+      "path": "Code/f1tenth-ws/src/particle_filter/test/test_flake8.py",
+      "type": "blob",
+      "git_object": "625324e084a436d51078f040d0e03093fd32237a",
+      "bytes": 909
+    },
+    {
+      "path": "Code/f1tenth-ws/src/particle_filter/test/test_pep257.py",
+      "type": "blob",
+      "git_object": "45697170f6cc63743786230b4a1bd17489e5edbb",
+      "bytes": 826
+    },
+    {
+      "path": "Code/f1tenth-ws/src/range_libc",
+      "type": "commit",
+      "git_object": "781acfc9edea977b564c4cb5bdaa86e8f719ab7b",
+      "bytes": 0
+    },
+    {
+      "path": "Code/f1tenth-ws/src/safety_node/CMakeLists.txt",
+      "type": "blob",
+      "git_object": "ddb7a6cec32868c517f05b7456d63490ca47f818",
+      "bytes": 1168
+    },
+    {
+      "path": "Code/f1tenth-ws/src/safety_node/README.md",
+      "type": "blob",
+      "git_object": "866a71adbe2871316b8d803ed1eb6f382a65a87e",
+      "bytes": 1389
+    },
+    {
+      "path": "Code/f1tenth-ws/src/safety_node/package.xml",
+      "type": "blob",
+      "git_object": "f57f72b3c5b20e34f2713c9d0286b9f0918abbad",
+      "bytes": 875
+    },
+    {
+      "path": "Code/f1tenth-ws/src/safety_node/safety_node/__init__.py",
+      "type": "blob",
+      "git_object": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "bytes": 0
+    },
+    {
+      "path": "Code/f1tenth-ws/src/safety_node/scripts/safety_node.py",
+      "type": "blob",
+      "git_object": "e2fd0eb312ba5c71de7ce74e0abba6b534e073f4",
+      "bytes": 3495
+    },
+    {
+      "path": "Code/f1tenth-ws/src/safety_node/setup.cfg",
+      "type": "blob",
+      "git_object": "d3caa9622ae1ebb36eeee24246547cabe8e8b7b3",
+      "bytes": 95
+    },
+    {
+      "path": "Code/f1tenth-ws/src/safety_node/setup.py",
+      "type": "blob",
+      "git_object": "d5f77aaef600080ec176f11790ecfea506fdc03c",
+      "bytes": 786
+    },
+    {
+      "path": "Code/f1tenth-ws/src/safety_node/src/safety_node.cpp",
+      "type": "blob",
+      "git_object": "805fd769cdee4e3ae508a288512f6d93b49cd511",
+      "bytes": 2442
+    },
+    {
+      "path": "Code/f1tenth-ws/src/waypoint_python/package.xml",
+      "type": "blob",
+      "git_object": "575943cd358d56ee1b6731e2bff84ad8615894e3",
+      "bytes": 677
+    },
+    {
+      "path": "Code/f1tenth-ws/src/waypoint_python/resource/waypoint_python",
+      "type": "blob",
+      "git_object": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "bytes": 0
+    },
+    {
+      "path": "Code/f1tenth-ws/src/waypoint_python/setup.cfg",
+      "type": "blob",
+      "git_object": "08cf0621330ca693f6909d9f0539fbaa92b1d42c",
+      "bytes": 103
+    },
+    {
+      "path": "Code/f1tenth-ws/src/waypoint_python/setup.py",
+      "type": "blob",
+      "git_object": "f78a2516f2bd922324f71ec3e39009d07455eb2a",
+      "bytes": 714
+    },
+    {
+      "path": "Code/f1tenth-ws/src/waypoint_python/test/test_copyright.py",
+      "type": "blob",
+      "git_object": "7c5c06b53e0c3a8c334c947b61b52062eecba752",
+      "bytes": 813
+    },
+    {
+      "path": "Code/f1tenth-ws/src/waypoint_python/test/test_flake8.py",
+      "type": "blob",
+      "git_object": "625324e084a436d51078f040d0e03093fd32237a",
+      "bytes": 909
+    },
+    {
+      "path": "Code/f1tenth-ws/src/waypoint_python/test/test_pep257.py",
+      "type": "blob",
+      "git_object": "45697170f6cc63743786230b4a1bd17489e5edbb",
+      "bytes": 826
+    },
+    {
+      "path": "Code/f1tenth-ws/src/waypoint_python/waypoint_python/__init__.py",
+      "type": "blob",
+      "git_object": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "bytes": 0
+    },
+    {
+      "path": "Code/f1tenth-ws/src/waypoint_python/waypoint_python/waypoints_logger.py",
+      "type": "blob",
+      "git_object": "bbde3c338e9b2037f86ebb66f88ec21cd68544da",
+      "bytes": 1934
+    },
+    {
+      "path": "Code/f1tenth-ws/src/waypoint_python/wp-2024-04-04-18-46-55.csv",
+      "type": "blob",
+      "git_object": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "bytes": 0
+    },
+    {
+      "path": "Code/f1tenth-ws/src/waypoint_python/wp-2024-04-04-18-48-25.csv",
+      "type": "blob",
+      "git_object": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "bytes": 0
+    },
+    {
+      "path": "Code/f1tenth-ws/src/waypoint_python/wp-2024-04-04-18-50-48.csv",
+      "type": "blob",
+      "git_object": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "bytes": 0
+    },
+    {
+      "path": "Code/f1tenth-ws/src/waypoint_python/wp-2024-04-04-19-02-35.csv",
+      "type": "blob",
+      "git_object": "9b14618dc28dbfc21e2f7ea631c364c3f781f884",
+      "bytes": 111259
+    },
+    {
+      "path": "Code/f1tenth-ws/src/waypoint_python/wp-2024-04-04-19-38-00.csv",
+      "type": "blob",
+      "git_object": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "bytes": 0
+    },
+    {
+      "path": "Code/f1tenth-ws/src/waypoint_python/wp-2024-04-04-19-39-50.csv",
+      "type": "blob",
+      "git_object": "6bba1992631ab8c0d6f68544a01a75c0d02b7cd8",
+      "bytes": 1339
+    },
+    {
+      "path": "Code/f1tenth-ws/src/waypoint_python/wp-2024-04-04-19-44-24.csv",
+      "type": "blob",
+      "git_object": "f94ffa712bc62dabab39935bc057f7ffaafba968",
+      "bytes": 1212
+    },
+    {
+      "path": "Code/f1tenth-ws/src/waypoint_python/wp-2024-04-04-19-44-40.csv",
+      "type": "blob",
+      "git_object": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "bytes": 0
+    },
+    {
+      "path": "Code/f1tenth-ws/src/waypoint_python/wp-2024-04-04-19-46-10.csv",
+      "type": "blob",
+      "git_object": "f150134da22fc6de44cbb76c067d7194ce7b2282",
+      "bytes": 632
+    },
+    {
+      "path": "Code/f1tenth-ws/src/waypoint_python/wp-2024-04-04-19-48-39.csv",
+      "type": "blob",
+      "git_object": "d82c11f8c112f749788d9c61404752ebc257366b",
+      "bytes": 5659
+    },
+    {
+      "path": "Code/f1tenth-ws/src/waypoint_python/wp-2024-04-04-19-52-51.csv",
+      "type": "blob",
+      "git_object": "224e8ffe3f98d56ec7abcdb94659dcff4eda149f",
+      "bytes": 5396
+    },
+    {
+      "path": "Code/f1tenth-ws/src/waypoint_python/wp-2024-04-05-03-24-27.csv",
+      "type": "blob",
+      "git_object": "464294b528b104717bc75a8ed688bc0d3607820f",
+      "bytes": 5544
+    },
+    {
+      "path": "Code/f1tenth-ws/src/waypoint_python/wp-2024-04-05-03-25-17.csv",
+      "type": "blob",
+      "git_object": "84991a31b20e6ce930d41719d150f584b1cc65aa",
+      "bytes": 39992
+    },
+    {
+      "path": "Code/f1tenth-ws/src/waypoint_python/wp-2024-04-05-03-55-00.csv",
+      "type": "blob",
+      "git_object": "1a7a0a8254acb07fa62256f12a23406af1ec6275",
+      "bytes": 2705
+    },
+    {
+      "path": "Code/f1tenth-ws/src/waypoint_python/wp-2024-04-05-03-57-16.csv",
+      "type": "blob",
+      "git_object": "440bcac0dc1238ec38606de9978edd95342c2349",
+      "bytes": 38799
+    },
+    {
+      "path": "Code/f1tenth-ws/src/waypoint_python/wp-2024-04-05-04-05-07.csv",
+      "type": "blob",
+      "git_object": "0d7ac1bd5b0a097b7ca1e9d558fd431eb36d0490",
+      "bytes": 41202
+    },
+    {
+      "path": "Code/f1tenth-ws/src/waypoint_python/wp-2024-04-11-02-12-45.csv",
+      "type": "blob",
+      "git_object": "3158fb84b0fbe4e8092d280b3017013b19d8e7d3",
+      "bytes": 99467
+    },
+    {
+      "path": "Code/f1tenth-ws/src/waypoint_python/wp-2024-04-11-02-24-01.csv",
+      "type": "blob",
+      "git_object": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "bytes": 0
+    },
+    {
+      "path": "Code/f1tenth-ws/src/waypoint_python/wp-2024-04-11-02-24-56.csv",
+      "type": "blob",
+      "git_object": "52f74e87b82b49a7e0eae8f97da24a2cbc89001c",
+      "bytes": 57054
+    },
+    {
+      "path": "Code/f1tenth-ws/src/waypoint_python/wp-2024-04-11-02-36-09.csv",
+      "type": "blob",
+      "git_object": "68fa9bbe0cef9641647e6375733500da11303600",
+      "bytes": 197978
+    },
+    {
+      "path": "Code/f1tenth-ws/src/waypoint_python/wp-2024-04-11-02-39-14.csv",
+      "type": "blob",
+      "git_object": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "bytes": 0
+    },
+    {
+      "path": "Code/f1tenth-ws/src/waypoint_python/wp-2024-04-11-02-45-13.csv",
+      "type": "blob",
+      "git_object": "1fc9a4d3d012fb6852f88b4a79bce703f550fa71",
+      "bytes": 60620
+    },
+    {
+      "path": "Code/f1tenth-ws/src/waypoint_python/wp-2024-04-11-18-42-04.csv",
+      "type": "blob",
+      "git_object": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "bytes": 0
+    },
+    {
+      "path": "Code/f1tenth-ws/src/waypoint_python/wp-2024-04-11-18-57-41.csv",
+      "type": "blob",
+      "git_object": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "bytes": 0
+    },
+    {
+      "path": "Code/f1tenth-ws/src/waypoint_python/wp-2024-04-11-18-59-39.csv",
+      "type": "blob",
+      "git_object": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "bytes": 0
+    },
+    {
+      "path": "Code/f1tenth-ws/src/waypoint_python/wp-2024-04-11-19-02-13.csv",
+      "type": "blob",
+      "git_object": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "bytes": 0
+    },
+    {
+      "path": "Code/f1tenth-ws/src/waypoint_python/wp-2024-04-11-19-16-45.csv",
+      "type": "blob",
+      "git_object": "35274bf1eebdd93f52b4423390a67fb6b0df848a",
+      "bytes": 188624
+    },
+    {
+      "path": "Code/f1tenth-ws/src/waypoint_python/wp-2024-04-11-19-19-50.csv",
+      "type": "blob",
+      "git_object": "aed50f22117601a1703eff43453eee5b264dec01",
+      "bytes": 117176
+    },
+    {
+      "path": "Code/f1tenth-ws/src/waypoint_python/wp-2024-04-11-19-32-53.csv",
+      "type": "blob",
+      "git_object": "920d289d27733b5ff81c9c074920c506049b2f0e",
+      "bytes": 118793
+    },
+    {
+      "path": "Code/particle_filter/.gitignore",
+      "type": "blob",
+      "git_object": "9168c40e2fc3e49be874eeddb92015db34b2f7f1",
+      "bytes": 2171
+    },
+    {
+      "path": "Code/particle_filter/README.md",
+      "type": "blob",
+      "git_object": "0316069788a0a1486cf36486247547821e243f0d",
+      "bytes": 2595
+    },
+    {
+      "path": "Code/particle_filter/config/localize.yaml",
+      "type": "blob",
+      "git_object": "1af79119ba32d781cf1481a7b6962f27cc617e24",
+      "bytes": 915
+    },
+    {
+      "path": "Code/particle_filter/deprecated/CMakeLists.txt",
+      "type": "blob",
+      "git_object": "f408736b9a865ad8da119e033d30a72cb02e8b92",
+      "bytes": 7057
+    },
+    {
+      "path": "Code/particle_filter/deprecated/localize.launch",
+      "type": "blob",
+      "git_object": "7e6f8cb6160629f90fa085c8367b594f9ab07120",
+      "bytes": 4031
+    },
+    {
+      "path": "Code/particle_filter/deprecated/map_server.launch",
+      "type": "blob",
+      "git_object": "165a271f27eaf934df9ecd4388a5c9e68a726220",
+      "bytes": 180
+    },
+    {
+      "path": "Code/particle_filter/deprecated/old_package.xml",
+      "type": "blob",
+      "git_object": "fd0450c92e07f5efc9f61fbbbf6d2e6c2fcf5a7b",
+      "bytes": 2425
+    },
+    {
+      "path": "Code/particle_filter/deprecated/slime.launch",
+      "type": "blob",
+      "git_object": "cafb1290bee9ba90d01427dce2d2779237176223",
+      "bytes": 690
+    },
+    {
+      "path": "Code/particle_filter/deprecated/src/particle_filter.py",
+      "type": "blob",
+      "git_object": "4804c323d95b297694bcd7772fb1520e4588ce1e",
+      "bytes": 32502
+    },
+    {
+      "path": "Code/particle_filter/deprecated/src/utils.py",
+      "type": "blob",
+      "git_object": "7d515da136dff391a6f2259ab4932b0ca3a4ad6b",
+      "bytes": 7090
+    },
+    {
+      "path": "Code/particle_filter/docs/Lab5.pdf",
+      "type": "blob",
+      "git_object": "d98c317130ce5b003db1d597b2c56ddaf1b07ce1",
+      "bytes": 613023
+    },
+    {
+      "path": "Code/particle_filter/docs/RangeLibcUsageandInformation.pdf",
+      "type": "blob",
+      "git_object": "80259b2332cb314dcd692190f979651d7857f4b5",
+      "bytes": 300011
+    },
+    {
+      "path": "Code/particle_filter/launch/localize_launch.py",
+      "type": "blob",
+      "git_object": "c834e38bcc0597a31a940fb10d905d9218a93028",
+      "bytes": 3069
+    },
+    {
+      "path": "Code/particle_filter/maps/basement_fixed.map.yaml",
+      "type": "blob",
+      "git_object": "5bc1c09f07a2b8da877cb989fe216a3eff0f9f33",
+      "bytes": 137
+    },
+    {
+      "path": "Code/particle_filter/maps/basement_fixed.png",
+      "type": "blob",
+      "git_object": "caa93ca33c58ec44c2bad9767eaa059ee72d78fd",
+      "bytes": 45848
+    },
+    {
+      "path": "Code/particle_filter/maps/levine.pgm",
+      "type": "blob",
+      "git_object": "4fe4857330adf1f3c23f954ac3c3f19a101672b0",
+      "bytes": 4194321
+    },
+    {
+      "path": "Code/particle_filter/maps/levine.yaml",
+      "type": "blob",
+      "git_object": "f836281fb489f8a23a9e0d63994c3e95f62e5162",
+      "bytes": 141
+    },
+    {
+      "path": "Code/particle_filter/media/comparison.png",
+      "type": "blob",
+      "git_object": "ba8b040cf93bc8f32919b3ac1f1277750bd581e4",
+      "bytes": 74354
+    },
+    {
+      "path": "Code/particle_filter/media/thumb.jpg",
+      "type": "blob",
+      "git_object": "6199a2ea8e5dd0b2a0a40c5091aaaa5d5cb19123",
+      "bytes": 68405
+    },
+    {
+      "path": "Code/particle_filter/package.xml",
+      "type": "blob",
+      "git_object": "c00ab7afdadd1b2aa084c2cceaebd760ed935933",
+      "bytes": 1107
+    },
+    {
+      "path": "Code/particle_filter/particle_filter/__init__.py",
+      "type": "blob",
+      "git_object": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "bytes": 0
+    },
+    {
+      "path": "Code/particle_filter/particle_filter/particle_filter.py",
+      "type": "blob",
+      "git_object": "b2e1c881427f6886c03d1f0df1ff203d93a8b6e9",
+      "bytes": 33600
+    },
+    {
+      "path": "Code/particle_filter/particle_filter/utils.py",
+      "type": "blob",
+      "git_object": "89ecf6e6c42ebc6cb6586853796330caf54f1e6e",
+      "bytes": 7215
+    },
+    {
+      "path": "Code/particle_filter/resource/particle_filter",
+      "type": "blob",
+      "git_object": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "bytes": 0
+    },
+    {
+      "path": "Code/particle_filter/rviz/pf.rviz",
+      "type": "blob",
+      "git_object": "e286743f9498b30aad69addc2b97e0e5afe72412",
+      "bytes": 6841
+    },
+    {
+      "path": "Code/particle_filter/setup.cfg",
+      "type": "blob",
+      "git_object": "3842f9d248d226f90c9c003d48a491d794c86fc2",
+      "bytes": 103
+    },
+    {
+      "path": "Code/particle_filter/setup.py",
+      "type": "blob",
+      "git_object": "c23ed9e93b9af90498da66c6e1a4335a07af3a38",
+      "bytes": 1022
+    },
+    {
+      "path": "Code/particle_filter/test/test_copyright.py",
+      "type": "blob",
+      "git_object": "7c5c06b53e0c3a8c334c947b61b52062eecba752",
+      "bytes": 813
+    },
+    {
+      "path": "Code/particle_filter/test/test_flake8.py",
+      "type": "blob",
+      "git_object": "625324e084a436d51078f040d0e03093fd32237a",
+      "bytes": 909
+    },
+    {
+      "path": "Code/particle_filter/test/test_pep257.py",
+      "type": "blob",
+      "git_object": "45697170f6cc63743786230b4a1bd17489e5edbb",
+      "bytes": 826
+    },
+    {
+      "path": "Hokuyo_Lidar/Hokuyo.md",
+      "type": "blob",
+      "git_object": "f502cb5635bae435c223c83b170abb17d6a9e6bf",
+      "bytes": 1500
+    },
+    {
+      "path": "Images/Connect.png",
+      "type": "blob",
+      "git_object": "032ad2728658ddd15b689ba53d9a0426a3c51c7e",
+      "bytes": 739512
+    },
+    {
+      "path": "Images/Depth_Camera_1.jpg",
+      "type": "blob",
+      "git_object": "0b62dfa12f93a6e7fa5e8f35a895c179e311ab85",
+      "bytes": 171447
+    },
+    {
+      "path": "Images/Depth_Camera_2.png",
+      "type": "blob",
+      "git_object": "27d81a070660781406aae28ced5b782fafe2fb6d",
+      "bytes": 490992
+    },
+    {
+      "path": "Images/Depth_Camera_3.png",
+      "type": "blob",
+      "git_object": "da613990421e62c41bd40ef8784a032413047295",
+      "bytes": 329098
+    },
+    {
+      "path": "Images/ESC.JPG",
+      "type": "blob",
+      "git_object": "ab50153f7d9db117908cb3d00c5e4b20d102c7fc",
+      "bytes": 12492326
+    },
+    {
+      "path": "Images/Final Look 1.JPG",
+      "type": "blob",
+      "git_object": "aab71b8c0e0757fe7b48b5eb9810bdcaf2958b2b",
+      "bytes": 15020952
+    },
+    {
+      "path": "Images/Final look 2.JPG",
+      "type": "blob",
+      "git_object": "18cfd7bc9d99e8188c484887853ec5e5f63453ee",
+      "bytes": 14581805
+    },
+    {
+      "path": "Images/First Look.jpg",
+      "type": "blob",
+      "git_object": "00abdc6268613becf5f3ff02e622d2e389a8e7e9",
+      "bytes": 1518646
+    },
+    {
+      "path": "Images/NX Connections.JPG",
+      "type": "blob",
+      "git_object": "a6b0069a9420700f4afd2b51fe8ea81b58ed4aaf",
+      "bytes": 14247274
+    },
+    {
+      "path": "Images/Overview.jpg",
+      "type": "blob",
+      "git_object": "b4d0f928aa608f38f9090dc2a40af37ee0e865c2",
+      "bytes": 6056811
+    },
+    {
+      "path": "Images/Power board.JPG",
+      "type": "blob",
+      "git_object": "bf797dbbe520119a64b0ec4e17ae879be9b79b70",
+      "bytes": 14337371
+    },
+    {
+      "path": "Images/R0001369.JPG",
+      "type": "blob",
+      "git_object": "444e9932ab3245a4daa5f903732eab6541d6bb63",
+      "bytes": 10922363
+    },
+    {
+      "path": "Images/R0001378.JPG",
+      "type": "blob",
+      "git_object": "7df4418c8c63140476f859ed4738c4fc5382e294",
+      "bytes": 10966920
+    },
+    {
+      "path": "Images/SSD Wifi.jpg",
+      "type": "blob",
+      "git_object": "1d856f189df83de2c1135517e3a82e9e58075dd1",
+      "bytes": 2786230
+    },
+    {
+      "path": "Images/SSDsetup.jpg",
+      "type": "blob",
+      "git_object": "1ad5433aa3f030245b612376c72dfd3787c459e7",
+      "bytes": 789610
+    },
+    {
+      "path": "Images/STEP01.jpg",
+      "type": "blob",
+      "git_object": "f9ec78b174c7cd68b48d6ebd2e54baef3d18cdf1",
+      "bytes": 953977
+    },
+    {
+      "path": "Images/STEP02-1.jpg",
+      "type": "blob",
+      "git_object": "d09becf3528f9dc7a7313f57d3813132f97742f1",
+      "bytes": 643415
+    },
+    {
+      "path": "Images/STEP02-2.jpg",
+      "type": "blob",
+      "git_object": "ac1c70bf1623e82c22c92c2c8628ccc53174d81c",
+      "bytes": 373073
+    },
+    {
+      "path": "Images/STEP02.jpg",
+      "type": "blob",
+      "git_object": "0efe63880db88d40423e78cd50699fa4debc414f",
+      "bytes": 560577
+    },
+    {
+      "path": "Images/STEP03-1.jpg",
+      "type": "blob",
+      "git_object": "0b310823cc2d3147e6ee30336d600e667a1d0830",
+      "bytes": 497382
+    },
+    {
+      "path": "Images/STEP03-2.jpg",
+      "type": "blob",
+      "git_object": "6c2c5e15888fef0f3348f19e8339af678ab12272",
+      "bytes": 486505
+    },
+    {
+      "path": "Images/STEP03-3.jpg",
+      "type": "blob",
+      "git_object": "97ed1a181677d12228af4754e7edfaf0ab151faa",
+      "bytes": 446217
+    },
+    {
+      "path": "Images/STEP03-4.jpg",
+      "type": "blob",
+      "git_object": "1f07367722e133a58d6225e4192fc15c43572942",
+      "bytes": 358340
+    },
+    {
+      "path": "Images/STEP04.jpg",
+      "type": "blob",
+      "git_object": "79bf1e72b7ccdc93017829bf2cedddea3ff9bbe4",
+      "bytes": 801367
+    },
+    {
+      "path": "Images/Screenshot from 2024-04-17 15-25-42.png",
+      "type": "blob",
+      "git_object": "a8275fc9344f1456746b3118e146826818b533cf",
+      "bytes": 170763
+    },
+    {
+      "path": "Images/Screenshot from 2024-04-17 15-26-00.png",
+      "type": "blob",
+      "git_object": "4eb2140251dfac438e591e530f16212db772fef5",
+      "bytes": 16994
+    },
+    {
+      "path": "Images/Screenshot from 2024-04-17 15-26-31.png",
+      "type": "blob",
+      "git_object": "fea420661b2746e64b227bfc27999eb80afbea5d",
+      "bytes": 17496
+    },
+    {
+      "path": "Images/Screenshot from 2024-04-17 15-27-07.png",
+      "type": "blob",
+      "git_object": "c6344cd10fdd66e4bfac1ac4bca81db1c2b7da97",
+      "bytes": 18161
+    },
+    {
+      "path": "Images/Screenshot from 2024-04-17 15-27-21.png",
+      "type": "blob",
+      "git_object": "2e3027b70efda0720222fbce6115ffd515daf719",
+      "bytes": 20396
+    },
+    {
+      "path": "Images/Screenshot from 2024-04-17 15-27-31.png",
+      "type": "blob",
+      "git_object": "0507782e3394059f5b7f20f8c2c2d3e374bc0388",
+      "bytes": 18020
+    },
+    {
+      "path": "Images/Screenshot from 2024-04-17 15-28-05.png",
+      "type": "blob",
+      "git_object": "b99d86fb801a9cf8c1e4e1d9bea6629be9bca34d",
+      "bytes": 15732
+    },
+    {
+      "path": "Images/Screenshot from 2024-04-17 15-28-27.png",
+      "type": "blob",
+      "git_object": "e9b172c8df090550ebde690972551897156004e8",
+      "bytes": 18761
+    },
+    {
+      "path": "Images/Screenshot from 2024-04-17 15-28-39.png",
+      "type": "blob",
+      "git_object": "6f03aae90a0f98dafdfafcf8708cf62e21122f31",
+      "bytes": 18237
+    },
+    {
+      "path": "Images/Screenshot-1.jpg",
+      "type": "blob",
+      "git_object": "8ce5fb95abf00e2631f3dd7d6b59011376629a65",
+      "bytes": 580259
+    },
+    {
+      "path": "Images/Screenshot-1.png",
+      "type": "blob",
+      "git_object": "b866c46570016ce53d9c36d3bddc3662e2a75b28",
+      "bytes": 1021607
+    },
+    {
+      "path": "Images/Screenshot-2.jpg",
+      "type": "blob",
+      "git_object": "b57a1d46d013dc25b04e7bc1e3e4ecf66c06137a",
+      "bytes": 661582
+    },
+    {
+      "path": "Images/Screenshot-2.png",
+      "type": "blob",
+      "git_object": "7e9f8e9ed444007599e1311a0c9a49e5824a0d33",
+      "bytes": 1051831
+    },
+    {
+      "path": "Images/Screenshot-3.jpg",
+      "type": "blob",
+      "git_object": "4788b4a95f8ecd7176fee331d4c35283484fe08a",
+      "bytes": 679218
+    },
+    {
+      "path": "Images/Screenshot-3.png",
+      "type": "blob",
+      "git_object": "b70fd1b0d94b28e3eff86ae9b2d9296674102892",
+      "bytes": 1077449
+    },
+    {
+      "path": "Images/Screenshot-4.jpg",
+      "type": "blob",
+      "git_object": "7c1bf80fc79f43806e9a41cb5d5eb5851b5217b7",
+      "bytes": 705786
+    },
+    {
+      "path": "Images/Screenshot-4.png",
+      "type": "blob",
+      "git_object": "148cb319c9a2df457e7db25d54ce01f63a4713d7",
+      "bytes": 1073308
+    },
+    {
+      "path": "Images/Screenshot-5.jpg",
+      "type": "blob",
+      "git_object": "ec48db5fa7a3e93370adc2f041ba6800c1b85b21",
+      "bytes": 868000
+    },
+    {
+      "path": "Images/Screenshot-5.png",
+      "type": "blob",
+      "git_object": "9e61edd5aef2224189afc4e9244abee7a3961f26",
+      "bytes": 1106717
+    },
+    {
+      "path": "Images/Screenshot-6.jpg",
+      "type": "blob",
+      "git_object": "50782b4285d50427535d6c9827b5de10159ba218",
+      "bytes": 928376
+    },
+    {
+      "path": "Images/Screenshot-6.png",
+      "type": "blob",
+      "git_object": "3b63de056c32e8e35b5e1a5d78c4979652f29ebc",
+      "bytes": 1187328
+    },
+    {
+      "path": "Images/Screenshot-7.jpg",
+      "type": "blob",
+      "git_object": "70eab69d81a8cb5d981936d15986a0c85acba727",
+      "bytes": 363485
+    },
+    {
+      "path": "Images/Screenshot-7.png",
+      "type": "blob",
+      "git_object": "89c870533eabd350fcb6ea895fc536639fce23d3",
+      "bytes": 207754
+    },
+    {
+      "path": "Images/Screenshot-8.jpg",
+      "type": "blob",
+      "git_object": "1cd5db035d4a6c5f5320fc5e88b87808d1f25cb1",
+      "bytes": 951267
+    },
+    {
+      "path": "Images/Screenshot-8.png",
+      "type": "blob",
+      "git_object": "639f65beebbf0a8b61585ca1db619f315adb1c97",
+      "bytes": 151689
+    },
+    {
+      "path": "Images/Screenshot-9.jpg",
+      "type": "blob",
+      "git_object": "3ac235facbeedd0e8dcd3f10879a99e09f35ddd7",
+      "bytes": 478037
+    },
+    {
+      "path": "Images/Servo_output.png",
+      "type": "blob",
+      "git_object": "7771eff0cf593bf49ac5ff8755616b522eeff463",
+      "bytes": 877482
+    },
+    {
+      "path": "Images/Wifi_1.png",
+      "type": "blob",
+      "git_object": "83f5098d5da27c65720acfbe75b6905c18539da1",
+      "bytes": 42679
+    },
+    {
+      "path": "Images/Wifi_2.png",
+      "type": "blob",
+      "git_object": "43864293612d77319974d37d6646cd4035640a26",
+      "bytes": 30744
+    },
+    {
+      "path": "Images/Wifi_3.png",
+      "type": "blob",
+      "git_object": "8abf5ec673c5e76c214409fa55e3d2d3ab411a87",
+      "bytes": 67561
+    },
+    {
+      "path": "Images/XML.png",
+      "type": "blob",
+      "git_object": "e1ec9a784b457f36b955cd8f96a3b7a4fa2ea73a",
+      "bytes": 820220
+    },
+    {
+      "path": "Images/autonomous_drive.gif",
+      "type": "blob",
+      "git_object": "64558b8669539b8d151a8a76592db9abfc87abda",
+      "bytes": 8341483
+    },
+    {
+      "path": "Images/autonomous_drive.mp4",
+      "type": "blob",
+      "git_object": "bf253cbca34a3a11af39e985cd53b0b98937e644",
+      "bytes": 1199210
+    },
+    {
+      "path": "Images/detecting.png",
+      "type": "blob",
+      "git_object": "9a6415ab9b0c8703608d0cc2f20ad678fc000765",
+      "bytes": 1083539
+    },
+    {
+      "path": "Images/keypad.png",
+      "type": "blob",
+      "git_object": "a09964382a6deb68426bcbe262795ab4c73f3b31",
+      "bytes": 743417
+    },
+    {
+      "path": "Images/nx-software-step1.png",
+      "type": "blob",
+      "git_object": "16db87895fe17607b8a1d38ce93213d73fba7175",
+      "bytes": 406420
+    },
+    {
+      "path": "Images/nx-software-step10.png",
+      "type": "blob",
+      "git_object": "1886cc84add14355a4ec32b99e2068b6781a9ed1",
+      "bytes": 59570
+    },
+    {
+      "path": "Images/nx-software-step2.png",
+      "type": "blob",
+      "git_object": "24331b7a44a3228e5a09f7670bcc0c5ada72dd04",
+      "bytes": 393365
+    },
+    {
+      "path": "Images/nx-software-step3.png",
+      "type": "blob",
+      "git_object": "770d393fdec2e107155eb6afc4616d49b7248274",
+      "bytes": 134435
+    },
+    {
+      "path": "Images/nx-software-step4.png",
+      "type": "blob",
+      "git_object": "ad9059534f41c677170797b3dc4ecbcf51eb6031",
+      "bytes": 10377
+    },
+    {
+      "path": "Images/nx-software-step7.png",
+      "type": "blob",
+      "git_object": "7ca35a9b28b3d9bb94b101b6affe6344126c070c",
+      "bytes": 18987
+    },
+    {
+      "path": "Images/nx-software-step8.png",
+      "type": "blob",
+      "git_object": "a05b1a10404d1cd2efcb5c35d66fd8b5cffc88ca",
+      "bytes": 157303
+    },
+    {
+      "path": "Images/nx-software-step9.png",
+      "type": "blob",
+      "git_object": "0a5e0dc71ef54f0d7207062774d1b9a370952c29",
+      "bytes": 34952
+    },
+    {
+      "path": "Images/nx-wifi-step-1.png",
+      "type": "blob",
+      "git_object": "d7f3a0c5792d32ba5d11203e8899e816d781c4c3",
+      "bytes": 41417
+    },
+    {
+      "path": "Images/nx-wifi-step-10.png",
+      "type": "blob",
+      "git_object": "b3486957df7a8143b2ff57547ec0d56d3a7b43c0",
+      "bytes": 89031
+    },
+    {
+      "path": "Images/nx-wifi-step-12.png",
+      "type": "blob",
+      "git_object": "cbfac3543344d2e931de89590190592581b2de18",
+      "bytes": 99498
+    },
+    {
+      "path": "Images/nx-wifi-step-2.png",
+      "type": "blob",
+      "git_object": "fbab9bba15f074b4b76932adb5155042c0929525",
+      "bytes": 46106
+    },
+    {
+      "path": "Images/nx-wifi-step-3.png",
+      "type": "blob",
+      "git_object": "73613026eba52a75d2f1d3754abe409b6df263b2",
+      "bytes": 83711
+    },
+    {
+      "path": "Images/nx-wifi-step-7.png",
+      "type": "blob",
+      "git_object": "52112ca08c5512f795ee2ab28ecba7eb1af14f57",
+      "bytes": 88278
+    },
+    {
+      "path": "Images/nx-wifi-step-8.png",
+      "type": "blob",
+      "git_object": "d5a275e42fc20f63ebbc45c50919375c6dbc3bd4",
+      "bytes": 63372
+    },
+    {
+      "path": "Images/nx-wifi-step-9.png",
+      "type": "blob",
+      "git_object": "d8892f266467084a03ae7a7c0a2f7d259063666b",
+      "bytes": 68768
+    },
+    {
+      "path": "Images/nx_ready.png",
+      "type": "blob",
+      "git_object": "4664891898356ae6c037a76268e1c9ae2b34fc96",
+      "bytes": 935376
+    },
+    {
+      "path": "Images/openloop.png",
+      "type": "blob",
+      "git_object": "e78e733f1bef19ac7c8274eb53b54281ebf08c4b",
+      "bytes": 848219
+    },
+    {
+      "path": "Images/particle_filter.mp4",
+      "type": "blob",
+      "git_object": "5672de3e4ed47e82cf7fe43ae16b6edd08dd7ee5",
+      "bytes": 3647359
+    },
+    {
+      "path": "Images/power.png",
+      "type": "blob",
+      "git_object": "87fa500f4d67c2e4ad8401675ce6e1c58b1f3e4a",
+      "bytes": 1058470
+    },
+    {
+      "path": "Images/realtime.png",
+      "type": "blob",
+      "git_object": "93c5a711634572315fd46cfb091c8f4c573a356a",
+      "bytes": 675557
+    },
+    {
+      "path": "Images/successSSD.png",
+      "type": "blob",
+      "git_object": "c3436a2da576faa1e98f6b5855de00c5a3488f9f",
+      "bytes": 1842690
+    },
+    {
+      "path": "Images/usb.png",
+      "type": "blob",
+      "git_object": "6e4d8e9c4e41a2559f3befe66342c49b3383d342",
+      "bytes": 811427
+    },
+    {
+      "path": "Images/write_motor.png",
+      "type": "blob",
+      "git_object": "5a78c3629fea882c901b6d9a0256841618dbe01b",
+      "bytes": 804214
+    },
+    {
+      "path": "Images/yolo.gif",
+      "type": "blob",
+      "git_object": "8911ffd98a45d439d23a6cea65b72e3946c6982f",
+      "bytes": 9686380
+    },
+    {
+      "path": "Pages/Automatic_Emergency_Braking.rst",
+      "type": "blob",
+      "git_object": "3ca9d162eb780361bb89d9a5aeeab8872fdb5564",
+      "bytes": 5634
+    },
+    {
+      "path": "Pages/Build.md",
+      "type": "blob",
+      "git_object": "2560ab82b8c7fa94e95fd39f005c6e919ec5aa8f",
+      "bytes": 3032
+    },
+    {
+      "path": "Pages/D415_Yolov5.rst",
+      "type": "blob",
+      "git_object": "3f61899664554adfaed5cb1d6cb003a65af8c3f8",
+      "bytes": 4675
+    },
+    {
+      "path": "Pages/Depth_Camera.rst",
+      "type": "blob",
+      "git_object": "40680540bbc3ffd8a370f18b930f76e912253f62",
+      "bytes": 1960
+    },
+    {
+      "path": "Pages/MPC.rst",
+      "type": "blob",
+      "git_object": "28d6afec8044c9895beffd217066f64689a9cb47",
+      "bytes": 3940
+    },
+    {
+      "path": "Pages/Raceline_opt.md",
+      "type": "blob",
+      "git_object": "b6a5cfe8f50a6b423c1bf3e7dc6113efd266fa40",
+      "bytes": 2620
+    },
+    {
+      "path": "Pages/SLAM.md",
+      "type": "blob",
+      "git_object": "7f08e57524518dfb066ab9b3239d11767421f9bd",
+      "bytes": 1940
+    },
+    {
+      "path": "Pages/SSD.md",
+      "type": "blob",
+      "git_object": "9fdb6da73e12504eab0c8c27944d3f1cff65c8dc",
+      "bytes": 2299
+    },
+    {
+      "path": "Pages/configuring_nx.rst",
+      "type": "blob",
+      "git_object": "d670ea162d8ad4f0b8e556071a06e24bdfa06505",
+      "bytes": 9542
+    },
+    {
+      "path": "Pages/connecting_host.rst",
+      "type": "blob",
+      "git_object": "63c96b30a934396ab1a13e32bad78d67d5e2515e",
+      "bytes": 3034
+    },
+    {
+      "path": "Pages/drive_autonomous.rst",
+      "type": "blob",
+      "git_object": "c1f288659951fcf0650a528492db2358498d7310",
+      "bytes": 2001
+    },
+    {
+      "path": "Pages/drive_calib_odom.rst",
+      "type": "blob",
+      "git_object": "271b7aa9bbcc60c74f29c44038052ea797ecc759",
+      "bytes": 8320
+    },
+    {
+      "path": "Pages/drive_manual.rst",
+      "type": "blob",
+      "git_object": "54e7c069df5a59ddb6a2213c4ab774687f19961d",
+      "bytes": 5972
+    },
+    {
+      "path": "Pages/driver_stack_setup.rst",
+      "type": "blob",
+      "git_object": "0492c974fa87cb7b6c24c7d9bc7820a2ec92ae42",
+      "bytes": 8472
+    },
+    {
+      "path": "Pages/git_command.md",
+      "type": "blob",
+      "git_object": "6a1378c14681d47e7f93f8d4e9ad56fdbcbbedc0",
+      "bytes": 922
+    },
+    {
+      "path": "Pages/particle_filter.md",
+      "type": "blob",
+      "git_object": "2ea9424e2059c679190287bbb21ef9c5b333fc31",
+      "bytes": 1931
+    },
+    {
+      "path": "Pages/simulator_install.md",
+      "type": "blob",
+      "git_object": "3d5da14fafbf3676a053ad535aca0d37bcc690b9",
+      "bytes": 3070
+    },
+    {
+      "path": "Pages/software_setup.md",
+      "type": "blob",
+      "git_object": "44ea50db66c8ec2f9ed5d4438662f9fd7a8eb435",
+      "bytes": 4145
+    },
+    {
+      "path": "README_LEGACY.md",
+      "type": "blob",
+      "git_object": "b4203bd7624eb86f44b32e5513deac0314bfed2b",
+      "bytes": 3974
+    },
+    {
+      "path": "Trajectory/Hudson1 (copy).csv",
+      "type": "blob",
+      "git_object": "c5424ffc972ac15bd038776d630fc707f5c04a09",
+      "bytes": 7585
+    },
+    {
+      "path": "Trajectory/trajectory_aftertuning.csv",
+      "type": "blob",
+      "git_object": "97d9bdc6ba9ef89fe1196f570b0c3a48a391e8f4",
+      "bytes": 335742
+    },
+    {
+      "path": "Trajectory/trajectory_beforetuning.csv",
+      "type": "blob",
+      "git_object": "a5e57f4efcb37b84415f1868c3a9bb114e4f079f",
+      "bytes": 156327
+    },
+    {
+      "path": "Trajectory/trajectory_data_10.csv",
+      "type": "blob",
+      "git_object": "cbcfc7cb76935f4b311bd5347d3e4cd69670057e",
+      "bytes": 288979
+    },
+    {
+      "path": "Trajectory/trajectory_data_100.csv",
+      "type": "blob",
+      "git_object": "a1c9ca7b91c5465eea20334dd8505ced481d07c1",
+      "bytes": 648719
+    },
+    {
+      "path": "Trajectory/trajectory_data_200.csv",
+      "type": "blob",
+      "git_object": "874f3004bd666a7e23f6e51af3d5d37d028aaf77",
+      "bytes": 648595
+    },
+    {
+      "path": "Trajectory/trajectory_data_500.csv",
+      "type": "blob",
+      "git_object": "1f8715fa1bf0abea03bd5225e6f16e23b4f58296",
+      "bytes": 641434
+    },
+    {
+      "path": "Trajectory/trajectory_data_800.csv",
+      "type": "blob",
+      "git_object": "09b4510807174671a8dd91ff9e7147dce3d59bd0",
+      "bytes": 284942
+    },
+    {
+      "path": "Trajectory/trajectory_william_4396.csv",
+      "type": "blob",
+      "git_object": "86e1d5abfa1ae65603a15887fe395232307e698f",
+      "bytes": 50233
+    },
+    {
+      "path": "Trajectory/trajectory_william_speed1.7.csv",
+      "type": "blob",
+      "git_object": "ba6af992205a5dd319619e24f61ba819920dd671",
+      "bytes": 291754
+    },
+    {
+      "path": "Trajectory/trajectory_william_speed10.2.csv",
+      "type": "blob",
+      "git_object": "14e24b6e4baa7e9e679334a17fdb69f8d8930bb9",
+      "bytes": 62784
+    },
+    {
+      "path": "Trajectory/trajectory_william_speed11.9.csv",
+      "type": "blob",
+      "git_object": "3ade03e85f5c39667f5cdb48d8258df4027d02bc",
+      "bytes": 51638
+    },
+    {
+      "path": "Trajectory/trajectory_william_speed3.4.csv",
+      "type": "blob",
+      "git_object": "10165b73b9aa9f8ed34b2bf248b0f3920c94da6a",
+      "bytes": 580402
+    },
+    {
+      "path": "Trajectory/trajectory_william_speed5.1.csv",
+      "type": "blob",
+      "git_object": "cd4e4a64ec91ac0b19a3958ca574bff4723afbc6",
+      "bytes": 147717
+    },
+    {
+      "path": "Trajectory/trajectory_william_speed6.8.csv",
+      "type": "blob",
+      "git_object": "3eb02fb94092283e7f1d83903c196a940074a6bf",
+      "bytes": 102138
+    },
+    {
+      "path": "Trajectory/trajectory_william_speed8.5.csv",
+      "type": "blob",
+      "git_object": "3b47121054b5505ee696094dcaf2ed2d1674b1c1",
+      "bytes": 76751
+    },
+    {
+      "path": "VESC/VESC_config.md",
+      "type": "blob",
+      "git_object": "c985930d68a11fe7f58f52da151f08b2c63a3c3c",
+      "bytes": 5635
+    },
+    {
+      "path": "map/Hudson_map.pgm",
+      "type": "blob",
+      "git_object": "ac9f67787ad31d5b68d24d05d077afbb35e5c72c",
+      "bytes": 1902113
+    },
+    {
+      "path": "map/Hudson_map.png",
+      "type": "blob",
+      "git_object": "7649dbd990135e13ecb1bee824e1a4f09814d19d",
+      "bytes": 30108
+    },
+    {
+      "path": "map/Hudson_map.yaml",
+      "type": "blob",
+      "git_object": "e0557c8f41a53b6fbd0f5dd950ab9bc268fb4ab6",
+      "bytes": 145
+    },
+    {
+      "path": "map/Hudson_map_1.pbm",
+      "type": "blob",
+      "git_object": "8e2d6c0dc3939d141ba1f6963f16d1f0652e238e",
+      "bytes": 1902113
+    },
+    {
+      "path": "map/Hudson_map_2.pbm",
+      "type": "blob",
+      "git_object": "ca98df76a882c6d7823c552689cf1e953a6dcfb2",
+      "bytes": 1902113
+    },
+    {
+      "path": "map/Melbourne_map.csv",
+      "type": "blob",
+      "git_object": "8e9770fe1164d076ff51f74a40a78a0d955154d9",
+      "bytes": 143208
+    },
+    {
+      "path": "map/Melbourne_map.png",
+      "type": "blob",
+      "git_object": "f97d3c42fa8fe58eabc476894f1469a80385d9eb",
+      "bytes": 75082
+    },
+    {
+      "path": "map/Melbourne_map.yaml",
+      "type": "blob",
+      "git_object": "9896b7d8328144a32b6e1acfe1d86c1ceee29636",
+      "bytes": 160
+    },
+    {
+      "path": "map/csv/Hudson1.csv",
+      "type": "blob",
+      "git_object": "d82c11f8c112f749788d9c61404752ebc257366b",
+      "bytes": 5659
+    },
+    {
+      "path": "map/csv/Hudson2.csv",
+      "type": "blob",
+      "git_object": "224e8ffe3f98d56ec7abcdb94659dcff4eda149f",
+      "bytes": 5396
+    },
+    {
+      "path": "map/csv/Hudson3.csv",
+      "type": "blob",
+      "git_object": "1a7a0a8254acb07fa62256f12a23406af1ec6275",
+      "bytes": 2705
+    },
+    {
+      "path": "map/csv/Hudson4.csv",
+      "type": "blob",
+      "git_object": "440bcac0dc1238ec38606de9978edd95342c2349",
+      "bytes": 38799
+    },
+    {
+      "path": "map/csv/Hudson5.csv",
+      "type": "blob",
+      "git_object": "0d7ac1bd5b0a097b7ca1e9d558fd431eb36d0490",
+      "bytes": 41202
+    },
+    {
+      "path": "map/csv/wp-2024-04-04-18-46-55.csv",
+      "type": "blob",
+      "git_object": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "bytes": 0
+    },
+    {
+      "path": "map/csv/wp-2024-04-04-18-48-25.csv",
+      "type": "blob",
+      "git_object": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "bytes": 0
+    },
+    {
+      "path": "map/csv/wp-2024-04-04-18-50-48.csv",
+      "type": "blob",
+      "git_object": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "bytes": 0
+    },
+    {
+      "path": "map/csv/wp-2024-04-04-19-02-35.csv",
+      "type": "blob",
+      "git_object": "9b14618dc28dbfc21e2f7ea631c364c3f781f884",
+      "bytes": 111259
+    },
+    {
+      "path": "map/csv/wp-2024-04-04-19-38-00.csv",
+      "type": "blob",
+      "git_object": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "bytes": 0
+    },
+    {
+      "path": "map/csv/wp-2024-04-04-19-39-50.csv",
+      "type": "blob",
+      "git_object": "6bba1992631ab8c0d6f68544a01a75c0d02b7cd8",
+      "bytes": 1339
+    },
+    {
+      "path": "map/csv/wp-2024-04-04-19-44-24.csv",
+      "type": "blob",
+      "git_object": "f94ffa712bc62dabab39935bc057f7ffaafba968",
+      "bytes": 1212
+    },
+    {
+      "path": "map/csv/wp-2024-04-04-19-44-40.csv",
+      "type": "blob",
+      "git_object": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "bytes": 0
+    },
+    {
+      "path": "map/csv/wp-2024-04-04-19-46-10.csv",
+      "type": "blob",
+      "git_object": "f150134da22fc6de44cbb76c067d7194ce7b2282",
+      "bytes": 632
+    },
+    {
+      "path": "map/csv/wp-2024-04-11-02-12-45.csv",
+      "type": "blob",
+      "git_object": "3158fb84b0fbe4e8092d280b3017013b19d8e7d3",
+      "bytes": 99467
+    },
+    {
+      "path": "map/csv/wp-2024-04-11-02-24-01.csv",
+      "type": "blob",
+      "git_object": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "bytes": 0
+    },
+    {
+      "path": "map/csv/wp-2024-04-11-02-24-56.csv",
+      "type": "blob",
+      "git_object": "52f74e87b82b49a7e0eae8f97da24a2cbc89001c",
+      "bytes": 57054
+    },
+    {
+      "path": "map/csv/wp-2024-04-11-02-36-09.csv",
+      "type": "blob",
+      "git_object": "68fa9bbe0cef9641647e6375733500da11303600",
+      "bytes": 197978
+    },
+    {
+      "path": "map/csv/wp-2024-04-11-02-39-14.csv",
+      "type": "blob",
+      "git_object": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "bytes": 0
+    },
+    {
+      "path": "map/csv/wp-2024-04-11-02-45-13.csv",
+      "type": "blob",
+      "git_object": "1fc9a4d3d012fb6852f88b4a79bce703f550fa71",
+      "bytes": 60620
+    },
+    {
+      "path": "map/csv/wp-2024-04-11-19-02-13.csv",
+      "type": "blob",
+      "git_object": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "bytes": 0
+    },
+    {
+      "path": "map/csv/wp-2024-04-11-19-16-45.csv",
+      "type": "blob",
+      "git_object": "35274bf1eebdd93f52b4423390a67fb6b0df848a",
+      "bytes": 188624
+    },
+    {
+      "path": "map/csv/wp-2024-04-11-19-19-50.csv",
+      "type": "blob",
+      "git_object": "aed50f22117601a1703eff43453eee5b264dec01",
+      "bytes": 117176
+    },
+    {
+      "path": "map/csv/wp-2024-04-11-19-32-53.csv",
+      "type": "blob",
+      "git_object": "920d289d27733b5ff81c9c074920c506049b2f0e",
+      "bytes": 118793
+    },
+    {
+      "path": "powerboardV9/F1TENTH Powerboard V9.0 Data Sheet.docx",
+      "type": "blob",
+      "git_object": "c1d5f049fb7b5ed62a656b001f91cd336862c6e6",
+      "bytes": 1341667
+    },
+    {
+      "path": "powerboardV9/New PDU requirement.docx",
+      "type": "blob",
+      "git_object": "605ef30fa430f0c61114dd5043c150b6049da000",
+      "bytes": 15499
+    },
+    {
+      "path": "powerboardV9/powerboard_v9_altium.zip",
+      "type": "blob",
+      "git_object": "dca63c098194a8371fe055c4410fc8fa71e7559e",
+      "bytes": 1263993
+    },
+    {
+      "path": "powerboardV9/powerboard_v9_designators.pdf",
+      "type": "blob",
+      "git_object": "63b0f61ef864ff8795af2c8f8ec392c195c55d07",
+      "bytes": 125902
+    },
+    {
+      "path": "powerboardV9/powerboard_v9_gerber.zip",
+      "type": "blob",
+      "git_object": "3094982b2c09d8fc67f0d054c304e21710e40176",
+      "bytes": 73976
+    },
+    {
+      "path": "powerboardV9/powerboard_v9_pickandplace.docx",
+      "type": "blob",
+      "git_object": "238dad2d7e1e3de35f4eb19c2d0c2b0c285fc460",
+      "bytes": 17629
+    },
+    {
+      "path": "powerboardV9/powerboard_v9_schematics.pdf",
+      "type": "blob",
+      "git_object": "e6c3f1e1fcada939d1139f25fc6212506f69bd37",
+      "bytes": 311492
+    },
+    {
+      "path": "powerboardV9/v9_BOM.xlsx",
+      "type": "blob",
+      "git_object": "6797fdb956c2d563960a2e447cc37d232b4b97e1",
+      "bytes": 31010
+    },
+    {
+      "path": "refine5.csv",
+      "type": "blob",
+      "git_object": "c2a27dab0c056792e6cc1ae665c1b48e44d5ffc8",
+      "bytes": 13088
+    }
+  ],
+  "total_removed_bytes": 191710483,
+  "retained": [
+    "real_vehicle",
+    "results",
+    "tools",
+    "docs",
+    "Code/sim_ws",
+    "Code/f1tenth_stack"
+  ],
+  "reason": "Current real-vehicle sources have no references to these removed legacy directories. Retain independent risk-aware following benchmark and its documented hardware stack reference."
+}

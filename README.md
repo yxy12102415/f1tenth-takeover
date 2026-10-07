@@ -34,7 +34,8 @@ v8 carries lateral velocity/yaw-rate estimates continuously through the dynamic 
 - [Source/build scope and dependencies](docs/BUILD.md)
 - [Curated real-vehicle source snapshot](real_vehicle/)
 - [Field evidence and English trajectory figures](results/fitzpatrick_v8_20260927/)
-- [Historical Duke documentation](README_LEGACY.md)
+- [Risk-aware following simulation reference](Code/sim_ws/BASELINE_EVALUATION.md)
+- [Historical materials and attribution](docs/HISTORY.md)
 
 ## Offline native checks
 
@@ -50,6 +51,17 @@ These commands build a non-actuating probe and run model tests. They do not laun
 
 ## Repository scope
 
-Current source, map, route, selected results and reproducible offline tests are included. Compiled binaries, build/install caches, raw ROS logs, obsolete YOLO training data and checkpoints are excluded. Original field logs and working vehicle releases remain on the Jetson. Removed historical data can be recovered from the parent commit; Git history has not been rewritten.
+| Directory | Purpose |
+|---|---|
+| `real_vehicle/` | Latest exported physical-vehicle source, configurations, Fitzpatrick map and route |
+| `results/` | Selected successful v8 field evidence and English trajectory figures |
+| `tools/` | Non-actuating native build and model tests |
+| `docs/` | Status, operation, build, provenance and cleanup records |
+| `Code/sim_ws/` | Independent risk-aware following simulation and shadow-mode reference |
+| `Code/f1tenth_stack/` | Hardware stack reference used by the simulation deployment documentation |
 
-The legacy Duke hardware documentation and source remain under their original terms. Acados, BLASFEO and HPIPM notices are preserved in the release `licenses/` directories. No new blanket license is applied to third-party or legacy material.
+The `Code/` reference implementation is separate from the validated v8 Frenet/dynamic-MPC vehicle release. Its simulation/shadow status does not establish physical acceptance.
+
+Compiled binaries, build/install caches and raw ROS logs are excluded. Original field logs and working vehicle releases remain on the Jetson. Obsolete photos/videos, old maps/trajectories, vision/raceline experiments, duplicate workspaces and hardware-design attachments have been removed from the current tree. [HISTORY.md](docs/HISTORY.md) links to the preserved prior revision; Git history has not been rewritten, so historical large objects still contribute to a full clone's size.
+
+Retained source/package notices and acados, BLASFEO and HPIPM notices remain intact. No new blanket license is applied to third-party or legacy material.

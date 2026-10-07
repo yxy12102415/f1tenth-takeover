@@ -1,6 +1,0 @@
-[submodule "Code/f1tenth-ws/src/f1tenth_system"]
-	path = Code/f1tenth-ws/src/f1tenth_system
-	url = https://github.com/f1tenth/f1tenth_system.git
-[submodule "Code/f1tenth-ws/src/range_libc"]
-	path = Code/f1tenth-ws/src/range_libc
-	url = https://github.com/f1tenth/range_libc

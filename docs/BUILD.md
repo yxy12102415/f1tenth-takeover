@@ -26,4 +26,4 @@ Existing installed vehicle operation stays at `~/f1tenth_real_migration_ws_20260
 
 ## Attribution
 
-The existing Duke hardware/software material is preserved with its notices in `README_LEGACY.md`, `Pages/`, `Code/`, and other historical directories. New native modules retain their source/package notices; third-party acados/BLASFEO/HPIPM notices are in each release's `licenses/`. No inference of a new project-wide license should be made.
+Historical Duke materials and their notices remain available in the prior revision linked from [HISTORY.md](HISTORY.md). Retained reference and native modules keep their source/package notices; third-party acados/BLASFEO/HPIPM notices are in each release's `licenses/`. No inference of a new project-wide license should be made.
