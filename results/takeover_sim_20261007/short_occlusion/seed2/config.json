@@ -1,0 +1,1 @@
+{"scenario":"short_occlusion","run_id":"verified_20261007_seed2","seed":2,"duration_s":30.0,"map":"benchmark_takeover","mode":"takeover","lead_scenario":"constant_speed","lead_speed_mps":0.8,"ego_max_speed_mps":1.5,"expected":"safe_recovery","ground_truth_input_to_ego":false}

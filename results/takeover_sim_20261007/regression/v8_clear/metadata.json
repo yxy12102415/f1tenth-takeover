@@ -1,0 +1,9 @@
+{
+  "created_utc": "2026-10-07T04:53:21.640068+00:00",
+  "expected_outcome": "v8_clear_regression",
+  "ground_truth_consumer": "takeover_evaluator only",
+  "map_name": "benchmark_straight",
+  "run_id": "verified_v8_clear_20261007",
+  "scenario": "v8_clear",
+  "seed": 9
+}

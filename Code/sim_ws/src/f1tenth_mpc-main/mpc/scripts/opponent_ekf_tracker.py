@@ -54,6 +54,12 @@ class OpponentEKFTracker(Node):
         self.declare_parameter('target_center_offset', 0.29)
         self.declare_parameter('max_target_speed', 3.0)
         self.declare_parameter('min_forward_x', -0.5)
+        # Disabled by default. These deterministic simulation-only hooks act
+        # on the LiDAR measurement path; they never substitute opponent truth.
+        self.declare_parameter('simulation_seed', 0)
+        self.declare_parameter('simulation_measurement_noise_std', 0.0)
+        self.declare_parameter('simulation_dropout_start_s', -1.0)
+        self.declare_parameter('simulation_dropout_duration_s', 0.0)
 
         measurement_source = self.get_parameter('measurement_source').value
         measurement_topic = self.get_parameter('measurement_topic').value
@@ -152,6 +158,21 @@ class OpponentEKFTracker(Node):
         self.missed_lidar_scans = 0
         self.reacquisition_tracks = []
         self.track_existence_probability = 0.0
+        self.simulation_rng = np.random.default_rng(
+            int(self.get_parameter('simulation_seed').value)
+        )
+        self.simulation_measurement_noise_std = max(
+            0.0,
+            float(self.get_parameter('simulation_measurement_noise_std').value),
+        )
+        self.simulation_dropout_start_s = float(
+            self.get_parameter('simulation_dropout_start_s').value
+        )
+        self.simulation_dropout_duration_s = max(
+            0.0,
+            float(self.get_parameter('simulation_dropout_duration_s').value),
+        )
+        self.simulation_start_stamp = None
 
         q_pos = float(self.get_parameter('process_noise_pos').value)
         q_vel = float(self.get_parameter('process_noise_vel').value)
@@ -192,10 +213,38 @@ class OpponentEKFTracker(Node):
             return
 
         stamp = msg.header.stamp.sec + msg.header.stamp.nanosec * 1e-9
+        if self.simulation_start_stamp is None:
+            self.simulation_start_stamp = stamp
         if self.initialized:
             self.predict_to(stamp)
 
-        detection, diagnostics = self.extract_lidar_target(msg, stamp)
+        elapsed = stamp - self.simulation_start_stamp
+        injected_dropout = (
+            self.simulation_dropout_start_s >= 0.0
+            and self.simulation_dropout_start_s <= elapsed
+            < self.simulation_dropout_start_s + self.simulation_dropout_duration_s
+        )
+        if injected_dropout:
+            detection = None
+            diagnostics = {
+                'miss_reason': 'simulation_injected_dropout',
+                'raw_cluster_count': 0,
+                'candidate_count': 0,
+                'association_error_m': None,
+                'association_gate_m': None,
+                'reacquisition_confirmation_count': 0,
+                'reacquisition_motion_mps': None,
+            }
+        else:
+            detection, diagnostics = self.extract_lidar_target(msg, stamp)
+            if detection is not None and self.simulation_measurement_noise_std > 0.0:
+                noise = self.simulation_rng.normal(
+                    0.0, self.simulation_measurement_noise_std, size=2
+                )
+                detection = (detection[0] + noise[0], detection[1] + noise[1])
+                diagnostics['simulation_noise_std_m'] = (
+                    self.simulation_measurement_noise_std
+                )
         if detection is None:
             self.missed_lidar_scans += 1
             # Gym can publish scans far faster than a physical LiDAR. Keep the

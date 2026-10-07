@@ -1,0 +1,8 @@
+{
+  "created_utc": "2026-10-07T04:19:31.189723+00:00",
+  "ground_truth_consumer": "takeover_evaluator only",
+  "map_name": "benchmark_takeover",
+  "run_id": "acceptance_accel_brake_seed1",
+  "scenario": "accel_brake",
+  "seed": 1
+}

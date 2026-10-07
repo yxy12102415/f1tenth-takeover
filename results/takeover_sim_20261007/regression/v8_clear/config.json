@@ -1,0 +1,1 @@
+{"scenario":"v8_clear","run_id":"verified_v8_clear_20261007","seed":9,"duration_s":12.0,"map":"benchmark_straight","mode":"static_v8","lead_scenario":"constant_speed","lead_speed_mps":0.0,"ego_max_speed_mps":1.5,"expected":"v8_clear_regression","ground_truth_input_to_ego":false}

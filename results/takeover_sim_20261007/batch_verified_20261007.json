@@ -1,0 +1,55 @@
+{
+  "run_prefix": "verified_20261007",
+  "scenarios": {
+    "accel_brake": {
+      "trials": 3,
+      "pass_rate": 1.0,
+      "collision_trials": 0,
+      "boundary_violation_trials": 0,
+      "overtake_success_rate": 1.0,
+      "minimum_body_clearance_m": 0.5073059042040504,
+      "maximum_planning_p95_ms": 0.22537899985763943,
+      "maximum_mpc_p95_ms": 1.736291399538459
+    },
+    "constant_speed": {
+      "trials": 3,
+      "pass_rate": 1.0,
+      "collision_trials": 0,
+      "boundary_violation_trials": 0,
+      "overtake_success_rate": 1.0,
+      "minimum_body_clearance_m": 0.5064967077210487,
+      "maximum_planning_p95_ms": 0.2330338996216593,
+      "maximum_mpc_p95_ms": 1.8076699496305078
+    },
+    "no_space": {
+      "trials": 3,
+      "pass_rate": 1.0,
+      "collision_trials": 0,
+      "boundary_violation_trials": 0,
+      "overtake_success_rate": 0.0,
+      "minimum_body_clearance_m": 0.5041207823541063,
+      "maximum_planning_p95_ms": 0.17067939970729626,
+      "maximum_mpc_p95_ms": 2.0003386005555512
+    },
+    "short_occlusion": {
+      "trials": 3,
+      "pass_rate": 1.0,
+      "collision_trials": 0,
+      "boundary_violation_trials": 0,
+      "overtake_success_rate": 1.0,
+      "minimum_body_clearance_m": 0.5053650847200517,
+      "maximum_planning_p95_ms": 0.2095211002597353,
+      "maximum_mpc_p95_ms": 1.7143923997537058
+    },
+    "stop_go": {
+      "trials": 3,
+      "pass_rate": 1.0,
+      "collision_trials": 0,
+      "boundary_violation_trials": 0,
+      "overtake_success_rate": 1.0,
+      "minimum_body_clearance_m": 0.40563905537786393,
+      "maximum_planning_p95_ms": 0.19332200008648215,
+      "maximum_mpc_p95_ms": 1.8043589998342213
+    }
+  }
+}

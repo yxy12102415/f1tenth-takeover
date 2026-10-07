@@ -1,6 +1,7 @@
 # F1TENTH Takeover
 
-Fixed-route navigation and static-obstacle avoidance on a real F1TENTH vehicle.
+Fixed-route navigation and static-obstacle avoidance on a real F1TENTH vehicle,
+plus a laptop-tested dynamic-obstacle overtaking simulation.
 
 **Latest validated result: Dynamic MPC v8, Fitzpatrick, 2026-09-27.** One complete lap with two static obstacles; the operator reported no contact, minimal oscillation, and a natural stop. This is one successful run, not a repeated-trial reliability claim.
 
@@ -25,7 +26,7 @@ Fixed-route navigation and static-obstacle avoidance on a real F1TENTH vehicle.
 4. **Control:** 20 Hz dynamic MPC jointly optimizes acceleration and steering over 24 steps / 1.2 s, including lateral vehicle dynamics and actuator lag.
 5. **Execute:** independent command supervision, freshness checks and the L1 deadman gate vehicle motion.
 
-v8 carries lateral velocity/yaw-rate estimates continuously through the dynamic model. The predicted lateral-acceleration bound is 1.65 m/s²; curvature speed planning still uses 1.20 m/s². These lateral states are model estimates, not independent IMU measurements. Dynamic-obstacle prediction and overtaking are not implemented here.
+v8 carries lateral velocity/yaw-rate estimates continuously through the dynamic model. The predicted lateral-acceleration bound is 1.65 m/s²; curvature speed planning still uses 1.20 m/s². These lateral states are model estimates, not independent IMU measurements. Dynamic-obstacle prediction and overtaking are implemented in the isolated laptop simulation, but have not been accepted on the physical vehicle.
 
 ## Where to start
 
@@ -35,6 +36,8 @@ v8 carries lateral velocity/yaw-rate estimates continuously through the dynamic 
 - [Curated real-vehicle source snapshot](real_vehicle/)
 - [Field evidence and English trajectory figures](results/fitzpatrick_v8_20260927/)
 - [Risk-aware following simulation reference](Code/sim_ws/BASELINE_EVALUATION.md)
+- [Laptop dynamic-overtaking setup and operation](docs/LAPTOP_TAKEOVER_SIM.md)
+- [Current 15-trial overtaking report](results/takeover_sim_20261007/REPORT.md)
 - [Historical materials and attribution](docs/HISTORY.md)
 
 ## Offline native checks

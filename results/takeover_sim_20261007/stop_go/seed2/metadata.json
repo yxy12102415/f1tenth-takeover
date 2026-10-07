@@ -1,0 +1,9 @@
+{
+  "created_utc": "2026-10-07T04:47:46.399591+00:00",
+  "expected_outcome": "safe_overtake_or_wait",
+  "ground_truth_consumer": "takeover_evaluator only",
+  "map_name": "benchmark_takeover",
+  "run_id": "verified_20261007_seed2",
+  "scenario": "stop_go",
+  "seed": 2
+}

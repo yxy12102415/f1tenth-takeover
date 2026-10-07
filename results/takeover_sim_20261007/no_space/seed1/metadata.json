@@ -1,0 +1,9 @@
+{
+  "created_utc": "2026-10-07T04:50:48.750435+00:00",
+  "expected_outcome": "follow_wait_or_cancel",
+  "ground_truth_consumer": "takeover_evaluator only",
+  "map_name": "benchmark_takeover_obstacle_center",
+  "run_id": "verified_20261007_seed1",
+  "scenario": "no_space",
+  "seed": 1
+}

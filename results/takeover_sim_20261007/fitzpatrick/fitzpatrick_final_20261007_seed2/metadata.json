@@ -1,0 +1,8 @@
+{
+  "created_utc": "2026-10-07T04:34:33.865443+00:00",
+  "ground_truth_consumer": "takeover_evaluator only",
+  "map_name": "Fitzpatrick_sim",
+  "run_id": "fitzpatrick_final_20261007_seed2",
+  "scenario": "fitzpatrick_constant_speed",
+  "seed": 2
+}

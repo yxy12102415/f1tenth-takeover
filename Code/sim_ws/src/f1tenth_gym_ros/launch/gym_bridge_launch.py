@@ -23,6 +23,7 @@
 from launch import LaunchDescription
 from launch_ros.actions import Node
 from launch.actions import DeclareLaunchArgument
+from launch.conditions import IfCondition
 from launch.substitutions import Command, LaunchConfiguration, PathJoinSubstitution
 from launch_ros.parameter_descriptions import ParameterValue
 from ament_index_python.packages import get_package_share_directory
@@ -44,6 +45,7 @@ def generate_launch_description():
         get_package_share_directory('f1tenth_gym_ros'), 'maps', map_name
     ])
     ld.add_action(DeclareLaunchArgument('map_name', default_value='Melbourne_map'))
+    ld.add_action(DeclareLaunchArgument('gui', default_value='true'))
     start_defaults = config_dict['bridge']['ros__parameters']
     for argument, parameter in (
         ('ego_start_x', 'sx'),
@@ -76,6 +78,7 @@ def generate_launch_description():
         executable='rviz2',
         name='rviz',
         arguments=['-d', os.path.join(get_package_share_directory('f1tenth_gym_ros'), 'launch', 'gym_bridge.rviz')],
+        condition=IfCondition(LaunchConfiguration('gui')),
         prefix=(
             'env '
             '-u SNAP -u SNAP_ARCH -u SNAP_COMMON -u SNAP_CONTEXT '

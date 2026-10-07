@@ -1,0 +1,1 @@
+{"scenario":"constant_speed","run_id":"verified_20261007_seed1","seed":1,"duration_s":28.0,"map":"benchmark_takeover","mode":"takeover","lead_scenario":"constant_speed","lead_speed_mps":0.8,"ego_max_speed_mps":1.5,"expected":"overtake","ground_truth_input_to_ego":false}

@@ -64,6 +64,7 @@ install(PROGRAMS
   scripts/ego_mpc_follower.py
   scripts/safety_arbiter.py
   scripts/baseline_evaluator.py
+  scripts/takeover_evaluator.py
   scripts/plot_race_trajectories.py
   scripts/utils.py
   scripts/waypoint_spline.py

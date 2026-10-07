@@ -100,6 +100,15 @@ public:
   ~JointControl(){if(capsule){joint_vehicle_acados_free(capsule);joint_vehicle_acados_free_capsule(capsule);}}
   bool terminal_coasting() const {return coasting;}
   void reset(){floor_reached=coasting=false;command=acceleration=steering=servo=integral=0; initialized=false;continuous_yaw=lateral_estimate=yaw_rate_estimate=0;diag=Json::Value();if(capsule)joint_vehicle_acados_reset(capsule,1);}
+  // Reset only the numerical warm start after an acados QP failure.  Seeding
+  // the longitudinal state from measured speed avoids an artificial zero-speed
+  // command; steering/servo estimates remain the physical actuator state.
+  void cold_retry(double measured) {
+    command=clip(measured,0.,2.0);acceleration=0.;initialized=false;
+    floor_reached=command>=.50;coasting=false;
+    continuous_yaw=lateral_estimate=yaw_rate_estimate=0.;diag=Json::Value();
+    if(capsule)joint_vehicle_acados_reset(capsule,1);
+  }
   Control compute(const Assets&a,const Path&p,Pose pose,double measured,double lateral,double yaw_rate,double remaining,double cap,double dt,Tracker&tracker,const std::vector<Point>&obs) {
     double begin=mono();
     diag=Json::Value();

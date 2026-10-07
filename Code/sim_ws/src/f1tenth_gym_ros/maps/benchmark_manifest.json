@@ -1,5 +1,5 @@
 {
-  "benchmark_version": "1.4",
+  "benchmark_version": "1.5",
   "boundary_thickness_m": 0.1,
   "coordinate_convention": "x right, y up; obstacle lateral offset l>0 is left of travel",
   "files_sha256": {
@@ -40,6 +40,17 @@
     "src/f1tenth_gym_ros/maps/benchmark_straight_visibility_left.yaml": "172aba7f1f4d2a1aef49d21c36bd227d2683b90a3345c5f2eb0191da97d5db1d",
     "src/f1tenth_gym_ros/maps/benchmark_straight_visibility_right.png": "ce0679cd0e02c9ec47ed92b4a30137266cdebe617cf98d3773e226e49cf608c4",
     "src/f1tenth_gym_ros/maps/benchmark_straight_visibility_right.yaml": "2fa0a4f2fe33dccf28f040e321e82b8f7eb9bd231d9f9d3db397601050d31a45",
+    "src/f1tenth_gym_ros/maps/benchmark_takeover.png": "f611e89bad0052c5f8a62fa64081b6edbab980027872a7341ec596a1ed755f97",
+    "src/f1tenth_gym_ros/maps/benchmark_takeover.yaml": "230a3fa48c5302c2087ec8533980bdf3554b93cb779cb95ef6156f2fab1aba77",
+    "src/f1tenth_gym_ros/maps/benchmark_takeover_centerline.csv": "cf34c0e2095b64b8b4512ad7ee7670a03c99c08977db0b77635105113315516d",
+    "src/f1tenth_gym_ros/maps/benchmark_takeover_course.yaml": "e0ed3b4eaea17e6f1f3a0f584c4a1d62cd0c98db3dbcc0e664eb7b08f170d278",
+    "src/f1tenth_gym_ros/maps/benchmark_takeover_obstacle_center.png": "527455f97902887cb044445b45ca0df738ff608558c3c94956602ad279c4ce3e",
+    "src/f1tenth_gym_ros/maps/benchmark_takeover_obstacle_center.yaml": "8b4f46fbd350b57cc18354e1fa05dff66e3314343ff0b9fb418a6dd74ec85d1a",
+    "src/f1tenth_gym_ros/maps/benchmark_takeover_obstacle_left.png": "c1a3083e45e0000c052ef43158f4585e520b9f84cfc55b4d4e3258e6c80de4f1",
+    "src/f1tenth_gym_ros/maps/benchmark_takeover_obstacle_left.yaml": "e82d79b1dddcb7a9a3196352e947592764713d8f50ee91f06c34e6b2c8ef2891",
+    "src/f1tenth_gym_ros/maps/benchmark_takeover_obstacle_right.png": "dadd8edfa65e9aa68f2ac82f3555144ac9c2d33f3a5cf883ff8419adfc2298f8",
+    "src/f1tenth_gym_ros/maps/benchmark_takeover_obstacle_right.yaml": "994418f1aaf31af82e7e66fdebb8dcf2eaccc245608e7cf7db14f7b8a165be87",
+    "src/f1tenth_gym_ros/maps/benchmark_takeover_obstacles.yaml": "9ea3f76a35169c879d31016b37448092d986309681c24023c1e470bf06cc7699",
     "src/f1tenth_mpc-main/mpc/waypoints/benchmark_occlusion_a_mpc.csv": "400ee0ccc5c65a135639353ddbbaa6b1b84e3a51fc45b580aa42cb7344ec7e8a",
     "src/f1tenth_mpc-main/mpc/waypoints/benchmark_occlusion_a_obstacle_center_mpc.csv": "2a1a1f5500deefb92b07c704ce450391d241f510dfe0ce1e7e7225b7df00192b",
     "src/f1tenth_mpc-main/mpc/waypoints/benchmark_occlusion_a_obstacle_left_mpc.csv": "400ee0ccc5c65a135639353ddbbaa6b1b84e3a51fc45b580aa42cb7344ec7e8a",
@@ -53,7 +64,11 @@
     "src/f1tenth_mpc-main/mpc/waypoints/benchmark_straight_obstacle_left_mpc.csv": "10154804f5dfc5fcb022c158e97d01f65d04300ab67004fa6105b55e084fb07f",
     "src/f1tenth_mpc-main/mpc/waypoints/benchmark_straight_obstacle_right_mpc.csv": "10154804f5dfc5fcb022c158e97d01f65d04300ab67004fa6105b55e084fb07f",
     "src/f1tenth_mpc-main/mpc/waypoints/benchmark_straight_visibility_left_mpc.csv": "aaa1f213d286e2f837b912972596c213b6f5cfe716392917a0baa323b2d22fa0",
-    "src/f1tenth_mpc-main/mpc/waypoints/benchmark_straight_visibility_right_mpc.csv": "ca0f5d1e56ad7b4725c033276696de5b1ca7babdce0917221489c7e8fd2caefa"
+    "src/f1tenth_mpc-main/mpc/waypoints/benchmark_straight_visibility_right_mpc.csv": "ca0f5d1e56ad7b4725c033276696de5b1ca7babdce0917221489c7e8fd2caefa",
+    "src/f1tenth_mpc-main/mpc/waypoints/benchmark_takeover_mpc.csv": "014d10df40ae40b9de052f0d45f41b392dc072449a7397329f1966d36e9acf59",
+    "src/f1tenth_mpc-main/mpc/waypoints/benchmark_takeover_obstacle_center_mpc.csv": "56046d58b19cc0dd832eac13295bd73386fe86e3bd955ed1939ae72279d7395d",
+    "src/f1tenth_mpc-main/mpc/waypoints/benchmark_takeover_obstacle_left_mpc.csv": "014d10df40ae40b9de052f0d45f41b392dc072449a7397329f1966d36e9acf59",
+    "src/f1tenth_mpc-main/mpc/waypoints/benchmark_takeover_obstacle_right_mpc.csv": "014d10df40ae40b9de052f0d45f41b392dc072449a7397329f1966d36e9acf59"
   },
   "maps": {
     "benchmark_occlusion_a": {
@@ -391,6 +406,102 @@
         "opponent_station_s_m": 1.75
       },
       "waypoints_file": "benchmark_straight_visibility_right_mpc.csv"
+    },
+    "benchmark_takeover": {
+      "course_id": "benchmark_takeover",
+      "course_spec": "benchmark_takeover_course.yaml",
+      "obstacle_label": null,
+      "obstacle_spec": "benchmark_takeover_obstacles.yaml",
+      "purpose": "dynamic-overtaking benchmark with a 24 m passing straight",
+      "spawn": {
+        "arc_separation_m": 1.5,
+        "center_distance_m": 1.5,
+        "ego": [
+          6.25,
+          3.0,
+          0.0
+        ],
+        "ego_station_s_m": 0.25,
+        "opponent": [
+          7.75,
+          3.0,
+          0.0
+        ],
+        "opponent_station_s_m": 1.75
+      },
+      "waypoints_file": "benchmark_takeover_mpc.csv"
+    },
+    "benchmark_takeover_obstacle_center": {
+      "course_id": "benchmark_takeover",
+      "course_spec": "benchmark_takeover_course.yaml",
+      "obstacle_label": "center",
+      "obstacle_spec": "benchmark_takeover_obstacles.yaml",
+      "purpose": "dynamic-overtaking benchmark with a 24 m passing straight",
+      "spawn": {
+        "arc_separation_m": 1.5,
+        "center_distance_m": 1.5,
+        "ego": [
+          6.25,
+          3.0,
+          0.0
+        ],
+        "ego_station_s_m": 0.25,
+        "opponent": [
+          7.75,
+          3.0,
+          0.0
+        ],
+        "opponent_station_s_m": 1.75
+      },
+      "waypoints_file": "benchmark_takeover_obstacle_center_mpc.csv"
+    },
+    "benchmark_takeover_obstacle_left": {
+      "course_id": "benchmark_takeover",
+      "course_spec": "benchmark_takeover_course.yaml",
+      "obstacle_label": "left",
+      "obstacle_spec": "benchmark_takeover_obstacles.yaml",
+      "purpose": "dynamic-overtaking benchmark with a 24 m passing straight",
+      "spawn": {
+        "arc_separation_m": 1.5,
+        "center_distance_m": 1.5,
+        "ego": [
+          6.25,
+          3.0,
+          0.0
+        ],
+        "ego_station_s_m": 0.25,
+        "opponent": [
+          7.75,
+          3.0,
+          0.0
+        ],
+        "opponent_station_s_m": 1.75
+      },
+      "waypoints_file": "benchmark_takeover_obstacle_left_mpc.csv"
+    },
+    "benchmark_takeover_obstacle_right": {
+      "course_id": "benchmark_takeover",
+      "course_spec": "benchmark_takeover_course.yaml",
+      "obstacle_label": "right",
+      "obstacle_spec": "benchmark_takeover_obstacles.yaml",
+      "purpose": "dynamic-overtaking benchmark with a 24 m passing straight",
+      "spawn": {
+        "arc_separation_m": 1.5,
+        "center_distance_m": 1.5,
+        "ego": [
+          6.25,
+          3.0,
+          0.0
+        ],
+        "ego_station_s_m": 0.25,
+        "opponent": [
+          7.75,
+          3.0,
+          0.0
+        ],
+        "opponent_station_s_m": 1.75
+      },
+      "waypoints_file": "benchmark_takeover_obstacle_right_mpc.csv"
     }
   },
   "online_map_policy": "evaluation/environment only; never an ego planning input",

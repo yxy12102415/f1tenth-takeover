@@ -1,0 +1,1 @@
+{"scenario":"fitzpatrick_constant_speed","run_id":"fitzpatrick_straight_20261007_seed1","seed":1,"duration_s":12,"map":"Fitzpatrick_sim","mode":"takeover","lead_scenario":"constant_speed","lead_speed_mps":0.8,"ego_max_speed_mps":2.0,"expected":"fitzpatrick_long_straight_overtake","ground_truth_input_to_ego":false}

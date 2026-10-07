@@ -21,7 +21,7 @@ MAPS = ROOT / "src" / "f1tenth_gym_ros" / "maps"
 WAYPOINTS = ROOT / "src" / "f1tenth_mpc-main" / "mpc" / "waypoints"
 MANIFEST = MAPS / "benchmark_manifest.json"
 
-VERSION = "1.4"
+VERSION = "1.5"
 RESOLUTION_M = 0.025
 TRACK_WIDTH_M = 2.20
 BOUNDARY_THICKNESS_M = 0.10
@@ -96,6 +96,18 @@ def rounded_rectangle_centerline(xmin, ymin, xmax, ymax, radius):
 def stadium_centerline():
     """Return a long calibration stadium with gentle 4 m-radius turns."""
     left_x, right_x = 6.0, 18.0
+    center_y, radius = 7.0, 4.0
+    return (
+        line_points((left_x, center_y - radius), (right_x, center_y - radius))
+        + arc_points((right_x, center_y), radius, -math.pi / 2.0, math.pi / 2.0)
+        + line_points((right_x, center_y + radius), (left_x, center_y + radius))
+        + arc_points((left_x, center_y), radius, math.pi / 2.0, 3.0 * math.pi / 2.0)
+    )
+
+
+def takeover_stadium_centerline():
+    """Long stadium whose 24 m straight contains a complete pass and rejoin."""
+    left_x, right_x = 6.0, 30.0
     center_y, radius = 7.0, 4.0
     return (
         line_points((left_x, center_y - radius), (right_x, center_y - radius))
@@ -363,6 +375,24 @@ def sha256(path):
 
 def build_courses():
     return [
+        {
+            "course_id": "benchmark_takeover",
+            "purpose": "dynamic-overtaking benchmark with a 24 m passing straight",
+            "size_m": [36.0, 14.0],
+            "geometry": {
+                "type": "stadium",
+                "straight_length_m": 24.0,
+                "turn_radius_m": 4.0,
+            },
+            "raw_points": takeover_stadium_centerline(),
+            "obstacle_station_m": 15.0,
+            "zones": {
+                "warmup": [0.0, 5.0],
+                "approach": [5.0, 9.0],
+                "passing": [9.0, 18.0],
+                "rejoin": [18.0, 22.0],
+            },
+        },
         {
             "course_id": "benchmark_straight",
             "purpose": "calibration and nominal following on two long straight sections",

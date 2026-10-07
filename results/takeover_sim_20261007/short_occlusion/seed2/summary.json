@@ -1,0 +1,62 @@
+{
+  "acceptance": {
+    "boundary_safe": true,
+    "collision_free": true,
+    "expected_behavior_satisfied": true,
+    "expected_outcome": "safe_recovery"
+  },
+  "control": {
+    "maximum_abs_acceleration_command_mps2": 23.876117843255624,
+    "maximum_abs_steering_rate_radps": 2.425506679025579,
+    "route_lateral_rmse_m": 0.47099353846569764
+  },
+  "duration_s": 30.270972505000003,
+  "ground_truth_policy": "Opponent ground truth is consumed only by takeover_evaluator for scoring.",
+  "overtaking": {
+    "behavior_sample_counts": {
+      "CANCEL": 4,
+      "CRUISE": 302,
+      "OVERTAKE": 235,
+      "PREPARE_OVERTAKE": 13,
+      "REJOIN": 33
+    },
+    "completed": 1,
+    "first_completion_time_s": 15.007302053
+  },
+  "passed": true,
+  "run_id": "verified_20261007_seed2",
+  "runtime": {
+    "controller_failures": 0,
+    "controller_rejection_reasons": {},
+    "infeasible_count": 0,
+    "mpc_mean_ms": 1.2237889386262013,
+    "mpc_p95_ms": 1.7143923997537058,
+    "planner_failures": 4,
+    "planning_mean_ms": 0.12408815334018095,
+    "planning_p95_ms": 0.19499799964250997,
+    "rejected_track_jumps": 641,
+    "solver_recoveries": 0,
+    "solver_timeouts": 0
+  },
+  "safety": {
+    "boundary_violation_events": 0,
+    "collision_events": 0,
+    "minimum_body_clearance_m": 0.5053650847200517
+  },
+  "samples": 587,
+  "scenario": "short_occlusion",
+  "seed": 2,
+  "tracking": {
+    "loss_count": 1,
+    "position_rmse_m": 5.365331985701669,
+    "reacquisition_times_s": [
+      14.388903065000001
+    ],
+    "tracker_mode_sample_counts": {
+      "COASTING": 89,
+      "LOST": 288,
+      "TRACKED": 210
+    },
+    "velocity_rmse_mps": 0.5610559797727039
+  }
+}

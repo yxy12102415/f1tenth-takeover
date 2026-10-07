@@ -2,6 +2,7 @@ Code/sim_ws/build/
 Code/sim_ws/install/
 Code/sim_ws/log/
 Code/sim_ws/results/
+Code/sim_ws/takeover_assets/
 Code/sim_ws/external/
 Code/sim_ws/MUJOCO_LOG.TXT
 Code/sim_ws/mjmodel.mjb
@@ -9,6 +10,7 @@ Code/sim_ws/mjmodel.xml
 build/
 install/
 log/
+.deps/
 
 # Generated artifacts and machine-local files
 __pycache__/

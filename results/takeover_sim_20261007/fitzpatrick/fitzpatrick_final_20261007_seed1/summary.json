@@ -1,0 +1,67 @@
+{
+  "acceptance": {
+    "boundary_safe": true,
+    "collision_free": true,
+    "required_overtake_complete": true
+  },
+  "control": {
+    "maximum_abs_acceleration_command_mps2": 39.999374613366186,
+    "maximum_abs_steering_rate_radps": 1.79027474252006,
+    "route_lateral_rmse_m": 0.42019136663681306
+  },
+  "duration_s": 25.25451418,
+  "ground_truth_policy": "Opponent ground truth is consumed only by takeover_evaluator for scoring.",
+  "overtaking": {
+    "behavior_sample_counts": {
+      "CANCEL": 4,
+      "CRUISE": 271,
+      "OVERTAKE": 175,
+      "PREPARE_OVERTAKE": 9,
+      "REJOIN": 29
+    },
+    "completed": 1,
+    "first_completion_time_s": 11.580312426
+  },
+  "passed": true,
+  "run_id": "fitzpatrick_final_20261007_seed1",
+  "runtime": {
+    "controller_failures": 1,
+    "controller_rejection_reasons": {
+      "joint_mpc_solver_4": 1
+    },
+    "infeasible_count": 1,
+    "mpc_mean_ms": 1.2642475611773067,
+    "mpc_p95_ms": 1.7807665499731224,
+    "planner_failures": 3,
+    "planning_mean_ms": 0.13128837704206503,
+    "planning_p95_ms": 0.19080799984294572,
+    "rejected_track_jumps": 2972,
+    "solver_recoveries": 1,
+    "solver_timeouts": 0
+  },
+  "safety": {
+    "boundary_violation_events": 0,
+    "collision_events": 0,
+    "minimum_body_clearance_m": 0.38525275129308845
+  },
+  "samples": 488,
+  "scenario": "fitzpatrick_constant_speed",
+  "seed": 1,
+  "tracking": {
+    "loss_count": 5,
+    "position_rmse_m": 7.791733606040191,
+    "reacquisition_times_s": [
+      0.3016976489999994,
+      0.29256005399999907,
+      0.29990139200000243,
+      0.33398789800000017,
+      0.31093155699999997
+    ],
+    "tracker_mode_sample_counts": {
+      "COASTING": 155,
+      "LOST": 31,
+      "TRACKED": 302
+    },
+    "velocity_rmse_mps": 1.3805200078628945
+  }
+}
