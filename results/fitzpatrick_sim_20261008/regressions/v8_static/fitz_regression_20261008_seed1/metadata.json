@@ -1,0 +1,10 @@
+{
+  "created_utc": "2026-10-07T16:39:37.944250+00:00",
+  "expected_outcome": "v8_static_avoidance_regression",
+  "ground_truth_consumer": "takeover_evaluator only",
+  "map_name": "benchmark_straight_obstacle_center",
+  "require_lead": true,
+  "run_id": "fitz_regression_20261008_seed1",
+  "scenario": "v8_static",
+  "seed": 1
+}

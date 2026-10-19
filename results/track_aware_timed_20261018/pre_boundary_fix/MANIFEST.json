@@ -1,0 +1,608 @@
+{
+  "run_prefix": "timed_verified_20261018",
+  "run_count": 12,
+  "source_root": "/data/projects/F1-Tenth-Duke/f1tenth-takeover/Code/sim_ws/results/takeover",
+  "note": "All matching runs included, irrespective of outcome. CSV gzip is lossless. ROS subdirectory logs remain at source.",
+  "files": [
+    {
+      "path": "fitzpatrick_1p5/timed_verified_20261018_seed1/build.log",
+      "sha256": "af37f81bfb6354729d1ebf780d5b3048183f5cd1f553a0a421a5665fe955015e",
+      "bytes": 605
+    },
+    {
+      "path": "fitzpatrick_1p5/timed_verified_20261018_seed1/config.json",
+      "sha256": "6671dd69fb06ae44803e5fcd53b4ea6a713090f66dab9c20a62f67d70b6afd7b",
+      "bytes": 722
+    },
+    {
+      "path": "fitzpatrick_1p5/timed_verified_20261018_seed1/launch.log",
+      "sha256": "f9abd0d42340111c28115d339aec4b2537c6e53fae86d410939b4cd3fa5c8cb8",
+      "bytes": 20564
+    },
+    {
+      "path": "fitzpatrick_1p5/timed_verified_20261018_seed1/metadata.json",
+      "sha256": "71cc7ff83cd898e38689348c701d89177189dac33447e973a4e5d96f99f68552",
+      "bytes": 291
+    },
+    {
+      "path": "fitzpatrick_1p5/timed_verified_20261018_seed1/prediction_en.png",
+      "sha256": "dadba72161947f87a6c1532fe2c0c5ed7bedbc324320df7db14a14dd9e3f7c51",
+      "bytes": 66832
+    },
+    {
+      "path": "fitzpatrick_1p5/timed_verified_20261018_seed1/predictions.csv.gz",
+      "sha256": "3389bb64ecbda8ad81e45151120c0446432441762e046f5615b191bf04496fb9",
+      "bytes": 1483445
+    },
+    {
+      "path": "fitzpatrick_1p5/timed_verified_20261018_seed1/source.patch",
+      "sha256": "98d3a8b2fde69b757bc29dd60272d38eeb2b439fe09eae9a9f74cba9e6d90523",
+      "bytes": 89050
+    },
+    {
+      "path": "fitzpatrick_1p5/timed_verified_20261018_seed1/summary.json",
+      "sha256": "9c5944548b0cfff148a2a3a1fb9fc11b998a031cde61cfd9e308350f72004cbe",
+      "bytes": 2131
+    },
+    {
+      "path": "fitzpatrick_1p5/timed_verified_20261018_seed1/trajectory.csv.gz",
+      "sha256": "9dbe7883697256804786b996b5f875480d2ab407876cb04561132e5b30d4d54b",
+      "bytes": 167767
+    },
+    {
+      "path": "fitzpatrick_1p5/timed_verified_20261018_seed1/trajectory_en.png",
+      "sha256": "d458721d6d1fd506cad3b427aefe094ddf96647e4f126c15ee85d7969001f870",
+      "bytes": 97676
+    },
+    {
+      "path": "fitzpatrick_1p5/timed_verified_20261018_seed2/build.log",
+      "sha256": "bebceaeae228f0843f076f68ec187b3a5a01b6c7850ba29a0f066e70cd01ea64",
+      "bytes": 605
+    },
+    {
+      "path": "fitzpatrick_1p5/timed_verified_20261018_seed2/config.json",
+      "sha256": "f14f66795f9177bff19fb1b2f87afb8babab4f22d886486597df04dd2854a003",
+      "bytes": 722
+    },
+    {
+      "path": "fitzpatrick_1p5/timed_verified_20261018_seed2/launch.log",
+      "sha256": "66afe0d62419b8adb7a9accfa597e2f6c6597f82e65f9929af679d473b8ce8c7",
+      "bytes": 20564
+    },
+    {
+      "path": "fitzpatrick_1p5/timed_verified_20261018_seed2/metadata.json",
+      "sha256": "e135089fc092602391354f4d1479d2c7af272a94ef0c62f0f69c1e12c3c1f48f",
+      "bytes": 291
+    },
+    {
+      "path": "fitzpatrick_1p5/timed_verified_20261018_seed2/prediction_en.png",
+      "sha256": "8bf8aff98de0fce1a8a98f131d3723761f1c6e5acdac4f688765b88c36926b32",
+      "bytes": 66877
+    },
+    {
+      "path": "fitzpatrick_1p5/timed_verified_20261018_seed2/predictions.csv.gz",
+      "sha256": "aba8ec8f2fc5e825336745596f5864f9ab70a0fe5cafebb984bf2530fd609f7e",
+      "bytes": 1492543
+    },
+    {
+      "path": "fitzpatrick_1p5/timed_verified_20261018_seed2/source.patch",
+      "sha256": "98d3a8b2fde69b757bc29dd60272d38eeb2b439fe09eae9a9f74cba9e6d90523",
+      "bytes": 89050
+    },
+    {
+      "path": "fitzpatrick_1p5/timed_verified_20261018_seed2/summary.json",
+      "sha256": "df9213055e64cedbf5dc97f85a791e0007ab7d3c929ce4489c687931cef54e4c",
+      "bytes": 2102
+    },
+    {
+      "path": "fitzpatrick_1p5/timed_verified_20261018_seed2/trajectory.csv.gz",
+      "sha256": "c3b65bad444f42a642e0cd4c2b8d448e2ad21c3c90b03aa945eeff8015730650",
+      "bytes": 168496
+    },
+    {
+      "path": "fitzpatrick_1p5/timed_verified_20261018_seed2/trajectory_en.png",
+      "sha256": "443b344c640191e629cfc10bb93e252287a623dce0422ba140cc8e300b932366",
+      "bytes": 98162
+    },
+    {
+      "path": "fitzpatrick_1p5/timed_verified_20261018_seed3/build.log",
+      "sha256": "b501e017018cc5f452d43f0b3320aab48bad4c3c3070dae7c39a9a3184cde103",
+      "bytes": 605
+    },
+    {
+      "path": "fitzpatrick_1p5/timed_verified_20261018_seed3/config.json",
+      "sha256": "8849d21c290bc0fa89d8a138ef65c14aae2053f99a495a2fc48ec2c0b0223d3c",
+      "bytes": 722
+    },
+    {
+      "path": "fitzpatrick_1p5/timed_verified_20261018_seed3/launch.log",
+      "sha256": "d31f9cd929f86851b1de4713072ecb19cb1727f65b25036f7a11ebe8c95b2e17",
+      "bytes": 22453
+    },
+    {
+      "path": "fitzpatrick_1p5/timed_verified_20261018_seed3/metadata.json",
+      "sha256": "d12949106e8162abc56cefc94fed508de4de5801ef3dcab1a10700880a6fe300",
+      "bytes": 291
+    },
+    {
+      "path": "fitzpatrick_1p5/timed_verified_20261018_seed3/prediction_en.png",
+      "sha256": "9bd2166a4b18ae9b07f3e66392d27013e810766b93d606ed2341c4593d18f91e",
+      "bytes": 66867
+    },
+    {
+      "path": "fitzpatrick_1p5/timed_verified_20261018_seed3/predictions.csv.gz",
+      "sha256": "d18a94bf5e4abe754f6c608e2ad5c172df279e642afa496a3230ddf0f2d5dba4",
+      "bytes": 1482403
+    },
+    {
+      "path": "fitzpatrick_1p5/timed_verified_20261018_seed3/source.patch",
+      "sha256": "98d3a8b2fde69b757bc29dd60272d38eeb2b439fe09eae9a9f74cba9e6d90523",
+      "bytes": 89050
+    },
+    {
+      "path": "fitzpatrick_1p5/timed_verified_20261018_seed3/summary.json",
+      "sha256": "78d2d174bc5ef071ff4db99fad8c1b32575cb15958c34ea5a176eedc1f2879d4",
+      "bytes": 2103
+    },
+    {
+      "path": "fitzpatrick_1p5/timed_verified_20261018_seed3/trajectory.csv.gz",
+      "sha256": "7180e2539b79c5c53cf15b7b780f2f094d94ff630d7d0649dffc5adcb3d81873",
+      "bytes": 168696
+    },
+    {
+      "path": "fitzpatrick_1p5/timed_verified_20261018_seed3/trajectory_en.png",
+      "sha256": "94804f2d286af1302b39a76e1823769bf2fc15d493c4087d2fd72b23b9e19f6f",
+      "bytes": 98344
+    },
+    {
+      "path": "fitzpatrick_clear/timed_verified_20261018_seed1/build.log",
+      "sha256": "16a0453a822626b7e5d07c5f6d144a7087406c38955e4b42f575e3cc363c985f",
+      "bytes": 605
+    },
+    {
+      "path": "fitzpatrick_clear/timed_verified_20261018_seed1/config.json",
+      "sha256": "daadb461c6ace645d96984e7227542e88ebf69f6403e3a66f57d6ee964b4c2ee",
+      "bytes": 729
+    },
+    {
+      "path": "fitzpatrick_clear/timed_verified_20261018_seed1/launch.log",
+      "sha256": "f772f85f11ef2a4b306c4aeaacd2697cf37acea2df44d4f2241f70ff33e5779d",
+      "bytes": 20153
+    },
+    {
+      "path": "fitzpatrick_clear/timed_verified_20261018_seed1/metadata.json",
+      "sha256": "0b6234da94df10d8f249d407b2aa78027386d1550c144ff404094365466ed698",
+      "bytes": 298
+    },
+    {
+      "path": "fitzpatrick_clear/timed_verified_20261018_seed1/prediction_en.png",
+      "sha256": "207aa371a2eeada0ff3ab2ebb15461a7e78e0f96e51521ba676d310cd063e254",
+      "bytes": 60792
+    },
+    {
+      "path": "fitzpatrick_clear/timed_verified_20261018_seed1/predictions.csv.gz",
+      "sha256": "6a7c74f5f6700ccd7fd2a41b1becc99130768cc85ef9d317a9854e4cbc962ecd",
+      "bytes": 677798
+    },
+    {
+      "path": "fitzpatrick_clear/timed_verified_20261018_seed1/source.patch",
+      "sha256": "98d3a8b2fde69b757bc29dd60272d38eeb2b439fe09eae9a9f74cba9e6d90523",
+      "bytes": 89050
+    },
+    {
+      "path": "fitzpatrick_clear/timed_verified_20261018_seed1/summary.json",
+      "sha256": "eaab93dbeca2d47697ccb86630aab4e46e3bea8aee1667dc393e5fdd69b2ace4",
+      "bytes": 1842
+    },
+    {
+      "path": "fitzpatrick_clear/timed_verified_20261018_seed1/trajectory.csv.gz",
+      "sha256": "5c0e8ad94a75c78012c0a21a7229962ee2ea145478075032a08198cd87c0d350",
+      "bytes": 68743
+    },
+    {
+      "path": "fitzpatrick_clear/timed_verified_20261018_seed1/trajectory_en.png",
+      "sha256": "b54afbb06847d45e03fedc0411764c1c698cb8ab71cfcaaa3f727c3cc819e992",
+      "bytes": 70479
+    },
+    {
+      "path": "fitzpatrick_clear/timed_verified_20261018_seed2/build.log",
+      "sha256": "59f81f234b010cac5de21e096878bbda94b5792f26d56a5359ebbfb596399062",
+      "bytes": 605
+    },
+    {
+      "path": "fitzpatrick_clear/timed_verified_20261018_seed2/config.json",
+      "sha256": "fd6bb067a3d1aae1d1fc5e366f927f5b196348f4c866e1de12c4d79ca9d49ea4",
+      "bytes": 729
+    },
+    {
+      "path": "fitzpatrick_clear/timed_verified_20261018_seed2/launch.log",
+      "sha256": "46f7098def066e57086d6ae5624f7cea6449ed53bd133eaa7b74f39ab42c1b69",
+      "bytes": 22026
+    },
+    {
+      "path": "fitzpatrick_clear/timed_verified_20261018_seed2/metadata.json",
+      "sha256": "50d36a31b79698fc8fac5b37da12807670aa01a5b2c35189ddfc3df89f4d8d58",
+      "bytes": 298
+    },
+    {
+      "path": "fitzpatrick_clear/timed_verified_20261018_seed2/prediction_en.png",
+      "sha256": "207aa371a2eeada0ff3ab2ebb15461a7e78e0f96e51521ba676d310cd063e254",
+      "bytes": 60792
+    },
+    {
+      "path": "fitzpatrick_clear/timed_verified_20261018_seed2/predictions.csv.gz",
+      "sha256": "287425abb36bf4c84d457c540fe3367171695baf1829f4886d7d553a693ef25d",
+      "bytes": 677391
+    },
+    {
+      "path": "fitzpatrick_clear/timed_verified_20261018_seed2/source.patch",
+      "sha256": "98d3a8b2fde69b757bc29dd60272d38eeb2b439fe09eae9a9f74cba9e6d90523",
+      "bytes": 89050
+    },
+    {
+      "path": "fitzpatrick_clear/timed_verified_20261018_seed2/summary.json",
+      "sha256": "5539c22cec11c184ea2ca461d69db646b498f3b2c686fefa0d6205df24ced512",
+      "bytes": 1864
+    },
+    {
+      "path": "fitzpatrick_clear/timed_verified_20261018_seed2/trajectory.csv.gz",
+      "sha256": "57037038b797f6187ac3d647a1da7d7294bb339aca2678af22de82f95c874931",
+      "bytes": 68895
+    },
+    {
+      "path": "fitzpatrick_clear/timed_verified_20261018_seed2/trajectory_en.png",
+      "sha256": "b8f567baf69c812ea0f0b3cb12f5facf6d82e3fc54de588612208e1d6e3c0e0a",
+      "bytes": 70520
+    },
+    {
+      "path": "fitzpatrick_clear/timed_verified_20261018_seed3/build.log",
+      "sha256": "e5d420942e3d686ab9c6f2d70851ccc9295c9b9fce7386710e6f574cbf2f9bfe",
+      "bytes": 605
+    },
+    {
+      "path": "fitzpatrick_clear/timed_verified_20261018_seed3/config.json",
+      "sha256": "3c2f6c684943bfd08bd6134aa15806e7bb2986ef24cf1994a83397119a8a97d1",
+      "bytes": 729
+    },
+    {
+      "path": "fitzpatrick_clear/timed_verified_20261018_seed3/launch.log",
+      "sha256": "f433dc78dc4ac7386e790c65c5e478bf943af07b846a666233b04d6b8e67c140",
+      "bytes": 20153
+    },
+    {
+      "path": "fitzpatrick_clear/timed_verified_20261018_seed3/metadata.json",
+      "sha256": "d870087690eb1e61bb17b6c392b2e9c0c6c82a231139ddc61054f30308d8e432",
+      "bytes": 298
+    },
+    {
+      "path": "fitzpatrick_clear/timed_verified_20261018_seed3/prediction_en.png",
+      "sha256": "207aa371a2eeada0ff3ab2ebb15461a7e78e0f96e51521ba676d310cd063e254",
+      "bytes": 60792
+    },
+    {
+      "path": "fitzpatrick_clear/timed_verified_20261018_seed3/predictions.csv.gz",
+      "sha256": "92068dc1aaa4c32221a579c0294957c77630d2ea02f454c45a94a6f10117095b",
+      "bytes": 683583
+    },
+    {
+      "path": "fitzpatrick_clear/timed_verified_20261018_seed3/source.patch",
+      "sha256": "98d3a8b2fde69b757bc29dd60272d38eeb2b439fe09eae9a9f74cba9e6d90523",
+      "bytes": 89050
+    },
+    {
+      "path": "fitzpatrick_clear/timed_verified_20261018_seed3/summary.json",
+      "sha256": "44e992ae2441c41f980e9e2fc7d30e53c6668301e260d62dc35cb97df1817837",
+      "bytes": 1839
+    },
+    {
+      "path": "fitzpatrick_clear/timed_verified_20261018_seed3/trajectory.csv.gz",
+      "sha256": "142961510ef158f756a9d14f8a9016fd6421ef6587babedf3c965a120f136b49",
+      "bytes": 69351
+    },
+    {
+      "path": "fitzpatrick_clear/timed_verified_20261018_seed3/trajectory_en.png",
+      "sha256": "2b0cb8b5146f6578c372d498ade745a4d0b403d5f467ffd0909781423d49631d",
+      "bytes": 70601
+    },
+    {
+      "path": "fitzpatrick_constant_speed/timed_verified_20261018_seed1/build.log",
+      "sha256": "2e00840fed8b64f6a723fb3b1c34e10ca97dcbd5f9b9b334174e199cd8924772",
+      "bytes": 605
+    },
+    {
+      "path": "fitzpatrick_constant_speed/timed_verified_20261018_seed1/config.json",
+      "sha256": "5ab983c681d65e902801b019fbe9bfc451fe1e25a4e23802f556ce98f8b962e6",
+      "bytes": 733
+    },
+    {
+      "path": "fitzpatrick_constant_speed/timed_verified_20261018_seed1/launch.log",
+      "sha256": "c7323fd4bccbbb926f58a6524d794b6f9fe740c8590bb110d14b162079e8104d",
+      "bytes": 20586
+    },
+    {
+      "path": "fitzpatrick_constant_speed/timed_verified_20261018_seed1/metadata.json",
+      "sha256": "07281ba4f9da0b9bd2d799e125e8a301f63455aecce9b5fc6dd3dfcd71a82e80",
+      "bytes": 302
+    },
+    {
+      "path": "fitzpatrick_constant_speed/timed_verified_20261018_seed1/prediction_en.png",
+      "sha256": "7a42bc0dd18de230bfe79d8664256c0747feab87cfe073a1b4bc4f8279766167",
+      "bytes": 66884
+    },
+    {
+      "path": "fitzpatrick_constant_speed/timed_verified_20261018_seed1/predictions.csv.gz",
+      "sha256": "cd4807ede532f1820c8ff995ffdcb8029f92f7ab4bc743ffb892de021c2d5008",
+      "bytes": 1498608
+    },
+    {
+      "path": "fitzpatrick_constant_speed/timed_verified_20261018_seed1/source.patch",
+      "sha256": "98d3a8b2fde69b757bc29dd60272d38eeb2b439fe09eae9a9f74cba9e6d90523",
+      "bytes": 89050
+    },
+    {
+      "path": "fitzpatrick_constant_speed/timed_verified_20261018_seed1/summary.json",
+      "sha256": "c2aa15364428dba11e374ccfa1e1c5a622058776a0b2ed07f4b85a3e27210065",
+      "bytes": 2123
+    },
+    {
+      "path": "fitzpatrick_constant_speed/timed_verified_20261018_seed1/trajectory.csv.gz",
+      "sha256": "dfd33d766848bba5a3ec1a4ddf549ba316e07fccb3cb30f40c40591321eccda2",
+      "bytes": 173815
+    },
+    {
+      "path": "fitzpatrick_constant_speed/timed_verified_20261018_seed1/trajectory_en.png",
+      "sha256": "03b01ed416558393cfa8a42818b387b0562bcad61531c227805fa96a2ac11f76",
+      "bytes": 94792
+    },
+    {
+      "path": "fitzpatrick_constant_speed/timed_verified_20261018_seed2/build.log",
+      "sha256": "c0739b9673718ddca3cf7434af9b7bc251f677bf0f0f5980fcb1799d1eb92bb5",
+      "bytes": 605
+    },
+    {
+      "path": "fitzpatrick_constant_speed/timed_verified_20261018_seed2/config.json",
+      "sha256": "4c8ebc5394c33db621d28ddbebeb6373f8fce6f186e7185d982902234b540d1f",
+      "bytes": 733
+    },
+    {
+      "path": "fitzpatrick_constant_speed/timed_verified_20261018_seed2/launch.log",
+      "sha256": "4ed2d3ce1e65846cdcaa7d9a5ec5e4848010e7d8836c10b8e21f6ae86563c5f9",
+      "bytes": 20586
+    },
+    {
+      "path": "fitzpatrick_constant_speed/timed_verified_20261018_seed2/metadata.json",
+      "sha256": "465aaceff3a77eda9e0859453c6554478e041d0be7a1870b0cb3d6ab6f063a38",
+      "bytes": 302
+    },
+    {
+      "path": "fitzpatrick_constant_speed/timed_verified_20261018_seed2/prediction_en.png",
+      "sha256": "0cbc9b5736ae5ad81ee70c5092e5623c7a83b863d32648cc2436dfcccce3c977",
+      "bytes": 66887
+    },
+    {
+      "path": "fitzpatrick_constant_speed/timed_verified_20261018_seed2/predictions.csv.gz",
+      "sha256": "5a3cef0f857313c831177996dbb823133140fdf590f1db50e3df78d801b1cc90",
+      "bytes": 1516332
+    },
+    {
+      "path": "fitzpatrick_constant_speed/timed_verified_20261018_seed2/source.patch",
+      "sha256": "98d3a8b2fde69b757bc29dd60272d38eeb2b439fe09eae9a9f74cba9e6d90523",
+      "bytes": 89050
+    },
+    {
+      "path": "fitzpatrick_constant_speed/timed_verified_20261018_seed2/summary.json",
+      "sha256": "3685f4228d4ef9bf12ef8e1943559b35ecccba449fe0673440257ccc07189355",
+      "bytes": 2107
+    },
+    {
+      "path": "fitzpatrick_constant_speed/timed_verified_20261018_seed2/trajectory.csv.gz",
+      "sha256": "fe56fdb38926f549deae750c2729539aa3e59bc351ff0a0e9189c6cfe9d5c64d",
+      "bytes": 173552
+    },
+    {
+      "path": "fitzpatrick_constant_speed/timed_verified_20261018_seed2/trajectory_en.png",
+      "sha256": "cee033b385ab4ceb78e2d009039ff00cea95ac519132ccf0efced6e75ef099a2",
+      "bytes": 95498
+    },
+    {
+      "path": "fitzpatrick_constant_speed/timed_verified_20261018_seed3/build.log",
+      "sha256": "0437036cb0ba56a5cba0af7da07e8777c7eb17bf3da32b6b4986f5e2898d4328",
+      "bytes": 605
+    },
+    {
+      "path": "fitzpatrick_constant_speed/timed_verified_20261018_seed3/config.json",
+      "sha256": "13e4c2d29a8da01c6821365aeb93580286b0ee82bb3d44b0072561e0af608bef",
+      "bytes": 733
+    },
+    {
+      "path": "fitzpatrick_constant_speed/timed_verified_20261018_seed3/launch.log",
+      "sha256": "3bd8466e73214ffc0cb3e845ed33831d09cbd64c58a9ec98974acf75f5af0c48",
+      "bytes": 22475
+    },
+    {
+      "path": "fitzpatrick_constant_speed/timed_verified_20261018_seed3/metadata.json",
+      "sha256": "3cd3f49d22fadd16c96028dd0c967d6c8149c5066d018edafef0c37a36866409",
+      "bytes": 302
+    },
+    {
+      "path": "fitzpatrick_constant_speed/timed_verified_20261018_seed3/prediction_en.png",
+      "sha256": "ba81d6b46b68008a91177437e071286a87cda8b02b72e1dad1c81cdffefda410",
+      "bytes": 66918
+    },
+    {
+      "path": "fitzpatrick_constant_speed/timed_verified_20261018_seed3/predictions.csv.gz",
+      "sha256": "5f315747ce4bfdfb8d234e623027f89c84f969086b40c6fbaf7f5118cb0e3232",
+      "bytes": 1518266
+    },
+    {
+      "path": "fitzpatrick_constant_speed/timed_verified_20261018_seed3/source.patch",
+      "sha256": "98d3a8b2fde69b757bc29dd60272d38eeb2b439fe09eae9a9f74cba9e6d90523",
+      "bytes": 89050
+    },
+    {
+      "path": "fitzpatrick_constant_speed/timed_verified_20261018_seed3/summary.json",
+      "sha256": "fff61fb2bdefdd5e41f7fa0df0e878df0501eb05c8fdd488b4ffdf19fd96d27b",
+      "bytes": 2114
+    },
+    {
+      "path": "fitzpatrick_constant_speed/timed_verified_20261018_seed3/trajectory.csv.gz",
+      "sha256": "b71b46be1504e2e4cbc59b69790b8954ddb1f1a085e98f32869fcfb519f9a9bf",
+      "bytes": 171246
+    },
+    {
+      "path": "fitzpatrick_constant_speed/timed_verified_20261018_seed3/trajectory_en.png",
+      "sha256": "1f83305480215c9179612e238393978fb96e6187e053c031aa2f3ad7ee9ab72d",
+      "bytes": 95995
+    },
+    {
+      "path": "fitzpatrick_occlusion/timed_verified_20261018_seed1/build.log",
+      "sha256": "cf7395b3e089d91091cc5b8cbd6b7264a889849d4298c7e153eeb25c4d22c89a",
+      "bytes": 605
+    },
+    {
+      "path": "fitzpatrick_occlusion/timed_verified_20261018_seed1/config.json",
+      "sha256": "8f5f47301e725c844cdb3c08de316a9c22790d9d17f61e26e9966c6756012069",
+      "bytes": 818
+    },
+    {
+      "path": "fitzpatrick_occlusion/timed_verified_20261018_seed1/launch.log",
+      "sha256": "4ecc195ffdb270a8eb944cb50c93c2c77ba545221b45e2f3494a3101eed5aa8b",
+      "bytes": 20576
+    },
+    {
+      "path": "fitzpatrick_occlusion/timed_verified_20261018_seed1/metadata.json",
+      "sha256": "dbb3d04d3c9ffe57df7253ad4613f17fa460d4d1a1b0b12a799c46b7f153a08b",
+      "bytes": 297
+    },
+    {
+      "path": "fitzpatrick_occlusion/timed_verified_20261018_seed1/prediction_en.png",
+      "sha256": "f3501589bb6bddb894723f8020a3ef8b2d4ba1b10d2f7cbd9a47a9f06707152f",
+      "bytes": 66876
+    },
+    {
+      "path": "fitzpatrick_occlusion/timed_verified_20261018_seed1/predictions.csv.gz",
+      "sha256": "0ab5009ef02e44e331465c2e7efea46a0169b9843c1c138e47b9073113a858db",
+      "bytes": 1476224
+    },
+    {
+      "path": "fitzpatrick_occlusion/timed_verified_20261018_seed1/source.patch",
+      "sha256": "98d3a8b2fde69b757bc29dd60272d38eeb2b439fe09eae9a9f74cba9e6d90523",
+      "bytes": 89050
+    },
+    {
+      "path": "fitzpatrick_occlusion/timed_verified_20261018_seed1/summary.json",
+      "sha256": "780e5c6257e62341a85ff75d07c0623cc4e09de1ef2014b84c6523d1f5dc0897",
+      "bytes": 2141
+    },
+    {
+      "path": "fitzpatrick_occlusion/timed_verified_20261018_seed1/trajectory.csv.gz",
+      "sha256": "2a6185ee35f1f9e40a694a0d7ab89268a6b1d6cbb0c9a4212d470b27f8423b5f",
+      "bytes": 169702
+    },
+    {
+      "path": "fitzpatrick_occlusion/timed_verified_20261018_seed1/trajectory_en.png",
+      "sha256": "ee1c059d95688f3c0ee7731e9a90c1b9866f67d25980b61e12173895dd30b815",
+      "bytes": 97854
+    },
+    {
+      "path": "fitzpatrick_occlusion/timed_verified_20261018_seed2/build.log",
+      "sha256": "ce6054d56cdc233fd60b6bf0ea3ce11cf7f0d1c5f067ee23c79c725fed5fa6c9",
+      "bytes": 605
+    },
+    {
+      "path": "fitzpatrick_occlusion/timed_verified_20261018_seed2/config.json",
+      "sha256": "2f6fc31790e3c87e4a1e003ff22cc9195d1e7fb8eb667e56fee6e38fa6c6a41f",
+      "bytes": 818
+    },
+    {
+      "path": "fitzpatrick_occlusion/timed_verified_20261018_seed2/launch.log",
+      "sha256": "c75964b4dc5deb21c04f0c8e96f305b83760fa9b163669a555deaaea71488b47",
+      "bytes": 20597
+    },
+    {
+      "path": "fitzpatrick_occlusion/timed_verified_20261018_seed2/metadata.json",
+      "sha256": "2c52054aadd27bcb7bc984fa1b937e70ab3cd01fc757447a7c5916ff54426311",
+      "bytes": 297
+    },
+    {
+      "path": "fitzpatrick_occlusion/timed_verified_20261018_seed2/prediction_en.png",
+      "sha256": "5b1b0eacc9dedec8e53f76b26f6f514c879895110baca88771d3397d5a7f2415",
+      "bytes": 66904
+    },
+    {
+      "path": "fitzpatrick_occlusion/timed_verified_20261018_seed2/predictions.csv.gz",
+      "sha256": "91ad7f711ec9986655d86859f1be4f5b1bb10b92e069129e39b300c03d24f7cb",
+      "bytes": 1457336
+    },
+    {
+      "path": "fitzpatrick_occlusion/timed_verified_20261018_seed2/source.patch",
+      "sha256": "98d3a8b2fde69b757bc29dd60272d38eeb2b439fe09eae9a9f74cba9e6d90523",
+      "bytes": 89050
+    },
+    {
+      "path": "fitzpatrick_occlusion/timed_verified_20261018_seed2/summary.json",
+      "sha256": "20e901dd08554b6dd504832c5014d0f8b74e60737d43e8346708974c1595868b",
+      "bytes": 2102
+    },
+    {
+      "path": "fitzpatrick_occlusion/timed_verified_20261018_seed2/trajectory.csv.gz",
+      "sha256": "583dc3d54e5f1583d5c6d7ad339a4082d8bac9c9a069d00efe5ad7cb7a98bd22",
+      "bytes": 168465
+    },
+    {
+      "path": "fitzpatrick_occlusion/timed_verified_20261018_seed2/trajectory_en.png",
+      "sha256": "69b43d9679f61fcbfae2cac2bed893c31b06b76e6a7b2af100620def3df0820c",
+      "bytes": 97686
+    },
+    {
+      "path": "fitzpatrick_occlusion/timed_verified_20261018_seed3/build.log",
+      "sha256": "3a5b74822801ccbb3800408013b65424b143fa85afc498aa070a49abf32e65fd",
+      "bytes": 605
+    },
+    {
+      "path": "fitzpatrick_occlusion/timed_verified_20261018_seed3/config.json",
+      "sha256": "1f85e4e853209b38ff041ae4e664d39a2a35e4182d1200e8c8811edbd449c950",
+      "bytes": 818
+    },
+    {
+      "path": "fitzpatrick_occlusion/timed_verified_20261018_seed3/launch.log",
+      "sha256": "ee70c86c9335252fe8ac8cb257607bcc4fb809e570d17ea41166ae5d0ce0ecb2",
+      "bytes": 20597
+    },
+    {
+      "path": "fitzpatrick_occlusion/timed_verified_20261018_seed3/metadata.json",
+      "sha256": "4d1d46fb49a3a511769aebce0551d74636f2125aae65a628c9f29d83d1a4d9f9",
+      "bytes": 297
+    },
+    {
+      "path": "fitzpatrick_occlusion/timed_verified_20261018_seed3/prediction_en.png",
+      "sha256": "e0abf41de8090e2319416cb44aab74616f41ece6ce1a869a1ab3e6ea950693c5",
+      "bytes": 66485
+    },
+    {
+      "path": "fitzpatrick_occlusion/timed_verified_20261018_seed3/predictions.csv.gz",
+      "sha256": "c1deb92fc4b2e981446273be33b4e7f3cf30a8a16f01c40101060f8ce1d42d8d",
+      "bytes": 1361991
+    },
+    {
+      "path": "fitzpatrick_occlusion/timed_verified_20261018_seed3/source.patch",
+      "sha256": "98d3a8b2fde69b757bc29dd60272d38eeb2b439fe09eae9a9f74cba9e6d90523",
+      "bytes": 89050
+    },
+    {
+      "path": "fitzpatrick_occlusion/timed_verified_20261018_seed3/summary.json",
+      "sha256": "992b729f772212e61d9b61938ceeb571a09acce7f2d32721e17db5d5677ef88d",
+      "bytes": 2139
+    },
+    {
+      "path": "fitzpatrick_occlusion/timed_verified_20261018_seed3/trajectory.csv.gz",
+      "sha256": "8450f79ced5379c178038367da1734034df936da81aae8f34f5c515741c7ef77",
+      "bytes": 175654
+    },
+    {
+      "path": "fitzpatrick_occlusion/timed_verified_20261018_seed3/trajectory_en.png",
+      "sha256": "67ef391dbee2fc0de7b4eafb021fb10083bea742fceacdd8ff3e203a1214c4f6",
+      "bytes": 97995
+    }
+  ]
+}

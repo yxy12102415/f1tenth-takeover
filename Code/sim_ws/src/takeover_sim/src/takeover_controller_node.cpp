@@ -9,6 +9,7 @@
 #include <nav_msgs/msg/path.hpp>
 #include <rclcpp/rclcpp.hpp>
 #include <std_msgs/msg/string.hpp>
+#include <sensor_msgs/msg/laser_scan.hpp>
 
 #include "joint_control.hpp"
 #include "takeover_sim/dynamic_overtaking.hpp"
@@ -49,6 +50,9 @@ public:
     declare_parameter<double>("pass_offset", 0.82);
     declare_parameter<double>("vehicle_length", 0.58);
     declare_parameter<double>("vehicle_width", 0.31);
+    declare_parameter<bool>("track_assisted_prediction", true);
+    declare_parameter<bool>("timed_control", true);
+    declare_parameter<int>("allowed_pass_side", 0);
 
     const std::string assets_path = get_parameter("assets_path").as_string();
     if (assets_path.empty()) throw std::runtime_error("assets_path_required");
@@ -64,6 +68,11 @@ public:
     dynamic_planner_->pass_offset = get_parameter("pass_offset").as_double();
     dynamic_planner_->vehicle_length = get_parameter("vehicle_length").as_double();
     dynamic_planner_->vehicle_width = get_parameter("vehicle_width").as_double();
+    dynamic_planner_->track_assisted_prediction = get_parameter("track_assisted_prediction").as_bool();
+    dynamic_planner_->timed_control = get_parameter("timed_control").as_bool();
+    dynamic_planner_->allowed_pass_side = get_parameter("allowed_pass_side").as_int();
+    if (std::abs(dynamic_planner_->allowed_pass_side) > 1)
+      throw std::runtime_error("allowed_pass_side_must_be_minus1_0_or_1");
     controller_ = std::make_unique<frenet::JointControl>(true);
     tracker_ = std::make_unique<frenet::Tracker>("dynamic_mpc");
 
@@ -76,6 +85,11 @@ public:
     ego_sub_ = create_subscription<nav_msgs::msg::Odometry>(
         get_parameter("ego_odom_topic").as_string(), 10,
         [this](nav_msgs::msg::Odometry::SharedPtr msg) { ego_ = msg; });
+    scan_sub_ = create_subscription<sensor_msgs::msg::LaserScan>(
+        "/scan", rclcpp::SensorDataQoS(),
+        [this](sensor_msgs::msg::LaserScan::SharedPtr msg) {
+          if (!msg->ranges.empty()) last_scan_time_ = now().seconds();
+        });
     target_sub_ = create_subscription<nav_msgs::msg::Odometry>(
         get_parameter("target_topic").as_string(), 10,
         [this](nav_msgs::msg::Odometry::SharedPtr msg) { update_track(*msg); });
@@ -100,11 +114,13 @@ private:
   std::unique_ptr<frenet::Tracker> tracker_;
   nav_msgs::msg::Odometry::SharedPtr ego_;
   takeover::Track track_;
+  takeover::Track measured_track_;
   std::string tracker_mode_ = "UNINITIALIZED";
   double tracker_measurement_age_ = frenet::INF;
   double last_plan_time_ = -frenet::INF;
   double last_control_time_ = -frenet::INF;
   double latest_target_message_time_ = -frenet::INF;
+  double last_scan_time_ = -frenet::INF;
   double planning_period_ = 0.2;
   bool stopped_ = true;
   int controller_failures_ = 0;
@@ -113,6 +129,7 @@ private:
   int infeasible_count_ = 0;
   int solver_recoveries_ = 0;
   int rejected_track_jumps_ = 0;
+  int freshness_triggered_replans_ = 0;
   takeover::Decision decision_;
   frenet::Path reference_path_;
 
@@ -121,6 +138,7 @@ private:
   rclcpp::Publisher<nav_msgs::msg::Path>::SharedPtr reference_pub_;
   rclcpp::Publisher<nav_msgs::msg::Path>::SharedPtr lead_prediction_pub_;
   rclcpp::Subscription<nav_msgs::msg::Odometry>::SharedPtr ego_sub_;
+  rclcpp::Subscription<sensor_msgs::msg::LaserScan>::SharedPtr scan_sub_;
   rclcpp::Subscription<nav_msgs::msg::Odometry>::SharedPtr target_sub_;
   rclcpp::Subscription<std_msgs::msg::String>::SharedPtr target_status_sub_;
   rclcpp::TimerBase::SharedPtr timer_;
@@ -132,10 +150,9 @@ private:
     const bool committed = decision_.behavior == takeover::Behavior::OVERTAKE ||
                            decision_.behavior == takeover::Behavior::REJOIN ||
                            decision_.overtakes_completed > 0;
-    if (track_.valid && committed && latest_target_message_time_ > 0.0) {
-      const double dt = frenet::clip(
-          receive_time - latest_target_message_time_, 0.0, 0.25);
-      const takeover::Point expected = track_.position + dt * track_.velocity;
+    if (track_.valid && committed && latest_target_message_time_ > 0.0 &&
+        receive_time-track_.observation_stamp < dynamic_planner_->committed_prediction_timeout) {
+      const takeover::Point expected = prediction_track(receive_time).position;
       // Reject a global re-acquisition jump while the passing side is locked.
       // This uses only innovation against the accepted CV track, never truth.
       if ((measured_position - expected).norm() > 0.90) {
@@ -153,6 +170,7 @@ private:
     track_.valid = true;
     track_.measured = tracker_mode_ == "TRACKED";
     track_.observation_stamp = latest_target_message_time_ - tracker_measurement_age_;
+    if (track_.measured && tracker_measurement_age_ < .15) measured_track_ = track_;
   }
 
   void update_tracker_status(const std::string &text) {
@@ -178,9 +196,26 @@ private:
     return std::hypot(ego_->twist.twist.linear.x, ego_->twist.twist.linear.y);
   }
 
+  takeover::Track prediction_track(double time) const {
+    // During a dropout, forecast from the last observed state along the track,
+    // not from the filter's repeatedly straight-extrapolated Cartesian output.
+    auto track = (dynamic_planner_->track_assisted_prediction &&
+                  tracker_mode_ != "TRACKED" && measured_track_.valid) ? measured_track_ : track_;
+    if (!track.valid) return track;
+    const auto forecast = takeover::predict_track(*assets_, track, .1, .1,
+        dynamic_planner_->process_sigma_rate, dynamic_planner_->track_assisted_prediction,
+        std::max(0.,time-track.stamp));
+    track.position=forecast[0].pose.xy();
+    track.velocity=(forecast[1].pose.xy()-forecast[0].pose.xy())/.1;
+    track.yaw=forecast[0].pose.yaw;
+    track.position_variance=forecast[0].sigma*forecast[0].sigma;
+    track.stamp=time;
+    return track;
+  }
+
   void plan(double time) {
     const frenet::Pose pose = ego_pose();
-    if (mode_ == "static_v8") {
+    if (mode_ == "static_v8" || !track_.valid) {
       const double begin = frenet::mono();
       auto candidate = static_planner_->plan(pose, {}, 3.2);
       decision_ = takeover::Decision{};
@@ -195,7 +230,9 @@ private:
       decision_.planning_ms = (frenet::mono() - begin) * 1000.0;
       decision_.transition = static_planner_->switch_reason;
     } else {
-      decision_ = dynamic_planner_->plan(pose, ego_speed(), track_, time);
+      dynamic_planner_->initial_command=controller_->command_speed();
+      dynamic_planner_->initial_acceleration=controller_->command_acceleration();
+      decision_ = dynamic_planner_->plan(pose, ego_speed(), prediction_track(time), time);
     }
     reference_path_ = decision_.candidate.path;
     if (!decision_.candidate.valid) ++planner_failures_;
@@ -210,7 +247,16 @@ private:
       publish_stop("waiting_for_ego_odometry");
       return;
     }
-    if (time - last_plan_time_ >= planning_period_) plan(time);
+    if (time - last_scan_time_ > 0.3 || time - stamp_seconds(ego_->header.stamp) > 0.3) {
+      publish_stop("sensor_stale");
+      return;
+    }
+    const bool freshness_replan = mode_ != "static_v8" && track_.valid &&
+        takeover::freshness_replan_required(decision_, prediction_track(time), time,
+            dynamic_planner_->detection_timeout,
+            dynamic_planner_->committed_prediction_timeout);
+    if (freshness_replan) ++freshness_triggered_replans_;
+    if (time - last_plan_time_ >= planning_period_ || freshness_replan) plan(time);
     if (decision_.stop || !decision_.candidate.valid || reference_path_.size() < 2) {
       publish_stop(decision_.candidate.reason.empty() ? "planner_stop" : decision_.candidate.reason);
       publish_status(time, Json::Value());
@@ -224,26 +270,35 @@ private:
       const auto &twist = ego_->twist.twist;
       const double speed = ego_speed();
       const double yaw = ego_pose().yaw;
-      const double lateral = -std::sin(yaw) * twist.linear.x + std::cos(yaw) * twist.linear.y;
+      // Gym odometry twist is already in child_frame_id (vehicle body).
+      const double lateral = twist.linear.y;
       const double remaining = 100.0;
+      frenet::TimedReference timed;
+      const bool use_timed = dynamic_planner_->timed_control && !decision_.candidate.timed.empty();
+      if(use_timed) {
+        timed.age=std::max(0.,time-last_plan_time_);
+        for(const auto &p:decision_.candidate.timed) timed.points.push_back({p.t,p.pose,p.speed});
+      }
+      const double command_cap=use_timed?dynamic_planner_->cruise_speed:decision_.candidate.speed_cap;
       frenet::Control command;
       try {
         command = controller_->compute(
             *assets_, reference_path_, ego_pose(), speed, lateral, twist.angular.z,
-            remaining, decision_.candidate.speed_cap, dt, *tracker_, {});
+            remaining, command_cap, dt, *tracker_, {}, use_timed?&timed:nullptr);
       } catch (const std::exception &first_error) {
         // acados status 4 can be a stale warm-start QP after a local-path
         // refresh. A cold retry is accepted only if the complete unchanged
         // constraints solve successfully; otherwise the outer catch performs
         // the same fail-stop as v8.
         if (std::string(first_error.what()) != "joint_mpc_solver_4") throw;
-        controller_->cold_retry(speed);
+        controller_->cold_retry(speed, use_timed);
         command = controller_->compute(
             *assets_, reference_path_, ego_pose(), speed, lateral, twist.angular.z,
-            remaining, decision_.candidate.speed_cap, dt, *tracker_, {});
+            remaining, command_cap, dt, *tracker_, {}, use_timed?&timed:nullptr);
         ++solver_recoveries_;
         controller_->diag["cold_retry_recovered"] = true;
       }
+      if(use_timed) validate_mpc_motion(time);
       publish_drive(command.speed, command.angle);
       diagnostic = controller_->diag;
       stopped_ = false;
@@ -269,9 +324,44 @@ private:
     drive_pub_->publish(command);
   }
 
+  void validate_mpc_motion(double time) {
+    const auto &path=controller_->accepted_prediction();
+    if(path.size()<2) throw std::runtime_error("mpc_prediction_missing");
+    auto target=prediction_track(time);
+    const double age=target.valid?time-target.observation_stamp:frenet::INF;
+    // Freshness must use this control tick, not the preceding planner tick.
+    // Once fully rejoined, expected rear-FOV loss follows the same cruise
+    // policy as the planner; a new fresh lead is still checked normally.
+    if(decision_.overtakes_completed>0 && decision_.behavior==takeover::Behavior::CRUISE &&
+        age>dynamic_planner_->detection_timeout) target.valid=false;
+    const auto lead=takeover::predict_track(*assets_,target,(path.size()-1)*.05,.05,
+        dynamic_planner_->process_sigma_rate,dynamic_planner_->track_assisted_prediction);
+    double minimum=frenet::INF;
+    for(size_t i=0;i<path.size();++i) {
+      const auto body=takeover::rectangle(path[i],.58,.31);
+      for(const auto &corner:body)
+        if(assets_->clearance(corner)<dynamic_planner_->map_margin)
+          throw std::runtime_error("mpc_actual_map_conflict");
+      if(!target.valid) continue;
+      if(age>dynamic_planner_->committed_prediction_timeout)
+        throw std::runtime_error("mpc_target_expired");
+      const double inflation=dynamic_planner_->body_margin+
+          std::min(.30,dynamic_planner_->uncertainty_sigma*lead[i].sigma)+
+          .5*(ego_speed()+target.velocity.norm())*.05;
+      const auto other=takeover::rectangle(lead[i].pose,target.length+2*inflation,target.width+2*inflation);
+      minimum=std::min(minimum,takeover::polygon_distance(body,other));
+      if(takeover::polygons_overlap(body,other))
+        throw std::runtime_error("mpc_actual_dynamic_conflict");
+    }
+    controller_->diag["mpc_dynamic_check_passed"]=true;
+    controller_->diag["mpc_minimum_predicted_body_clearance_m"]=std::isfinite(minimum)?Json::Value(minimum):Json::Value();
+  }
+
   void publish_stop(const std::string &reason) {
     publish_drive(0.0, 0.0);
-    if (!stopped_) controller_->reset();
+    // A rejected solve can update internal command state even before the
+    // first drive publication. Never carry that rejected state into retry.
+    controller_->reset();
     stopped_ = true;
     stop_reason_ = reason;
   }
@@ -301,6 +391,8 @@ private:
   void publish_status(double time, const Json::Value &controller_diagnostic) {
     Json::Value value;
     value["stamp"] = time;
+    value["plan_stamp"] = last_plan_time_;
+    value["freshness_triggered_replans"] = freshness_triggered_replans_;
     value["mode"] = mode_;
     value["behavior"] = takeover::behavior_name(decision_.behavior);
     value["transition"] = decision_.transition;
@@ -318,6 +410,9 @@ private:
     value["planner_reason"] = decision_.candidate.reason;
     value["planning_ms"] = decision_.planning_ms;
     value["speed_cap_mps"] = decision_.candidate.speed_cap;
+    value["prediction_model"] = dynamic_planner_->track_assisted_prediction?"track_assisted_with_cv_fallback":"cartesian_cv";
+    value["timed_control"] = dynamic_planner_->timed_control;
+    value["transition_length_m"] = decision_.candidate.transition_length;
     value["minimum_predicted_body_clearance_m"] =
         std::isfinite(decision_.candidate.minimum_body_clearance) ?
         Json::Value(decision_.candidate.minimum_body_clearance) : Json::Value();
@@ -334,6 +429,14 @@ private:
     value["rejected_track_jumps"] = rejected_track_jumps_;
     value["controller"] = controller_diagnostic;
     value["reference_path"] = frenet::path_json(reference_path_);
+    value["timed_reference"] = Json::Value(Json::arrayValue);
+    for (const auto &point : decision_.candidate.timed) {
+      Json::Value row(Json::arrayValue);
+      row.append(point.t); row.append(point.s); row.append(point.d); row.append(point.speed);
+      value["timed_reference"].append(row);
+    }
+    value["mpc_prediction"] = stopped_ ? Json::Value(Json::arrayValue) :
+        frenet::path_json(controller_->accepted_prediction());
     value["target_prediction"] = Json::Value(Json::arrayValue);
     for (const auto &point : decision_.target_prediction) {
       Json::Value row(Json::arrayValue);

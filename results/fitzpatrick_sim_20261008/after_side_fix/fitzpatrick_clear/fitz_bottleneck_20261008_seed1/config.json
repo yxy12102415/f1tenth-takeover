@@ -1,0 +1,27 @@
+{
+  "map": "Fitzpatrick_sim",
+  "duration_s": 40.0,
+  "mode": "takeover",
+  "lead_enabled": false,
+  "lead_scenario": "constant_speed",
+  "lead_speed_mps": 0.0,
+  "ego_max_speed_mps": 1.5,
+  "ego_spawn": [
+    0.613857424,
+    -0.347118616,
+    0.0
+  ],
+  "lead_spawn": [
+    2.82419166,
+    -0.027387507,
+    0.287312773
+  ],
+  "expected": "route_cruise",
+  "scenario": "fitzpatrick_clear",
+  "run_id": "fitz_bottleneck_20261008_seed1",
+  "seed": 1,
+  "ground_truth_input_to_ego": false,
+  "pass_offset_m": 0.82,
+  "git_commit": "ff218f94b5995209198211433cc1d247074985c3",
+  "working_diff_sha256": "976ce92214043cef54676c1af85afbecf5befc658168e790adefc8ac2c16418b"
+}

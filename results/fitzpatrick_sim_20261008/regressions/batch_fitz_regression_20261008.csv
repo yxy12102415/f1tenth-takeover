@@ -1,0 +1,4 @@
+scenario,run_id,seed,passed,collisions,boundary_violations,overtakes,minimum_body_clearance_m,tracking_position_rmse_m,planning_p95_ms,mpc_p95_ms
+constant_speed,fitz_regression_20261008_seed1,1,True,0,0,1,0.5043098357041322,5.207386167065354,0.14623524998569337,1.5247719996978049
+v8_clear,fitz_regression_20261008_seed1,1,True,0,0,0,7.690000000000001,,0.1077030001397361,1.505064749835583
+v8_static,fitz_regression_20261008_seed1,1,True,0,0,0,7.690000000000001,,1.3042977999248249,1.4693605000957177

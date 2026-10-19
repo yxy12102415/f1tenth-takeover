@@ -1,0 +1,27 @@
+{
+  "map": "benchmark_takeover",
+  "duration_s": 28.0,
+  "lead_scenario": "constant_speed",
+  "lead_speed_mps": 0.8,
+  "mode": "takeover",
+  "ego_max_speed_mps": 1.5,
+  "ego_spawn": [
+    6.25,
+    3.0,
+    0.0
+  ],
+  "lead_spawn": [
+    8.5,
+    3.0,
+    0.0
+  ],
+  "expected": "overtake",
+  "scenario": "constant_speed",
+  "run_id": "fitz_regression_20261008_seed1",
+  "seed": 1,
+  "ground_truth_input_to_ego": false,
+  "lead_enabled": true,
+  "pass_offset_m": 0.82,
+  "git_commit": "ff218f94b5995209198211433cc1d247074985c3",
+  "working_diff_sha256": "2ee5a12da17d633bd0423227c0cf4e3c5f970353306a41b3a82ecba9b088dd22"
+}

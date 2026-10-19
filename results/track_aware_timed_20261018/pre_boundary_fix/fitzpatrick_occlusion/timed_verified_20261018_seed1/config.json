@@ -1,0 +1,32 @@
+{
+  "map": "Fitzpatrick_sim",
+  "duration_s": 40.0,
+  "lead_scenario": "constant_speed",
+  "lead_speed_mps": 0.8,
+  "mode": "takeover",
+  "ego_max_speed_mps": 1.5,
+  "ego_spawn": [
+    0.613857424,
+    -0.347118616,
+    0.0
+  ],
+  "lead_spawn": [
+    2.82419166,
+    -0.027387507,
+    0.287312773
+  ],
+  "dropout_start_s": 4.0,
+  "dropout_duration_s": 0.6,
+  "measurement_noise_std_m": 0.02,
+  "expected": "overtake",
+  "scenario": "fitzpatrick_occlusion",
+  "run_id": "timed_verified_20261018_seed1",
+  "seed": 1,
+  "ground_truth_input_to_ego": false,
+  "lead_enabled": true,
+  "pass_offset_m": 0.82,
+  "git_commit": "ff218f94b5995209198211433cc1d247074985c3",
+  "track_assisted_prediction": true,
+  "timed_control": true,
+  "working_diff_sha256": "98d3a8b2fde69b757bc29dd60272d38eeb2b439fe09eae9a9f74cba9e6d90523"
+}

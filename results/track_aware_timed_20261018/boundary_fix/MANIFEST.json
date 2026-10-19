@@ -1,0 +1,58 @@
+{
+  "run_prefix": "timed_boundaryfix_20261018",
+  "run_count": 1,
+  "source_root": "/data/projects/F1-Tenth-Duke/f1tenth-takeover/Code/sim_ws/results/takeover",
+  "note": "All matching runs included, irrespective of outcome. CSV gzip is lossless. ROS subdirectory logs remain at source.",
+  "files": [
+    {
+      "path": "fitzpatrick_occlusion/timed_boundaryfix_20261018_seed3/build.log",
+      "sha256": "b6e253d0b656cebcba95e4053c4e108554774ccf5a7c69547cbfdf7c2a91caec",
+      "bytes": 605
+    },
+    {
+      "path": "fitzpatrick_occlusion/timed_boundaryfix_20261018_seed3/config.json",
+      "sha256": "260943894f222589cfe435c96236b1db49731161d29f968c279a14f1d495ac21",
+      "bytes": 821
+    },
+    {
+      "path": "fitzpatrick_occlusion/timed_boundaryfix_20261018_seed3/launch.log",
+      "sha256": "35a6907260a4b6d454221cbec2ab3b449a833a6b506cdb7ef98be6006382fd3a",
+      "bytes": 20603
+    },
+    {
+      "path": "fitzpatrick_occlusion/timed_boundaryfix_20261018_seed3/metadata.json",
+      "sha256": "af970889c7b3e471afd7b15a9a4fae28ffecfcbb50a335f0b9760d61dc4e9f2c",
+      "bytes": 300
+    },
+    {
+      "path": "fitzpatrick_occlusion/timed_boundaryfix_20261018_seed3/prediction_en.png",
+      "sha256": "abc2fe06833d46a92fc22fc05e30d454a05fd73347e18117249f598189afccd3",
+      "bytes": 66890
+    },
+    {
+      "path": "fitzpatrick_occlusion/timed_boundaryfix_20261018_seed3/predictions.csv.gz",
+      "sha256": "9435ffbe8a966f43181eb47d3a549a9b54a6696d398a881a12f21cbefae53841",
+      "bytes": 1456596
+    },
+    {
+      "path": "fitzpatrick_occlusion/timed_boundaryfix_20261018_seed3/source.patch",
+      "sha256": "c732ef4f21acb35b676d998c929a2fe28f6546ee9860126bde2f165fe1729d7e",
+      "bytes": 92858
+    },
+    {
+      "path": "fitzpatrick_occlusion/timed_boundaryfix_20261018_seed3/summary.json",
+      "sha256": "23e5aad60b77fb5180b6afffe2df2fee37ccd1c51914ce2e6dfcfee7338b3fb1",
+      "bytes": 2193
+    },
+    {
+      "path": "fitzpatrick_occlusion/timed_boundaryfix_20261018_seed3/trajectory.csv.gz",
+      "sha256": "3f65ff0af5a7a3055e07943f3635352a3d54ccf4793e2801b43f6e6d1c7cf7b5",
+      "bytes": 166263
+    },
+    {
+      "path": "fitzpatrick_occlusion/timed_boundaryfix_20261018_seed3/trajectory_en.png",
+      "sha256": "5ced023f1c2901e75e6ab1120c66d3d18403c8c623b218a03c9054b7a0e8fdde",
+      "bytes": 97129
+    }
+  ]
+}

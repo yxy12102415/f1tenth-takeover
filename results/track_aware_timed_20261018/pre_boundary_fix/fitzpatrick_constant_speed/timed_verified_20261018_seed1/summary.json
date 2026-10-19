@@ -1,0 +1,69 @@
+{
+  "acceptance": {
+    "boundary_safe": true,
+    "collision_free": true,
+    "expected_behavior_satisfied": true,
+    "expected_outcome": "overtake"
+  },
+  "control": {
+    "maximum_abs_acceleration_command_mps2": 1.0057585273298277,
+    "maximum_abs_steering_rate_radps": 1.0027644818506691,
+    "mpc_dynamic_check_pass_samples": 775,
+    "post_rejoin_route_max_error_m": 0.17730749991874076,
+    "post_rejoin_route_rmse_m": 0.06454164269039063,
+    "route_lateral_rmse_m": 0.29313515739155405,
+    "timed_horizon_position_error_p95_m": 0.04621097643343467,
+    "timed_horizon_speed_rmse_p95_mps": 0.037744834349072304,
+    "timed_position_rmse_m": 0.0030798787413095956,
+    "timed_speed_rmse_mps": 0.005839932835072432
+  },
+  "duration_s": 40.467733739,
+  "ground_truth_policy": "Opponent ground truth is consumed only by takeover_evaluator for scoring.",
+  "overtaking": {
+    "behavior_sample_counts": {
+      "CRUISE": 577,
+      "OVERTAKE": 160,
+      "PREPARE_OVERTAKE": 9,
+      "REJOIN": 38,
+      "WAIT": 4
+    },
+    "completed": 1,
+    "first_completion_time_s": 11.274769635,
+    "truth_verified_pass_and_rejoin": true
+  },
+  "passed": true,
+  "run_id": "timed_verified_20261018_seed1",
+  "runtime": {
+    "controller_failures": 0,
+    "controller_rejection_reasons": {},
+    "infeasible_count": 0,
+    "mpc_mean_ms": 0.9709225032273964,
+    "mpc_p95_ms": 1.33592780005074,
+    "planner_failures": 3,
+    "planning_mean_ms": 0.2055701751232719,
+    "planning_p95_ms": 0.2564610000490575,
+    "rejected_track_jumps": 0,
+    "solver_recoveries": 0,
+    "solver_timeouts": 0
+  },
+  "safety": {
+    "boundary_violation_events": 0,
+    "collision_events": 0,
+    "minimum_body_clearance_m": 0.4233108055657541
+  },
+  "samples": 788,
+  "scenario": "fitzpatrick_constant_speed",
+  "seed": 1,
+  "tracking": {
+    "loss_count": 1,
+    "position_rmse_m": 8.93022447007383,
+    "reacquisition_times_s": [],
+    "tracked_only_position_rmse_m": 0.06736270773618135,
+    "tracker_mode_sample_counts": {
+      "COASTING": 35,
+      "LOST": 608,
+      "TRACKED": 145
+    },
+    "velocity_rmse_mps": 1.2288768328154538
+  }
+}

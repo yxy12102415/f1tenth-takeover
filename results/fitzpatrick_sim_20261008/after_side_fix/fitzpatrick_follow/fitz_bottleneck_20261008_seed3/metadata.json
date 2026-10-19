@@ -1,0 +1,10 @@
+{
+  "created_utc": "2026-10-07T16:37:44.414159+00:00",
+  "expected_outcome": "follow_wait_or_cancel",
+  "ground_truth_consumer": "takeover_evaluator only",
+  "map_name": "Fitzpatrick_sim",
+  "require_lead": true,
+  "run_id": "fitz_bottleneck_20261008_seed3",
+  "scenario": "fitzpatrick_follow",
+  "seed": 3
+}

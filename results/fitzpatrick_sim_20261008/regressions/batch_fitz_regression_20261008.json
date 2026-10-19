@@ -1,0 +1,35 @@
+{
+  "run_prefix": "fitz_regression_20261008",
+  "scenarios": {
+    "constant_speed": {
+      "trials": 1,
+      "pass_rate": 1.0,
+      "collision_trials": 0,
+      "boundary_violation_trials": 0,
+      "overtake_success_rate": 1.0,
+      "minimum_body_clearance_m": 0.5043098357041322,
+      "maximum_planning_p95_ms": 0.14623524998569337,
+      "maximum_mpc_p95_ms": 1.5247719996978049
+    },
+    "v8_clear": {
+      "trials": 1,
+      "pass_rate": 1.0,
+      "collision_trials": 0,
+      "boundary_violation_trials": 0,
+      "overtake_success_rate": 0.0,
+      "minimum_body_clearance_m": 7.690000000000001,
+      "maximum_planning_p95_ms": 0.1077030001397361,
+      "maximum_mpc_p95_ms": 1.505064749835583
+    },
+    "v8_static": {
+      "trials": 1,
+      "pass_rate": 1.0,
+      "collision_trials": 0,
+      "boundary_violation_trials": 0,
+      "overtake_success_rate": 0.0,
+      "minimum_body_clearance_m": 7.690000000000001,
+      "maximum_planning_p95_ms": 1.3042977999248249,
+      "maximum_mpc_p95_ms": 1.4693605000957177
+    }
+  }
+}

@@ -84,7 +84,7 @@ def main():
                   label="Time-aware ego reference")
     if lead.size:
         axis.plot(lead[:, 0], lead[:, 1], "o-", color="#d1495b", markersize=3,
-                  label="Constant-velocity lead prediction")
+                  label="Lead motion prediction")
     axis.set_title("Representative Time-Aligned Prediction")
     axis.set_xlabel("x [m]")
     axis.set_ylabel("y [m]")

@@ -54,6 +54,8 @@ class OpponentEKFTracker(Node):
         self.declare_parameter('target_center_offset', 0.29)
         self.declare_parameter('max_target_speed', 3.0)
         self.declare_parameter('min_forward_x', -0.5)
+        self.declare_parameter('static_map_assets', '')
+        self.declare_parameter('scan_origin_x', 0.275)
         # Disabled by default. These deterministic simulation-only hooks act
         # on the LiDAR measurement path; they never substitute opponent truth.
         self.declare_parameter('simulation_seed', 0)
@@ -155,6 +157,14 @@ class OpponentEKFTracker(Node):
             0.1, float(self.get_parameter('max_target_speed').value)
         )
         self.min_forward_x = float(self.get_parameter('min_forward_x').value)
+        self.static_map = None
+        assets_path = str(self.get_parameter('static_map_assets').value)
+        if assets_path:
+            with open(assets_path, encoding='utf-8') as handle:
+                self.static_map = json.load(handle)
+            self.static_map['clearance'] = np.asarray(self.static_map['clearance'])
+            self.static_map['route_xy'] = np.asarray(self.static_map['route'])[:, :2]
+        self.scan_origin_x = float(self.get_parameter('scan_origin_x').value)
         self.missed_lidar_scans = 0
         self.reacquisition_tracks = []
         self.track_existence_probability = 0.0
@@ -341,6 +351,22 @@ class OpponentEKFTracker(Node):
         for cluster in clusters:
             if len(cluster) > self.max_cluster_points:
                 continue
+            if self.static_map is not None:
+                # Reject returns belonging to the known static map, before
+                # the target-centre correction. Map data is independent of
+                # opponent ground truth; sensor extrinsics apply to raw hits.
+                clear = self.static_map
+                hits = 0
+                for px, py in cluster:
+                    gx, gy = self.ego_to_global_frame(px + self.scan_origin_x, py)
+                    col = int(math.floor((gx - clear['origin'][0]) / clear['resolution']))
+                    row = clear['height'] - 1 - int(math.floor((gy - clear['origin'][1]) / clear['resolution']))
+                    if not (0 <= col < clear['width'] and 0 <= row < clear['height']):
+                        hits += 1
+                    elif clear['clearance'][row * clear['width'] + col] < 0.15:
+                        hits += 1
+                if hits / len(cluster) >= 0.6:
+                    continue
             cx = sum(p[0] for p in cluster) / len(cluster)
             cy = sum(p[1] for p in cluster) / len(cluster)
             distance = math.hypot(cx, cy)
@@ -353,6 +379,14 @@ class OpponentEKFTracker(Node):
                 cx += self.target_center_offset * cx / distance
                 cy += self.target_center_offset * cy / distance
                 distance += self.target_center_offset
+            if self.static_map is not None:
+                gx, gy = self.ego_to_global_frame(cx, cy)
+                route_distance = np.min(np.linalg.norm(
+                    self.static_map['route_xy'] - np.array([gx, gy]), axis=1))
+                # The route-following experiment concerns the local driving
+                # corridor, not segmented furniture across the open hall.
+                if route_distance > 1.5:
+                    continue
             candidates.append((distance, cx, cy))
 
         if not candidates:

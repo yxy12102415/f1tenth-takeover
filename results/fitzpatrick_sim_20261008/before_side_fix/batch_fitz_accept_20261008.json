@@ -1,0 +1,55 @@
+{
+  "run_prefix": "fitz_accept_20261008",
+  "scenarios": {
+    "fitzpatrick_1p5": {
+      "trials": 3,
+      "pass_rate": 0.3333333333333333,
+      "collision_trials": 0,
+      "boundary_violation_trials": 0,
+      "overtake_success_rate": 0.3333333333333333,
+      "minimum_body_clearance_m": 0.40426595408383165,
+      "maximum_planning_p95_ms": 0.19681100002344465,
+      "maximum_mpc_p95_ms": 1.7389331000458697
+    },
+    "fitzpatrick_clear": {
+      "trials": 3,
+      "pass_rate": 1.0,
+      "collision_trials": 0,
+      "boundary_violation_trials": 0,
+      "overtake_success_rate": 0.0,
+      "minimum_body_clearance_m": null,
+      "maximum_planning_p95_ms": 0.09916699991663336,
+      "maximum_mpc_p95_ms": 1.4961647498807906
+    },
+    "fitzpatrick_constant_speed": {
+      "trials": 3,
+      "pass_rate": 0.6666666666666666,
+      "collision_trials": 0,
+      "boundary_violation_trials": 0,
+      "overtake_success_rate": 0.6666666666666666,
+      "minimum_body_clearance_m": 0.40524581152228883,
+      "maximum_planning_p95_ms": 0.17639200018493284,
+      "maximum_mpc_p95_ms": 1.6114628501441073
+    },
+    "fitzpatrick_follow": {
+      "trials": 3,
+      "pass_rate": 1.0,
+      "collision_trials": 0,
+      "boundary_violation_trials": 0,
+      "overtake_success_rate": 0.0,
+      "minimum_body_clearance_m": 0.24921201207953633,
+      "maximum_planning_p95_ms": 0.16063200018834323,
+      "maximum_mpc_p95_ms": 1.640414849885019
+    },
+    "fitzpatrick_occlusion": {
+      "trials": 3,
+      "pass_rate": 0.0,
+      "collision_trials": 0,
+      "boundary_violation_trials": 0,
+      "overtake_success_rate": 0.0,
+      "minimum_body_clearance_m": 1.5710853826876312,
+      "maximum_planning_p95_ms": 0.1565550001032534,
+      "maximum_mpc_p95_ms": 1.8812101499179328
+    }
+  }
+}

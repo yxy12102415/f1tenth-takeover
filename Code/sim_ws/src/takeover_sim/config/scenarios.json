@@ -1,4 +1,16 @@
 {
+  "fitzpatrick_clear": {
+    "map": "Fitzpatrick_sim",
+    "duration_s": 40.0,
+    "mode": "takeover",
+    "lead_enabled": false,
+    "lead_scenario": "constant_speed",
+    "lead_speed_mps": 0.0,
+    "ego_max_speed_mps": 1.5,
+    "ego_spawn": [0.613857424, -0.347118616, 0.0],
+    "lead_spawn": [2.824191660, -0.027387507, 0.287312773],
+    "expected": "route_cruise"
+  },
   "v8_clear": {
     "map": "benchmark_straight",
     "duration_s": 12.0,
@@ -69,14 +81,50 @@
   },
   "fitzpatrick_constant_speed": {
     "map": "Fitzpatrick_sim",
-    "duration_s": 12.0,
+    "duration_s": 40.0,
     "lead_scenario": "constant_speed",
     "lead_speed_mps": 0.8,
     "mode": "takeover",
     "ego_max_speed_mps": 2.0,
-    "ego_spawn": [-1.171876686, 12.702865625, -1.577492755],
-    "lead_spawn": [-1.172211506, 11.158930907, -1.570796327],
-    "expected": "fitzpatrick_long_straight_overtake"
+    "ego_spawn": [0.613857424, -0.347118616, 0.0],
+    "lead_spawn": [2.824191660, -0.027387507, 0.287312773],
+    "expected": "overtake"
+  },
+  "fitzpatrick_1p5": {
+    "map": "Fitzpatrick_sim",
+    "duration_s": 40.0,
+    "lead_scenario": "constant_speed",
+    "lead_speed_mps": 0.8,
+    "mode": "takeover",
+    "ego_max_speed_mps": 1.5,
+    "ego_spawn": [0.613857424, -0.347118616, 0.0],
+    "lead_spawn": [2.824191660, -0.027387507, 0.287312773],
+    "expected": "overtake"
+  },
+  "fitzpatrick_occlusion": {
+    "map": "Fitzpatrick_sim",
+    "duration_s": 40.0,
+    "lead_scenario": "constant_speed",
+    "lead_speed_mps": 0.8,
+    "mode": "takeover",
+    "ego_max_speed_mps": 1.5,
+    "ego_spawn": [0.613857424, -0.347118616, 0.0],
+    "lead_spawn": [2.824191660, -0.027387507, 0.287312773],
+    "dropout_start_s": 4.0,
+    "dropout_duration_s": 0.6,
+    "measurement_noise_std_m": 0.02,
+    "expected": "overtake"
+  },
+  "fitzpatrick_follow": {
+    "map": "Fitzpatrick_sim",
+    "duration_s": 40.0,
+    "lead_scenario": "constant_speed",
+    "lead_speed_mps": 0.8,
+    "mode": "takeover",
+    "ego_max_speed_mps": 0.9,
+    "ego_spawn": [0.613857424, -0.347118616, 0.0],
+    "lead_spawn": [2.824191660, -0.027387507, 0.287312773],
+    "expected": "follow_wait_or_cancel"
   },
   "no_space": {
     "map": "benchmark_takeover_obstacle_center",

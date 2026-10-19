@@ -1,0 +1,70 @@
+{
+  "acceptance": {
+    "boundary_safe": true,
+    "collision_free": true,
+    "expected_behavior_satisfied": true,
+    "expected_outcome": "overtake"
+  },
+  "control": {
+    "maximum_abs_acceleration_command_mps2": 0.9307595304691226,
+    "maximum_abs_steering_rate_radps": 1.000352170563186,
+    "mpc_dynamic_check_pass_samples": 770,
+    "post_rejoin_route_max_error_m": 0.1936339675488781,
+    "post_rejoin_route_rmse_m": 0.08255432903589434,
+    "route_lateral_rmse_m": 0.41249320930335004,
+    "timed_horizon_position_error_p95_m": 0.038802080172228574,
+    "timed_horizon_speed_rmse_p95_mps": 0.031813671805227865,
+    "timed_position_rmse_m": 0.0025422925555919963,
+    "timed_speed_rmse_mps": 0.003879738260726674
+  },
+  "duration_s": 40.474135915000005,
+  "ground_truth_policy": "Opponent ground truth is used only by its own controller and the independent evaluator, never by ego tracking/planning/MPC.",
+  "overtaking": {
+    "behavior_sample_counts": {
+      "CRUISE": 469,
+      "OVERTAKE": 252,
+      "PREPARE_OVERTAKE": 14,
+      "REJOIN": 49,
+      "WAIT": 4
+    },
+    "completed": 1,
+    "first_completion_time_s": 16.670673358000002,
+    "truth_verified_pass_and_rejoin": true
+  },
+  "passed": true,
+  "run_id": "timed_rightfix_20261018_seed3",
+  "runtime": {
+    "controller_failures": 0,
+    "controller_rejection_reasons": {},
+    "freshness_triggered_replans": 1,
+    "infeasible_count": 0,
+    "mpc_mean_ms": 1.107027624675243,
+    "mpc_p95_ms": 1.6295580000132759,
+    "planner_failures": 4,
+    "planning_mean_ms": 0.2205249086339763,
+    "planning_p95_ms": 0.34396999990349286,
+    "rejected_track_jumps": 0,
+    "solver_recoveries": 0,
+    "solver_timeouts": 0
+  },
+  "safety": {
+    "boundary_violation_events": 0,
+    "collision_events": 0,
+    "minimum_body_clearance_m": 0.5955039780934376
+  },
+  "samples": 788,
+  "scenario": "fitzpatrick_occlusion",
+  "seed": 3,
+  "tracking": {
+    "loss_count": 1,
+    "position_rmse_m": 6.5150155828385055,
+    "reacquisition_times_s": [],
+    "tracked_only_position_rmse_m": 0.07526416493957719,
+    "tracker_mode_sample_counts": {
+      "COASTING": 47,
+      "LOST": 525,
+      "TRACKED": 216
+    },
+    "velocity_rmse_mps": 0.9459289579517708
+  }
+}

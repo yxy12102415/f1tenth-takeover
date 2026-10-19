@@ -46,6 +46,7 @@ def generate_launch_description():
     ])
     ld.add_action(DeclareLaunchArgument('map_name', default_value='Melbourne_map'))
     ld.add_action(DeclareLaunchArgument('gui', default_value='true'))
+    ld.add_action(DeclareLaunchArgument('num_agents', default_value=str(config_dict['bridge']['ros__parameters']['num_agent'])))
     start_defaults = config_dict['bridge']['ros__parameters']
     for argument, parameter in (
         ('ego_start_x', 'sx'),
@@ -64,6 +65,7 @@ def generate_launch_description():
         executable='gym_bridge',
         name='bridge',
         parameters=[config, {
+            'num_agent': ParameterValue(LaunchConfiguration('num_agents'), value_type=int),
             'map_path': ParameterValue(map_path, value_type=str),
             'sx': ParameterValue(LaunchConfiguration('ego_start_x'), value_type=float),
             'sy': ParameterValue(LaunchConfiguration('ego_start_y'), value_type=float),

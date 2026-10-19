@@ -1,0 +1,207 @@
+[INFO] [launch]: All log files can be found below /data/projects/F1-Tenth-Duke/f1tenth-takeover/Code/sim_ws/results/takeover/fitzpatrick_follow/fitz_accept_20261008_seed2/ros_log/2026-10-08-00-24-39-652987-yxy-laptop-200144
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [gym_bridge-1]: process started with pid [200152]
+[INFO] [lifecycle_manager-2]: process started with pid [200154]
+[INFO] [map_server-3]: process started with pid [200156]
+[INFO] [robot_state_publisher-4]: process started with pid [200158]
+[INFO] [robot_state_publisher-5]: process started with pid [200160]
+[INFO] [opp_pid_node.py-6]: process started with pid [200162]
+[INFO] [opponent_ekf_tracker.py-7]: process started with pid [200164]
+[INFO] [takeover_controller_node-8]: process started with pid [200166]
+[INFO] [safety_arbiter.py-9]: process started with pid [200168]
+[INFO] [takeover_evaluator.py-10]: process started with pid [200170]
+[lifecycle_manager-2] [INFO] [1791390279.854236946] [lifecycle_manager_localization]: Creating
+[lifecycle_manager-2] [INFO] [1791390279.857270232] [lifecycle_manager_localization]: [34m[1mCreating and initializing lifecycle service clients[0m[0m
+[map_server-3] [INFO] [1791390279.864810064] [map_server]: 
+[map_server-3] 	map_server lifecycle node launched. 
+[map_server-3] 	Waiting on external lifecycle transitions to activate
+[map_server-3] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[map_server-3] [INFO] [1791390279.864925441] [map_server]: Creating
+[lifecycle_manager-2] [INFO] [1791390279.866143703] [lifecycle_manager_localization]: [34m[1mStarting managed nodes bringup...[0m[0m
+[lifecycle_manager-2] [INFO] [1791390279.866189148] [lifecycle_manager_localization]: [34m[1mConfiguring map_server[0m[0m
+[robot_state_publisher-4] [INFO] [1791390279.879293027] [ego_robot_state_publisher]: got segment ego_racecar/back_left_wheel
+[robot_state_publisher-4] [INFO] [1791390279.879429614] [ego_robot_state_publisher]: got segment ego_racecar/back_right_wheel
+[robot_state_publisher-4] [INFO] [1791390279.879449611] [ego_robot_state_publisher]: got segment ego_racecar/base_link
+[robot_state_publisher-4] [INFO] [1791390279.879455542] [ego_robot_state_publisher]: got segment ego_racecar/front_left_hinge
+[robot_state_publisher-4] [INFO] [1791390279.879460181] [ego_robot_state_publisher]: got segment ego_racecar/front_left_wheel
+[robot_state_publisher-4] [INFO] [1791390279.879464439] [ego_robot_state_publisher]: got segment ego_racecar/front_right_hinge
+[robot_state_publisher-4] [INFO] [1791390279.879468567] [ego_robot_state_publisher]: got segment ego_racecar/front_right_wheel
+[robot_state_publisher-4] [INFO] [1791390279.879473005] [ego_robot_state_publisher]: got segment ego_racecar/laser_model
+[robot_state_publisher-5] [INFO] [1791390279.882912134] [opp_robot_state_publisher]: got segment opp_racecar/back_left_wheel
+[robot_state_publisher-5] [INFO] [1791390279.883015338] [opp_robot_state_publisher]: got segment opp_racecar/back_right_wheel
+[robot_state_publisher-5] [INFO] [1791390279.883025858] [opp_robot_state_publisher]: got segment opp_racecar/base_link
+[robot_state_publisher-5] [INFO] [1791390279.883031088] [opp_robot_state_publisher]: got segment opp_racecar/front_left_hinge
+[robot_state_publisher-5] [INFO] [1791390279.883035566] [opp_robot_state_publisher]: got segment opp_racecar/front_left_wheel
+[robot_state_publisher-5] [INFO] [1791390279.883040015] [opp_robot_state_publisher]: got segment opp_racecar/front_right_hinge
+[robot_state_publisher-5] [INFO] [1791390279.883044223] [opp_robot_state_publisher]: got segment opp_racecar/front_right_wheel
+[robot_state_publisher-5] [INFO] [1791390279.883048411] [opp_robot_state_publisher]: got segment opp_racecar/laser_model
+[map_server-3] [INFO] [1791390279.883732417] [map_server]: Configuring
+[map_server-3] [INFO] [1791390279.883811386] [map_io]: Loading yaml file: /data/projects/F1-Tenth-Duke/f1tenth-takeover/Code/sim_ws/install/f1tenth_gym_ros/share/f1tenth_gym_ros/maps/Fitzpatrick_sim.yaml
+[map_server-3] [INFO] [1791390279.884091022] [map_io]: resolution: 0.05
+[map_server-3] [INFO] [1791390279.884103615] [map_io]: origin[0]: -4.08
+[map_server-3] [INFO] [1791390279.884109366] [map_io]: origin[1]: -3.29
+[map_server-3] [INFO] [1791390279.884114346] [map_io]: origin[2]: 0
+[map_server-3] [INFO] [1791390279.884119575] [map_io]: free_thresh: 0.25
+[map_server-3] [INFO] [1791390279.884125366] [map_io]: occupied_thresh: 0.65
+[map_server-3] [INFO] [1791390279.884131328] [map_io]: mode: trinary
+[map_server-3] [INFO] [1791390279.884138551] [map_io]: negate: 0
+[map_server-3] [INFO] [1791390279.884359266] [map_io]: Loading image_file: /data/projects/F1-Tenth-Duke/f1tenth-takeover/Code/sim_ws/install/f1tenth_gym_ros/share/f1tenth_gym_ros/maps/Fitzpatrick_sim.png
+[map_server-3] [INFO] [1791390279.919078493] [map_io]: Read map /data/projects/F1-Tenth-Duke/f1tenth-takeover/Code/sim_ws/install/f1tenth_gym_ros/share/f1tenth_gym_ros/maps/Fitzpatrick_sim.png: 655 X 648 map @ 0.05 m/cell
+[lifecycle_manager-2] [INFO] [1791390279.923097432] [lifecycle_manager_localization]: [34m[1mActivating map_server[0m[0m
+[map_server-3] [INFO] [1791390279.923209854] [map_server]: Activating
+[map_server-3] [INFO] [1791390279.923525888] [map_server]: Creating bond (map_server) to lifecycle manager.
+[lifecycle_manager-2] [INFO] [1791390280.025033603] [lifecycle_manager_localization]: Server map_server connected with bond.
+[lifecycle_manager-2] [INFO] [1791390280.025072987] [lifecycle_manager_localization]: [34m[1mManaged nodes are active[0m[0m
+[lifecycle_manager-2] [INFO] [1791390280.025088216] [lifecycle_manager_localization]: [34m[1mCreating bond timer...[0m[0m
+[safety_arbiter.py-9] [WARN] [1791390280.072788249] [takeover_safety_arbiter]: SAFETY STOP: no nominal command
+[opp_pid_node.py-6] [INFO] [1791390280.107548333] [takeover_lead_controller]: Loaded 899 raceline waypoints from /data/projects/F1-Tenth-Duke/f1tenth-takeover/Code/sim_ws/install/mpc/share/mpc/waypoints/Fitzpatrick_sim_mpc.csv; subscribing to /opp_racecar/odom, publishing /opp_drive
+[takeover_evaluator.py-10] [INFO] [1791390280.149620821] [takeover_evaluator]: Takeover evaluation results: /data/projects/F1-Tenth-Duke/f1tenth-takeover/Code/sim_ws/results/takeover/fitzpatrick_follow/fitz_accept_20261008_seed2
+[takeover_controller_node-8] [INFO] [1791390280.161810599] [takeover_controller]: Loaded v8 assets from /data/projects/F1-Tenth-Duke/f1tenth-takeover/Code/sim_ws/takeover_assets/Fitzpatrick_sim.json in takeover mode
+[safety_arbiter.py-9] [WARN] [1791390280.213423763] [takeover_safety_arbiter]: SAFETY STOP: waiting for 3 fresh nominal commands
+[gym_bridge-1] /opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/node.py:440: UserWarning: when declaring parameter named 'ego_namespace', declaring a parameter only providing its name is deprecated. You have to either:
+[gym_bridge-1] 	- Pass a name and a default value different to "PARAMETER NOT SET" (and optionally a descriptor).
+[gym_bridge-1] 	- Pass a name and a parameter type.
+[gym_bridge-1] 	- Pass a name and a descriptor with `dynamic_typing=True
+[gym_bridge-1]   warnings.warn(
+[gym_bridge-1] /opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/node.py:440: UserWarning: when declaring parameter named 'ego_odom_topic', declaring a parameter only providing its name is deprecated. You have to either:
+[gym_bridge-1] 	- Pass a name and a default value different to "PARAMETER NOT SET" (and optionally a descriptor).
+[gym_bridge-1] 	- Pass a name and a parameter type.
+[gym_bridge-1] 	- Pass a name and a descriptor with `dynamic_typing=True
+[gym_bridge-1]   warnings.warn(
+[gym_bridge-1] /opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/node.py:440: UserWarning: when declaring parameter named 'ego_opp_odom_topic', declaring a parameter only providing its name is deprecated. You have to either:
+[gym_bridge-1] 	- Pass a name and a default value different to "PARAMETER NOT SET" (and optionally a descriptor).
+[gym_bridge-1] 	- Pass a name and a parameter type.
+[gym_bridge-1] 	- Pass a name and a descriptor with `dynamic_typing=True
+[gym_bridge-1]   warnings.warn(
+[gym_bridge-1] /opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/node.py:440: UserWarning: when declaring parameter named 'ego_scan_topic', declaring a parameter only providing its name is deprecated. You have to either:
+[gym_bridge-1] 	- Pass a name and a default value different to "PARAMETER NOT SET" (and optionally a descriptor).
+[gym_bridge-1] 	- Pass a name and a parameter type.
+[gym_bridge-1] 	- Pass a name and a descriptor with `dynamic_typing=True
+[gym_bridge-1]   warnings.warn(
+[gym_bridge-1] /opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/node.py:440: UserWarning: when declaring parameter named 'ego_drive_topic', declaring a parameter only providing its name is deprecated. You have to either:
+[gym_bridge-1] 	- Pass a name and a default value different to "PARAMETER NOT SET" (and optionally a descriptor).
+[gym_bridge-1] 	- Pass a name and a parameter type.
+[gym_bridge-1] 	- Pass a name and a descriptor with `dynamic_typing=True
+[gym_bridge-1]   warnings.warn(
+[gym_bridge-1] /opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/node.py:440: UserWarning: when declaring parameter named 'opp_namespace', declaring a parameter only providing its name is deprecated. You have to either:
+[gym_bridge-1] 	- Pass a name and a default value different to "PARAMETER NOT SET" (and optionally a descriptor).
+[gym_bridge-1] 	- Pass a name and a parameter type.
+[gym_bridge-1] 	- Pass a name and a descriptor with `dynamic_typing=True
+[gym_bridge-1]   warnings.warn(
+[gym_bridge-1] /opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/node.py:440: UserWarning: when declaring parameter named 'opp_odom_topic', declaring a parameter only providing its name is deprecated. You have to either:
+[gym_bridge-1] 	- Pass a name and a default value different to "PARAMETER NOT SET" (and optionally a descriptor).
+[gym_bridge-1] 	- Pass a name and a parameter type.
+[gym_bridge-1] 	- Pass a name and a descriptor with `dynamic_typing=True
+[gym_bridge-1]   warnings.warn(
+[gym_bridge-1] /opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/node.py:440: UserWarning: when declaring parameter named 'opp_ego_odom_topic', declaring a parameter only providing its name is deprecated. You have to either:
+[gym_bridge-1] 	- Pass a name and a default value different to "PARAMETER NOT SET" (and optionally a descriptor).
+[gym_bridge-1] 	- Pass a name and a parameter type.
+[gym_bridge-1] 	- Pass a name and a descriptor with `dynamic_typing=True
+[gym_bridge-1]   warnings.warn(
+[gym_bridge-1] /opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/node.py:440: UserWarning: when declaring parameter named 'opp_scan_topic', declaring a parameter only providing its name is deprecated. You have to either:
+[gym_bridge-1] 	- Pass a name and a default value different to "PARAMETER NOT SET" (and optionally a descriptor).
+[gym_bridge-1] 	- Pass a name and a parameter type.
+[gym_bridge-1] 	- Pass a name and a descriptor with `dynamic_typing=True
+[gym_bridge-1]   warnings.warn(
+[gym_bridge-1] /opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/node.py:440: UserWarning: when declaring parameter named 'opp_drive_topic', declaring a parameter only providing its name is deprecated. You have to either:
+[gym_bridge-1] 	- Pass a name and a default value different to "PARAMETER NOT SET" (and optionally a descriptor).
+[gym_bridge-1] 	- Pass a name and a parameter type.
+[gym_bridge-1] 	- Pass a name and a descriptor with `dynamic_typing=True
+[gym_bridge-1]   warnings.warn(
+[gym_bridge-1] /opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/node.py:440: UserWarning: when declaring parameter named 'scan_distance_to_base_link', declaring a parameter only providing its name is deprecated. You have to either:
+[gym_bridge-1] 	- Pass a name and a default value different to "PARAMETER NOT SET" (and optionally a descriptor).
+[gym_bridge-1] 	- Pass a name and a parameter type.
+[gym_bridge-1] 	- Pass a name and a descriptor with `dynamic_typing=True
+[gym_bridge-1]   warnings.warn(
+[gym_bridge-1] /opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/node.py:440: UserWarning: when declaring parameter named 'scan_fov', declaring a parameter only providing its name is deprecated. You have to either:
+[gym_bridge-1] 	- Pass a name and a default value different to "PARAMETER NOT SET" (and optionally a descriptor).
+[gym_bridge-1] 	- Pass a name and a parameter type.
+[gym_bridge-1] 	- Pass a name and a descriptor with `dynamic_typing=True
+[gym_bridge-1]   warnings.warn(
+[gym_bridge-1] /opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/node.py:440: UserWarning: when declaring parameter named 'scan_beams', declaring a parameter only providing its name is deprecated. You have to either:
+[gym_bridge-1] 	- Pass a name and a default value different to "PARAMETER NOT SET" (and optionally a descriptor).
+[gym_bridge-1] 	- Pass a name and a parameter type.
+[gym_bridge-1] 	- Pass a name and a descriptor with `dynamic_typing=True
+[gym_bridge-1]   warnings.warn(
+[gym_bridge-1] /opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/node.py:440: UserWarning: when declaring parameter named 'map_path', declaring a parameter only providing its name is deprecated. You have to either:
+[gym_bridge-1] 	- Pass a name and a default value different to "PARAMETER NOT SET" (and optionally a descriptor).
+[gym_bridge-1] 	- Pass a name and a parameter type.
+[gym_bridge-1] 	- Pass a name and a descriptor with `dynamic_typing=True
+[gym_bridge-1]   warnings.warn(
+[gym_bridge-1] /opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/node.py:440: UserWarning: when declaring parameter named 'map_img_ext', declaring a parameter only providing its name is deprecated. You have to either:
+[gym_bridge-1] 	- Pass a name and a default value different to "PARAMETER NOT SET" (and optionally a descriptor).
+[gym_bridge-1] 	- Pass a name and a parameter type.
+[gym_bridge-1] 	- Pass a name and a descriptor with `dynamic_typing=True
+[gym_bridge-1]   warnings.warn(
+[gym_bridge-1] /opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/node.py:440: UserWarning: when declaring parameter named 'num_agent', declaring a parameter only providing its name is deprecated. You have to either:
+[gym_bridge-1] 	- Pass a name and a default value different to "PARAMETER NOT SET" (and optionally a descriptor).
+[gym_bridge-1] 	- Pass a name and a parameter type.
+[gym_bridge-1] 	- Pass a name and a descriptor with `dynamic_typing=True
+[gym_bridge-1]   warnings.warn(
+[gym_bridge-1] /opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/node.py:440: UserWarning: when declaring parameter named 'sx', declaring a parameter only providing its name is deprecated. You have to either:
+[gym_bridge-1] 	- Pass a name and a default value different to "PARAMETER NOT SET" (and optionally a descriptor).
+[gym_bridge-1] 	- Pass a name and a parameter type.
+[gym_bridge-1] 	- Pass a name and a descriptor with `dynamic_typing=True
+[gym_bridge-1]   warnings.warn(
+[gym_bridge-1] /opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/node.py:440: UserWarning: when declaring parameter named 'sy', declaring a parameter only providing its name is deprecated. You have to either:
+[gym_bridge-1] 	- Pass a name and a default value different to "PARAMETER NOT SET" (and optionally a descriptor).
+[gym_bridge-1] 	- Pass a name and a parameter type.
+[gym_bridge-1] 	- Pass a name and a descriptor with `dynamic_typing=True
+[gym_bridge-1]   warnings.warn(
+[gym_bridge-1] /opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/node.py:440: UserWarning: when declaring parameter named 'stheta', declaring a parameter only providing its name is deprecated. You have to either:
+[gym_bridge-1] 	- Pass a name and a default value different to "PARAMETER NOT SET" (and optionally a descriptor).
+[gym_bridge-1] 	- Pass a name and a parameter type.
+[gym_bridge-1] 	- Pass a name and a descriptor with `dynamic_typing=True
+[gym_bridge-1]   warnings.warn(
+[gym_bridge-1] /opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/node.py:440: UserWarning: when declaring parameter named 'sx1', declaring a parameter only providing its name is deprecated. You have to either:
+[gym_bridge-1] 	- Pass a name and a default value different to "PARAMETER NOT SET" (and optionally a descriptor).
+[gym_bridge-1] 	- Pass a name and a parameter type.
+[gym_bridge-1] 	- Pass a name and a descriptor with `dynamic_typing=True
+[gym_bridge-1]   warnings.warn(
+[gym_bridge-1] /opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/node.py:440: UserWarning: when declaring parameter named 'sy1', declaring a parameter only providing its name is deprecated. You have to either:
+[gym_bridge-1] 	- Pass a name and a default value different to "PARAMETER NOT SET" (and optionally a descriptor).
+[gym_bridge-1] 	- Pass a name and a parameter type.
+[gym_bridge-1] 	- Pass a name and a descriptor with `dynamic_typing=True
+[gym_bridge-1]   warnings.warn(
+[gym_bridge-1] /opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/node.py:440: UserWarning: when declaring parameter named 'stheta1', declaring a parameter only providing its name is deprecated. You have to either:
+[gym_bridge-1] 	- Pass a name and a default value different to "PARAMETER NOT SET" (and optionally a descriptor).
+[gym_bridge-1] 	- Pass a name and a parameter type.
+[gym_bridge-1] 	- Pass a name and a descriptor with `dynamic_typing=True
+[gym_bridge-1]   warnings.warn(
+[gym_bridge-1] /opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/node.py:440: UserWarning: when declaring parameter named 'kb_teleop', declaring a parameter only providing its name is deprecated. You have to either:
+[gym_bridge-1] 	- Pass a name and a default value different to "PARAMETER NOT SET" (and optionally a descriptor).
+[gym_bridge-1] 	- Pass a name and a parameter type.
+[gym_bridge-1] 	- Pass a name and a descriptor with `dynamic_typing=True
+[gym_bridge-1]   warnings.warn(
+[gym_bridge-1] /data/projects/F1-Tenth-Duke/Code/sim_ws/external/f1tenth_gym/gym/f110_gym/envs/base_classes.py:95: UserWarning: Chosen integrator is RK4. This is different from previous versions of the gym.
+[gym_bridge-1]   warnings.warn(f"Chosen integrator is RK4. This is different from previous versions of the gym.")
+[takeover_controller_node-8] 
+[takeover_controller_node-8] SQP_RTI: QP solver returned error status 3 QP iteration 8.
+[takeover_controller_node-8] 
+[takeover_controller_node-8] SQP_RTI: QP solver returned error status 3 QP iteration 8.
+[takeover_controller_node-8] 
+[takeover_controller_node-8] SQP_RTI: QP solver returned error status 3 QP iteration 9.
+[robot_state_publisher-5] [INFO] [1791390320.166984760] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[map_server-3] [INFO] [1791390320.166993436] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[lifecycle_manager-2] [INFO] [1791390320.166992755] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[lifecycle_manager-2] [INFO] [1791390320.167093234] [lifecycle_manager_localization]: Running Nav2 LifecycleManager rcl preshutdown (lifecycle_manager_localization)
+[map_server-3] [INFO] [1791390320.167101890] [map_server]: Running Nav2 LifecycleNode rcl preshutdown (map_server)
+[map_server-3] [INFO] [1791390320.167189485] [map_server]: Deactivating
+[map_server-3] [INFO] [1791390320.167215744] [map_server]: Destroying bond (map_server) to lifecycle manager.
+[lifecycle_manager-2] [INFO] [1791390320.167149700] [lifecycle_manager_localization]: [34m[1mTerminating bond timer...[0m[0m
+[robot_state_publisher-4] [INFO] [1791390320.167349115] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[takeover_controller_node-8] [INFO] [1791390320.169619616] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[map_server-3] [INFO] [1791390320.177432422] [map_server]: Cleaning up
+[map_server-3] [INFO] [1791390320.177515067] [map_server]: Destroying bond (map_server) to lifecycle manager.
+[map_server-3] [INFO] [1791390320.268748046] [map_server]: Destroying
+[lifecycle_manager-2] [INFO] [1791390320.268807017] [lifecycle_manager_localization]: Destroying lifecycle_manager_localization
+[INFO] [robot_state_publisher-5]: process has finished cleanly [pid 200160]
+[INFO] [robot_state_publisher-4]: process has finished cleanly [pid 200158]
+[INFO] [lifecycle_manager-2]: process has finished cleanly [pid 200154]
+[INFO] [takeover_controller_node-8]: process has finished cleanly [pid 200166]
+[INFO] [map_server-3]: process has finished cleanly [pid 200156]
+[INFO] [safety_arbiter.py-9]: process has finished cleanly [pid 200168]
+[INFO] [opp_pid_node.py-6]: process has finished cleanly [pid 200162]
+[INFO] [opponent_ekf_tracker.py-7]: process has finished cleanly [pid 200164]
+[INFO] [takeover_evaluator.py-10]: process has finished cleanly [pid 200170]
+[INFO] [gym_bridge-1]: process has finished cleanly [pid 200152]

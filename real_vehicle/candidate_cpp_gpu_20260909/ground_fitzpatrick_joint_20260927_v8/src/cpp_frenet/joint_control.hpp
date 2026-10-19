@@ -5,6 +5,32 @@ extern "C" {
 }
 namespace frenet {
 struct Control { double speed=0, angle=0; };
+struct TimedReferencePoint { double t; Pose pose; double speed; };
+struct TimedReference {
+  std::vector<TimedReferencePoint> points;
+  double age = 0.;
+  void validate() const {
+    if(points.size()<2 || !std::isfinite(age) || age<0 || std::abs(points.front().t)>1e-9)
+      throw std::runtime_error("timed_reference_invalid");
+    for(size_t i=0;i<points.size();++i) {
+      const auto &p=points[i];
+      if(!std::isfinite(p.t+p.pose.x+p.pose.y+p.pose.yaw+p.speed) || p.speed<0 ||
+          (i && p.t<=points[i-1].t)) throw std::runtime_error("timed_reference_invalid");
+    }
+  }
+  TimedReferencePoint at(double t) const {
+    t += age;
+    if (points.size()<2 || !std::isfinite(t) || t < 0 || t > points.back().t + 1e-6)
+      throw std::runtime_error("timed_reference_expired");
+    size_t hi=1;
+    while(hi+1<points.size() && points[hi].t<t) ++hi;
+    const auto &a=points[hi-1], &b=points[hi];
+    if(b.t<=a.t) throw std::runtime_error("timed_reference_order");
+    const double u=clip((t-a.t)/(b.t-a.t),0.,1.);
+    return {t,{a.pose.x+u*(b.pose.x-a.pose.x),a.pose.y+u*(b.pose.y-a.pose.y),
+       a.pose.yaw+u*wrap(b.pose.yaw-a.pose.yaw)},a.speed+u*(b.speed-a.speed)};
+  }
+};
 struct Geometry {
   Path path;
   std::vector<double> arc, yaw, curvature;
@@ -80,6 +106,7 @@ class JointControl {
   double continuous_yaw=0, lateral_estimate=0, yaw_rate_estimate=0;
   bool initialized=false, floor_reached=false, coasting=false;
   std::array<std::array<double,10>,25> predicted{};
+  Path accepted_prediction_;
 public:
   Json::Value diag;
   explicit JointControl(bool mpc) {
@@ -99,17 +126,24 @@ public:
   }
   ~JointControl(){if(capsule){joint_vehicle_acados_free(capsule);joint_vehicle_acados_free_capsule(capsule);}}
   bool terminal_coasting() const {return coasting;}
+  double command_speed() const { return command; }
+  double command_acceleration() const { return acceleration; }
+  const Path &accepted_prediction() const { return accepted_prediction_; }
   void reset(){floor_reached=coasting=false;command=acceleration=steering=servo=integral=0; initialized=false;continuous_yaw=lateral_estimate=yaw_rate_estimate=0;diag=Json::Value();if(capsule)joint_vehicle_acados_reset(capsule,1);}
   // Reset only the numerical warm start after an acados QP failure.  Seeding
   // the longitudinal state from measured speed avoids an artificial zero-speed
   // command; steering/servo estimates remain the physical actuator state.
-  void cold_retry(double measured) {
-    command=clip(measured,0.,2.0);acceleration=0.;initialized=false;
+  void cold_retry(double measured, bool preserve_command=false) {
+    if(!preserve_command) {
+      command=clip(measured,0.,2.0);acceleration=0.;
+      continuous_yaw=lateral_estimate=yaw_rate_estimate=0.;
+    }
+    initialized=false;
     floor_reached=command>=.50;coasting=false;
-    continuous_yaw=lateral_estimate=yaw_rate_estimate=0.;diag=Json::Value();
+    diag=Json::Value();
     if(capsule)joint_vehicle_acados_reset(capsule,1);
   }
-  Control compute(const Assets&a,const Path&p,Pose pose,double measured,double lateral,double yaw_rate,double remaining,double cap,double dt,Tracker&tracker,const std::vector<Point>&obs) {
+  Control compute(const Assets&a,const Path&p,Pose pose,double measured,double lateral,double yaw_rate,double remaining,double cap,double dt,Tracker&tracker,const std::vector<Point>&obs, const TimedReference *timed=nullptr) {
     double begin=mono();
     diag=Json::Value();
     if(!std::isfinite(measured+lateral+yaw_rate+remaining+cap+dt) || measured<0 || measured>2.4 || cap<.70 || cap>2.0 || std::abs(lateral)>2.5 || std::abs(yaw_rate)>8 || dt<=0 || dt>.1)
@@ -123,6 +157,14 @@ public:
     }
     Geometry g(p,pose);dt=std::min(.05,dt);
     diag=Json::Value();Path trajectory{pose};
+    if(timed) {
+      timed->validate();
+      const auto ref=timed->at(0.);
+      timed->at(1.20); // Never silently clamp an expired horizon.
+      diag["timed_reference_age_s"]=timed->age;
+      diag["timed_position_error_m"]=(pose.xy()-ref.pose.xy()).norm();
+      diag["timed_speed_error_mps"]=measured-ref.speed;
+    }
     if(capsule) {
       diag["continuous_yaw_rad"]=pose.yaw;
       // This vehicle's odometry angular velocity is inferred from the servo
@@ -243,8 +285,10 @@ public:
       ocp_nlp_constraints_model_set(config,dims,in,0,"ubx",x);
       double s=g.nearest_s, guess_v=measured;
       for(int i=0;i<=24;++i) {
-        Pose ref=g.at(s);ref.yaw=pose.yaw+wrap(ref.yaw-pose.yaw);
-        double target=speed_target(s,std::max(0.,control_remaining-(s-g.nearest_s)));
+        Pose ref=timed?timed->at(i*.05).pose:g.at(s);
+        ref.yaw=pose.yaw+wrap(ref.yaw-pose.yaw);
+        double target=timed?timed->at(i*.05).speed:
+            speed_target(s,std::max(0.,control_remaining-(s-g.nearest_s)));
         double param[5]={ref.x,ref.y,ref.yaw,target,corridor(a,ref,obs)};
         joint_vehicle_acados_update_params(capsule,i,param,5);
         if(!initialized) {
@@ -283,9 +327,24 @@ public:
         for(double value:predicted[i])if(!std::isfinite(value))throw std::runtime_error("joint_nonfinite");
         if(i)trajectory.push_back({predicted[i][0],predicted[i][1],predicted[i][2]});
       }
+      if(timed) {
+        double max_position=0, squared_speed=0;
+        diag["predicted_speed_mps"]=Json::Value(Json::arrayValue);
+        for(int i=0;i<=24;++i) {
+          const auto ref=timed->at(i*.05);
+          max_position=std::max(max_position,(Point(predicted[i][0],predicted[i][1])-ref.pose.xy()).norm());
+          squared_speed+=std::pow(predicted[i][3]-ref.speed,2);
+          diag["predicted_speed_mps"].append(predicted[i][3]);
+        }
+        diag["timed_horizon_max_position_error_m"]=max_position;
+        diag["timed_horizon_speed_rmse_mps"]=std::sqrt(squared_speed/25.);
+      }
       if(!std::isfinite(u[0]+u[1]) || std::abs(u[1])>.26901 || u[0]<-.80001 || u[0]>1.00001 || std::abs(u[1]-steering)>dt+1e-4 || std::abs(u[0]-acceleration)>4*dt+1e-4)
         throw std::runtime_error("joint_control_constraint a="+std::to_string(u[0])+" delta="+std::to_string(u[1])+" previous="+std::to_string(acceleration)+","+std::to_string(steering)+" dt="+std::to_string(dt));
-      double next=command+u[0]*dt;
+      // Execute exactly the solver's first command-state transition. Wall
+      // timer jitter must not reintegrate the optimized acceleration with a
+      // different interval and thereby alter the collision-checked motion.
+      double next=timed?predicted[1][8]:command+u[0]*dt;
       if(next<-.0001 || next>2.0001)throw std::runtime_error("joint_speed_constraint");
       if(floor_reached && next<floor-1e-5)throw std::runtime_error("joint_speed_below_drivable_floor");
       command=clip(next,0,2.0);acceleration=u[0];steering=u[1];initialized=true;
@@ -304,7 +363,8 @@ public:
     diag["proposed_steering_rad"]=steering;
     diag["sweep_initial_servo_rad"]=servo;
     check_swept(a,trajectory,obs);
-    if(command>cap){command=cap;acceleration=std::min(0.,acceleration);diag["independent_speed_cap_applied"]=true;}
+    if(timed && command>cap+1e-5) throw std::runtime_error("timed_command_bound_violation");
+    if(!timed && command>cap){command=cap;acceleration=std::min(0.,acceleration);diag["independent_speed_cap_applied"]=true;}
     servo+=(steering-servo)*dt/((capsule?.20:.10)+dt);
     if(capsule) {
       // Propagate unmeasured lateral states with the SAME backward-Euler
@@ -329,6 +389,7 @@ public:
     diag["measured_speed_mps"]=measured;diag["acceleration_command_mps2"]=acceleration;
     diag["speed_command_mps"]=command;diag["controller_compute_ms"]=(mono()-begin)*1000;
     if(mono()-begin>.045)throw std::runtime_error("joint_control_deadline");
+    accepted_prediction_=trajectory;
     return {command,steering};
   }
 };

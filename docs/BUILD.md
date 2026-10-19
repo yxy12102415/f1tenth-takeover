@@ -24,6 +24,14 @@ Existing installed vehicle operation stays at `~/f1tenth_real_migration_ws_20260
 
 `docs/SOURCE_SNAPSHOT.json` records hashes of the original source files. The map YAML uses a relative image path, and stale summary fields in two config metadata JSON files are reconciled with the v8 result. Original and exported hashes are recorded; vehicle-control source remains unchanged. `docs/EXPORT_VALIDATION.json` records checks performed on the exported build. Raw field traces remain on the vehicle; selected original result summaries and trajectory CSV/PNGs are under `results/`.
 
+Research-branch update (2026-10-17): the shared `joint_control.hpp` now also
+supports an optional timed reference used by the laptop overtaking adapter.
+Legacy callers omit that argument. The original `SOURCE_SNAPSHOT.json` is
+historical provenance, **not** a hash certification of this modified branch;
+it is intentionally not rewritten. New trials retain their commit and working
+patch, including the shared header. No commissioned Jetson binary was replaced.
+See [the timed-control contract](TRACK_AWARE_TIMED_CONTROL.md).
+
 ## Attribution
 
 Historical Duke materials and their notices remain available in the prior revision linked from [HISTORY.md](HISTORY.md). Retained reference and native modules keep their source/package notices; third-party acados/BLASFEO/HPIPM notices are in each release's `licenses/`. No inference of a new project-wide license should be made.

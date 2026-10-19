@@ -1,5 +1,20 @@
 # Current status — source export 2026-10-06
 
+## Development snapshot — 2026-10-20 (not release acceptance)
+
+Track-assisted prediction, time-indexed references to the retained v8 MPC,
+cancel/rejoin recovery and control-clock freshness-triggered replanning are
+implemented on `codex/track-aware-timed-mpc-20261016`. Latest evidence is from
+2026-10-18, not a new physical test. The latest right-side dropout/noise trial
+completed in full with zero collision, boundary violation or MPC failure.
+The preceding 12-run campaign still contained a collision and an additional
+fail-stop trial; both remain archived. Full multi-seed validation and static-v8
+regressions on the latest code are **pending**. No real-car deployment approval.
+
+See [the progress/evidence report](../results/track_aware_timed_20261018/REPORT.md)
+and [the implementation contract](TRACK_AWARE_TIMED_CONTROL.md). Historical
+results below describe their own code versions, not acceptance of this branch.
+
 The most recent physical evidence in this workspace is dated **2026-09-27**, not the export date.
 
 | Entry point on the commissioned Jetson | Active release | Evidence scope |
@@ -31,3 +46,17 @@ Published JSON files preserve selected original evidence. `RAW_LOG_HASHES.json` 
 2. Test additional static-obstacle positions with adequate maneuvering space.
 3. Evaluate PID separately before claiming comparable results.
 4. Add moving-obstacle prediction and behavior selection before overtaking tests.
+
+## Laptop simulation update — 2026-10-08
+
+This does not replace or extend the physical evidence above. On the existing
+Fitzpatrick map/route, the new headless simulation campaign ran two 15-trial
+batches and preserved all failures. The final batch passed 13/15 configured
+checks: route cruise 3/3, 1.5 m/s overtaking 3/3, 2.0 m/s overtaking 3/3,
+follow/wait 3/3, dropout-plus-noise 1/3. All 15 were free of sampled collision
+and boundary violation. The 2.0 m/s runs still each triggered one MPC fail-stop;
+dropout recovery remains incomplete. This is **not** a physical overtaking gate.
+
+See [the new report](../results/fitzpatrick_sim_20261008/REPORT.md), including
+compressed raw trajectories/predictions and separate English plots. Prefer
+`./run_takeover_trial.sh fitzpatrick_1p5 '' 1 my_trial false` from `Code/sim_ws`.

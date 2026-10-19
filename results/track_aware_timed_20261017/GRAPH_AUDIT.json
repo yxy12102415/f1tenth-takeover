@@ -1,0 +1,14 @@
+{
+  "observed_date_local": "2026-10-17",
+  "campaign": "timed_v3_batch_20261017",
+  "tool": "Code/sim_ws/tools/audit_takeover_graph.py",
+  "method": "Live ROS graph introspection and tracker parameter service, read-only",
+  "ros_domain_id": 73,
+  "ros_localhost_only": true,
+  "opponent_truth_subscribers": ["takeover_evaluator", "takeover_lead_controller"],
+  "final_command_publishers": ["takeover_safety_arbiter"],
+  "nominal_command_publishers": ["takeover_controller"],
+  "tracker_measurement_source": "lidar",
+  "passed": true,
+  "scope": "Simulation graph only. No real vehicle was contacted. Later changes do not alter subscriptions or publication topics."
+}

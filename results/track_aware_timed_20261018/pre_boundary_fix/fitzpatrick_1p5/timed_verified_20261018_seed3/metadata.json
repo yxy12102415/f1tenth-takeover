@@ -1,0 +1,10 @@
+{
+  "created_utc": "2026-10-18T15:09:15.519852+00:00",
+  "expected_outcome": "overtake",
+  "ground_truth_consumer": "takeover_evaluator only",
+  "map_name": "Fitzpatrick_sim",
+  "require_lead": true,
+  "run_id": "timed_verified_20261018_seed3",
+  "scenario": "fitzpatrick_1p5",
+  "seed": 3
+}

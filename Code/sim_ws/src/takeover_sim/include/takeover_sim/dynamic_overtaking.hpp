@@ -147,6 +147,43 @@ inline std::vector<Prediction> predict_cv(const Track &track, double horizon,
   return output;
 }
 
+// Optional map-assisted prediction. The filter still estimates Cartesian
+// position/velocity; this is a separate forecast with an explicit route prior.
+inline std::vector<Prediction> predict_track(const Assets &assets, const Track &track,
+    double horizon, double dt, double noise, bool assisted, double age = 0.0) {
+  const Projection q = project(assets, track.position);
+  const double v = track.velocity.norm();
+  const Point tangent(std::cos(q.pose.yaw), std::sin(q.pose.yaw));
+  const Point normal(-tangent.y(), tangent.x());
+  const double heading = v > .15 ? wrap(std::atan2(track.velocity.y(), track.velocity.x()) - q.pose.yaw) : 0.;
+  const bool on_route = assisted && std::abs(q.d) < 1.2 && std::abs(heading) < .65;
+  const double curvature = wrap(route_pose(assets, q.s + .15).yaw -
+                                route_pose(assets, q.s - .15).yaw) / .30;
+  const double metric = std::max(.5, 1. - curvature * q.d);
+  const double vs = track.velocity.dot(tangent) / metric;
+  const double vd = track.velocity.dot(normal);
+  std::vector<Prediction> output;
+  for (double t = 0.; t <= horizon + 1e-9; t += dt) {
+    const double tau = std::max(0., age) + t;
+    Prediction p;
+    p.t = t;
+    if (on_route) {
+      const double d = q.d + vd * (1. - std::exp(-tau));
+      p.pose = route_pose(assets, q.s + vs * tau);
+      p.pose.x -= std::sin(p.pose.yaw) * d;
+      p.pose.y += std::cos(p.pose.yaw) * d;
+      p.pose.yaw += std::atan2(vd * std::exp(-tau), std::max(.05, track.velocity.dot(tangent)));
+    } else {
+      const Point xy = track.position + tau * track.velocity;
+      p.pose = {xy.x(), xy.y(), v > .08 ? std::atan2(track.velocity.y(), track.velocity.x()) : track.yaw};
+    }
+    p.sigma = std::sqrt(std::max(0., track.position_variance + tau*tau *
+        (track.velocity_variance + noise*noise + (on_route ? .02*.02 : 0.))));
+    output.push_back(p);
+  }
+  return output;
+}
+
 using Polygon = std::array<Point, 4>;
 
 inline Polygon rectangle(const Pose &pose, double length, double width) {
@@ -203,12 +240,22 @@ struct Candidate {
   std::string reason = "uninitialized";
   int side = 0;
   double speed_cap = 0.7;
+  double transition_length = 0.;
   double minimum_body_clearance = INF;
   double minimum_map_clearance = INF;
   double maximum_curvature = 0.0;
   Path path;
   std::vector<TimedState> timed;
 };
+
+inline double candidate_bottleneck_margin(const Candidate &candidate, double map_margin) {
+  if (!candidate.valid) return -INF;
+  // Rank by the more restrictive clearance, after mandatory inflation/margins.
+  // Wall-only ranking selected corridors almost touching the predicted lead
+  // envelope even when the other passing side had substantially more room.
+  return std::min(candidate.minimum_map_clearance - map_margin,
+                  candidate.minimum_body_clearance);
+}
 
 struct Decision {
   Behavior behavior = Behavior::WAIT;
@@ -224,6 +271,18 @@ struct Decision {
   int overtakes_completed = 0;
   std::string transition = "initialized";
 };
+
+// The control clock can cross a freshness boundary between planner ticks.
+// Re-evaluate behavior first, using the same timeout; never bypass expiry in
+// the MPC or extend the age of an observation. A completed rejoin may become
+// CRUISE, while an unfinished maneuver must become WAIT.
+inline bool freshness_replan_required(const Decision &last, const Track &track,
+    double now, double normal_timeout, double committed_timeout) {
+  if (!last.target_fresh || !track.valid) return false;
+  const bool committed = last.behavior == Behavior::OVERTAKE ||
+      last.behavior == Behavior::REJOIN || last.behavior == Behavior::CANCEL;
+  return now - track.observation_stamp > (committed ? committed_timeout : normal_timeout);
+}
 
 class DynamicOvertakingPlanner {
 public:
@@ -249,6 +308,11 @@ public:
   double process_sigma_rate = 0.08;
   double acceleration_max = 1.0;
   double deceleration_max = 0.8;
+  bool track_assisted_prediction = true;
+  bool timed_control = true;
+  int allowed_pass_side = 0; // 0: automatic; +/-1: restrict candidates for regression
+  double initial_command = 0.;
+  double initial_acceleration = 0.;
 
   Decision plan(Pose ego, double ego_speed, const Track &track, double now) {
     const double begin = frenet::mono();
@@ -258,7 +322,7 @@ public:
     decision.overtakes_completed = overtakes_completed_;
     decision.target_age = track.valid ? std::max(0.0, now - track.observation_stamp) : INF;
     const bool committed = behavior_ == Behavior::OVERTAKE ||
-                           behavior_ == Behavior::REJOIN;
+                           behavior_ == Behavior::REJOIN || behavior_ == Behavior::CANCEL;
     const double allowed_prediction_age = committed
         ? committed_prediction_timeout : detection_timeout;
     decision.target_fresh = track.valid &&
@@ -271,7 +335,22 @@ public:
       decision.target_gap = signed_progress(target_projection.s, ego_projection.s,
                                             assets_.arc.back());
       decision.target_speed = track.velocity.norm();
-      decision.target_prediction = predict_cv(track, horizon, step, process_sigma_rate);
+      decision.target_prediction = predict_track(assets_, track, horizon, step,
+          process_sigma_rate, track_assisted_prediction);
+    }
+
+    // Complete an already-committed return BEFORE checking target expiry.
+    // The ego can cross both the rejoin threshold and the age threshold
+    // between 5 Hz ticks. Stopping first strands a fully rejoined car in the
+    // departed lead's lane. Keep the same position, heading and separation
+    // criteria; do not extend the target timeout or ignore unfinished loss.
+    if(behavior_==Behavior::REJOIN && track.valid &&
+        std::abs(ego_projection.d)<.10 &&
+        std::abs(wrap(ego.yaw-ego_projection.pose.yaw))<.15 &&
+        decision.target_gap < -1.20) {
+      ++overtakes_completed_;
+      committed_side_=0;prepare_start_=-INF;aborting_=false;
+      set_behavior(Behavior::CRUISE,"reference_route_rejoined");
     }
 
     // After a completed pass the slower vehicle is behind the forward LiDAR
@@ -292,12 +371,31 @@ public:
 
     const double gap = decision.target_gap;
     const double lead_speed = decision.target_speed;
-    const bool lead_ahead = gap > -0.4 && gap < 7.0;
+    const bool lead_ahead = decision.target_fresh && gap > -0.4 && gap < 7.0;
     const bool slower = lead_speed + 0.18 < cruise_speed;
 
-    if (behavior_ == Behavior::WAIT || behavior_ == Behavior::CANCEL) {
-      set_behavior(lead_ahead ? Behavior::FOLLOW : Behavior::CRUISE,
-                   "fresh_target_recovered");
+    if (behavior_ == Behavior::WAIT) {
+      if(committed_side_ && std::abs(ego_projection.d)>.10) {
+        aborting_=true; cancel_start_=now;
+        set_behavior(Behavior::CANCEL,"fresh_target_recovered_mid_maneuver");
+      } else {
+        set_behavior(lead_ahead ? Behavior::FOLLOW : Behavior::CRUISE,
+                     "fresh_target_recovered");
+      }
+    }
+    // An aborted manoeuvre keeps its side until a feasible rejoin completes.
+    // Do not restart side selection every cycle from a partially shifted pose.
+    if (behavior_ == Behavior::CANCEL && now - cancel_start_ > .5) {
+      if (std::abs(ego_projection.d) < .10 &&
+          std::abs(wrap(ego.yaw - ego_projection.pose.yaw)) < .15) {
+        committed_side_ = 0;
+        aborting_ = false;
+        prepare_start_ = -INF;
+        set_behavior(lead_ahead ? Behavior::FOLLOW : Behavior::CRUISE, "abort_rejoined");
+      } else if (gap < -1.2 || gap > desired_gap + .8) {
+        maneuver_start_s_ = ego_projection.s;
+        set_behavior(Behavior::REJOIN, "abort_rejoin_clear");
+      }
     }
     if (behavior_ == Behavior::CRUISE && lead_ahead) {
       set_behavior(Behavior::FOLLOW, "lead_vehicle_ahead");
@@ -326,16 +424,25 @@ public:
                                        std::max(0.70, lead_speed + 0.05));
       Candidate right = build_candidate(ego, ego_speed, track, -1, Behavior::OVERTAKE,
                                         std::max(0.70, lead_speed + 0.05));
+      if (allowed_pass_side < 0) left.valid = false;
+      if (allowed_pass_side > 0) right.valid = false;
       if (left.valid || right.valid) {
         Candidate selected = !right.valid || (left.valid &&
-            left.minimum_map_clearance >= right.minimum_map_clearance) ? left : right;
+            candidate_bottleneck_margin(left, map_margin) >=
+            candidate_bottleneck_margin(right, map_margin)) ? left : right;
         committed_side_ = selected.side;
+        aborting_ = false;
         set_behavior(Behavior::OVERTAKE, selected.side > 0 ?
                      "left_corridor_committed" : "right_corridor_committed");
       }
     }
 
     const Projection current_projection = project(assets_, ego.xy());
+    if(behavior_==Behavior::OVERTAKE && !slower && gap>1.35 &&
+        std::abs(current_projection.d)<.35) {
+      aborting_=true;cancel_start_=now;
+      set_behavior(Behavior::CANCEL,"speed_advantage_disappeared");
+    }
     if (behavior_ == Behavior::OVERTAKE) {
       const double offset_progress = std::abs(current_projection.d);
       // Build lateral separation at approximately the lead speed.  Closing
@@ -345,23 +452,50 @@ public:
       cap = offset_progress < 0.68
           ? std::min(cruise_speed, std::max(0.70, lead_speed + 0.05))
           : cruise_speed;
-      if (gap < -1.0) {
+      // Start returning as soon as full longitudinal body separation exists
+      // AND a complete inflated, time-aligned return is feasible. Waiting for
+      // a fixed extra metre wastes the bounded prediction window on the outer
+      // side of a bend. Completion still requires gap < -1.20 and alignment.
+      const double return_gap = .5 * (vehicle_length + track.length) + body_margin;
+      if (gap < -return_gap) {
+        const double old_start_s = maneuver_start_s_;
+        const double old_start_d = maneuver_start_d_;
         maneuver_start_s_ = current_projection.s;
         maneuver_start_d_ = current_projection.d;
-        set_behavior(Behavior::REJOIN, "ego_body_clear_of_lead");
+        const auto returning = build_candidate(ego, ego_speed, track, committed_side_,
+                                               Behavior::REJOIN, cruise_speed);
+        if (returning.valid) {
+          set_behavior(Behavior::REJOIN, "ego_body_clear_return_feasible");
+        } else {
+          maneuver_start_s_ = old_start_s;
+          maneuver_start_d_ = old_start_d;
+        }
       }
     }
     if (behavior_ == Behavior::REJOIN) {
-      cap = cruise_speed;
-      if (std::abs(current_projection.d) < 0.10 && gap < -1.20) {
-        ++overtakes_completed_;
+      cap = aborting_ && lead_ahead ?
+          clip(lead_speed + .65*(gap-desired_gap), .70, cruise_speed) : cruise_speed;
+      if (std::abs(current_projection.d) < 0.10 &&
+          std::abs(wrap(ego.yaw-current_projection.pose.yaw)) < .15 &&
+          (gap < -1.20 || aborting_)) {
+        const bool passed = gap < -1.20;
+        if (passed) ++overtakes_completed_;
         committed_side_ = 0;
         prepare_start_ = -INF;
-        set_behavior(Behavior::CRUISE, "reference_route_rejoined");
+        aborting_ = false;
+        set_behavior(passed ? Behavior::CRUISE : Behavior::FOLLOW,
+                     passed ? "reference_route_rejoined" : "abort_rejoined_behind_lead");
       }
     }
+    if (behavior_ == Behavior::CANCEL)
+      // Create a longitudinal gap for recovery instead of matching the lead
+      // indefinitely while sitting alongside it. Retain the locked side.
+      cap = clip(lead_speed + .5*(gap-desired_gap-1.0), .70,
+                 std::min(cruise_speed,std::max(.70,lead_speed)));
 
-    Candidate candidate = build_candidate(ego, ego_speed, track, committed_side_,
+    Track collision_track = track;
+    if (post_pass_cruise && !decision.target_fresh) collision_track.valid = false;
+    Candidate candidate = build_candidate(ego, ego_speed, collision_track, committed_side_,
                                           behavior_, cap);
     if (!candidate.valid && behavior_ == Behavior::PREPARE_OVERTAKE) {
       candidate = build_candidate(ego, ego_speed, track, 0, Behavior::FOLLOW, cap);
@@ -378,7 +512,9 @@ public:
       if (conservative.valid) candidate = std::move(conservative);
     }
     if (!candidate.valid && (behavior_ == Behavior::OVERTAKE || behavior_ == Behavior::REJOIN)) {
-      set_behavior(Behavior::CANCEL, "committed_corridor_invalid");
+      cancel_start_ = now;
+      aborting_ = true;
+      set_behavior(Behavior::CANCEL, "committed_corridor_invalid:"+candidate.reason);
       candidate = build_candidate(ego, ego_speed, track, committed_side_,
                                   Behavior::CANCEL, 0.70);
     }
@@ -387,7 +523,7 @@ public:
     decision.candidate = candidate;
     decision.committed_side = committed_side_;
     decision.stop = !candidate.valid || behavior_ == Behavior::WAIT ||
-                    (lead_speed < 0.25 && gap < desired_gap + 0.35 &&
+                    (lead_ahead && lead_speed < 0.25 && gap < desired_gap + 0.35 &&
                      std::abs(current_projection.d) < 0.35);
     decision.overtakes_completed = overtakes_completed_;
     decision.transition = transition_;
@@ -403,6 +539,8 @@ private:
   double prepare_start_ = -INF;
   double maneuver_start_s_ = 0.0;
   double maneuver_start_d_ = 0.0;
+  double cancel_start_ = -INF;
+  bool aborting_ = false;
   std::string transition_ = "initialized";
 
   void set_behavior(Behavior value, const std::string &reason) {
@@ -417,17 +555,31 @@ private:
 
   Candidate build_candidate(Pose ego, double ego_speed, const Track &track,
                             int side, Behavior behavior, double speed_cap) const {
+    Candidate best;
+    // Search longer physically executable blends instead of relaxing the
+    // curvature limit or resetting to the same impossible short return path.
+    for (double scale : {1., 1.4, 2., 3.}) {
+      best = build_candidate_scaled(ego, ego_speed, track, side, behavior, speed_cap, scale);
+      if (best.valid) return best;
+      if (best.reason != "curvature_limit" && scale == 1.) return best;
+    }
+    return best;
+  }
+
+  Candidate build_candidate_scaled(Pose ego, double ego_speed, const Track &track,
+                            int side, Behavior behavior, double speed_cap, double scale) const {
     Candidate candidate;
     candidate.side = side;
     candidate.speed_cap = clip(speed_cap, 0.70, cruise_speed);
     const Projection start = project(assets_, ego.xy());
     const std::vector<Prediction> prediction =
-        predict_cv(track, horizon, step, process_sigma_rate);
-    const double goal_d = behavior == Behavior::OVERTAKE || behavior == Behavior::CANCEL
-        ? side * pass_offset : 0.0;
+        predict_track(assets_, track, horizon, step, process_sigma_rate, track_assisted_prediction);
+    const double goal_d = behavior == Behavior::CANCEL ? start.d :
+        behavior == Behavior::OVERTAKE ? side * pass_offset : 0.0;
     const double transition = behavior == Behavior::REJOIN ? rejoin_length : lane_change_length;
     double s = start.s;
     double speed = std::max(0.0, ego_speed);
+    double command = initial_command, acceleration = initial_acceleration;
     candidate.path.push_back(ego);
     candidate.timed.push_back({0.0, s, start.d, speed, ego});
     double previous_yaw = ego.yaw;
@@ -437,31 +589,95 @@ private:
     const double blend_start_s = committed_maneuver ? maneuver_start_s_ : start.s;
     const double current_distance = std::max(
         0.0, signed_progress(start.s, blend_start_s, assets_.arc.back()));
-    const double current_blend = smoothstep(
-        current_distance / std::max(0.2, transition));
+    // A geometrically steerable return can still exceed the MPC's lateral
+    // acceleration limit at 2 m/s. Lengthen the blend before solving, rather
+    // than resetting physical actuator states when the QP rejects it.
+    const double design_speed=std::max({.70,ego_speed,candidate.speed_cap});
+    const double curvature_budget=std::min(.60,1.20/(design_speed*design_speed));
+    const double remaining_distance=scale*std::max({1.5,transition-current_distance,
+        std::sqrt(6.0*std::abs(goal_d-start.d)/curvature_budget)});
+    candidate.transition_length=remaining_distance;
+    const Point normal(-std::sin(start.pose.yaw),std::cos(start.pose.yaw));
+    const Point anchor_error=ego.xy()-(start.pose.xy()+start.d*normal);
+    const double initial_slope=std::tan(clip(wrap(ego.yaw-start.pose.yaw),-.65,.65));
+    auto spatial_pose=[&](double progress) {
+      const double u=clip((progress-start.s)/remaining_distance,0.,1.);
+      const double d=start.d+(goal_d-start.d)*smoothstep(u)+
+          remaining_distance*initial_slope*(u*u*u-2*u*u+u);
+      Pose p=route_pose(assets_,progress);
+      p.x-=std::sin(p.yaw)*d; p.y+=std::cos(p.yaw)*d;
+      // Projection uses a discretized route tangent. Its reconstruction can
+      // miss the measured pose by millimetres: fade that residual continuously
+      // instead of inserting a kink at the first near-zero-speed sample.
+      p.x+=(1-smoothstep(u))*anchor_error.x();
+      p.y+=(1-smoothstep(u))*anchor_error.y();
+      return p;
+    };
 
     for (size_t i = 1; i < prediction.size(); ++i) {
       const double requested_acceleration = candidate.speed_cap > speed ? acceleration_max : -deceleration_max;
       const double next_speed = candidate.speed_cap > speed
           ? std::min(candidate.speed_cap, speed + requested_acceleration * step)
           : std::max(candidate.speed_cap, speed + requested_acceleration * step);
-      s += 0.5 * (speed + next_speed) * step;
-      speed = next_speed;
-      const double distance = std::max(
-          0.0, signed_progress(s, blend_start_s, assets_.arc.back()));
-      const double absolute_blend = smoothstep(
-          distance / std::max(0.2, transition));
-      // Anchor the receding-horizon path at the measured lateral position,
-      // then consume the remaining portion of the original manoeuvre.  This
-      // is continuous even when tracking lags, but still reaches the fixed
-      // lateral goal at the fixed Frenet end station.
-      const double remaining_blend = current_blend < 1.0 - 1e-6
-          ? clip((absolute_blend - current_blend) / (1.0 - current_blend), 0.0, 1.0)
-          : 1.0;
-      const double d = start.d + (goal_d - start.d) * remaining_blend;
-      Pose reference = route_pose(assets_, s);
-      reference.x -= std::sin(reference.yaw) * d;
-      reference.y += std::cos(reference.yaw) * d;
+      double travel = 0.;
+      if (timed_control) {
+        double local_cap=candidate.speed_cap;
+        if(track.valid && (behavior==Behavior::FOLLOW || behavior==Behavior::PREPARE_OVERTAKE)) {
+          // Re-evaluate the gap throughout the forecast, not only at t=0.
+          // Holding today's catch-up speed for four seconds predicts a
+          // preventable rear-end conflict even when gradual following exists.
+          const double lead_s=project(assets_,prediction[i-1].pose.xy()).s;
+          const double future_gap=signed_progress(lead_s,s,assets_.arc.back());
+          local_cap=std::min(local_cap,clip(track.velocity.norm()+.65*(future_gap-desired_gap),
+                                         .70,cruise_speed));
+        }
+        for(double ahead=0.;ahead<=1.5;ahead+=.25) {
+          // Forward-only samples: there is no planned pre-start trajectory.
+          const Point a=spatial_pose(s+ahead).xy();
+          const Point b=spatial_pose(s+ahead+.08).xy();
+          const Point c=spatial_pose(s+ahead+.16).xy();
+          const Point ab=b-a,bc=c-b,ac=c-a;
+          const double den=ab.norm()*bc.norm()*ac.norm();
+          const double k=den>1e-8?2*std::abs(ab.x()*bc.y()-ab.y()*bc.x())/den:0.;
+          local_cap=std::min(local_cap,std::sqrt(1.20/std::max(.01,k)));
+        }
+        if(local_cap<.70) {candidate.reason="curvature_limit";return candidate;}
+        // Match MPC command integration, jerk limits and longitudinal lag.
+        const int substeps = std::max(1, int(std::round(step / .05)));
+        const double h = step / substeps;
+        for (int j = 0; j < substeps; ++j) {
+          const double desired_a = clip(2.0 * (local_cap - command),
+                                         -deceleration_max, acceleration_max);
+          acceleration += clip(desired_a - acceleration, -4*h, 4*h);
+          command = clip(command + h * acceleration, 0., cruise_speed);
+          const double vnew = speed + h / (.15+h) * (command-speed);
+          travel += .5*(speed+vnew)*h;
+          speed = vnew;
+        }
+      } else { travel = .5*(speed+next_speed)*step; speed = next_speed; }
+      // Anchor at the measured lateral position, retaining enough remaining
+      // transition distance to finish without a residual-position snap.
+      // Convert travelled path length into reference-route progress. An offset
+      // path has different arc length, especially through the Fitz bends.
+      const double local_u = clip((s-start.s)/remaining_distance, 0., 1.);
+      const double slope0 = std::tan(clip(wrap(ego.yaw-start.pose.yaw), -.65, .65));
+      const double deriv = (goal_d-start.d)*6*local_u*(1-local_u)/remaining_distance +
+          slope0*(3*local_u*local_u-4*local_u+1);
+      const double current_d = start.d + (goal_d-start.d)*smoothstep(local_u) +
+          remaining_distance*slope0*(local_u*local_u*local_u-2*local_u*local_u+local_u);
+      const double k = wrap(route_pose(assets_, s+.15).yaw-route_pose(assets_, s-.15).yaw)/.30;
+      const double path_metric = std::sqrt(std::pow(1-k*current_d,2)+deriv*deriv);
+      s += travel / (timed_control ? std::max(.5,path_metric) : 1.);
+      // Finish residual tracking error over a finite distance. A completed
+      // blend must not snap the very next 5 cm sample onto the offset: that
+      // artificial kink caused curvature failures and repeated braking on Fitz.
+      const double u = clip(std::max(0.0, s - start.s) / remaining_distance, 0., 1.);
+      // Cubic Hermite boundary conditions preserve measured start heading.
+      // Restarting every plan with zero lateral slope kinks the path whenever
+      // the vehicle is already turning into/out of its offset corridor.
+      const double d = start.d + (goal_d - start.d) * smoothstep(u) +
+          remaining_distance * initial_slope * (u*u*u - 2*u*u + u);
+      Pose reference = spatial_pose(s);
       if (!candidate.path.empty()) {
         const Point delta = reference.xy() - candidate.path.back().xy();
         if (delta.norm() > 1e-8) previous_yaw += wrap(std::atan2(delta.y(), delta.x()) - previous_yaw);
@@ -511,6 +727,8 @@ private:
         candidate.reason = "map_or_static_footprint";
         return candidate;
       }
+
+      if (!track.valid) continue;
 
       const Prediction &opponent = prediction[std::min(i, prediction.size() - 1)];
       const double sampling_margin = 0.5 * relative_speed * step;

@@ -1,0 +1,15 @@
+Starting >>> f1tenth_gym_ros
+/home/yxy/.local/lib/python3.10/site-packages/setuptools/_distutils/dist.py:289: UserWarning: Unknown distribution option: 'tests_require'
+  warnings.warn(msg)
+--- stderr: f1tenth_gym_ros
+/home/yxy/.local/lib/python3.10/site-packages/setuptools/_distutils/dist.py:289: UserWarning: Unknown distribution option: 'tests_require'
+  warnings.warn(msg)
+---
+Finished <<< f1tenth_gym_ros [1.06s]
+Starting >>> mpc
+Finished <<< mpc [0.39s]
+Starting >>> takeover_sim
+Finished <<< takeover_sim [0.12s]
+
+Summary: 3 packages finished [1.88s]
+  1 package had stderr output: f1tenth_gym_ros

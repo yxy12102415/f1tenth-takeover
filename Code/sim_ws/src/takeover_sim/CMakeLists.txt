@@ -10,6 +10,7 @@ find_package(rclcpp REQUIRED)
 find_package(ackermann_msgs REQUIRED)
 find_package(nav_msgs REQUIRED)
 find_package(std_msgs REQUIRED)
+find_package(sensor_msgs REQUIRED)
 find_package(geometry_msgs REQUIRED)
 find_package(Eigen3 REQUIRED)
 find_package(PkgConfig REQUIRED)
@@ -58,7 +59,7 @@ target_link_directories(takeover_controller_node PRIVATE "${ACADOS_PREFIX}/lib")
 target_link_libraries(takeover_controller_node
   takeover_joint_solver acados hpipm blasfeo Eigen3::Eigen ${JSONCPP_LIBRARIES})
 ament_target_dependencies(takeover_controller_node
-  rclcpp ackermann_msgs nav_msgs std_msgs geometry_msgs)
+  rclcpp ackermann_msgs nav_msgs std_msgs geometry_msgs sensor_msgs)
 set_target_properties(takeover_controller_node PROPERTIES
   BUILD_RPATH "${ACADOS_PREFIX}/lib"
   INSTALL_RPATH "${ACADOS_PREFIX}/lib")

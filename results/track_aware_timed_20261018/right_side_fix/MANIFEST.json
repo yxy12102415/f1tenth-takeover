@@ -1,0 +1,58 @@
+{
+  "run_prefix": "timed_rightfix_20261018",
+  "run_count": 1,
+  "source_root": "/data/projects/F1-Tenth-Duke/f1tenth-takeover/Code/sim_ws/results/takeover",
+  "note": "All matching runs included, irrespective of outcome. CSV gzip is lossless. ROS subdirectory logs remain at source.",
+  "files": [
+    {
+      "path": "fitzpatrick_occlusion/timed_rightfix_20261018_seed3/build.log",
+      "sha256": "d3372a8cf7dc13239413511b50e084bd377dcf82042301cf6c1a5b20c3e47e92",
+      "bytes": 605
+    },
+    {
+      "path": "fitzpatrick_occlusion/timed_rightfix_20261018_seed3/config.json",
+      "sha256": "dca4cbfbe06e0847dd8f68e895b3e8c6dc83f9de66cfa9ebd882b8917fe899a6",
+      "bytes": 845
+    },
+    {
+      "path": "fitzpatrick_occlusion/timed_rightfix_20261018_seed3/launch.log",
+      "sha256": "175a1be02bf10a06ddfafee9e4d1a3189439628aea423dbcaed508659e8e5585",
+      "bytes": 20480
+    },
+    {
+      "path": "fitzpatrick_occlusion/timed_rightfix_20261018_seed3/metadata.json",
+      "sha256": "1afb9e6853e3a96a763e8709872ddfc34404e9fd3cfe78ff261e11a1157100db",
+      "bytes": 297
+    },
+    {
+      "path": "fitzpatrick_occlusion/timed_rightfix_20261018_seed3/prediction_en.png",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "fitzpatrick_occlusion/timed_rightfix_20261018_seed3/predictions.csv.gz",
+      "sha256": "bd3344873b2e467240a4107ba3aea7f169f5d23102bdd922794b04deea6bc5ba",
+      "bytes": 1107591
+    },
+    {
+      "path": "fitzpatrick_occlusion/timed_rightfix_20261018_seed3/source.patch",
+      "sha256": "66bdee4d99c22e247b8ff4b0a2dc611d00d182bf8947fc01f64c51f005406df2",
+      "bytes": 93953
+    },
+    {
+      "path": "fitzpatrick_occlusion/timed_rightfix_20261018_seed3/summary.json",
+      "sha256": "4889e0656c05dc9d6f4eabe93b5f8fb258a09fd8f604216900f79f401a0a56d5",
+      "bytes": 2222
+    },
+    {
+      "path": "fitzpatrick_occlusion/timed_rightfix_20261018_seed3/trajectory.csv.gz",
+      "sha256": "f6335f19e7c43c301bcd8f49c2069691d9d0372de724abc3f1ec19d9f287554b",
+      "bytes": 170718
+    },
+    {
+      "path": "fitzpatrick_occlusion/timed_rightfix_20261018_seed3/trajectory_en.png",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    }
+  ]
+}

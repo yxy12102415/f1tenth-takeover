@@ -32,6 +32,6 @@ cmake -S "$prefix" -B "$prefix/build" \
   -DCMAKE_INSTALL_PREFIX="$prefix" \
   -DBUILD_SHARED_LIBS=ON \
   -DACADOS_WITH_QPOASES=ON
-cmake --build "$prefix/build" --parallel "$(nproc)"
+cmake --build "$prefix/build" --parallel "${CMAKE_BUILD_PARALLEL_LEVEL:-2}"
 cmake --install "$prefix/build"
 echo "Installed acados v0.4.0 at $prefix"

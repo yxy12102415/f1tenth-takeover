@@ -1,0 +1,27 @@
+{
+  "map": "Fitzpatrick_sim",
+  "duration_s": 40.0,
+  "lead_scenario": "constant_speed",
+  "lead_speed_mps": 0.8,
+  "mode": "takeover",
+  "ego_max_speed_mps": 0.9,
+  "ego_spawn": [
+    0.613857424,
+    -0.347118616,
+    0.0
+  ],
+  "lead_spawn": [
+    2.82419166,
+    -0.027387507,
+    0.287312773
+  ],
+  "expected": "follow_wait_or_cancel",
+  "scenario": "fitzpatrick_follow",
+  "run_id": "fitz_accept_20261008_seed1",
+  "seed": 1,
+  "ground_truth_input_to_ego": false,
+  "lead_enabled": true,
+  "pass_offset_m": 0.82,
+  "git_commit": "ff218f94b5995209198211433cc1d247074985c3",
+  "working_diff_sha256": "fab1a1e435b02bff53ac8a766fb26c9963bca81acfa14222b8b1e1d4c5a87494"
+}

@@ -51,10 +51,10 @@ def main():
             "overtake_success_rate": sum(
                 v["overtaking"]["completed"] > 0 for v in values
             ) / len(values),
-            "minimum_body_clearance_m": min(
+            "minimum_body_clearance_m": min((
                 v["safety"]["minimum_body_clearance_m"] for v in values
                 if v["safety"]["minimum_body_clearance_m"] is not None
-            ),
+            ), default=None),
             "maximum_planning_p95_ms": max(v["runtime"]["planning_p95_ms"] for v in values),
             "maximum_mpc_p95_ms": max(v["runtime"]["mpc_p95_ms"] for v in values),
         }

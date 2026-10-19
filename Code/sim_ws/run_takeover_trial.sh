@@ -3,11 +3,28 @@
 set -euo pipefail
 
 cd "$(dirname "$0")"
-SCENARIO="${1:-constant_speed}"
+SCENARIO="${1:-fitzpatrick_1p5}"
 DURATION_OVERRIDE="${2:-}"
 SEED="${3:-0}"
 RUN_ID="${4:-$(date -u +%Y%m%dT%H%M%SZ)_seed${SEED}}"
 GUI="${5:-false}"
+export TAKEOVER_TRACK_PREDICTION="${TAKEOVER_TRACK_PREDICTION:-true}"
+export TAKEOVER_TIMED_CONTROL="${TAKEOVER_TIMED_CONTROL:-true}"
+export TAKEOVER_PASS_SIDE="${TAKEOVER_PASS_SIDE:-0}"
+case "$TAKEOVER_PASS_SIDE" in -1|0|1) ;; *) echo 'Pass side must be -1, 0 or 1' >&2; exit 2 ;; esac
+for value in "$TAKEOVER_TRACK_PREDICTION" "$TAKEOVER_TIMED_CONTROL"; do
+  case "$value" in true|false) ;; *) echo 'Feature flags must be true or false' >&2; exit 2 ;; esac
+done
+
+# Keep laptop trials local and prevent accidental overlapping launches.
+export ROS_LOCALHOST_ONLY=1
+export ROS_DOMAIN_ID="${TAKEOVER_ROS_DOMAIN_ID:-73}"
+export RMW_IMPLEMENTATION=rmw_cyclonedds_cpp
+export CYCLONEDDS_URI='<CycloneDDS><Domain><General><AllowMulticast>false</AllowMulticast></General><Discovery><ParticipantIndex>auto</ParticipantIndex><MaxAutoParticipantIndex>100</MaxAutoParticipantIndex><Peers><Peer Address="127.0.0.1"/></Peers></Discovery></Domain></CycloneDDS>'
+export OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 NUMBA_NUM_THREADS=2
+export CMAKE_BUILD_PARALLEL_LEVEL=2
+exec 9>"${XDG_RUNTIME_DIR:-/tmp}/takeover-sim-${UID}.lock"
+flock -n 9 || { echo 'Another takeover trial is running.' >&2; exit 2; }
 
 case "$GUI" in true|false) ;; *) echo "GUI must be true or false" >&2; exit 2 ;; esac
 if ! [[ "$SEED" =~ ^[0-9]+$ ]]; then echo "Seed must be a non-negative integer" >&2; exit 2; fi
@@ -29,17 +46,23 @@ values = [
     c['lead_speed_mps'], c['ego_max_speed_mps'], *c['ego_spawn'], *c['lead_spawn'],
     c.get('dropout_start_s', -1.0), c.get('dropout_duration_s', 0.0),
     c.get('measurement_noise_std_m', 0.0), c['expected'], base,
+    str(c.get('lead_enabled', True)).lower(),
+    c.get('pass_offset_m', 0.82),
 ]
 print('\n'.join(map(str, values)))
 PY
 )
-if [ "${#CONFIG[@]}" -ne 17 ]; then echo "Invalid scenario configuration" >&2; exit 2; fi
+if [ "${#CONFIG[@]}" -ne 19 ]; then echo "Invalid scenario configuration" >&2; exit 2; fi
 MAP_NAME="${CONFIG[0]}"; DURATION="${DURATION_OVERRIDE:-${CONFIG[1]}}"; MODE="${CONFIG[2]}"
 LEAD_SCENARIO="${CONFIG[3]}"; LEAD_SPEED="${CONFIG[4]}"; EGO_SPEED="${CONFIG[5]}"
 EGO_X="${CONFIG[6]}"; EGO_Y="${CONFIG[7]}"; EGO_YAW="${CONFIG[8]}"
 OPP_X="${CONFIG[9]}"; OPP_Y="${CONFIG[10]}"; OPP_YAW="${CONFIG[11]}"
 DROPOUT_START="${CONFIG[12]}"; DROPOUT_DURATION="${CONFIG[13]}"; NOISE="${CONFIG[14]}"
 EXPECTED="${CONFIG[15]}"; ROUTE_NAME="${CONFIG[16]}"
+LEAD_ENABLED="${CONFIG[17]}"
+PASS_OFFSET="${CONFIG[18]}"
+NUM_AGENTS=2
+if [ "$LEAD_ENABLED" = false ]; then NUM_AGENTS=1; fi
 if ! [[ "$DURATION" =~ ^[0-9]+([.][0-9]+)?$ ]]; then echo "Duration must be numeric" >&2; exit 2; fi
 
 OUTPUT_DIR="$PWD/results/takeover/$SCENARIO/$RUN_ID"
@@ -59,20 +82,47 @@ export LD_LIBRARY_PATH="$ACADOS_INSTALL_DIR/lib:${LD_LIBRARY_PATH:-}"
 export ROS_LOG_DIR="$OUTPUT_DIR/ros_log"
 
 python3 tools/generate_takeover_assets.py "$MAP_NAME" >/dev/null
-colcon build --packages-select f1tenth_gym_ros mpc takeover_sim --cmake-args -DCMAKE_BUILD_TYPE=Release
+if ! colcon build --executor sequential --packages-select f1tenth_gym_ros mpc takeover_sim \
+  --cmake-args -DCMAKE_BUILD_TYPE=Release >"$OUTPUT_DIR/build.log" 2>&1; then
+  tail -n 25 "$OUTPUT_DIR/build.log" >&2
+  exit 1
+fi
 set +u
 source install/setup.bash
 set -u
 
 ASSETS_PATH="$PWD/takeover_assets/$MAP_NAME.json"
 WAYPOINTS_PATH="$PWD/install/mpc/share/mpc/waypoints/${ROUTE_NAME}_mpc.csv"
-cat > "$OUTPUT_DIR/config.json" <<EOF
-{"scenario":"$SCENARIO","run_id":"$RUN_ID","seed":$SEED,"duration_s":$DURATION,"map":"$MAP_NAME","mode":"$MODE","lead_scenario":"$LEAD_SCENARIO","lead_speed_mps":$LEAD_SPEED,"ego_max_speed_mps":$EGO_SPEED,"expected":"$EXPECTED","ground_truth_input_to_ego":false}
-EOF
+python3 - "$SCENARIO" "$RUN_ID" "$SEED" "$DURATION" "$OUTPUT_DIR" <<'PY'
+import hashlib
+import json
+import os
+import subprocess
+import sys
+from pathlib import Path
+scenario, run_id, seed, duration, output = sys.argv[1:]
+config = json.loads(Path('src/takeover_sim/config/scenarios.json').read_text())[scenario]
+config.update(scenario=scenario, run_id=run_id, seed=int(seed),
+              duration_s=float(duration), ground_truth_input_to_ego=False)
+config.setdefault('lead_enabled', True)
+config.setdefault('pass_offset_m', 0.82)
+config['git_commit'] = subprocess.check_output(['git', 'rev-parse', 'HEAD'], text=True).strip()
+config['track_assisted_prediction'] = os.environ['TAKEOVER_TRACK_PREDICTION'] == 'true'
+config['timed_control'] = os.environ['TAKEOVER_TIMED_CONTROL'] == 'true'
+config['allowed_pass_side'] = int(os.environ['TAKEOVER_PASS_SIDE'])
+diff = subprocess.check_output(['git', 'diff', 'HEAD'])
+config['working_diff_sha256'] = hashlib.sha256(diff).hexdigest()
+Path(output, 'source.patch').write_bytes(diff)
+Path(output, 'config.json').write_text(json.dumps(config, indent=2) + '\n')
+PY
 
 setsid ros2 launch takeover_sim gym_takeover_launch.py \
   scenario:="$LEAD_SCENARIO" trial_scenario:="$SCENARIO" expected_outcome:="$EXPECTED" \
   map_name:="$MAP_NAME" gui:="$GUI" mode:="$MODE" \
+  num_agents:="$NUM_AGENTS" lead_enabled:="$LEAD_ENABLED" \
+  pass_offset:="$PASS_OFFSET" \
+  track_assisted_prediction:="$TAKEOVER_TRACK_PREDICTION" timed_control:="$TAKEOVER_TIMED_CONTROL" \
+  allowed_pass_side:="$TAKEOVER_PASS_SIDE" \
   assets_path:="$ASSETS_PATH" waypoints_path:="$WAYPOINTS_PATH" \
   results_dir:="$OUTPUT_DIR" run_id:="$RUN_ID" seed:="$SEED" \
   lead_speed:="$LEAD_SPEED" ego_max_speed:="$EGO_SPEED" \

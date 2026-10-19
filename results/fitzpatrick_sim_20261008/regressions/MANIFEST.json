@@ -1,0 +1,158 @@
+{
+  "run_prefix": "fitz_regression_20261008",
+  "run_count": 3,
+  "source_root": "/data/projects/F1-Tenth-Duke/f1tenth-takeover/Code/sim_ws/results/takeover",
+  "note": "All matching runs included, irrespective of outcome. CSV gzip is lossless. ROS subdirectory logs remain at source.",
+  "files": [
+    {
+      "path": "constant_speed/fitz_regression_20261008_seed1/build.log",
+      "sha256": "b4aabdcc9014229709118c5b67ec68f2f25d77f88e65ebbbfc04a3daba456386",
+      "bytes": 605
+    },
+    {
+      "path": "constant_speed/fitz_regression_20261008_seed1/config.json",
+      "sha256": "641afc821099570d2f73f59dc073545817a1b47b201b31acec7603a65adccae8",
+      "bytes": 623
+    },
+    {
+      "path": "constant_speed/fitz_regression_20261008_seed1/launch.log",
+      "sha256": "aceb4a1821be26f48555aef9c026c0fbbd2911c12e93ddb969489ec4e96353f5",
+      "bytes": 20618
+    },
+    {
+      "path": "constant_speed/fitz_regression_20261008_seed1/metadata.json",
+      "sha256": "8534cbd349c745ebbec3d9a24499bc4b8516d712e43b92ef18feb261ca11ff92",
+      "bytes": 294
+    },
+    {
+      "path": "constant_speed/fitz_regression_20261008_seed1/prediction_en.png",
+      "sha256": "8a4d220c3c7998632633e785e0e57a21a5a6f07e1799d90d5e642a073eb441a9",
+      "bytes": 62267
+    },
+    {
+      "path": "constant_speed/fitz_regression_20261008_seed1/predictions.csv.gz",
+      "sha256": "c80c8d953e73e9cc7b994019470118bac5a213c3e4a11d9a1c31c37eb2407923",
+      "bytes": 269706
+    },
+    {
+      "path": "constant_speed/fitz_regression_20261008_seed1/source.patch",
+      "sha256": "2ee5a12da17d633bd0423227c0cf4e3c5f970353306a41b3a82ecba9b088dd22",
+      "bytes": 38665
+    },
+    {
+      "path": "constant_speed/fitz_regression_20261008_seed1/summary.json",
+      "sha256": "eea87c47cd7f92ab6c35938b497133d77906579f29611b0aae9bc5ebec2da239",
+      "bytes": 1835
+    },
+    {
+      "path": "constant_speed/fitz_regression_20261008_seed1/trajectory.csv.gz",
+      "sha256": "90507cc087c66133dce353a8db01864a403966f30a93d5352594e05c22a3ed16",
+      "bytes": 80274
+    },
+    {
+      "path": "constant_speed/fitz_regression_20261008_seed1/trajectory_en.png",
+      "sha256": "b59ba9549ba117fcb6d4ca4efb6f1d6511f66840e5c148d446146a8167497f9b",
+      "bytes": 76495
+    },
+    {
+      "path": "v8_clear/fitz_regression_20261008_seed1/build.log",
+      "sha256": "eb02a4de7ecf54e288b3c0fa991f57e842728d6fdeadbc834ea36dc2833af228",
+      "bytes": 605
+    },
+    {
+      "path": "v8_clear/fitz_regression_20261008_seed1/config.json",
+      "sha256": "2b560a866e0f1058ee24fe9a948b9340c62b9fc1f44c64754e6de4dc47c8a1b9",
+      "bytes": 644
+    },
+    {
+      "path": "v8_clear/fitz_regression_20261008_seed1/launch.log",
+      "sha256": "7555f62dd91320061c5156986bb23129740805191a69bef8b14712774ad307ba",
+      "bytes": 20605
+    },
+    {
+      "path": "v8_clear/fitz_regression_20261008_seed1/metadata.json",
+      "sha256": "15c55c4bbd34b8937b02c264035389778a916bdcea265eccaaa688b0c374b677",
+      "bytes": 299
+    },
+    {
+      "path": "v8_clear/fitz_regression_20261008_seed1/prediction_en.png",
+      "sha256": "650602629efea8bdeea5a81b36953e4b00c5f7722208f4077b5a0b57303ee8f7",
+      "bytes": 63740
+    },
+    {
+      "path": "v8_clear/fitz_regression_20261008_seed1/predictions.csv.gz",
+      "sha256": "3adda2961e2327252036a1aa23dd10eb9ff8ea33f78e2e09a6dcdb0e41a2a53d",
+      "bytes": 59659
+    },
+    {
+      "path": "v8_clear/fitz_regression_20261008_seed1/source.patch",
+      "sha256": "2ee5a12da17d633bd0423227c0cf4e3c5f970353306a41b3a82ecba9b088dd22",
+      "bytes": 38665
+    },
+    {
+      "path": "v8_clear/fitz_regression_20261008_seed1/summary.json",
+      "sha256": "10c7391dfae2f604f7aad5a5e56c8e204b5affe651dff768955168ae45bcdebe",
+      "bytes": 1669
+    },
+    {
+      "path": "v8_clear/fitz_regression_20261008_seed1/trajectory.csv.gz",
+      "sha256": "aaa15168723f633cd489cd144706b40d7754d907ef0e3a16349179f44bbdc75f",
+      "bytes": 18455
+    },
+    {
+      "path": "v8_clear/fitz_regression_20261008_seed1/trajectory_en.png",
+      "sha256": "bd69ea89b021ca0bc6a16a0d55d65f9d45675b1574084528508ca6cd6edb0674",
+      "bytes": 73028
+    },
+    {
+      "path": "v8_static/fitz_regression_20261008_seed1/build.log",
+      "sha256": "200ae9a37a26dfde676cc3f2198f332e4a10999ee2439471284a3d39bac0cc4f",
+      "bytes": 605
+    },
+    {
+      "path": "v8_static/fitz_regression_20261008_seed1/config.json",
+      "sha256": "bbb0e9c89ee9527abb1ded9e153557c8c97fb2814399501ed569ae1b59a3720a",
+      "bytes": 672
+    },
+    {
+      "path": "v8_static/fitz_regression_20261008_seed1/launch.log",
+      "sha256": "f74fd4b60cab5347d9bca00dd9277a3e1fa310e6678bb90f963c3fe2d1532c26",
+      "bytes": 22560
+    },
+    {
+      "path": "v8_static/fitz_regression_20261008_seed1/metadata.json",
+      "sha256": "6ab7dc0d32eec89909bb96f591cf6af2c7f33c79c4b4bbbdaa8ab415f815d46d",
+      "bytes": 327
+    },
+    {
+      "path": "v8_static/fitz_regression_20261008_seed1/prediction_en.png",
+      "sha256": "650602629efea8bdeea5a81b36953e4b00c5f7722208f4077b5a0b57303ee8f7",
+      "bytes": 63740
+    },
+    {
+      "path": "v8_static/fitz_regression_20261008_seed1/predictions.csv.gz",
+      "sha256": "690f6e4a1d53e30639338c74cea49b4ec7ceb0b9ba77d30089249840d57d7a5e",
+      "bytes": 21455
+    },
+    {
+      "path": "v8_static/fitz_regression_20261008_seed1/source.patch",
+      "sha256": "2ee5a12da17d633bd0423227c0cf4e3c5f970353306a41b3a82ecba9b088dd22",
+      "bytes": 38665
+    },
+    {
+      "path": "v8_static/fitz_regression_20261008_seed1/summary.json",
+      "sha256": "d6bd94b2e491d7e2054f4895a864e4a1efdc6fc665e4a5ce662fdb81c2aba7d7",
+      "bytes": 1669
+    },
+    {
+      "path": "v8_static/fitz_regression_20261008_seed1/trajectory.csv.gz",
+      "sha256": "8aa597e63c1341141884d8e33ff3b7b8a099d40bbcd907a05fa474ef9c1d5790",
+      "bytes": 12449
+    },
+    {
+      "path": "v8_static/fitz_regression_20261008_seed1/trajectory_en.png",
+      "sha256": "5875949d7efddd04174d9f3f0cb7a06e073695cfd31c9fe8da0442e949d35fe7",
+      "bytes": 72953
+    }
+  ]
+}

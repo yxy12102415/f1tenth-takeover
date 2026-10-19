@@ -88,6 +88,8 @@ class TakeoverEvaluator(Node):
         ):
             self.declare_parameter(name, default)
         self.declare_parameter("seed", 0)
+        self.declare_parameter("require_lead", True)
+        self.require_lead = bool(self.get_parameter("require_lead").value)
         self.declare_parameter("sample_rate", 20.0)
 
         self.scenario = str(self.get_parameter("scenario").value)
@@ -124,6 +126,7 @@ class TakeoverEvaluator(Node):
         self.in_boundary_violation = False
         self.boundary_events = 0
         self.overtake_time = None
+        self.truth_overtake_confirmed = False
         self.last_steering = None
         self.last_speed_command = None
         self.last_sample_time = None
@@ -167,7 +170,7 @@ class TakeoverEvaluator(Node):
         if mode == "LOST" and previous != "LOST":
             self.loss_count += 1
             self.loss_start = now
-        if mode == "TRACKED" and previous == "LOST" and self.loss_start is not None:
+        if mode == "TRACKED" and self.loss_start is not None:
             self.reacquisition_times.append(now - self.loss_start)
             self.loss_start = None
         self.tracker = current
@@ -183,17 +186,29 @@ class TakeoverEvaluator(Node):
         stamp = float(self.status.get("stamp", self.elapsed()))
         reference = self.status.get("reference_path", [])
         prediction = self.status.get("target_prediction", [])
-        for index in range(max(len(reference), len(prediction))):
+        timed = self.status.get("timed_reference", [])
+        mpc = self.status.get("mpc_prediction", [])
+        mpc_speed = (self.status.get("controller") or {}).get("predicted_speed_mps", [])
+        for index in range(max(len(reference), len(prediction), len(mpc))):
             ref = reference[index] if index < len(reference) else [None, None, None]
             pred = prediction[index] if index < len(prediction) else [None] * 5
+            schedule = timed[index] if index < len(timed) else [None] * 4
+            actual = mpc[index] if index < len(mpc) else [None] * 3
             self.prediction_rows.append({
                 "status_stamp_s": stamp,
+                "plan_stamp_s": self.status.get("plan_stamp"),
+                "prediction_model": self.status.get("prediction_model"),
                 "behavior": self.status.get("behavior", "UNAVAILABLE"),
                 "index": index,
                 "reference_x": ref[0], "reference_y": ref[1], "reference_yaw": ref[2],
                 "prediction_t_s": pred[0], "lead_prediction_x": pred[1],
                 "lead_prediction_y": pred[2], "lead_prediction_yaw": pred[3],
                 "lead_prediction_sigma_m": pred[4],
+                "reference_t_s": schedule[0], "reference_s_m": schedule[1],
+                "reference_d_m": schedule[2], "reference_speed_mps": schedule[3],
+                "mpc_t_s": index * 0.05 if index < len(mpc) else None,
+                "mpc_x": actual[0], "mpc_y": actual[1], "mpc_yaw": actual[2],
+                "mpc_speed_mps": mpc_speed[index] if index < len(mpc_speed) and index < len(mpc) else None,
             })
 
     def elapsed(self):
@@ -232,28 +247,38 @@ class TakeoverEvaluator(Node):
             row = height - 1 - int(math.floor((y - self.map_origin[1]) / self.map_resolution))
             if row < 0 or row >= height or col < 0 or col >= width or self.map_image[row, col] < 250:
                 return True
+        # Inspect occupied cells under the entire oriented body. Corner-only
+        # checking misses a small obstacle between corners or along an edge.
+        lo = np.floor((body.min(axis=0) - self.map_origin) / self.map_resolution).astype(int)
+        hi = np.floor((body.max(axis=0) - self.map_origin) / self.map_resolution).astype(int)
+        roi = self.map_image[height - 1 - hi[1]:height - lo[1], lo[0]:hi[0] + 1]
+        for rr, cc in np.argwhere(roi < 250):
+            x = self.map_origin[0] + (lo[0] + cc + 0.5) * self.map_resolution
+            y = self.map_origin[1] + (hi[1] - rr + 0.5) * self.map_resolution
+            if overlap(body, rectangle(x, y, 0.0, self.map_resolution, self.map_resolution)):
+                return True
         return False
 
     def sample(self):
-        if self.ego is None or self.opp is None:
+        if self.ego is None or (self.require_lead and self.opp is None):
             return
         time = self.elapsed()
         ego_x, ego_y, ego_yaw = self.ego.pose.pose.position.x, self.ego.pose.pose.position.y, yaw_from_odom(self.ego)
-        opp_x, opp_y, opp_yaw = self.opp.pose.pose.position.x, self.opp.pose.pose.position.y, yaw_from_odom(self.opp)
+        opp_x, opp_y, opp_yaw = (self.opp.pose.pose.position.x, self.opp.pose.pose.position.y, yaw_from_odom(self.opp)) if self.opp else (float('nan'), float('nan'), float('nan'))
         ego_speed = math.hypot(self.ego.twist.twist.linear.x, self.ego.twist.twist.linear.y)
-        opp_speed = math.hypot(self.opp.twist.twist.linear.x, self.opp.twist.twist.linear.y)
+        opp_speed = math.hypot(self.opp.twist.twist.linear.x, self.opp.twist.twist.linear.y) if self.opp else float('nan')
         # nav_msgs/Odometry defines twist in child_frame_id.  Gym therefore
         # reports longitudinal/lateral velocity in each vehicle body frame,
         # while the EKF estimate is expressed in the map frame.  Rotate truth
         # before comparing it with the estimate (the magnitude above is frame
         # invariant and remains useful for following metrics).
-        opp_body_vx = self.opp.twist.twist.linear.x
-        opp_body_vy = self.opp.twist.twist.linear.y
+        opp_body_vx = self.opp.twist.twist.linear.x if self.opp else float('nan')
+        opp_body_vy = self.opp.twist.twist.linear.y if self.opp else float('nan')
         opp_world_vx = math.cos(opp_yaw) * opp_body_vx - math.sin(opp_yaw) * opp_body_vy
         opp_world_vy = math.sin(opp_yaw) * opp_body_vx + math.cos(opp_yaw) * opp_body_vy
         ego_body, opp_body = rectangle(ego_x, ego_y, ego_yaw), rectangle(opp_x, opp_y, opp_yaw)
-        body_clearance = polygon_distance(ego_body, opp_body)
-        collision = overlap(ego_body, opp_body)
+        body_clearance = polygon_distance(ego_body, opp_body) if self.opp else float('nan')
+        collision = overlap(ego_body, opp_body) if self.opp else False
         if collision and not self.in_collision:
             self.collision_events += 1
         self.in_collision = collision
@@ -263,9 +288,16 @@ class TakeoverEvaluator(Node):
         self.in_boundary_violation = boundary
 
         _, ego_progress, route_error = self.route_state(ego_x, ego_y, True)
-        _, opp_progress, _ = self.route_state(opp_x, opp_y, False)
+        opp_progress = self.route_state(opp_x, opp_y, False)[1] if self.opp else None
+        if self.opp is not None and int(self.status.get('overtakes_completed', 0)) > 0:
+            forward_clearance = (ego_x - opp_x) * math.cos(ego_yaw) + (ego_y - opp_y) * math.sin(ego_yaw)
+            # Independent evaluation of complete passage and route rejoin.
+            # 0.70 m exceeds the longitudinal extent of two 0.58 x 0.31 m
+            # rectangles even with relative heading; truth never leaves this node.
+            if forward_clearance > 0.70 and route_error < 0.15:
+                self.truth_overtake_confirmed = True
         estimate_error = velocity_error = float("nan")
-        if self.estimate is not None:
+        if self.estimate is not None and self.opp is not None:
             estimate_error = math.hypot(self.estimate.pose.pose.position.x - opp_x,
                                         self.estimate.pose.pose.position.y - opp_y)
             velocity_error = math.hypot(self.estimate.twist.twist.linear.x - opp_world_vx,
@@ -297,6 +329,14 @@ class TakeoverEvaluator(Node):
             "planner_reason": self.status.get("planner_reason"),
             "speed_cap_mps": self.status.get("speed_cap_mps"),
             "controller_error": controller.get("controller_error"),
+            "timed_position_error_m": controller.get("timed_position_error_m"),
+            "timed_speed_error_mps": controller.get("timed_speed_error_mps"),
+            "timed_reference_age_s": controller.get("timed_reference_age_s"),
+            "timed_horizon_max_position_error_m": controller.get("timed_horizon_max_position_error_m"),
+            "timed_horizon_speed_rmse_mps": controller.get("timed_horizon_speed_rmse_mps"),
+            "mpc_dynamic_check_passed": controller.get("mpc_dynamic_check_passed"),
+            "mpc_predicted_body_clearance_m": controller.get("mpc_minimum_predicted_body_clearance_m"),
+            "transition_length_m": self.status.get("transition_length_m"),
             "committed_side": self.status.get("committed_side"),
             "ego_route_index_unwrapped": ego_progress,
             "lead_route_index_unwrapped": opp_progress,
@@ -329,12 +369,21 @@ class TakeoverEvaluator(Node):
         duration = self.elapsed()
         position = self.finite_values(self.rows, "tracking_position_error_m")
         velocity = self.finite_values(self.rows, "tracking_velocity_error_mps")
+        measured = [row for row in self.rows if row.get('tracker_mode') == 'TRACKED']
+        tracked_position = self.finite_values(measured, 'tracking_position_error_m')
         body = self.finite_values(self.rows, "body_clearance_m")
         route_error = self.finite_values(self.rows, "route_lateral_error_m")
         steering_rate = self.finite_values(self.rows, "steering_rate_radps")
         acceleration = self.finite_values(self.rows, "acceleration_command_est_mps2")
         planning = self.finite_values(self.rows, "planning_ms")
         solve = self.finite_values(self.rows, "mpc_solve_ms")
+        timed_position = self.finite_values(self.rows, "timed_position_error_m")
+        timed_speed = self.finite_values(self.rows, "timed_speed_error_mps")
+        horizon_position = self.finite_values(self.rows, "timed_horizon_max_position_error_m")
+        horizon_speed = self.finite_values(self.rows, "timed_horizon_speed_rmse_mps")
+        rejoined = [row for row in self.rows if self.overtake_time is not None
+                    and row['time_s'] >= self.overtake_time]
+        rejoin_error = self.finite_values(rejoined, 'route_lateral_error_m')
         rejection_reasons = Counter(
             row.get("controller_error") for row in self.rows
             if row.get("controller_error")
@@ -343,12 +392,16 @@ class TakeoverEvaluator(Node):
         safe = bool(self.rows) and self.collision_events == 0 and self.boundary_events == 0
         behavior_samples = dict(self.behaviors)
         if self.expected_outcome in ("overtake", "fitzpatrick_long_straight_overtake"):
-            expected_behavior_pass = overtakes > 0
+            expected_behavior_pass = overtakes > 0 and self.truth_overtake_confirmed
         elif self.expected_outcome == "follow_wait_or_cancel":
             expected_behavior_pass = (
                 overtakes == 0
                 and sum(behavior_samples.get(state, 0) for state in ("FOLLOW", "WAIT", "CANCEL")) > 0
             )
+        elif self.expected_outcome == "route_cruise":
+            progress = [row['ego_route_index_unwrapped'] for row in self.rows]
+            expected_behavior_pass = (len(progress) > 1 and progress[-1] - progress[0] > 0.9 * len(self.route)
+                                      and overtakes == 0)
         else:
             # Perturbation and v8 regression cases have safety/recovery
             # expectations rather than a mandatory behavior outcome.
@@ -373,11 +426,13 @@ class TakeoverEvaluator(Node):
                 "minimum_body_clearance_m": float(body.min()) if body.size else None,
             },
             "overtaking": {
+                "truth_verified_pass_and_rejoin": self.truth_overtake_confirmed,
                 "completed": overtakes,
                 "first_completion_time_s": self.overtake_time,
                 "behavior_sample_counts": behavior_samples,
             },
             "tracking": {
+                "tracked_only_position_rmse_m": float(np.sqrt(np.mean(tracked_position ** 2))) if tracked_position.size else None,
                 "position_rmse_m": float(np.sqrt(np.mean(position ** 2))) if position.size else None,
                 "velocity_rmse_mps": float(np.sqrt(np.mean(velocity ** 2))) if velocity.size else None,
                 "loss_count": self.loss_count,
@@ -385,6 +440,13 @@ class TakeoverEvaluator(Node):
                 "tracker_mode_sample_counts": dict(self.tracker_modes),
             },
             "control": {
+                "timed_horizon_position_error_p95_m": float(np.percentile(horizon_position,95)) if horizon_position.size else None,
+                "timed_horizon_speed_rmse_p95_mps": float(np.percentile(horizon_speed,95)) if horizon_speed.size else None,
+                "timed_position_rmse_m": float(np.sqrt(np.mean(timed_position ** 2))) if timed_position.size else None,
+                "timed_speed_rmse_mps": float(np.sqrt(np.mean(timed_speed ** 2))) if timed_speed.size else None,
+                "mpc_dynamic_check_pass_samples": sum(row.get("mpc_dynamic_check_passed") is True for row in self.rows),
+                "post_rejoin_route_rmse_m": float(np.sqrt(np.mean(rejoin_error ** 2))) if rejoin_error.size else None,
+                "post_rejoin_route_max_error_m": float(rejoin_error.max()) if rejoin_error.size else None,
                 "route_lateral_rmse_m": float(np.sqrt(np.mean(route_error ** 2))) if route_error.size else None,
                 "maximum_abs_steering_rate_radps": float(np.max(np.abs(steering_rate))) if steering_rate.size else None,
                 "maximum_abs_acceleration_command_mps2": float(np.max(np.abs(acceleration))) if acceleration.size else None,
@@ -400,9 +462,10 @@ class TakeoverEvaluator(Node):
                 "infeasible_count": int(self.status.get("infeasible_count", 0)),
                 "solver_recoveries": int(self.status.get("solver_recoveries", 0)),
                 "rejected_track_jumps": int(self.status.get("rejected_track_jumps", 0)),
+                "freshness_triggered_replans": int(self.status.get("freshness_triggered_replans", 0)),
                 "controller_rejection_reasons": dict(rejection_reasons),
             },
-            "ground_truth_policy": "Opponent ground truth is consumed only by takeover_evaluator for scoring.",
+            "ground_truth_policy": "Opponent ground truth is used only by its own controller and the independent evaluator, never by ego tracking/planning/MPC.",
         }
 
     def write_metadata(self):
@@ -413,6 +476,7 @@ class TakeoverEvaluator(Node):
             "run_id": self.run_id,
             "seed": self.seed,
             "map_name": self.map_name,
+            "require_lead": self.require_lead,
             "ground_truth_consumer": "takeover_evaluator only",
         }
         with open(os.path.join(self.output_dir, "metadata.json"), "w", encoding="utf-8") as handle:
