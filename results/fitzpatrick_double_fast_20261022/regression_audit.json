@@ -1,0 +1,304 @@
+{
+  "run_prefix": "fast_regression_20261022",
+  "runs": [
+    {
+      "scenario": "fitzpatrick_1p5",
+      "run_id": "fast_regression_20261022",
+      "seed": 1,
+      "duration_s": 40.468203143000004,
+      "samples": 788,
+      "ego_max_speed_mps": 1.5,
+      "lead_speed_mps": 0.8,
+      "working_diff_sha256": "8570379cef8895a06ee3484f8e4b32ec7dd071d2f0dca470f155782854b7af77",
+      "track_assisted_prediction": true,
+      "timed_control": true,
+      "configured_behavior_and_safety_passed": true,
+      "complete_duration": true,
+      "clean_motion_passed": true,
+      "zero_controller_failures": true,
+      "planner_invalid_samples_after_2s": 0,
+      "controller_failures": 0,
+      "solver_recoveries": 0,
+      "solver_timeouts": 0,
+      "freshness_triggered_replans": 1,
+      "planner_failures_total": 3,
+      "controller_rejection_reasons": {},
+      "return_preview_checks": 0,
+      "return_preview_rejections": {},
+      "overtaking": {
+        "behavior_sample_counts": {
+          "CRUISE": 546,
+          "OVERTAKE": 183,
+          "PREPARE_OVERTAKE": 14,
+          "REJOIN": 44,
+          "UNAVAILABLE": 1
+        },
+        "completed": 1,
+        "first_completion_time_s": 12.747070161000002,
+        "truth_completed": 1,
+        "truth_events": [
+          {
+            "completion_time_s": 13.286273468000001,
+            "encounter_lap": 0,
+            "lead_distance_m": 3.146613152296535,
+            "start_time_s": 0.686200569
+          }
+        ],
+        "truth_verified_pass_and_rejoin": true
+      },
+      "safety": {
+        "boundary_violation_events": 0,
+        "collision_events": 0,
+        "lead_boundary_violation_events": 0,
+        "minimum_body_clearance_m": 0.41486321426812933
+      },
+      "control": {
+        "maximum_abs_acceleration_command_mps2": 1.0016730549324715,
+        "maximum_abs_steering_rate_radps": 1.003880469973713,
+        "mpc_dynamic_check_pass_samples": 773,
+        "post_rejoin_route_max_error_m": 0.17105131458574604,
+        "post_rejoin_route_rmse_m": 0.07588462197406097,
+        "route_lateral_rmse_m": 0.3295783573917233,
+        "timed_horizon_position_error_p95_m": 0.04729128410420141,
+        "timed_horizon_speed_rmse_p95_mps": 0.03681439063317058,
+        "timed_position_rmse_m": 0.0026317529299782635,
+        "timed_speed_rmse_mps": 0.004151824498388042
+      },
+      "planning_p95_ms": 0.2680539998891618,
+      "mpc_p95_ms": 1.601097599859713
+    },
+    {
+      "scenario": "fitzpatrick_clear",
+      "run_id": "fast_regression_20261022",
+      "seed": 1,
+      "duration_s": 40.363608999,
+      "samples": 789,
+      "ego_max_speed_mps": 1.5,
+      "lead_speed_mps": 0.0,
+      "working_diff_sha256": "8570379cef8895a06ee3484f8e4b32ec7dd071d2f0dca470f155782854b7af77",
+      "track_assisted_prediction": true,
+      "timed_control": true,
+      "configured_behavior_and_safety_passed": true,
+      "complete_duration": true,
+      "clean_motion_passed": true,
+      "zero_controller_failures": true,
+      "planner_invalid_samples_after_2s": 0,
+      "controller_failures": 0,
+      "solver_recoveries": 0,
+      "solver_timeouts": 0,
+      "freshness_triggered_replans": 0,
+      "planner_failures_total": 0,
+      "controller_rejection_reasons": {},
+      "return_preview_checks": 0,
+      "return_preview_rejections": {},
+      "overtaking": {
+        "behavior_sample_counts": {
+          "CRUISE": 788,
+          "UNAVAILABLE": 1
+        },
+        "completed": 0,
+        "first_completion_time_s": null,
+        "truth_completed": 0,
+        "truth_events": [],
+        "truth_verified_pass_and_rejoin": false
+      },
+      "safety": {
+        "boundary_violation_events": 0,
+        "collision_events": 0,
+        "lead_boundary_violation_events": 0,
+        "minimum_body_clearance_m": null
+      },
+      "control": {
+        "maximum_abs_acceleration_command_mps2": 9.99484545830043,
+        "maximum_abs_steering_rate_radps": 2.409295823533265,
+        "mpc_dynamic_check_pass_samples": 0,
+        "post_rejoin_route_max_error_m": null,
+        "post_rejoin_route_rmse_m": null,
+        "route_lateral_rmse_m": 0.018655624564201605,
+        "timed_horizon_position_error_p95_m": null,
+        "timed_horizon_speed_rmse_p95_mps": null,
+        "timed_position_rmse_m": null,
+        "timed_speed_rmse_mps": null
+      },
+      "planning_p95_ms": 0.10043299994322297,
+      "mpc_p95_ms": 1.421407649968387
+    },
+    {
+      "scenario": "no_space",
+      "run_id": "fast_regression_20261022",
+      "seed": 1,
+      "duration_s": 20.248345125,
+      "samples": 387,
+      "ego_max_speed_mps": 1.5,
+      "lead_speed_mps": 0.8,
+      "working_diff_sha256": "8570379cef8895a06ee3484f8e4b32ec7dd071d2f0dca470f155782854b7af77",
+      "track_assisted_prediction": true,
+      "timed_control": true,
+      "configured_behavior_and_safety_passed": true,
+      "complete_duration": true,
+      "clean_motion_passed": false,
+      "zero_controller_failures": false,
+      "planner_invalid_samples_after_2s": 99,
+      "controller_failures": 4,
+      "solver_recoveries": 0,
+      "solver_timeouts": 0,
+      "freshness_triggered_replans": 1,
+      "planner_failures_total": 27,
+      "controller_rejection_reasons": {
+        "joint_mpc_solver_4": 3,
+        "predicted_static_clearance": 1
+      },
+      "return_preview_checks": 0,
+      "return_preview_rejections": {},
+      "overtaking": {
+        "behavior_sample_counts": {
+          "CANCEL": 27,
+          "OVERTAKE": 240,
+          "PREPARE_OVERTAKE": 17,
+          "REJOIN": 4,
+          "WAIT": 99
+        },
+        "completed": 0,
+        "first_completion_time_s": null,
+        "truth_completed": 0,
+        "truth_events": [],
+        "truth_verified_pass_and_rejoin": false
+      },
+      "safety": {
+        "boundary_violation_events": 0,
+        "collision_events": 0,
+        "lead_boundary_violation_events": 0,
+        "minimum_body_clearance_m": 0.5058258805436449
+      },
+      "control": {
+        "maximum_abs_acceleration_command_mps2": 29.9824199847079,
+        "maximum_abs_steering_rate_radps": 0.4932188764832872,
+        "mpc_dynamic_check_pass_samples": 267,
+        "post_rejoin_route_max_error_m": null,
+        "post_rejoin_route_rmse_m": null,
+        "route_lateral_rmse_m": 0.7087661893179755,
+        "timed_horizon_position_error_p95_m": 0.023747021639683615,
+        "timed_horizon_speed_rmse_p95_mps": 0.017986736633203805,
+        "timed_position_rmse_m": 0.00411348686972738,
+        "timed_speed_rmse_mps": 0.07345882002384917
+      },
+      "planning_p95_ms": 0.269659999958094,
+      "mpc_p95_ms": 1.2689924499795777
+    },
+    {
+      "scenario": "v8_clear",
+      "run_id": "fast_regression_20261022",
+      "seed": 1,
+      "duration_s": 12.158117843000001,
+      "samples": 227,
+      "ego_max_speed_mps": 1.5,
+      "lead_speed_mps": 0.0,
+      "working_diff_sha256": "8570379cef8895a06ee3484f8e4b32ec7dd071d2f0dca470f155782854b7af77",
+      "track_assisted_prediction": true,
+      "timed_control": true,
+      "configured_behavior_and_safety_passed": true,
+      "complete_duration": true,
+      "clean_motion_passed": true,
+      "zero_controller_failures": true,
+      "planner_invalid_samples_after_2s": 0,
+      "controller_failures": 0,
+      "solver_recoveries": 0,
+      "solver_timeouts": 0,
+      "freshness_triggered_replans": 0,
+      "planner_failures_total": 0,
+      "controller_rejection_reasons": {},
+      "return_preview_checks": 0,
+      "return_preview_rejections": {},
+      "overtaking": {
+        "behavior_sample_counts": {
+          "CRUISE": 227
+        },
+        "completed": 0,
+        "first_completion_time_s": null,
+        "truth_completed": 0,
+        "truth_events": [],
+        "truth_verified_pass_and_rejoin": false
+      },
+      "safety": {
+        "boundary_violation_events": 0,
+        "collision_events": 0,
+        "lead_boundary_violation_events": 0,
+        "minimum_body_clearance_m": 7.690000000000001
+      },
+      "control": {
+        "maximum_abs_acceleration_command_mps2": 2.00379053149075,
+        "maximum_abs_steering_rate_radps": 0.25165459039969096,
+        "mpc_dynamic_check_pass_samples": 0,
+        "post_rejoin_route_max_error_m": null,
+        "post_rejoin_route_rmse_m": null,
+        "route_lateral_rmse_m": 0.015301201520201169,
+        "timed_horizon_position_error_p95_m": null,
+        "timed_horizon_speed_rmse_p95_mps": null,
+        "timed_position_rmse_m": null,
+        "timed_speed_rmse_mps": null
+      },
+      "planning_p95_ms": 0.11936000009882264,
+      "mpc_p95_ms": 1.603875200044058
+    },
+    {
+      "scenario": "v8_static",
+      "run_id": "fast_regression_20261022",
+      "seed": 1,
+      "duration_s": 14.122080449,
+      "samples": 268,
+      "ego_max_speed_mps": 1.5,
+      "lead_speed_mps": 0.0,
+      "working_diff_sha256": "8570379cef8895a06ee3484f8e4b32ec7dd071d2f0dca470f155782854b7af77",
+      "track_assisted_prediction": true,
+      "timed_control": true,
+      "configured_behavior_and_safety_passed": true,
+      "complete_duration": true,
+      "clean_motion_passed": false,
+      "zero_controller_failures": true,
+      "planner_invalid_samples_after_2s": 176,
+      "controller_failures": 0,
+      "solver_recoveries": 0,
+      "solver_timeouts": 0,
+      "freshness_triggered_replans": 0,
+      "planner_failures_total": 39,
+      "controller_rejection_reasons": {},
+      "return_preview_checks": 0,
+      "return_preview_rejections": {},
+      "overtaking": {
+        "behavior_sample_counts": {
+          "CRUISE": 92,
+          "WAIT": 176
+        },
+        "completed": 0,
+        "first_completion_time_s": null,
+        "truth_completed": 0,
+        "truth_events": [],
+        "truth_verified_pass_and_rejoin": false
+      },
+      "safety": {
+        "boundary_violation_events": 0,
+        "collision_events": 0,
+        "lead_boundary_violation_events": 0,
+        "minimum_body_clearance_m": 7.690000000000001
+      },
+      "control": {
+        "maximum_abs_acceleration_command_mps2": 30.005213962636876,
+        "maximum_abs_steering_rate_radps": 0.0,
+        "mpc_dynamic_check_pass_samples": 0,
+        "post_rejoin_route_max_error_m": null,
+        "post_rejoin_route_rmse_m": null,
+        "route_lateral_rmse_m": 0.01800887647321184,
+        "timed_horizon_position_error_p95_m": null,
+        "timed_horizon_speed_rmse_p95_mps": null,
+        "timed_position_rmse_m": null,
+        "timed_speed_rmse_mps": null
+      },
+      "planning_p95_ms": 1.3816865500416478,
+      "mpc_p95_ms": 1.5829543500331056
+    }
+  ],
+  "expected_runs": 5,
+  "run_count_matches": true,
+  "all_clean": false,
+  "note": "Planner-invalid samples are 20 Hz evaluation samples, not independent planner failures. Three repeats are repeatability checks, not broad generalization or vehicle approval. Clean-motion is stricter than configured behavior/safety acceptance; it is not appropriate for deliberately injected fail-stop tests."
+}

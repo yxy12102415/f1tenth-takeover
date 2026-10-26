@@ -46,6 +46,8 @@ def generate_launch_description():
     ])
     ld.add_action(DeclareLaunchArgument('map_name', default_value='Melbourne_map'))
     ld.add_action(DeclareLaunchArgument('gui', default_value='true'))
+    ld.add_action(DeclareLaunchArgument('use_sim_time', default_value='false'))
+    sim_time = ParameterValue(LaunchConfiguration('use_sim_time'), value_type=bool)
     ld.add_action(DeclareLaunchArgument('num_agents', default_value=str(config_dict['bridge']['ros__parameters']['num_agent'])))
     start_defaults = config_dict['bridge']['ros__parameters']
     for argument, parameter in (
@@ -65,6 +67,8 @@ def generate_launch_description():
         executable='gym_bridge',
         name='bridge',
         parameters=[config, {
+            'use_sim_time': sim_time,
+            'publish_sim_clock': sim_time,
             'num_agent': ParameterValue(LaunchConfiguration('num_agents'), value_type=int),
             'map_path': ParameterValue(map_path, value_type=str),
             'sx': ParameterValue(LaunchConfiguration('ego_start_x'), value_type=float),
@@ -80,6 +84,7 @@ def generate_launch_description():
         executable='rviz2',
         name='rviz',
         arguments=['-d', os.path.join(get_package_share_directory('f1tenth_gym_ros'), 'launch', 'gym_bridge.rviz')],
+        parameters=[{'use_sim_time': sim_time}],
         condition=IfCondition(LaunchConfiguration('gui')),
         prefix=(
             'env '
@@ -102,14 +107,14 @@ def generate_launch_description():
                     {'topic': 'map'},
                     {'frame_id': 'map'},
                     {'output': 'screen'},
-                    {'use_sim_time': True}]
+                    {'use_sim_time': sim_time}]
     )
     nav_lifecycle_node = Node(
         package='nav2_lifecycle_manager',
         executable='lifecycle_manager',
         name='lifecycle_manager_localization',
         output='screen',
-        parameters=[{'use_sim_time': True},
+        parameters=[{'use_sim_time': sim_time},
                     {'autostart': True},
                     {'node_names': ['map_server']}]
     )
@@ -117,14 +122,14 @@ def generate_launch_description():
         package='robot_state_publisher',
         executable='robot_state_publisher',
         name='ego_robot_state_publisher',
-        parameters=[{'robot_description': Command(['xacro ', os.path.join(get_package_share_directory('f1tenth_gym_ros'), 'launch', 'ego_racecar.xacro')])}],
+        parameters=[{'use_sim_time': sim_time, 'robot_description': Command(['xacro ', os.path.join(get_package_share_directory('f1tenth_gym_ros'), 'launch', 'ego_racecar.xacro')])}],
         remappings=[('/robot_description', 'ego_robot_description')]
     )
     opp_robot_publisher = Node(
         package='robot_state_publisher',
         executable='robot_state_publisher',
         name='opp_robot_state_publisher',
-        parameters=[{'robot_description': Command(['xacro ', os.path.join(get_package_share_directory('f1tenth_gym_ros'), 'launch', 'opp_racecar.xacro')])}],
+        parameters=[{'use_sim_time': sim_time, 'robot_description': Command(['xacro ', os.path.join(get_package_share_directory('f1tenth_gym_ros'), 'launch', 'opp_racecar.xacro')])}],
         remappings=[('/robot_description', 'opp_robot_description')]
     )
 

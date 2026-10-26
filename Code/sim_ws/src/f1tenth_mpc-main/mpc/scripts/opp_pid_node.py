@@ -11,6 +11,8 @@ from ament_index_python.packages import get_package_share_directory
 from nav_msgs.msg import Odometry
 from rclpy.executors import ExternalShutdownException
 from rclpy.node import Node
+from rclpy.qos import QoSProfile, DurabilityPolicy
+from std_msgs.msg import Float64
 from scipy.spatial.transform import Rotation
 
 
@@ -57,12 +59,15 @@ class OppPIDNode(Node):
         self.declare_parameter("constant_speed", 1.6)
         self.declare_parameter("turning_speed", 1.2)
         self.declare_parameter("stop_duration", 3.0)
+        self.declare_parameter("lateral_amplitude", 0.0)
+        self.declare_parameter("lateral_accel_limit", 0.0)
 
         self.waypoints_path = self.get_parameter("waypoints_path").value
         self.pose_topic = self.get_parameter("pose_topic").value
         self.drive_topic = self.get_parameter("drive_topic").value
         self.lookahead_distance = float(self.get_parameter("lookahead_distance").value)
         self.max_speed = float(self.get_parameter("max_speed").value)
+        self.lateral_accel_limit = float(self.get_parameter("lateral_accel_limit").value)
         self.min_speed = float(self.get_parameter("min_speed").value)
         self.max_steer = float(self.get_parameter("max_steer").value)
         self.kp_steer = float(self.get_parameter("kp_steer").value)
@@ -81,6 +86,15 @@ class OppPIDNode(Node):
         self.scenario_start = self.get_clock().now()
 
         self.waypoints = self.load_waypoints(self.waypoints_path)
+        # Opponent-only route perturbation, never published to ego. Physical
+        # Gym motion executes the steering command; no pose reset/teleport.
+        amplitude = float(self.get_parameter("lateral_amplitude").value)
+        if self.scenario == "lateral_weave":
+            arc = np.r_[0., np.cumsum(np.linalg.norm(np.diff(self.waypoints[:, :2], axis=0), axis=1))]
+            total = arc[-1] + np.linalg.norm(self.waypoints[-1, :2]-self.waypoints[0, :2])
+            offset = amplitude * np.sin(4.0 * np.pi * arc / total)
+            self.waypoints[:, 0] -= np.sin(self.waypoints[:, 2]) * offset
+            self.waypoints[:, 1] += np.cos(self.waypoints[:, 2]) * offset
         self.steer_pid = PIDState()
         self.speed_pid = PIDState()
         self.get_logger().info(
@@ -89,6 +103,11 @@ class OppPIDNode(Node):
         )
 
         self.drive_pub = self.create_publisher(AckermannDriveStamped, self.drive_topic, 10)
+        # Trial sequencing only: no opponent pose/velocity is sent to ego.
+        self.started_pub = self.create_publisher(
+            Float64, "/takeover/lead_started", QoSProfile(
+                depth=1, durability=DurabilityPolicy.TRANSIENT_LOCAL))
+        self.started_sent = False
         self.create_subscription(Odometry, self.pose_topic, self.pose_callback, 10)
 
     def load_waypoints(self, path: str) -> np.ndarray:
@@ -112,6 +131,9 @@ class OppPIDNode(Node):
         y = odom.pose.pose.position.y
         yaw = yaw_from_odom(odom)
         current_speed = math.hypot(odom.twist.twist.linear.x, odom.twist.twist.linear.y)
+        if not self.started_sent and current_speed > 0.05:
+            self.started_pub.publish(Float64(data=self.get_clock().now().nanoseconds * 1e-9))
+            self.started_sent = True
 
         nearest_idx = self.find_nearest_index(x, y)
         target_idx = self.find_lookahead_index(nearest_idx, x, y)
@@ -131,6 +153,25 @@ class OppPIDNode(Node):
 
         elapsed = (self.get_clock().now() - self.scenario_start).nanoseconds * 1e-9
         target_speed = self.scenario_target_speed(elapsed, float(target[3]))
+        if self.lateral_accel_limit > 0.0:
+            # Opponent-only route geometry, including the lateral perturbation.
+            # Preview braking distance; a maximum is not a constant bend speed.
+            preview_distance = current_speed * current_speed / (2.0 * self.max_accel) + 1.0
+            travel = 0.0
+            index = nearest_idx
+            for _ in range(len(self.waypoints)):
+                prev = self.waypoints[(index - 1) % len(self.waypoints), :2]
+                point = self.waypoints[index, :2]
+                nxt = self.waypoints[(index + 1) % len(self.waypoints), :2]
+                ab, bc, ac = point - prev, nxt - point, nxt - prev
+                denominator = np.linalg.norm(ab) * np.linalg.norm(bc) * np.linalg.norm(ac)
+                curvature = abs(2.0 * (ab[0] * bc[1] - ab[1] * bc[0]) / denominator) if denominator > 1e-9 else 0.0
+                corner_speed = math.sqrt(self.lateral_accel_limit / max(0.01, curvature))
+                target_speed = min(target_speed, math.sqrt(corner_speed**2 + 2.0 * self.max_accel * travel))
+                travel += float(np.linalg.norm(bc))
+                if travel >= preview_distance:
+                    break
+                index = (index + 1) % len(self.waypoints)
         speed_error = target_speed - current_speed
         speed_delta = self.pid_step(
             speed_error,
@@ -151,7 +192,7 @@ class OppPIDNode(Node):
 
     def scenario_target_speed(self, elapsed: float, waypoint_speed: float) -> float:
         phase = (elapsed % self.scenario_period) / self.scenario_period
-        if self.scenario == "constant_speed":
+        if self.scenario in ("constant_speed", "lateral_weave"):
             speed = self.constant_speed
         elif self.scenario == "accel_brake":
             triangle = 1.0 - abs(2.0 * phase - 1.0)

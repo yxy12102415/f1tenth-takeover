@@ -1,0 +1,510 @@
+{
+  "run_prefix": "sqp_preview_20261022",
+  "runs": [
+    {
+      "scenario": "fitzpatrick_double_fast",
+      "run_id": "sqp_preview_20261022_seed1",
+      "seed": 1,
+      "duration_s": 111.731510029,
+      "samples": 2180,
+      "ego_max_speed_mps": 1.8,
+      "lead_speed_mps": 1.0,
+      "ego_max_observed_mps": 1.799999952305857,
+      "lead_max_observed_mps": 0.9999999999999989,
+      "working_diff_sha256": "49a130362a6fe400dff85c3b230a120d621460b4c72ef31b62181ae996a70467",
+      "planning_backend": "upstream_sqp",
+      "adapter_source_sha256": {
+        "tools/upstream_sqp_worker.py": "1a635d4dce8b8cd8d039724c051be40a8420661042266be15b40199113958e6a",
+        "src/takeover_sim/include/takeover_sim/sqp_worker.hpp": "dc3a24b95336f93be01aeb85c98c5b98069182a06969a885610f49bab9c8b110"
+      },
+      "sqp_calls": 201,
+      "sqp_failures": 48,
+      "sqp_timeouts": 0,
+      "sqp_preview_checks": 122,
+      "sqp_preview_rejections": {},
+      "track_assisted_prediction": true,
+      "timed_control": true,
+      "configured_behavior_and_safety_passed": true,
+      "complete_duration": true,
+      "clean_motion_passed": true,
+      "zero_controller_failures": true,
+      "planner_invalid_samples_after_2s": 0,
+      "controller_failures": 0,
+      "solver_recoveries": 0,
+      "solver_timeouts": 0,
+      "freshness_triggered_replans": 3,
+      "planner_failures_total": 4,
+      "controller_rejection_reasons": {},
+      "return_preview_checks": 64,
+      "return_preview_rejections": {},
+      "overtaking": {
+        "behavior_sample_counts": {
+          "CANCEL": 81,
+          "CRUISE": 1190,
+          "FOLLOW": 78,
+          "OVERTAKE": 398,
+          "PREPARE_OVERTAKE": 163,
+          "REJOIN": 266,
+          "WAIT": 4
+        },
+        "completed": 2,
+        "first_completion_time_s": 12.156831420000001,
+        "truth_completed": 2,
+        "truth_events": [
+          {
+            "completion_time_s": 12.66644254,
+            "encounter_lap": 0,
+            "lead_distance_m": 2.9992027695438033,
+            "start_time_s": 1.116387397
+          },
+          {
+            "completion_time_s": 100.016466514,
+            "encounter_lap": 1,
+            "lead_distance_m": 3.1996011643125684,
+            "start_time_s": 60.916620218000006
+          }
+        ],
+        "truth_verified_pass_and_rejoin": true
+      },
+      "safety": {
+        "boundary_violation_events": 0,
+        "collision_events": 0,
+        "lead_boundary_violation_events": 0,
+        "minimum_body_clearance_m": 0.36448769049580754
+      },
+      "control": {
+        "maximum_abs_acceleration_command_mps2": 1.9200302143786019,
+        "maximum_abs_steering_rate_radps": 2.0220952620820882,
+        "mpc_dynamic_check_pass_samples": 2162,
+        "post_rejoin_route_max_error_m": 0.17486810187744056,
+        "post_rejoin_route_rmse_m": 0.06557465224705147,
+        "route_lateral_rmse_m": 0.34975043911590253,
+        "timed_horizon_position_error_p95_m": 0.06382095709335972,
+        "timed_horizon_speed_rmse_p95_mps": 0.0513660629774424,
+        "timed_position_rmse_m": 0.00502579295257509,
+        "timed_speed_rmse_mps": 0.007243098612738431
+      },
+      "planning_p95_ms": 28.47876699979679,
+      "mpc_p95_ms": 1.931515550450058
+    },
+    {
+      "scenario": "fitzpatrick_double_fast",
+      "run_id": "sqp_preview_20261022_seed2",
+      "seed": 2,
+      "duration_s": 111.738796328,
+      "samples": 2180,
+      "ego_max_speed_mps": 1.8,
+      "lead_speed_mps": 1.0,
+      "ego_max_observed_mps": 1.7999999523093333,
+      "lead_max_observed_mps": 0.9999999999999989,
+      "working_diff_sha256": "49a130362a6fe400dff85c3b230a120d621460b4c72ef31b62181ae996a70467",
+      "planning_backend": "upstream_sqp",
+      "adapter_source_sha256": {
+        "tools/upstream_sqp_worker.py": "1a635d4dce8b8cd8d039724c051be40a8420661042266be15b40199113958e6a",
+        "src/takeover_sim/include/takeover_sim/sqp_worker.hpp": "dc3a24b95336f93be01aeb85c98c5b98069182a06969a885610f49bab9c8b110"
+      },
+      "sqp_calls": 117,
+      "sqp_failures": 33,
+      "sqp_timeouts": 0,
+      "sqp_preview_checks": 84,
+      "sqp_preview_rejections": {},
+      "track_assisted_prediction": true,
+      "timed_control": true,
+      "configured_behavior_and_safety_passed": true,
+      "complete_duration": true,
+      "clean_motion_passed": false,
+      "zero_controller_failures": true,
+      "planner_invalid_samples_after_2s": 1,
+      "controller_failures": 0,
+      "solver_recoveries": 0,
+      "solver_timeouts": 0,
+      "freshness_triggered_replans": 2,
+      "planner_failures_total": 3,
+      "controller_rejection_reasons": {},
+      "return_preview_checks": 20,
+      "return_preview_rejections": {},
+      "overtaking": {
+        "behavior_sample_counts": {
+          "CRUISE": 1628,
+          "FOLLOW": 68,
+          "OVERTAKE": 345,
+          "PREPARE_OVERTAKE": 59,
+          "REJOIN": 80
+        },
+        "completed": 2,
+        "first_completion_time_s": 12.481748906,
+        "truth_completed": 2,
+        "truth_events": [
+          {
+            "completion_time_s": 13.012299388,
+            "encounter_lap": 0,
+            "lead_distance_m": 3.199999758695901,
+            "start_time_s": 1.1120161480000001
+          },
+          {
+            "completion_time_s": 78.411656382,
+            "encounter_lap": 1,
+            "lead_distance_m": 3.2359214419232103,
+            "start_time_s": 61.361680062000005
+          }
+        ],
+        "truth_verified_pass_and_rejoin": true
+      },
+      "safety": {
+        "boundary_violation_events": 0,
+        "collision_events": 0,
+        "lead_boundary_violation_events": 0,
+        "minimum_body_clearance_m": 0.28046190444669933
+      },
+      "control": {
+        "maximum_abs_acceleration_command_mps2": 2.993100628186689,
+        "maximum_abs_steering_rate_radps": 1.4703594697504454,
+        "mpc_dynamic_check_pass_samples": 2161,
+        "post_rejoin_route_max_error_m": 0.18481418400263433,
+        "post_rejoin_route_rmse_m": 0.0715675983879033,
+        "route_lateral_rmse_m": 0.2734845598050473,
+        "timed_horizon_position_error_p95_m": 0.06553501932398069,
+        "timed_horizon_speed_rmse_p95_mps": 0.05424060887848561,
+        "timed_position_rmse_m": 0.005662110020812048,
+        "timed_speed_rmse_mps": 0.006957173495778213
+      },
+      "planning_p95_ms": 17.444905000047584,
+      "mpc_p95_ms": 2.3881995001602263
+    },
+    {
+      "scenario": "fitzpatrick_double_fast",
+      "run_id": "sqp_preview_20261022_seed3",
+      "seed": 3,
+      "duration_s": 111.746538903,
+      "samples": 2184,
+      "ego_max_speed_mps": 1.8,
+      "lead_speed_mps": 1.0,
+      "ego_max_observed_mps": 1.799999952260445,
+      "lead_max_observed_mps": 0.9999999999999989,
+      "working_diff_sha256": "49a130362a6fe400dff85c3b230a120d621460b4c72ef31b62181ae996a70467",
+      "planning_backend": "upstream_sqp",
+      "adapter_source_sha256": {
+        "tools/upstream_sqp_worker.py": "1a635d4dce8b8cd8d039724c051be40a8420661042266be15b40199113958e6a",
+        "src/takeover_sim/include/takeover_sim/sqp_worker.hpp": "dc3a24b95336f93be01aeb85c98c5b98069182a06969a885610f49bab9c8b110"
+      },
+      "sqp_calls": 184,
+      "sqp_failures": 41,
+      "sqp_timeouts": 0,
+      "sqp_preview_checks": 115,
+      "sqp_preview_rejections": {},
+      "track_assisted_prediction": true,
+      "timed_control": true,
+      "configured_behavior_and_safety_passed": true,
+      "complete_duration": true,
+      "clean_motion_passed": true,
+      "zero_controller_failures": true,
+      "planner_invalid_samples_after_2s": 0,
+      "controller_failures": 0,
+      "solver_recoveries": 0,
+      "solver_timeouts": 0,
+      "freshness_triggered_replans": 2,
+      "planner_failures_total": 4,
+      "controller_rejection_reasons": {},
+      "return_preview_checks": 60,
+      "return_preview_rejections": {},
+      "overtaking": {
+        "behavior_sample_counts": {
+          "CANCEL": 83,
+          "CRUISE": 1188,
+          "FOLLOW": 80,
+          "OVERTAKE": 401,
+          "PREPARE_OVERTAKE": 164,
+          "REJOIN": 267,
+          "UNAVAILABLE": 1
+        },
+        "completed": 2,
+        "first_completion_time_s": 12.182495638,
+        "truth_completed": 2,
+        "truth_events": [
+          {
+            "completion_time_s": 12.759258727,
+            "encounter_lap": 0,
+            "lead_distance_m": 3.149999644781957,
+            "start_time_s": 0.9592837260000001
+          },
+          {
+            "completion_time_s": 100.20931576400001,
+            "encounter_lap": 1,
+            "lead_distance_m": 3.1499998333408428,
+            "start_time_s": 61.059282523
+          }
+        ],
+        "truth_verified_pass_and_rejoin": true
+      },
+      "safety": {
+        "boundary_violation_events": 0,
+        "collision_events": 0,
+        "lead_boundary_violation_events": 0,
+        "minimum_body_clearance_m": 0.37058749802408164
+      },
+      "control": {
+        "maximum_abs_acceleration_command_mps2": 1.8938519522993804,
+        "maximum_abs_steering_rate_radps": 2.0011831491793552,
+        "mpc_dynamic_check_pass_samples": 2163,
+        "post_rejoin_route_max_error_m": 0.1828963515394937,
+        "post_rejoin_route_rmse_m": 0.0712283822651846,
+        "route_lateral_rmse_m": 0.351066361559501,
+        "timed_horizon_position_error_p95_m": 0.0636737441157514,
+        "timed_horizon_speed_rmse_p95_mps": 0.05122580049504777,
+        "timed_position_rmse_m": 0.005608736575185974,
+        "timed_speed_rmse_mps": 0.007393146410318914
+      },
+      "planning_p95_ms": 23.343869999735034,
+      "mpc_p95_ms": 2.0047268998496297
+    },
+    {
+      "scenario": "fitzpatrick_double_fast_lateral",
+      "run_id": "sqp_preview_20261022_seed1",
+      "seed": 1,
+      "duration_s": 111.68833462600001,
+      "samples": 2181,
+      "ego_max_speed_mps": 1.8,
+      "lead_speed_mps": 1.0,
+      "ego_max_observed_mps": 1.799999952305747,
+      "lead_max_observed_mps": 0.9999999999999989,
+      "working_diff_sha256": "49a130362a6fe400dff85c3b230a120d621460b4c72ef31b62181ae996a70467",
+      "planning_backend": "upstream_sqp",
+      "adapter_source_sha256": {
+        "tools/upstream_sqp_worker.py": "1a635d4dce8b8cd8d039724c051be40a8420661042266be15b40199113958e6a",
+        "src/takeover_sim/include/takeover_sim/sqp_worker.hpp": "dc3a24b95336f93be01aeb85c98c5b98069182a06969a885610f49bab9c8b110"
+      },
+      "sqp_calls": 127,
+      "sqp_failures": 35,
+      "sqp_timeouts": 0,
+      "sqp_preview_checks": 88,
+      "sqp_preview_rejections": {},
+      "track_assisted_prediction": true,
+      "timed_control": true,
+      "configured_behavior_and_safety_passed": false,
+      "complete_duration": true,
+      "clean_motion_passed": false,
+      "zero_controller_failures": true,
+      "planner_invalid_samples_after_2s": 473,
+      "controller_failures": 0,
+      "solver_recoveries": 0,
+      "solver_timeouts": 0,
+      "freshness_triggered_replans": 2,
+      "planner_failures_total": 109,
+      "controller_rejection_reasons": {},
+      "return_preview_checks": 31,
+      "return_preview_rejections": {},
+      "overtaking": {
+        "behavior_sample_counts": {
+          "CANCEL": 333,
+          "CRUISE": 985,
+          "FOLLOW": 68,
+          "OVERTAKE": 327,
+          "PREPARE_OVERTAKE": 96,
+          "REJOIN": 142,
+          "UNAVAILABLE": 1,
+          "WAIT": 229
+        },
+        "completed": 1,
+        "first_completion_time_s": 13.669988125000001,
+        "truth_completed": 1,
+        "truth_events": [
+          {
+            "completion_time_s": 14.201302605,
+            "encounter_lap": 0,
+            "lead_distance_m": 3.299999883361293,
+            "start_time_s": 1.101274923
+          }
+        ],
+        "truth_verified_pass_and_rejoin": true
+      },
+      "safety": {
+        "boundary_violation_events": 0,
+        "collision_events": 1,
+        "lead_boundary_violation_events": 0,
+        "minimum_body_clearance_m": 0.0
+      },
+      "control": {
+        "maximum_abs_acceleration_command_mps2": 21.595918419722903,
+        "maximum_abs_steering_rate_radps": 5.43101552766555,
+        "mpc_dynamic_check_pass_samples": 1690,
+        "post_rejoin_route_max_error_m": 0.19202602272316252,
+        "post_rejoin_route_rmse_m": 0.07215086795647563,
+        "route_lateral_rmse_m": 0.4072624994888604,
+        "timed_horizon_position_error_p95_m": 0.06587497847512747,
+        "timed_horizon_speed_rmse_p95_mps": 0.05384074805561102,
+        "timed_position_rmse_m": 0.0045676130063289164,
+        "timed_speed_rmse_mps": 0.008082380013958189
+      },
+      "planning_p95_ms": 17.058261999864044,
+      "mpc_p95_ms": 2.3614921999751455
+    },
+    {
+      "scenario": "fitzpatrick_double_fast_lateral",
+      "run_id": "sqp_preview_20261022_seed2",
+      "seed": 2,
+      "duration_s": 111.34511569600001,
+      "samples": 1808,
+      "ego_max_speed_mps": 1.8,
+      "lead_speed_mps": 1.0,
+      "ego_max_observed_mps": 1.7999999522966947,
+      "lead_max_observed_mps": 0.9999999999999989,
+      "working_diff_sha256": "49a130362a6fe400dff85c3b230a120d621460b4c72ef31b62181ae996a70467",
+      "planning_backend": "upstream_sqp",
+      "adapter_source_sha256": {
+        "tools/upstream_sqp_worker.py": "1a635d4dce8b8cd8d039724c051be40a8420661042266be15b40199113958e6a",
+        "src/takeover_sim/include/takeover_sim/sqp_worker.hpp": "dc3a24b95336f93be01aeb85c98c5b98069182a06969a885610f49bab9c8b110"
+      },
+      "sqp_calls": 64,
+      "sqp_failures": 9,
+      "sqp_timeouts": 0,
+      "sqp_preview_checks": 51,
+      "sqp_preview_rejections": {},
+      "track_assisted_prediction": true,
+      "timed_control": true,
+      "configured_behavior_and_safety_passed": false,
+      "complete_duration": true,
+      "clean_motion_passed": false,
+      "zero_controller_failures": true,
+      "planner_invalid_samples_after_2s": 1,
+      "controller_failures": 0,
+      "solver_recoveries": 0,
+      "solver_timeouts": 0,
+      "freshness_triggered_replans": 1,
+      "planner_failures_total": 4,
+      "controller_rejection_reasons": {},
+      "return_preview_checks": 16,
+      "return_preview_rejections": {},
+      "overtaking": {
+        "behavior_sample_counts": {
+          "CANCEL": 24,
+          "CRUISE": 1385,
+          "FOLLOW": 69,
+          "OVERTAKE": 208,
+          "PREPARE_OVERTAKE": 52,
+          "REJOIN": 69,
+          "UNAVAILABLE": 1
+        },
+        "completed": 1,
+        "first_completion_time_s": 13.297880668000001,
+        "truth_completed": 1,
+        "truth_events": [
+          {
+            "completion_time_s": 13.802377005,
+            "encounter_lap": 0,
+            "lead_distance_m": 3.2999998833612985,
+            "start_time_s": 1.102341545
+          }
+        ],
+        "truth_verified_pass_and_rejoin": true
+      },
+      "safety": {
+        "boundary_violation_events": 0,
+        "collision_events": 0,
+        "lead_boundary_violation_events": 0,
+        "minimum_body_clearance_m": 0.39713431053692905
+      },
+      "control": {
+        "maximum_abs_acceleration_command_mps2": 38.22166914481248,
+        "maximum_abs_steering_rate_radps": 1.998764255617988,
+        "mpc_dynamic_check_pass_samples": 1789,
+        "post_rejoin_route_max_error_m": 0.18287423794020202,
+        "post_rejoin_route_rmse_m": 0.06319501365038321,
+        "route_lateral_rmse_m": 0.2533690838967181,
+        "timed_horizon_position_error_p95_m": 0.062339065056280944,
+        "timed_horizon_speed_rmse_p95_mps": 0.053443594860018956,
+        "timed_position_rmse_m": 0.007175691631518275,
+        "timed_speed_rmse_mps": 0.008427315495555128
+      },
+      "planning_p95_ms": 13.48886499999935,
+      "mpc_p95_ms": 2.152170199951797
+    },
+    {
+      "scenario": "fitzpatrick_double_fast_lateral",
+      "run_id": "sqp_preview_20261022_seed3",
+      "seed": 3,
+      "duration_s": 111.657364677,
+      "samples": 2182,
+      "ego_max_speed_mps": 1.8,
+      "lead_speed_mps": 1.0,
+      "ego_max_observed_mps": 1.799999952304856,
+      "lead_max_observed_mps": 0.9999999999999989,
+      "working_diff_sha256": "49a130362a6fe400dff85c3b230a120d621460b4c72ef31b62181ae996a70467",
+      "planning_backend": "upstream_sqp",
+      "adapter_source_sha256": {
+        "tools/upstream_sqp_worker.py": "1a635d4dce8b8cd8d039724c051be40a8420661042266be15b40199113958e6a",
+        "src/takeover_sim/include/takeover_sim/sqp_worker.hpp": "dc3a24b95336f93be01aeb85c98c5b98069182a06969a885610f49bab9c8b110"
+      },
+      "sqp_calls": 155,
+      "sqp_failures": 60,
+      "sqp_timeouts": 0,
+      "sqp_preview_checks": 89,
+      "sqp_preview_rejections": {},
+      "track_assisted_prediction": true,
+      "timed_control": true,
+      "configured_behavior_and_safety_passed": false,
+      "complete_duration": true,
+      "clean_motion_passed": false,
+      "zero_controller_failures": false,
+      "planner_invalid_samples_after_2s": 448,
+      "controller_failures": 4,
+      "solver_recoveries": 0,
+      "solver_timeouts": 0,
+      "freshness_triggered_replans": 2,
+      "planner_failures_total": 108,
+      "controller_rejection_reasons": {
+        "joint_mpc_solver_4": 3,
+        "mpc_actual_dynamic_conflict": 1
+      },
+      "return_preview_checks": 39,
+      "return_preview_rejections": {},
+      "overtaking": {
+        "behavior_sample_counts": {
+          "CANCEL": 285,
+          "CRUISE": 980,
+          "FOLLOW": 72,
+          "OVERTAKE": 327,
+          "PREPARE_OVERTAKE": 110,
+          "REJOIN": 169,
+          "UNAVAILABLE": 1,
+          "WAIT": 238
+        },
+        "completed": 1,
+        "first_completion_time_s": 13.137866835,
+        "truth_completed": 1,
+        "truth_events": [
+          {
+            "completion_time_s": 13.653247224000001,
+            "encounter_lap": 0,
+            "lead_distance_m": 3.0999998904303094,
+            "start_time_s": 1.05320809
+          }
+        ],
+        "truth_verified_pass_and_rejoin": true
+      },
+      "safety": {
+        "boundary_violation_events": 0,
+        "collision_events": 0,
+        "lead_boundary_violation_events": 0,
+        "minimum_body_clearance_m": 0.4027810898453488
+      },
+      "control": {
+        "maximum_abs_acceleration_command_mps2": 23.37096628545113,
+        "maximum_abs_steering_rate_radps": 4.850381969321043,
+        "mpc_dynamic_check_pass_samples": 1711,
+        "post_rejoin_route_max_error_m": 0.19645133241095325,
+        "post_rejoin_route_rmse_m": 0.07180328784090662,
+        "route_lateral_rmse_m": 0.4542330436663606,
+        "timed_horizon_position_error_p95_m": 0.06864240488641193,
+        "timed_horizon_speed_rmse_p95_mps": 0.0550606887211324,
+        "timed_position_rmse_m": 0.004079634180252825,
+        "timed_speed_rmse_mps": 0.0300717264183172
+      },
+      "planning_p95_ms": 21.245827000257123,
+      "mpc_p95_ms": 2.201328050045957
+    }
+  ],
+  "expected_runs": 6,
+  "run_count_matches": true,
+  "all_clean": false,
+  "note": "Planner-invalid samples are 20 Hz evaluation samples, not independent planner failures. Three repeats are repeatability checks, not broad generalization or vehicle approval. Clean-motion is stricter than configured behavior/safety acceptance; it is not appropriate for deliberately injected fail-stop tests."
+}

@@ -1,0 +1,331 @@
+{
+  "cohort": "Three fresh-process constant-lead trials, same runtime implementation",
+  "source_audits": [
+    "clock_pair_audit.json",
+    "constant_repeats_audit.json"
+  ],
+  "runtime_source_snapshots_identical": true,
+  "behavior_safety_passes": 2,
+  "clean_motion_passes": 0,
+  "runs": [
+    {
+      "scenario": "fitzpatrick_double_3p0_1p8",
+      "run_id": "sqp_clock_pair_20261023_seed1",
+      "seed": 1,
+      "duration_s": 180.15,
+      "samples": 3603,
+      "ego_max_speed_mps": 3,
+      "lead_speed_mps": 1.8,
+      "controller_model": "official_gym_native",
+      "ego_max_observed_mps": 2.9983871319770663,
+      "lead_max_observed_mps": 1.799999952316282,
+      "working_diff_sha256": "b00a52a25be6a9cdff6da7807109d48c5bcf2760ceb1c0afc6cca2bf4eb1f1ba",
+      "runtime_source_sha256": {
+        "Code/sim_ws/src/takeover_sim/src/takeover_controller_node.cpp": "ba2ad2cd4ec6a222b5195bcd58c8e5092af32bf53d9d164fe6cb85da929ef39a",
+        "Code/sim_ws/src/takeover_sim/include/takeover_sim/dynamic_overtaking.hpp": "05fec99955e90d08bb46e0e27a71f40f770ab138231951dca61c54477a107785",
+        "Code/sim_ws/src/takeover_sim/include/takeover_sim/sqp_worker.hpp": "dc3a24b95336f93be01aeb85c98c5b98069182a06969a885610f49bab9c8b110",
+        "Code/sim_ws/src/takeover_sim/launch/gym_takeover_launch.py": "a97337377b4d3d0e5e1251aed6bd4fd5925a286c8e0bc6f0f1da77091d23241a",
+        "Code/sim_ws/src/f1tenth_gym_ros/f1tenth_gym_ros/gym_bridge.py": "dc9539245ce05679085a227f34c47c7981386213e594d7aa0027a546b6c59cb6",
+        "Code/sim_ws/src/f1tenth_gym_ros/launch/gym_bridge_launch.py": "1e1391f5045c27a11c868292765ffe090585f84b51313c074857bf93b9169a00",
+        "Code/sim_ws/src/f1tenth_mpc-main/mpc/scripts/opponent_ekf_tracker.py": "778081542c9bae590ed02f1388763b587c751c7ba2127c9758cfa811023dc1f0",
+        "Code/sim_ws/src/f1tenth_mpc-main/mpc/scripts/opp_pid_node.py": "635c09b3801ee2a52c95f9f1de646f7ab4dd191ddeb14d1bcb8d31cfecd23f61",
+        "Code/sim_ws/src/f1tenth_mpc-main/mpc/scripts/takeover_evaluator.py": "739839241600fa87f31cee075b25d289e71a5435a2a166ca91407d2c0cdfb6f8",
+        "Code/sim_ws/tools/upstream_sqp_worker.py": "62fda9957d4732f31490c3024a95f4c50bbb1c492c487bfff9793ab34eaf26a4",
+        "real_vehicle/candidate_cpp_gpu_20260909/ground_fitzpatrick_joint_20260927_v8/src/cpp_frenet/joint_control.hpp": "07b6e3613c05a0775fb4cd6a962f93495e09bc7e76a719cee537f38eb0cd16cf",
+        "real_vehicle/candidate_cpp_gpu_20260909/ground_fitzpatrick_joint_20260927_v8/generate_joint_solver.py": "9d1e48bb3167bb1a03a85591fa1be2eb6fecd4e78a0b840ae0455bba1e6321d5"
+      },
+      "planning_backend": "upstream_sqp",
+      "adapter_source_sha256": {
+        "tools/upstream_sqp_worker.py": "62fda9957d4732f31490c3024a95f4c50bbb1c492c487bfff9793ab34eaf26a4",
+        "src/takeover_sim/include/takeover_sim/sqp_worker.hpp": "dc3a24b95336f93be01aeb85c98c5b98069182a06969a885610f49bab9c8b110",
+        "tools/generate_gym_mpc.sh": "b44326050c502d4e93c94d1aea4688e9430a065964906d9981c5e65365c85589"
+      },
+      "sqp_calls": 258,
+      "sqp_failures": 49,
+      "sqp_timeouts": 0,
+      "sqp_preview_checks": 165,
+      "sqp_preview_rejections": {},
+      "track_assisted_prediction": true,
+      "timed_control": true,
+      "configured_behavior_and_safety_passed": true,
+      "complete_duration": true,
+      "clean_motion_passed": false,
+      "zero_controller_failures": false,
+      "planner_invalid_samples_after_2s": 20,
+      "controller_failures": 2,
+      "solver_recoveries": 0,
+      "solver_timeouts": 0,
+      "freshness_triggered_replans": 3,
+      "planner_failures_total": 8,
+      "controller_rejection_reasons": {
+        "mpc_actual_dynamic_conflict": 2
+      },
+      "return_preview_checks": 25,
+      "return_preview_rejections": {},
+      "overtaking": {
+        "behavior_sample_counts": {
+          "CANCEL": 35,
+          "CRUISE": 2385,
+          "FOLLOW": 200,
+          "OVERTAKE": 515,
+          "PREPARE_OVERTAKE": 348,
+          "REJOIN": 115,
+          "UNAVAILABLE": 1,
+          "WAIT": 4
+        },
+        "completed": 2,
+        "first_completion_time_s": 10.9,
+        "truth_completed": 2,
+        "truth_events": [
+          {
+            "completion_time_s": 11.450000000000001,
+            "encounter_lap": 0,
+            "lead_distance_m": 2.2499999204736163,
+            "start_time_s": 0.05
+          },
+          {
+            "completion_time_s": 139.70000000000002,
+            "encounter_lap": 1,
+            "lead_distance_m": 1.4404094188294891,
+            "start_time_s": 89
+          }
+        ],
+        "truth_verified_pass_and_rejoin": true
+      },
+      "safety": {
+        "boundary_violation_events": 0,
+        "collision_events": 0,
+        "lead_boundary_violation_events": 0,
+        "minimum_body_clearance_m": 0.22161259537126157
+      },
+      "control": {
+        "maximum_abs_acceleration_command_mps2": 33.14609766006658,
+        "maximum_abs_steering_rate_radps": 3.198287487030211,
+        "mpc_dynamic_check_pass_samples": 3563,
+        "post_rejoin_route_max_error_m": 0.09238244890818506,
+        "post_rejoin_route_rmse_m": 0.03818927314042545,
+        "route_lateral_rmse_m": 0.2950434322921881,
+        "timed_horizon_position_error_p95_m": 0.0932244502951568,
+        "timed_horizon_speed_rmse_p95_mps": 0.07196885102924346,
+        "timed_position_rmse_m": 0.015154837665574841,
+        "timed_speed_rmse_mps": 0.020053255914344863
+      },
+      "planning_p95_ms": 26.09530899985657,
+      "mpc_p95_ms": 1.7692447999252177,
+      "planning_max_ms": 47.07974099983403,
+      "mpc_max_ms": 2.928812999925867
+    },
+    {
+      "scenario": "fitzpatrick_double_3p0_1p8",
+      "run_id": "sqp_clock_repeat_20261023_seed1",
+      "seed": 1,
+      "duration_s": 180.10000000000002,
+      "samples": 3601,
+      "ego_max_speed_mps": 3,
+      "lead_speed_mps": 1.8,
+      "controller_model": "official_gym_native",
+      "ego_max_observed_mps": 2.9979328717455096,
+      "lead_max_observed_mps": 1.799999952316282,
+      "working_diff_sha256": "ad6dbd5689372e1174c65515ded6e448b7eb074bfbdc4c9f387292683f37f891",
+      "runtime_source_sha256": {
+        "Code/sim_ws/src/takeover_sim/src/takeover_controller_node.cpp": "ba2ad2cd4ec6a222b5195bcd58c8e5092af32bf53d9d164fe6cb85da929ef39a",
+        "Code/sim_ws/src/takeover_sim/include/takeover_sim/dynamic_overtaking.hpp": "05fec99955e90d08bb46e0e27a71f40f770ab138231951dca61c54477a107785",
+        "Code/sim_ws/src/takeover_sim/include/takeover_sim/sqp_worker.hpp": "dc3a24b95336f93be01aeb85c98c5b98069182a06969a885610f49bab9c8b110",
+        "Code/sim_ws/src/takeover_sim/launch/gym_takeover_launch.py": "a97337377b4d3d0e5e1251aed6bd4fd5925a286c8e0bc6f0f1da77091d23241a",
+        "Code/sim_ws/src/f1tenth_gym_ros/f1tenth_gym_ros/gym_bridge.py": "dc9539245ce05679085a227f34c47c7981386213e594d7aa0027a546b6c59cb6",
+        "Code/sim_ws/src/f1tenth_gym_ros/launch/gym_bridge_launch.py": "1e1391f5045c27a11c868292765ffe090585f84b51313c074857bf93b9169a00",
+        "Code/sim_ws/src/f1tenth_mpc-main/mpc/scripts/opponent_ekf_tracker.py": "778081542c9bae590ed02f1388763b587c751c7ba2127c9758cfa811023dc1f0",
+        "Code/sim_ws/src/f1tenth_mpc-main/mpc/scripts/opp_pid_node.py": "635c09b3801ee2a52c95f9f1de646f7ab4dd191ddeb14d1bcb8d31cfecd23f61",
+        "Code/sim_ws/src/f1tenth_mpc-main/mpc/scripts/takeover_evaluator.py": "739839241600fa87f31cee075b25d289e71a5435a2a166ca91407d2c0cdfb6f8",
+        "Code/sim_ws/tools/upstream_sqp_worker.py": "62fda9957d4732f31490c3024a95f4c50bbb1c492c487bfff9793ab34eaf26a4",
+        "real_vehicle/candidate_cpp_gpu_20260909/ground_fitzpatrick_joint_20260927_v8/src/cpp_frenet/joint_control.hpp": "07b6e3613c05a0775fb4cd6a962f93495e09bc7e76a719cee537f38eb0cd16cf",
+        "real_vehicle/candidate_cpp_gpu_20260909/ground_fitzpatrick_joint_20260927_v8/generate_joint_solver.py": "9d1e48bb3167bb1a03a85591fa1be2eb6fecd4e78a0b840ae0455bba1e6321d5"
+      },
+      "planning_backend": "upstream_sqp",
+      "adapter_source_sha256": {
+        "tools/upstream_sqp_worker.py": "62fda9957d4732f31490c3024a95f4c50bbb1c492c487bfff9793ab34eaf26a4",
+        "src/takeover_sim/include/takeover_sim/sqp_worker.hpp": "dc3a24b95336f93be01aeb85c98c5b98069182a06969a885610f49bab9c8b110",
+        "tools/generate_gym_mpc.sh": "b44326050c502d4e93c94d1aea4688e9430a065964906d9981c5e65365c85589"
+      },
+      "sqp_calls": 260,
+      "sqp_failures": 53,
+      "sqp_timeouts": 0,
+      "sqp_preview_checks": 162,
+      "sqp_preview_rejections": {},
+      "track_assisted_prediction": true,
+      "timed_control": true,
+      "configured_behavior_and_safety_passed": true,
+      "complete_duration": true,
+      "clean_motion_passed": false,
+      "zero_controller_failures": false,
+      "planner_invalid_samples_after_2s": 20,
+      "controller_failures": 4,
+      "solver_recoveries": 0,
+      "solver_timeouts": 0,
+      "freshness_triggered_replans": 3,
+      "planner_failures_total": 8,
+      "controller_rejection_reasons": {
+        "mpc_actual_dynamic_conflict": 4
+      },
+      "return_preview_checks": 28,
+      "return_preview_rejections": {
+        "mpc_return_clearance_reserve": 2
+      },
+      "overtaking": {
+        "behavior_sample_counts": {
+          "CANCEL": 35,
+          "CRUISE": 2378,
+          "FOLLOW": 195,
+          "OVERTAKE": 515,
+          "PREPARE_OVERTAKE": 353,
+          "REJOIN": 120,
+          "UNAVAILABLE": 1,
+          "WAIT": 4
+        },
+        "completed": 2,
+        "first_completion_time_s": 10.4,
+        "truth_completed": 2,
+        "truth_events": [
+          {
+            "completion_time_s": 10.950000000000001,
+            "encounter_lap": 0,
+            "lead_distance_m": 2.5999999081028395,
+            "start_time_s": 0.05
+          },
+          {
+            "completion_time_s": 141,
+            "encounter_lap": 1,
+            "lead_distance_m": 1.3940456907618284,
+            "start_time_s": 88.35000000000001
+          }
+        ],
+        "truth_verified_pass_and_rejoin": true
+      },
+      "safety": {
+        "boundary_violation_events": 0,
+        "collision_events": 0,
+        "lead_boundary_violation_events": 0,
+        "minimum_body_clearance_m": 0.22192169349778804
+      },
+      "control": {
+        "maximum_abs_acceleration_command_mps2": 32.61892557143423,
+        "maximum_abs_steering_rate_radps": 3.508163392542995,
+        "mpc_dynamic_check_pass_samples": 3559,
+        "post_rejoin_route_max_error_m": 0.09421608777553843,
+        "post_rejoin_route_rmse_m": 0.039145195741209,
+        "route_lateral_rmse_m": 0.295852222216389,
+        "timed_horizon_position_error_p95_m": 0.09307900962343704,
+        "timed_horizon_speed_rmse_p95_mps": 0.07214110946181175,
+        "timed_position_rmse_m": 0.015436689875536709,
+        "timed_speed_rmse_mps": 0.023216219774156468
+      },
+      "planning_p95_ms": 26.518898000176705,
+      "mpc_p95_ms": 1.7751181002040537,
+      "planning_max_ms": 51.01762399999643,
+      "mpc_max_ms": 3.118852000170591
+    },
+    {
+      "scenario": "fitzpatrick_double_3p0_1p8",
+      "run_id": "sqp_clock_repeat_20261023_seed2",
+      "seed": 2,
+      "duration_s": 180.14000000000001,
+      "samples": 3602,
+      "ego_max_speed_mps": 3,
+      "lead_speed_mps": 1.8,
+      "controller_model": "official_gym_native",
+      "ego_max_observed_mps": 2.9947034289481085,
+      "lead_max_observed_mps": 1.799999952316282,
+      "working_diff_sha256": "ad6dbd5689372e1174c65515ded6e448b7eb074bfbdc4c9f387292683f37f891",
+      "runtime_source_sha256": {
+        "Code/sim_ws/src/takeover_sim/src/takeover_controller_node.cpp": "ba2ad2cd4ec6a222b5195bcd58c8e5092af32bf53d9d164fe6cb85da929ef39a",
+        "Code/sim_ws/src/takeover_sim/include/takeover_sim/dynamic_overtaking.hpp": "05fec99955e90d08bb46e0e27a71f40f770ab138231951dca61c54477a107785",
+        "Code/sim_ws/src/takeover_sim/include/takeover_sim/sqp_worker.hpp": "dc3a24b95336f93be01aeb85c98c5b98069182a06969a885610f49bab9c8b110",
+        "Code/sim_ws/src/takeover_sim/launch/gym_takeover_launch.py": "a97337377b4d3d0e5e1251aed6bd4fd5925a286c8e0bc6f0f1da77091d23241a",
+        "Code/sim_ws/src/f1tenth_gym_ros/f1tenth_gym_ros/gym_bridge.py": "dc9539245ce05679085a227f34c47c7981386213e594d7aa0027a546b6c59cb6",
+        "Code/sim_ws/src/f1tenth_gym_ros/launch/gym_bridge_launch.py": "1e1391f5045c27a11c868292765ffe090585f84b51313c074857bf93b9169a00",
+        "Code/sim_ws/src/f1tenth_mpc-main/mpc/scripts/opponent_ekf_tracker.py": "778081542c9bae590ed02f1388763b587c751c7ba2127c9758cfa811023dc1f0",
+        "Code/sim_ws/src/f1tenth_mpc-main/mpc/scripts/opp_pid_node.py": "635c09b3801ee2a52c95f9f1de646f7ab4dd191ddeb14d1bcb8d31cfecd23f61",
+        "Code/sim_ws/src/f1tenth_mpc-main/mpc/scripts/takeover_evaluator.py": "739839241600fa87f31cee075b25d289e71a5435a2a166ca91407d2c0cdfb6f8",
+        "Code/sim_ws/tools/upstream_sqp_worker.py": "62fda9957d4732f31490c3024a95f4c50bbb1c492c487bfff9793ab34eaf26a4",
+        "real_vehicle/candidate_cpp_gpu_20260909/ground_fitzpatrick_joint_20260927_v8/src/cpp_frenet/joint_control.hpp": "07b6e3613c05a0775fb4cd6a962f93495e09bc7e76a719cee537f38eb0cd16cf",
+        "real_vehicle/candidate_cpp_gpu_20260909/ground_fitzpatrick_joint_20260927_v8/generate_joint_solver.py": "9d1e48bb3167bb1a03a85591fa1be2eb6fecd4e78a0b840ae0455bba1e6321d5"
+      },
+      "planning_backend": "upstream_sqp",
+      "adapter_source_sha256": {
+        "tools/upstream_sqp_worker.py": "62fda9957d4732f31490c3024a95f4c50bbb1c492c487bfff9793ab34eaf26a4",
+        "src/takeover_sim/include/takeover_sim/sqp_worker.hpp": "dc3a24b95336f93be01aeb85c98c5b98069182a06969a885610f49bab9c8b110",
+        "tools/generate_gym_mpc.sh": "b44326050c502d4e93c94d1aea4688e9430a065964906d9981c5e65365c85589"
+      },
+      "sqp_calls": 443,
+      "sqp_failures": 60,
+      "sqp_timeouts": 1,
+      "sqp_preview_checks": 272,
+      "sqp_preview_rejections": {},
+      "track_assisted_prediction": true,
+      "timed_control": true,
+      "configured_behavior_and_safety_passed": false,
+      "complete_duration": true,
+      "clean_motion_passed": false,
+      "zero_controller_failures": false,
+      "planner_invalid_samples_after_2s": 35,
+      "controller_failures": 7,
+      "solver_recoveries": 0,
+      "solver_timeouts": 0,
+      "freshness_triggered_replans": 2,
+      "planner_failures_total": 11,
+      "controller_rejection_reasons": {
+        "joint_mpc_solver_4": 1,
+        "mpc_actual_dynamic_conflict": 6
+      },
+      "return_preview_checks": 37,
+      "return_preview_rejections": {},
+      "overtaking": {
+        "behavior_sample_counts": {
+          "CANCEL": 188,
+          "CRUISE": 1565,
+          "FOLLOW": 210,
+          "OVERTAKE": 676,
+          "PREPARE_OVERTAKE": 778,
+          "REJOIN": 180,
+          "UNAVAILABLE": 1,
+          "WAIT": 4
+        },
+        "completed": 1,
+        "first_completion_time_s": 10.9,
+        "truth_completed": 1,
+        "truth_events": [
+          {
+            "completion_time_s": 11.450000000000001,
+            "encounter_lap": 0,
+            "lead_distance_m": 2.2999999187063622,
+            "start_time_s": 0.05
+          }
+        ],
+        "truth_verified_pass_and_rejoin": true
+      },
+      "safety": {
+        "boundary_violation_events": 0,
+        "collision_events": 0,
+        "lead_boundary_violation_events": 0,
+        "minimum_body_clearance_m": 0.2255453129527942
+      },
+      "control": {
+        "maximum_abs_acceleration_command_mps2": 32.209687232973025,
+        "maximum_abs_steering_rate_radps": 4.043455719948045,
+        "mpc_dynamic_check_pass_samples": 3542,
+        "post_rejoin_route_max_error_m": 0.08960493798431188,
+        "post_rejoin_route_rmse_m": 0.038684762068850964,
+        "route_lateral_rmse_m": 0.37165685748830635,
+        "timed_horizon_position_error_p95_m": 0.09468007120303257,
+        "timed_horizon_speed_rmse_p95_mps": 0.07360622250023348,
+        "timed_position_rmse_m": 0.014678897623162771,
+        "timed_speed_rmse_mps": 0.02731717699702336
+      },
+      "planning_p95_ms": 33.52940599961585,
+      "mpc_p95_ms": 1.7770597501112197,
+      "planning_max_ms": 59.36602400015545,
+      "mpc_max_ms": 2.9731629997513664
+    }
+  ],
+  "note": "Seed labels are fresh process/wall-clock repeats, Gym seed remains 12345, injected noise is zero. Not a powered success-probability estimate or hardware approval."
+}

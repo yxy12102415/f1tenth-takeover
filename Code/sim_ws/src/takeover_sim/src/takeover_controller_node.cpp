@@ -9,10 +9,12 @@
 #include <nav_msgs/msg/path.hpp>
 #include <rclcpp/rclcpp.hpp>
 #include <std_msgs/msg/string.hpp>
+#include <std_msgs/msg/float64.hpp>
 #include <sensor_msgs/msg/laser_scan.hpp>
 
 #include "joint_control.hpp"
 #include "takeover_sim/dynamic_overtaking.hpp"
+#include "takeover_sim/sqp_worker.hpp"
 
 namespace {
 
@@ -52,6 +54,12 @@ public:
     declare_parameter<double>("vehicle_width", 0.31);
     declare_parameter<bool>("track_assisted_prediction", true);
     declare_parameter<bool>("timed_control", true);
+    declare_parameter<bool>("lead_enabled", true);
+    declare_parameter<double>("ego_start_delay_s", 0.0);
+    declare_parameter<bool>("adaptive_offset", false);
+    declare_parameter<std::string>("planning_backend", "frenet_candidates");
+    declare_parameter<std::string>("sqp_worker_script", "");
+    declare_parameter<std::string>("sqp_upstream_source", "");
     declare_parameter<int>("allowed_pass_side", 0);
 
     const std::string assets_path = get_parameter("assets_path").as_string();
@@ -59,21 +67,50 @@ public:
     mode_ = get_parameter("mode").as_string();
     if (mode_ != "takeover" && mode_ != "static_v8")
       throw std::runtime_error("mode_must_be_takeover_or_static_v8");
+#ifdef TAKEOVER_OFFICIAL_GYM_MODEL
+    if(mode_=="static_v8")throw std::runtime_error("gym_model_is_not_static_v8");
+#endif
 
     assets_ = std::make_unique<frenet::Assets>(assets_path);
     static_planner_ = std::make_unique<frenet::Planner>(*assets_, 0.03);
     dynamic_planner_ = std::make_unique<takeover::DynamicOvertakingPlanner>(*assets_);
     dynamic_planner_->cruise_speed = get_parameter("cruise_speed").as_double();
+    dynamic_planner_->wheelbase=frenet::joint_model::wheelbase;
+    dynamic_planner_->maximum_steering=frenet::joint_model::steering_limit;
+    dynamic_planner_->acceleration_max=frenet::joint_model::acceleration_limit;
+    dynamic_planner_->deceleration_max=frenet::joint_model::deceleration_limit;
+    dynamic_planner_->acceleration_response=frenet::joint_model::longitudinal_tau(1.,0.);
+    dynamic_planner_->braking_response=frenet::joint_model::longitudinal_tau(0.,1.);
     dynamic_planner_->detection_timeout = get_parameter("target_timeout").as_double();
     dynamic_planner_->pass_offset = get_parameter("pass_offset").as_double();
     dynamic_planner_->vehicle_length = get_parameter("vehicle_length").as_double();
     dynamic_planner_->vehicle_width = get_parameter("vehicle_width").as_double();
     dynamic_planner_->track_assisted_prediction = get_parameter("track_assisted_prediction").as_bool();
     dynamic_planner_->timed_control = get_parameter("timed_control").as_bool();
+    dynamic_planner_->require_target = get_parameter("lead_enabled").as_bool();
+    ego_start_delay_ = get_parameter("ego_start_delay_s").as_double();
+    if (!std::isfinite(ego_start_delay_) || ego_start_delay_ < 0.)
+      throw std::runtime_error("invalid_ego_start_delay_s");
+    dynamic_planner_->adaptive_offset = get_parameter("adaptive_offset").as_bool();
+    planning_backend_=get_parameter("planning_backend").as_string();
+    if(planning_backend_!="frenet_candidates" && planning_backend_!="upstream_sqp")
+      throw std::runtime_error("unknown_planning_backend");
+    if(planning_backend_=="upstream_sqp") {
+      if(mode_!="takeover")throw std::runtime_error("sqp_backend_not_for_static_v8");
+      sqp_worker_=std::make_unique<takeover::SqpWorker>(
+          get_parameter("sqp_worker_script").as_string(),get_parameter("sqp_upstream_source").as_string());
+      dynamic_planner_->adaptive_offset=true;
+      dynamic_planner_->sqp_optimizer=[this](const Json::Value &r){return sqp_worker_->solve(r);};
+    }
     dynamic_planner_->allowed_pass_side = get_parameter("allowed_pass_side").as_int();
     if (std::abs(dynamic_planner_->allowed_pass_side) > 1)
       throw std::runtime_error("allowed_pass_side_must_be_minus1_0_or_1");
-    controller_ = std::make_unique<frenet::JointControl>(true);
+    const double simulation_limit=std::max(2.0,dynamic_planner_->cruise_speed);
+    if(mode_=="static_v8" && simulation_limit>2.0)
+      throw std::runtime_error("static_v8_speed_limit_is_2_mps");
+    controller_ = std::make_unique<frenet::JointControl>(true,simulation_limit,mode_=="takeover");
+    if(dynamic_planner_->adaptive_offset)
+      preview_controller_ = std::make_unique<frenet::JointControl>(true,simulation_limit,mode_=="takeover");
     tracker_ = std::make_unique<frenet::Tracker>("dynamic_mpc");
 
     drive_pub_ = create_publisher<ackermann_msgs::msg::AckermannDriveStamped>(
@@ -81,6 +118,18 @@ public:
     status_pub_ = create_publisher<std_msgs::msg::String>("/takeover/status", 10);
     reference_pub_ = create_publisher<nav_msgs::msg::Path>("/takeover/reference_path", 10);
     lead_prediction_pub_ = create_publisher<nav_msgs::msg::Path>("/takeover/lead_prediction", 10);
+    centerline_pub_ = create_publisher<nav_msgs::msg::Path>(
+        "/takeover/track_centerline", rclcpp::QoS(1).transient_local());
+    publish_path(centerline_pub_, assets_->route);
+    if (dynamic_planner_->require_target && ego_start_delay_ > 0.)
+      lead_started_sub_ = create_subscription<std_msgs::msg::Float64>(
+          "/takeover/lead_started", rclcpp::QoS(1).transient_local(),
+          [this](std_msgs::msg::Float64::SharedPtr msg) {
+            // /clock and this latched event can arrive in either order.
+            if (!std::isfinite(lead_started_time_) && std::isfinite(msg->data) &&
+                msg->data >= 0.)
+              lead_started_time_ = msg->data;
+          });
 
     ego_sub_ = create_subscription<nav_msgs::msg::Odometry>(
         get_parameter("ego_odom_topic").as_string(), 10,
@@ -99,7 +148,7 @@ public:
 
     const double control_rate = get_parameter("control_rate_hz").as_double();
     planning_period_ = 1.0 / get_parameter("planning_rate_hz").as_double();
-    timer_ = create_wall_timer(std::chrono::duration<double>(1.0 / control_rate),
+    timer_ = rclcpp::create_timer(this, get_clock(), rclcpp::Duration::from_seconds(1.0 / control_rate),
                                [this]() { control_tick(); });
     RCLCPP_INFO(get_logger(), "Loaded v8 assets from %s in %s mode",
                 assets_path.c_str(), mode_.c_str());
@@ -107,6 +156,8 @@ public:
 
 private:
   std::string mode_;
+  std::string planning_backend_;
+  std::unique_ptr<takeover::SqpWorker> sqp_worker_;
   std::unique_ptr<frenet::Assets> assets_;
   std::unique_ptr<frenet::Planner> static_planner_;
   std::unique_ptr<takeover::DynamicOvertakingPlanner> dynamic_planner_;
@@ -122,6 +173,8 @@ private:
   double latest_target_message_time_ = -frenet::INF;
   double last_scan_time_ = -frenet::INF;
   double planning_period_ = 0.2;
+  double ego_start_delay_ = 0.0;
+  double lead_started_time_ = std::numeric_limits<double>::quiet_NaN();
   bool stopped_ = true;
   int controller_failures_ = 0;
   int planner_failures_ = 0;
@@ -131,12 +184,19 @@ private:
   int rejected_track_jumps_ = 0;
   int freshness_triggered_replans_ = 0;
   takeover::Decision decision_;
+  std::unique_ptr<frenet::JointControl> preview_controller_;
+  int return_preview_checks_=0;
+  Json::Value return_preview_rejections_{Json::objectValue};
+  int sqp_preview_checks_=0;
+  Json::Value sqp_preview_rejections_{Json::objectValue};
   frenet::Path reference_path_;
 
   rclcpp::Publisher<ackermann_msgs::msg::AckermannDriveStamped>::SharedPtr drive_pub_;
   rclcpp::Publisher<std_msgs::msg::String>::SharedPtr status_pub_;
   rclcpp::Publisher<nav_msgs::msg::Path>::SharedPtr reference_pub_;
   rclcpp::Publisher<nav_msgs::msg::Path>::SharedPtr lead_prediction_pub_;
+  rclcpp::Publisher<nav_msgs::msg::Path>::SharedPtr centerline_pub_;
+  rclcpp::Subscription<std_msgs::msg::Float64>::SharedPtr lead_started_sub_;
   rclcpp::Subscription<nav_msgs::msg::Odometry>::SharedPtr ego_sub_;
   rclcpp::Subscription<sensor_msgs::msg::LaserScan>::SharedPtr scan_sub_;
   rclcpp::Subscription<nav_msgs::msg::Odometry>::SharedPtr target_sub_;
@@ -215,7 +275,7 @@ private:
 
   void plan(double time) {
     const frenet::Pose pose = ego_pose();
-    if (mode_ == "static_v8" || !track_.valid) {
+    if (mode_ == "static_v8" || (!track_.valid && dynamic_planner_->require_target)) {
       const double begin = frenet::mono();
       auto candidate = static_planner_->plan(pose, {}, 3.2);
       decision_ = takeover::Decision{};
@@ -232,6 +292,16 @@ private:
     } else {
       dynamic_planner_->initial_command=controller_->command_speed();
       dynamic_planner_->initial_acceleration=controller_->command_acceleration();
+      dynamic_planner_->initial_curvature=ego_speed()>.2 ?
+          ego_->twist.twist.angular.z/ego_speed() : std::numeric_limits<double>::quiet_NaN();
+      if(preview_controller_) dynamic_planner_->return_feasibility=
+          [this,time](const takeover::Candidate &candidate) {
+            return preview_candidate(candidate,time,true);
+          };
+      if(sqp_worker_ && preview_controller_) dynamic_planner_->overtake_feasibility=
+          [this,time](const takeover::Candidate &candidate) {
+            return preview_candidate(candidate,time,false);
+          };
       decision_ = dynamic_planner_->plan(pose, ego_speed(), prediction_track(time), time);
     }
     reference_path_ = decision_.candidate.path;
@@ -241,8 +311,47 @@ private:
     last_plan_time_ = time;
   }
 
+  bool preview_candidate(const takeover::Candidate &candidate,double time,bool returning) {
+    if(returning) ++return_preview_checks_; else ++sqp_preview_checks_;
+    try {
+      preview_controller_->copy_runtime_from(*controller_);
+      frenet::TimedReference timed;
+      for(const auto &p:candidate.timed) timed.points.push_back({p.t,p.pose,p.speed});
+      preview_controller_->compute(*assets_,candidate.path,ego_pose(),ego_speed(),
+          ego_->twist.twist.linear.y,ego_->twist.twist.angular.z,100.,
+          dynamic_planner_->cruise_speed,.05,*tracker_,{},&timed);
+      validate_mpc_motion(time,*preview_controller_);
+      // Preserve the original stricter return admission. SQP lateral-entry
+      // previews use the same live body/map checks, not return-only alignment.
+      const auto &clearance=preview_controller_->diag["mpc_minimum_predicted_body_clearance_m"];
+      if(returning && decision_.behavior==takeover::Behavior::OVERTAKE) {
+        if(clearance.isNumeric() && !takeover::return_clearance_reserved(clearance.asDouble()))
+          throw std::runtime_error("mpc_return_clearance_reserve");
+        const auto target=prediction_track(time);
+        const double deadline=dynamic_planner_->committed_prediction_timeout-
+            std::max(0.,time-target.observation_stamp)-planning_period_;
+        if(!takeover::return_alignment_before(*assets_,candidate,deadline))
+          throw std::runtime_error("mpc_return_prediction_window");
+      }
+      if(!returning && decision_.behavior!=takeover::Behavior::OVERTAKE &&
+          clearance.isNumeric() && clearance.asDouble()<.10)
+        throw std::runtime_error("mpc_sqp_clearance_reserve");
+      return true;
+    } catch(const std::exception &e) {
+      auto &rejections=returning?return_preview_rejections_:sqp_preview_rejections_;
+      rejections[e.what()]=rejections[e.what()].asInt()+1;
+      return false;
+    }
+  }
+
   void control_tick() {
     const double time = now().seconds();
+    if (dynamic_planner_->require_target && ego_start_delay_ > 0. &&
+        (!std::isfinite(lead_started_time_) || time < lead_started_time_ + ego_start_delay_)) {
+      publish_stop("waiting_for_lead_head_start");
+      publish_status(time, Json::Value());
+      return;
+    }
     if (!ego_) {
       publish_stop("waiting_for_ego_odometry");
       return;
@@ -298,7 +407,7 @@ private:
         ++solver_recoveries_;
         controller_->diag["cold_retry_recovered"] = true;
       }
-      if(use_timed) validate_mpc_motion(time);
+      if(use_timed) validate_mpc_motion(time,*controller_);
       publish_drive(command.speed, command.angle);
       diagnostic = controller_->diag;
       stopped_ = false;
@@ -324,8 +433,8 @@ private:
     drive_pub_->publish(command);
   }
 
-  void validate_mpc_motion(double time) {
-    const auto &path=controller_->accepted_prediction();
+  void validate_mpc_motion(double time, frenet::JointControl &model) {
+    const auto &path=model.accepted_prediction();
     if(path.size()<2) throw std::runtime_error("mpc_prediction_missing");
     auto target=prediction_track(time);
     const double age=target.valid?time-target.observation_stamp:frenet::INF;
@@ -353,8 +462,8 @@ private:
       if(takeover::polygons_overlap(body,other))
         throw std::runtime_error("mpc_actual_dynamic_conflict");
     }
-    controller_->diag["mpc_dynamic_check_passed"]=true;
-    controller_->diag["mpc_minimum_predicted_body_clearance_m"]=std::isfinite(minimum)?Json::Value(minimum):Json::Value();
+    model.diag["mpc_dynamic_check_passed"]=true;
+    model.diag["mpc_minimum_predicted_body_clearance_m"]=std::isfinite(minimum)?Json::Value(minimum):Json::Value();
   }
 
   void publish_stop(const std::string &reason) {
@@ -391,6 +500,9 @@ private:
   void publish_status(double time, const Json::Value &controller_diagnostic) {
     Json::Value value;
     value["stamp"] = time;
+    value["ego_start_delay_s"] = ego_start_delay_;
+    value["lead_started_stamp"] = std::isfinite(lead_started_time_) ?
+        Json::Value(lead_started_time_) : Json::Value();
     value["plan_stamp"] = last_plan_time_;
     value["freshness_triggered_replans"] = freshness_triggered_replans_;
     value["mode"] = mode_;
@@ -413,6 +525,21 @@ private:
     value["prediction_model"] = dynamic_planner_->track_assisted_prediction?"track_assisted_with_cv_fallback":"cartesian_cv";
     value["timed_control"] = dynamic_planner_->timed_control;
     value["transition_length_m"] = decision_.candidate.transition_length;
+    value["adaptive_offset"] = dynamic_planner_->adaptive_offset;
+    value["planning_backend"] = planning_backend_;
+    if(sqp_worker_) {
+      value["sqp_calls"]=sqp_worker_->calls;
+      value["sqp_failures"]=sqp_worker_->failures;
+      value["sqp_timeouts"]=sqp_worker_->timeouts;
+      value["sqp_last"]=sqp_worker_->last;
+      value["sqp_geometry"]=dynamic_planner_->sqp_geometry;
+    }
+    value["target_offset_m"] = decision_.candidate.target_offset;
+    value["evaluated_candidates"] = decision_.candidate.evaluated_candidates;
+    value["return_preview_checks"] = return_preview_checks_;
+    value["return_preview_rejections"] = return_preview_rejections_;
+    value["sqp_preview_checks"] = sqp_preview_checks_;
+    value["sqp_preview_rejections"] = sqp_preview_rejections_;
     value["minimum_predicted_body_clearance_m"] =
         std::isfinite(decision_.candidate.minimum_body_clearance) ?
         Json::Value(decision_.candidate.minimum_body_clearance) : Json::Value();

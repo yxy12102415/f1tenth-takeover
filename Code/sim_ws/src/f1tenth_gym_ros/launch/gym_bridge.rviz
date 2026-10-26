@@ -180,6 +180,46 @@ Visualization Manager:
       Update Interval: 0
       Value: true
       Visual Enabled: true
+    - Class: rviz_default_plugins/Path
+      Name: Track Centerline (Reference Route)
+      Enabled: true
+      Color: 255; 220; 40
+      Alpha: 1
+      Line Style: Billboards
+      Line Width: 0.04
+      Buffer Length: 1
+      Pose Style: None
+      Offset:
+        X: 0
+        Y: 0
+        Z: 0.04
+      Topic:
+        Value: /takeover/track_centerline
+        Depth: 1
+        Durability Policy: Transient Local
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+      Value: true
+    - Class: rviz_default_plugins/Path
+      Name: Overtaking Plan (Local Reference)
+      Enabled: true
+      Color: 0; 230; 255
+      Alpha: 1
+      Line Style: Billboards
+      Line Width: 0.07
+      Buffer Length: 1
+      Pose Style: None
+      Offset:
+        X: 0
+        Y: 0
+        Z: 0.08
+      Topic:
+        Value: /takeover/reference_path
+        Depth: 10
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+      Value: true
   Enabled: true
   Global Options:
     Background Color: 48; 48; 48

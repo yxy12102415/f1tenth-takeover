@@ -30,6 +30,10 @@ class OpponentEKFTracker(Node):
         self.declare_parameter('measurement_noise_pos', 0.08)
         self.declare_parameter('measurement_noise_vel', 0.8)
         self.declare_parameter('lidar_fov_deg', 120.0)
+        self.declare_parameter('tracked_lidar_fov_deg', 0.0)
+        self.declare_parameter('tracked_min_forward_x', -1.5)
+        self.declare_parameter('tracked_max_cluster_points', 300)
+        self.declare_parameter('tracked_geometry_timeout', 0.3)
         self.declare_parameter('lidar_min_range', 0.2)
         self.declare_parameter('lidar_max_range', 8.0)
         self.declare_parameter('cluster_gap', 0.35)
@@ -92,6 +96,10 @@ class OpponentEKFTracker(Node):
         self.ego_odom = None
         self.last_detection_stamp = None
         self.lidar_fov = math.radians(float(self.get_parameter('lidar_fov_deg').value))
+        self.tracked_lidar_fov = math.radians(float(self.get_parameter('tracked_lidar_fov_deg').value))
+        self.tracked_min_forward_x = float(self.get_parameter('tracked_min_forward_x').value)
+        self.tracked_max_cluster_points = int(self.get_parameter('tracked_max_cluster_points').value)
+        self.tracked_geometry_timeout = float(self.get_parameter('tracked_geometry_timeout').value)
         self.lidar_min_range = float(self.get_parameter('lidar_min_range').value)
         self.lidar_max_range = float(self.get_parameter('lidar_max_range').value)
         self.cluster_gap = float(self.get_parameter('cluster_gap').value)
@@ -314,7 +322,18 @@ class OpponentEKFTracker(Node):
             'reacquisition_motion_mps': None,
         }
         points = []
-        half_fov = self.lidar_fov * 0.5
+        # Rear/side association is opt-in and requires a recently measured
+        # identity. Initial/global acquisition retains the original front mask.
+        # A fully visible side panel also spans more beams than a rear face.
+        established = (self.tracked_lidar_fov > 0.0 and self.initialized and
+                       self.last_detection_stamp is not None and
+                       0.0 <= stamp-self.last_detection_stamp <= self.tracked_geometry_timeout)
+        half_fov = (max(self.lidar_fov,self.tracked_lidar_fov) if established else self.lidar_fov)*.5
+        max_points = max(self.max_cluster_points,self.tracked_max_cluster_points) if established else self.max_cluster_points
+        min_x = min(self.min_forward_x,self.tracked_min_forward_x) if established else self.min_forward_x
+        diagnostics['established_track_geometry'] = established
+        diagnostics['active_fov_deg'] = math.degrees(2*half_fov)
+        diagnostics['active_max_cluster_points'] = max_points
         for idx, dist in enumerate(msg.ranges):
             if not math.isfinite(dist):
                 continue
@@ -349,7 +368,7 @@ class OpponentEKFTracker(Node):
 
         candidates = []
         for cluster in clusters:
-            if len(cluster) > self.max_cluster_points:
+            if len(cluster) > max_points:
                 continue
             if self.static_map is not None:
                 # Reject returns belonging to the known static map, before
@@ -373,7 +392,7 @@ class OpponentEKFTracker(Node):
             width = self.cluster_width(cluster)
             if width < self.min_cluster_width or width > self.max_cluster_width:
                 continue
-            if cx <= self.min_forward_x:
+            if cx <= min_x:
                 continue
             if distance > 1e-6:
                 cx += self.target_center_offset * cx / distance

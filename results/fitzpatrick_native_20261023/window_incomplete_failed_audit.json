@@ -1,0 +1,108 @@
+{
+  "run_prefix": "sqp_window_pair_20261023",
+  "runs": [
+    {
+      "scenario": "fitzpatrick_double_3p0_1p8",
+      "run_id": "sqp_window_pair_20261023_seed1",
+      "seed": 1,
+      "duration_s": 180.10000000000002,
+      "samples": 3602,
+      "ego_max_speed_mps": 3.0,
+      "lead_speed_mps": 1.8,
+      "controller_model": "official_gym_native",
+      "ego_max_observed_mps": 2.977705970338444,
+      "lead_max_observed_mps": 1.799999952316282,
+      "working_diff_sha256": "ba02641e84f2ae260445d3c106c4961ca090ee7d72c7fa8354eb956aa8ff3a1e",
+      "runtime_source_sha256": {
+        "Code/sim_ws/src/takeover_sim/src/takeover_controller_node.cpp": "ba2ad2cd4ec6a222b5195bcd58c8e5092af32bf53d9d164fe6cb85da929ef39a",
+        "Code/sim_ws/src/takeover_sim/include/takeover_sim/dynamic_overtaking.hpp": "8f6ae119b4328bdde8996f3d0cbe28ddc107081f30573fce9e8b6c58ac85188c",
+        "Code/sim_ws/src/takeover_sim/include/takeover_sim/sqp_worker.hpp": "dc3a24b95336f93be01aeb85c98c5b98069182a06969a885610f49bab9c8b110",
+        "Code/sim_ws/src/takeover_sim/launch/gym_takeover_launch.py": "a97337377b4d3d0e5e1251aed6bd4fd5925a286c8e0bc6f0f1da77091d23241a",
+        "Code/sim_ws/src/f1tenth_gym_ros/f1tenth_gym_ros/gym_bridge.py": "dc9539245ce05679085a227f34c47c7981386213e594d7aa0027a546b6c59cb6",
+        "Code/sim_ws/src/f1tenth_gym_ros/launch/gym_bridge_launch.py": "1e1391f5045c27a11c868292765ffe090585f84b51313c074857bf93b9169a00",
+        "Code/sim_ws/src/f1tenth_mpc-main/mpc/scripts/opponent_ekf_tracker.py": "778081542c9bae590ed02f1388763b587c751c7ba2127c9758cfa811023dc1f0",
+        "Code/sim_ws/src/f1tenth_mpc-main/mpc/scripts/opp_pid_node.py": "635c09b3801ee2a52c95f9f1de646f7ab4dd191ddeb14d1bcb8d31cfecd23f61",
+        "Code/sim_ws/src/f1tenth_mpc-main/mpc/scripts/takeover_evaluator.py": "739839241600fa87f31cee075b25d289e71a5435a2a166ca91407d2c0cdfb6f8",
+        "Code/sim_ws/tools/upstream_sqp_worker.py": "62fda9957d4732f31490c3024a95f4c50bbb1c492c487bfff9793ab34eaf26a4",
+        "real_vehicle/candidate_cpp_gpu_20260909/ground_fitzpatrick_joint_20260927_v8/src/cpp_frenet/joint_control.hpp": "07b6e3613c05a0775fb4cd6a962f93495e09bc7e76a719cee537f38eb0cd16cf",
+        "real_vehicle/candidate_cpp_gpu_20260909/ground_fitzpatrick_joint_20260927_v8/generate_joint_solver.py": "9d1e48bb3167bb1a03a85591fa1be2eb6fecd4e78a0b840ae0455bba1e6321d5"
+      },
+      "planning_backend": "upstream_sqp",
+      "adapter_source_sha256": {
+        "tools/upstream_sqp_worker.py": "62fda9957d4732f31490c3024a95f4c50bbb1c492c487bfff9793ab34eaf26a4",
+        "src/takeover_sim/include/takeover_sim/sqp_worker.hpp": "dc3a24b95336f93be01aeb85c98c5b98069182a06969a885610f49bab9c8b110",
+        "tools/generate_gym_mpc.sh": "b44326050c502d4e93c94d1aea4688e9430a065964906d9981c5e65365c85589"
+      },
+      "sqp_calls": 480,
+      "sqp_failures": 43,
+      "sqp_timeouts": 0,
+      "sqp_preview_checks": 371,
+      "sqp_preview_rejections": {
+        "mpc_actual_dynamic_conflict": 3
+      },
+      "track_assisted_prediction": true,
+      "timed_control": true,
+      "configured_behavior_and_safety_passed": false,
+      "complete_duration": true,
+      "clean_motion_passed": false,
+      "zero_controller_failures": false,
+      "planner_invalid_samples_after_2s": 75,
+      "controller_failures": 15,
+      "solver_recoveries": 0,
+      "solver_timeouts": 0,
+      "freshness_triggered_replans": 0,
+      "planner_failures_total": 19,
+      "controller_rejection_reasons": {
+        "joint_mpc_solver_4": 5,
+        "mpc_actual_dynamic_conflict": 10
+      },
+      "return_preview_checks": 138,
+      "return_preview_rejections": {
+        "mpc_actual_dynamic_conflict": 3,
+        "mpc_return_clearance_reserve": 7
+      },
+      "overtaking": {
+        "behavior_sample_counts": {
+          "CANCEL": 509,
+          "FOLLOW": 444,
+          "OVERTAKE": 1221,
+          "PREPARE_OVERTAKE": 793,
+          "REJOIN": 630,
+          "UNAVAILABLE": 1,
+          "WAIT": 4
+        },
+        "completed": 0,
+        "first_completion_time_s": null,
+        "truth_completed": 0,
+        "truth_events": [],
+        "truth_verified_pass_and_rejoin": false
+      },
+      "safety": {
+        "boundary_violation_events": 0,
+        "collision_events": 0,
+        "lead_boundary_violation_events": 0,
+        "minimum_body_clearance_m": 0.10152518764692257
+      },
+      "control": {
+        "maximum_abs_acceleration_command_mps2": 53.10269832611009,
+        "maximum_abs_steering_rate_radps": 4.191527962684572,
+        "mpc_dynamic_check_pass_samples": 3494,
+        "post_rejoin_route_max_error_m": null,
+        "post_rejoin_route_rmse_m": null,
+        "route_lateral_rmse_m": 0.5059409319412077,
+        "timed_horizon_position_error_p95_m": 0.09858015543901152,
+        "timed_horizon_speed_rmse_p95_mps": 0.07695157915526055,
+        "timed_position_rmse_m": 0.014466377209187144,
+        "timed_speed_rmse_mps": 0.0432588030258655
+      },
+      "planning_p95_ms": 28.437939000014012,
+      "mpc_p95_ms": 1.8276558000479781,
+      "planning_max_ms": 68.3924259997184,
+      "mpc_max_ms": 3.4216149997519096
+    }
+  ],
+  "expected_runs": 2,
+  "run_count_matches": false,
+  "all_clean": false,
+  "note": "Planner-invalid samples are 20 Hz evaluation samples, not independent planner failures. Three repeats are repeatability checks, not broad generalization or vehicle approval. Clean-motion is stricter than configured behavior/safety acceptance; it is not appropriate for deliberately injected fail-stop tests."
+}

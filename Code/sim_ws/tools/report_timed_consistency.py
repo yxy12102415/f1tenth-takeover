@@ -7,6 +7,7 @@ and invalid-planner samples after initialization. No acceptance is relaxed.
 import argparse
 import csv
 import json
+import math
 from pathlib import Path
 
 
@@ -32,13 +33,30 @@ def main():
         moving = [r for r in rows if float(r['time_s']) > 2.0]
         invalid = sum(r.get('planner_valid') == 'False' for r in moving)
         runtime = s['runtime']
+        def peak(key):
+            values=[float(r[key]) for r in rows if r.get(key) not in ('',None)]
+            return max((v for v in values if math.isfinite(v)),default=None)
         config = json.loads(p.with_name('config.json').read_text())
         complete = bool(rows) and s['duration_s'] + .75 >= config['duration_s']
         clean = (complete and s['passed'] and runtime['controller_failures'] == 0
-                 and runtime['solver_timeouts'] == 0 and invalid == 0)
+                 and runtime['solver_timeouts'] == 0 and runtime.get('sqp_timeouts', 0) == 0 and invalid == 0)
         reports.append({
             'scenario': s['scenario'], 'run_id': s['run_id'], 'seed': s['seed'],
             'duration_s': s['duration_s'], 'samples': s['samples'],
+            'ego_max_speed_mps': config.get('ego_max_speed_mps'),
+            'lead_speed_mps': config.get('lead_speed_mps'),
+            'controller_model': config.get('controller_model','v8'),
+            'ego_max_observed_mps': peak('ego_speed_mps'),
+            'lead_max_observed_mps': peak('lead_speed_mps'),
+            'working_diff_sha256': config.get('working_diff_sha256'),
+            'runtime_source_sha256': config.get('runtime_source_sha256'),
+            'planning_backend': config.get('planning_backend', 'frenet_candidates'),
+            'adapter_source_sha256': config.get('adapter_source_sha256'),
+            'sqp_calls': runtime.get('sqp_calls', 0),
+            'sqp_failures': runtime.get('sqp_failures', 0),
+            'sqp_timeouts': runtime.get('sqp_timeouts', 0),
+            'sqp_preview_checks': runtime.get('sqp_preview_checks', 0),
+            'sqp_preview_rejections': runtime.get('sqp_preview_rejections', {}),
             'track_assisted_prediction': config.get('track_assisted_prediction'),
             'timed_control': config.get('timed_control'),
             'configured_behavior_and_safety_passed': s['passed'],
@@ -52,9 +70,13 @@ def main():
             'freshness_triggered_replans': runtime.get('freshness_triggered_replans', 0),
             'planner_failures_total': runtime['planner_failures'],
             'controller_rejection_reasons': runtime.get('controller_rejection_reasons', {}),
+            'return_preview_checks': runtime.get('return_preview_checks', 0),
+            'return_preview_rejections': runtime.get('return_preview_rejections', {}),
             'overtaking': s['overtaking'], 'safety': s['safety'], 'control': s['control'],
             'planning_p95_ms': runtime['planning_p95_ms'],
             'mpc_p95_ms': runtime['mpc_p95_ms'],
+            'planning_max_ms': peak('planning_ms'),
+            'mpc_max_ms': peak('mpc_solve_ms'),
         })
     if not reports:
         raise SystemExit('No matching completed runs')

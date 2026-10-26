@@ -71,4 +71,37 @@ install(TARGETS takeover_joint_solver takeover_controller_node
 install(DIRECTORY include/ DESTINATION include)
 install(DIRECTORY launch config DESTINATION share/${PROJECT_NAME})
 
+# Same C++ MPC formulation, separate generated plant parameters for Gym.
+# The shipped v8 library/executable above retain their original model.
+set(GYM_GENERATED "${CMAKE_CURRENT_BINARY_DIR}/gym_model/generated_joint")
+if(EXISTS "${GYM_GENERATED}/acados_solver_joint_vehicle.c")
+  file(GLOB GYM_MODEL_SOURCES
+    "${GYM_GENERATED}/joint_vehicle_model/*.c"
+    "${GYM_GENERATED}/joint_vehicle_cost/*.c"
+    "${GYM_GENERATED}/joint_vehicle_constraints/*.c")
+  add_library(takeover_gym_joint_solver SHARED
+    "${GYM_GENERATED}/acados_solver_joint_vehicle.c" ${GYM_MODEL_SOURCES})
+  target_include_directories(takeover_gym_joint_solver PRIVATE "${GYM_GENERATED}"
+    "${ACADOS_PREFIX}/include" "${ACADOS_PREFIX}/include/blasfeo/include"
+    "${ACADOS_PREFIX}/include/hpipm/include")
+  target_link_directories(takeover_gym_joint_solver PRIVATE "${ACADOS_PREFIX}/lib")
+  target_link_libraries(takeover_gym_joint_solver acados hpipm blasfeo m)
+  add_executable(takeover_gym_controller_node src/takeover_controller_node.cpp
+    "${V8_ROOT}/src/dynamic_mpc.cpp" "${V8_ROOT}/src/mpc_iteration.cpp")
+  target_compile_definitions(takeover_gym_controller_node PRIVATE TAKEOVER_OFFICIAL_GYM_MODEL=1)
+  target_include_directories(takeover_gym_controller_node PRIVATE include
+    "${V8_ROOT}/src/cpp_frenet" "${GYM_GENERATED}" "${ACADOS_PREFIX}/include"
+    "${ACADOS_PREFIX}/include/blasfeo/include" "${ACADOS_PREFIX}/include/hpipm/include"
+    ${JSONCPP_INCLUDE_DIRS})
+  target_link_directories(takeover_gym_controller_node PRIVATE "${ACADOS_PREFIX}/lib")
+  target_link_libraries(takeover_gym_controller_node takeover_gym_joint_solver
+    acados hpipm blasfeo Eigen3::Eigen ${JSONCPP_LIBRARIES})
+  ament_target_dependencies(takeover_gym_controller_node rclcpp ackermann_msgs
+    nav_msgs std_msgs geometry_msgs sensor_msgs)
+  set_target_properties(takeover_gym_joint_solver takeover_gym_controller_node PROPERTIES
+    BUILD_RPATH "${ACADOS_PREFIX}/lib" INSTALL_RPATH "${ACADOS_PREFIX}/lib")
+  install(TARGETS takeover_gym_joint_solver takeover_gym_controller_node
+    LIBRARY DESTINATION lib RUNTIME DESTINATION lib/${PROJECT_NAME})
+endif()
+
 ament_package()

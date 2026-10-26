@@ -1,0 +1,10 @@
+{
+  "run_id": "sqp_stage2_20261022_seed1",
+  "scenario": "fitzpatrick_double_fast",
+  "command": "python3 tools/audit_takeover_graph.py",
+  "opponent_truth_subscribers": ["takeover_evaluator", "takeover_lead_controller"],
+  "final_command_publishers": ["takeover_safety_arbiter"],
+  "nominal_command_publishers": ["takeover_controller"],
+  "tracker_measurement_source": "lidar",
+  "passed": true
+}

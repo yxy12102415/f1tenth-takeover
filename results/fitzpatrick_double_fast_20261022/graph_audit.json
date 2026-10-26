@@ -1,0 +1,14 @@
+{
+  "scenario": "fitzpatrick_double_fast_lateral",
+  "run_id": "fast_progress_20261022_seed1",
+  "working_diff_sha256": "8570379cef8895a06ee3484f8e4b32ec7dd071d2f0dca470f155782854b7af77",
+  "audit_command": "timeout 12 python3 tools/audit_takeover_graph.py",
+  "ROS_LOCALHOST_ONLY": 1,
+  "ROS_DOMAIN_ID": 73,
+  "opponent_truth_subscribers": ["takeover_evaluator", "takeover_lead_controller"],
+  "final_command_publishers": ["takeover_safety_arbiter"],
+  "nominal_command_publishers": ["takeover_controller"],
+  "tracker_measurement_source": "lidar",
+  "passed": true,
+  "note": "Read-only ROS graph/parameter observation during this trial. No real vehicle contacted."
+}

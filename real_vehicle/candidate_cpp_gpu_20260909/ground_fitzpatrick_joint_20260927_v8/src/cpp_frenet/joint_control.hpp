@@ -4,6 +4,26 @@ extern "C" {
 #include "acados_solver_joint_vehicle.h"
 }
 namespace frenet {
+namespace joint_model {
+#ifdef TAKEOVER_OFFICIAL_GYM_MODEL
+constexpr double lf=.15875,lr=.17145,steering_tau=.02;
+constexpr double steering_limit=.4189;
+constexpr double acceleration_limit=3.0;
+constexpr double deceleration_limit=3.0;
+constexpr int rti_passes=8;
+constexpr double cf=1.0489*3.74*9.81*lr/(lf+lr)*4.718;
+constexpr double cr=1.0489*3.74*9.81*lf/(lf+lr)*5.4562;
+inline double longitudinal_tau(double command,double speed){return command>=speed?20./95.1:5./95.1;}
+#else
+constexpr double lf=.12,lr=.13,cf=90.,cr=96.,steering_tau=.20;
+constexpr double steering_limit=.269;
+constexpr double acceleration_limit=1.0;
+constexpr double deceleration_limit=.8;
+constexpr int rti_passes=4;
+inline double longitudinal_tau(double,double){return .15;}
+#endif
+constexpr double wheelbase=lf+lr;
+}
 struct Control { double speed=0, angle=0; };
 struct TimedReferencePoint { double t; Pose pose; double speed; };
 struct TimedReference {
@@ -105,11 +125,16 @@ class JointControl {
   double command=0, acceleration=0, steering=0, servo=0, integral=0;
   double continuous_yaw=0, lateral_estimate=0, yaw_rate_estimate=0;
   bool initialized=false, floor_reached=false, coasting=false;
+  double speed_limit_=2.0;
+  bool measured_yaw_feedback_=false;
   std::array<std::array<double,10>,25> predicted{};
   Path accepted_prediction_;
 public:
   Json::Value diag;
-  explicit JointControl(bool mpc) {
+  explicit JointControl(bool mpc, double speed_limit=2.0, bool measured_yaw_feedback=false)
+      :speed_limit_(speed_limit),measured_yaw_feedback_(measured_yaw_feedback) {
+    if(!std::isfinite(speed_limit_) || speed_limit_<.70 || speed_limit_>3.0)
+      throw std::runtime_error("joint_speed_limit_invalid");
     if(mpc) {
       capsule=joint_vehicle_acados_create_capsule();
       if(!capsule || joint_vehicle_acados_create(capsule)) throw std::runtime_error("joint_solver_create");
@@ -129,13 +154,28 @@ public:
   double command_speed() const { return command; }
   double command_acceleration() const { return acceleration; }
   const Path &accepted_prediction() const { return accepted_prediction_; }
+  // Copy physical/observer state into a SEPARATE non-actuating solver for
+  // candidate feasibility tests. Never share or copy the acados capsule.
+  // Costs, model, bounds and the live controller's state are unchanged.
+  void copy_runtime_from(const JointControl &other) {
+    if(this==&other) throw std::runtime_error("preview_requires_separate_controller");
+    if(speed_limit_!=other.speed_limit_) throw std::runtime_error("preview_speed_limits_differ");
+    if(measured_yaw_feedback_!=other.measured_yaw_feedback_)
+      throw std::runtime_error("preview_yaw_feedback_modes_differ");
+    command=other.command;acceleration=other.acceleration;steering=other.steering;
+    servo=other.servo;integral=other.integral;continuous_yaw=other.continuous_yaw;
+    lateral_estimate=other.lateral_estimate;yaw_rate_estimate=other.yaw_rate_estimate;
+    floor_reached=other.floor_reached;coasting=other.coasting;
+    initialized=false;accepted_prediction_.clear();diag=Json::Value();
+    if(capsule)joint_vehicle_acados_reset(capsule,1);
+  }
   void reset(){floor_reached=coasting=false;command=acceleration=steering=servo=integral=0; initialized=false;continuous_yaw=lateral_estimate=yaw_rate_estimate=0;diag=Json::Value();if(capsule)joint_vehicle_acados_reset(capsule,1);}
   // Reset only the numerical warm start after an acados QP failure.  Seeding
   // the longitudinal state from measured speed avoids an artificial zero-speed
   // command; steering/servo estimates remain the physical actuator state.
   void cold_retry(double measured, bool preserve_command=false) {
     if(!preserve_command) {
-      command=clip(measured,0.,2.0);acceleration=0.;
+      command=clip(measured,0.,speed_limit_);acceleration=0.;
       continuous_yaw=lateral_estimate=yaw_rate_estimate=0.;
     }
     initialized=false;
@@ -146,7 +186,7 @@ public:
   Control compute(const Assets&a,const Path&p,Pose pose,double measured,double lateral,double yaw_rate,double remaining,double cap,double dt,Tracker&tracker,const std::vector<Point>&obs, const TimedReference *timed=nullptr) {
     double begin=mono();
     diag=Json::Value();
-    if(!std::isfinite(measured+lateral+yaw_rate+remaining+cap+dt) || measured<0 || measured>2.4 || cap<.70 || cap>2.0 || std::abs(lateral)>2.5 || std::abs(yaw_rate)>8 || dt<=0 || dt>.1)
+    if(!std::isfinite(measured+lateral+yaw_rate+remaining+cap+dt) || measured<0 || measured>speed_limit_+.4 || cap<.70 || cap>speed_limit_ || std::abs(lateral)>2.5 || std::abs(yaw_rate)>8 || dt<=0 || dt>.1)
       throw std::runtime_error("joint_state_invalid");
     // Localization wraps yaw at +/-pi. Keep the solver state, references and
     // its retained warm-start trajectory on the same continuous angle branch.
@@ -157,6 +197,7 @@ public:
     }
     Geometry g(p,pose);dt=std::min(.05,dt);
     diag=Json::Value();Path trajectory{pose};
+    diag["configured_speed_limit_mps"]=speed_limit_;
     if(timed) {
       timed->validate();
       const auto ref=timed->at(0.);
@@ -174,13 +215,15 @@ public:
       // These are model estimates, not independent inertial measurements.
       // Preserve the raw odometry input for diagnosis.
       diag["command_derived_yaw_rate_rad_s"]=yaw_rate;
+      diag["input_yaw_rate_rad_s"]=yaw_rate;
       diag["input_lateral_speed_mps"]=lateral;
       lateral=lateral_estimate;
-      yaw_rate=yaw_rate_estimate;
+      if(!measured_yaw_feedback_)yaw_rate=yaw_rate_estimate;
+      diag["yaw_feedback_source"]=measured_yaw_feedback_?"measured_simulation_odom":"model_observer";
       diag["model_yaw_rate_rad_s"]=yaw_rate;
       diag["model_lateral_speed_mps"]=lateral;
       diag["initial_servo_estimate_rad"]=servo;
-      diag["yaw_rate_source"]="continuous_dynamic_model_observer";
+      diag["yaw_rate_source"]=measured_yaw_feedback_?"measured_simulation_odom":"continuous_dynamic_model_observer";
       diag["predicted_lateral_acceleration_limit_mps2"]=1.65;
     }
     if(!capsule) {
@@ -267,15 +310,17 @@ public:
         // response estimate used by the driving model, including its tail.
         int coast_steps=int(std::ceil(measured/(.4*.05)))+2;
         for(int i=0;i<coast_steps;++i) {
-          v=std::max(0.,v-.05*.4);s+=(steering-s)*.05/(.20+.05);
-          q.yaw+=.05*v/.25*std::tan(s);q.x+=.05*v*std::cos(q.yaw);q.y+=.05*v*std::sin(q.yaw);trajectory.push_back(q);
+          v=std::max(0.,v-.05*.4);s+=(steering-s)*.05/(joint_model::steering_tau+.05);
+          q.yaw+=.05*v/joint_model::wheelbase*std::tan(s);q.x+=.05*v*std::cos(q.yaw);q.y+=.05*v*std::sin(q.yaw);trajectory.push_back(q);
         }
       } else {
       // Keep the minimum command inside the optimization constraints. Tighten
       // future command bounds only after launch; never clip a solved steering
       // or floor-speed command and silently invalidate its prediction.
       double lbx[4]={0.,-2.5,-8.,floor_reached?floor:0.};
-      double ubx[4]={2.3,2.5,8.,cap};
+      // Runtime bounds include the terminal stage. Generated default bounds
+      // stay at the validated real-v8 2 m/s; the simulator opts in explicitly.
+      double ubx[4]={speed_limit_+.3,2.5,8.,cap};
       for(int i=1;i<=24;++i) {
         ocp_nlp_constraints_model_set(config,dims,in,i,"lbx",lbx);
         ocp_nlp_constraints_model_set(config,dims,in,i,"ubx",ubx);
@@ -292,7 +337,7 @@ public:
         double param[5]={ref.x,ref.y,ref.yaw,target,corridor(a,ref,obs)};
         joint_vehicle_acados_update_params(capsule,i,param,5);
         if(!initialized) {
-          double seed[10]={ref.x,ref.y,ref.yaw,guess_v,0,guess_v/.25*std::tan(steering),acceleration,steering,std::min(cap,guess_v),servo};
+          double seed[10]={ref.x,ref.y,ref.yaw,guess_v,0,guess_v/joint_model::wheelbase*std::tan(steering),acceleration,steering,std::min(cap,guess_v),servo};
           if(i==0)std::copy(x,x+10,seed);
           ocp_nlp_out_set(config,dims,out,i,"x",seed);
           if(i<24){double u[2]={0,steering};ocp_nlp_out_set(config,dims,out,i,"u",u);}
@@ -310,7 +355,7 @@ public:
       int status=0, iterations=0;
       double equality=INF, inequality=INF;
       auto solver=joint_vehicle_acados_get_nlp_solver(capsule);
-      for(int iteration=0;iteration<4;++iteration) {
+      for(int iteration=0;iteration<joint_model::rti_passes;++iteration) {
         status=joint_vehicle_acados_solve(capsule);++iterations;
         if(status!=0)throw std::runtime_error("joint_mpc_solver_"+std::to_string(status));
         ocp_nlp_eval_residuals(solver,in,out);
@@ -339,15 +384,15 @@ public:
         diag["timed_horizon_max_position_error_m"]=max_position;
         diag["timed_horizon_speed_rmse_mps"]=std::sqrt(squared_speed/25.);
       }
-      if(!std::isfinite(u[0]+u[1]) || std::abs(u[1])>.26901 || u[0]<-.80001 || u[0]>1.00001 || std::abs(u[1]-steering)>dt+1e-4 || std::abs(u[0]-acceleration)>4*dt+1e-4)
+      if(!std::isfinite(u[0]+u[1]) || std::abs(u[1])>joint_model::steering_limit+.00001 || u[0]<-joint_model::deceleration_limit-.00001 || u[0]>joint_model::acceleration_limit+.00001 || std::abs(u[1]-steering)>dt+1e-4 || std::abs(u[0]-acceleration)>4*dt+1e-4)
         throw std::runtime_error("joint_control_constraint a="+std::to_string(u[0])+" delta="+std::to_string(u[1])+" previous="+std::to_string(acceleration)+","+std::to_string(steering)+" dt="+std::to_string(dt));
       // Execute exactly the solver's first command-state transition. Wall
       // timer jitter must not reintegrate the optimized acceleration with a
       // different interval and thereby alter the collision-checked motion.
       double next=timed?predicted[1][8]:command+u[0]*dt;
-      if(next<-.0001 || next>2.0001)throw std::runtime_error("joint_speed_constraint");
+      if(next<-.0001 || next>speed_limit_+.0001)throw std::runtime_error("joint_speed_constraint");
       if(floor_reached && next<floor-1e-5)throw std::runtime_error("joint_speed_below_drivable_floor");
-      command=clip(next,0,2.0);acceleration=u[0];steering=u[1];initialized=true;
+      command=clip(next,0,speed_limit_);acceleration=u[0];steering=u[1];initialized=true;
       if(command>=floor)floor_reached=true;
       diag["longitudinal_controller"]="joint_dynamic_mpc";diag["state_dimension"]=10;
       diag["mpc_solver_status"]=status;diag["mpc_iterations"]=iterations;diag["equality_residual"]=equality;diag["inequality_residual"]=inequality;diag["mpc_solve_ms"]=(mono()-begin)*1000;
@@ -365,21 +410,22 @@ public:
     check_swept(a,trajectory,obs);
     if(timed && command>cap+1e-5) throw std::runtime_error("timed_command_bound_violation");
     if(!timed && command>cap){command=cap;acceleration=std::min(0.,acceleration);diag["independent_speed_cap_applied"]=true;}
-    servo+=(steering-servo)*dt/((capsule?.20:.10)+dt);
+    servo+=(steering-servo)*dt/((capsule?joint_model::steering_tau:.10)+dt);
     if(capsule) {
       // Propagate unmeasured lateral states with the SAME backward-Euler
       // bicycle model used by the optimizer. Resetting vy=0 and substituting
       // kinematic yaw rate each tick can make an accepted next state infeasible.
-      double v=std::max(measured,.35),m=3.74,iz=.04712,lf=.12,lr=.13,cf=90.,cr=96.;
+      double v=std::max(measured,.35),m=3.74,iz=.04712;
+      const double lf=joint_model::lf,lr=joint_model::lr,cf=joint_model::cf,cr=joint_model::cr;
       Eigen::Matrix2d A;
       A << -(cf+cr)/(m*v), -v-(cf*lf-cr*lr)/(m*v),
            -(cf*lf-cr*lr)/(iz*v), -(cf*lf*lf+cr*lr*lr)/(iz*v);
       Eigen::Vector2d b(cf/m,lf*cf/iz), z(lateral,yaw_rate);
       z=(Eigen::Matrix2d::Identity()-dt*A).inverse()*(z+dt*b*servo);
       double blend=clip((measured-.25)/.30,0.,1.);blend=blend*blend*(3-2*blend);
-      double next_v=measured+dt/(.15+dt)*(command-measured);
+      double next_v=measured+dt/(joint_model::longitudinal_tau(command,measured)+dt)*(command-measured);
       lateral_estimate=blend*z[0];
-      yaw_rate_estimate=blend*z[1]+(1-blend)*next_v/.25*std::tan(servo);
+      yaw_rate_estimate=blend*z[1]+(1-blend)*next_v/joint_model::wheelbase*std::tan(servo);
       if(!std::isfinite(lateral_estimate+yaw_rate_estimate))
         throw std::runtime_error("joint_observer_nonfinite");
       diag["next_model_yaw_rate_rad_s"]=yaw_rate_estimate;
@@ -387,6 +433,8 @@ public:
     }
     diag["cross_track_error_m"]=g.cross;diag["heading_error_rad"]=g.heading;
     diag["measured_speed_mps"]=measured;diag["acceleration_command_mps2"]=acceleration;
+    diag["configured_acceleration_limit_mps2"]=joint_model::acceleration_limit;
+    diag["configured_deceleration_limit_mps2"]=joint_model::deceleration_limit;
     diag["speed_command_mps"]=command;diag["controller_compute_ms"]=(mono()-begin)*1000;
     if(mono()-begin>.045)throw std::runtime_error("joint_control_deadline");
     accepted_prediction_=trajectory;

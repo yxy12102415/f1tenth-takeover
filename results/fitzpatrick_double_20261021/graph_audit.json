@@ -1,0 +1,17 @@
+{
+  "opponent_truth_subscribers": [
+    "takeover_evaluator",
+    "takeover_lead_controller"
+  ],
+  "final_command_publishers": [
+    "takeover_safety_arbiter"
+  ],
+  "nominal_command_publishers": [
+    "takeover_controller"
+  ],
+  "tracker_measurement_source": "lidar",
+  "passed": true,
+  "observed_during": "adaptive_final_20261021 batch",
+  "ros_domain_id": 73,
+  "localhost_only": true
+}

@@ -75,6 +75,46 @@ def polygon_distance(first, second):
     return value
 
 
+class TruthPassCounter:
+    """Evaluation-only encounter counter using continuous unwrapped progress.
+
+    Each lap-relative encounter must start behind, contain OVERTAKE, and end
+    fully ahead/aligned for 0.5 s. Repeated status messages cannot add passes.
+    """
+    def __init__(self, route_length):
+        self.length = route_length
+        self.armed = None
+        self.started = None
+        self.saw_overtake = False
+        self.aligned_since = None
+        self.counted = set()
+        self.events = []
+
+    def update(self, time, delta, route_error, heading_error, behavior, safe=True):
+        encounter = int(round(delta / self.length))
+        gap = encounter*self.length-delta
+        if self.armed is None and encounter not in self.counted and 1.35 < gap < 7.:
+            self.armed, self.started = encounter, time
+            self.saw_overtake = False
+            self.aligned_since = None
+        if self.armed is None:
+            return
+        if behavior == "OVERTAKE":
+            self.saw_overtake = True
+        ahead = delta-self.armed*self.length
+        aligned = (safe and self.saw_overtake and ahead > 1.20 and
+                   route_error < .10 and abs(heading_error) < .15 and behavior == "CRUISE")
+        if not aligned:
+            self.aligned_since = None
+        elif self.aligned_since is None:
+            self.aligned_since = time
+        elif time-self.aligned_since >= .5:
+            self.events.append(dict(encounter_lap=self.armed, start_time_s=self.started,
+                                    completion_time_s=time, lead_distance_m=ahead))
+            self.counted.add(self.armed)
+            self.armed = None
+
+
 class TakeoverEvaluator(Node):
     def __init__(self):
         super().__init__("takeover_evaluator")
@@ -104,6 +144,9 @@ class TakeoverEvaluator(Node):
 
         waypoint_path = str(self.get_parameter("waypoints_path").value)
         self.route = self.load_route(waypoint_path)
+        self.route_arc = np.r_[0., np.cumsum(np.linalg.norm(np.diff(self.route, axis=0), axis=1))]
+        self.route_length = float(self.route_arc[-1] + np.linalg.norm(self.route[-1]-self.route[0]))
+        self.truth_passes = TruthPassCounter(self.route_length)
         maps = os.path.join(get_package_share_directory("f1tenth_gym_ros"), "maps")
         metadata = yaml.safe_load(open(os.path.join(maps, self.map_name + ".yaml"), encoding="utf-8"))
         self.map_resolution = float(metadata["resolution"])
@@ -125,6 +168,8 @@ class TakeoverEvaluator(Node):
         self.collision_events = 0
         self.in_boundary_violation = False
         self.boundary_events = 0
+        self.lead_boundary_events = 0
+        self.in_lead_boundary_violation = False
         self.overtake_time = None
         self.truth_overtake_confirmed = False
         self.last_steering = None
@@ -286,9 +331,27 @@ class TakeoverEvaluator(Node):
         if boundary and not self.in_boundary_violation:
             self.boundary_events += 1
         self.in_boundary_violation = boundary
+        lead_boundary = self.boundary_violation(opp_body) if self.opp else False
+        if lead_boundary and not self.in_lead_boundary_violation:
+            self.lead_boundary_events += 1
+        self.in_lead_boundary_violation = lead_boundary
 
-        _, ego_progress, route_error = self.route_state(ego_x, ego_y, True)
+        ego_index, ego_progress, route_error = self.route_state(ego_x, ego_y, True)
         opp_progress = self.route_state(opp_x, opp_y, False)[1] if self.opp else None
+        truth_gap = float('nan')
+        if self.opp is not None:
+            def progress_m(index_progress):
+                lap, index = divmod(int(index_progress), len(self.route))
+                return lap*self.route_length + self.route_arc[index]
+            delta = progress_m(ego_progress)-progress_m(opp_progress)
+            tangent = self.route[(ego_index+1) % len(self.route)]-self.route[(ego_index-1) % len(self.route)]
+            heading_error = math.atan2(math.sin(ego_yaw-math.atan2(tangent[1], tangent[0])),
+                                       math.cos(ego_yaw-math.atan2(tangent[1], tangent[0])))
+            self.truth_passes.update(time, delta, route_error, heading_error,
+                                    self.status.get('behavior', ''),
+                                    self.collision_events == 0 and self.boundary_events == 0
+                                    and self.lead_boundary_events == 0)
+            truth_gap = round(delta/self.route_length)*self.route_length-delta
         if self.opp is not None and int(self.status.get('overtakes_completed', 0)) > 0:
             forward_clearance = (ego_x - opp_x) * math.cos(ego_yaw) + (ego_y - opp_y) * math.sin(ego_yaw)
             # Independent evaluation of complete passage and route rejoin.
@@ -337,6 +400,20 @@ class TakeoverEvaluator(Node):
             "mpc_dynamic_check_passed": controller.get("mpc_dynamic_check_passed"),
             "mpc_predicted_body_clearance_m": controller.get("mpc_minimum_predicted_body_clearance_m"),
             "transition_length_m": self.status.get("transition_length_m"),
+            "target_offset_m": self.status.get("target_offset_m"),
+            "evaluated_candidates": self.status.get("evaluated_candidates"),
+            "planning_backend": self.status.get("planning_backend", "frenet_candidates"),
+            "sqp_calls": self.status.get("sqp_calls", 0),
+            "sqp_failures": self.status.get("sqp_failures", 0),
+            "sqp_timeouts": self.status.get("sqp_timeouts", 0),
+            "sqp_solve_ms": (self.status.get("sqp_last") or {}).get("solve_ms"),
+            "sqp_message": (self.status.get("sqp_last") or {}).get("message"),
+            "sqp_geometry": json.dumps(self.status.get("sqp_geometry", {}), sort_keys=True),
+            "return_preview_checks": self.status.get("return_preview_checks", 0),
+            "sqp_preview_checks": self.status.get("sqp_preview_checks", 0),
+            "overtakes_completed": self.status.get("overtakes_completed", 0),
+            "truth_overtakes_completed": len(self.truth_passes.events),
+            "truth_route_gap_m": truth_gap,
             "committed_side": self.status.get("committed_side"),
             "ego_route_index_unwrapped": ego_progress,
             "lead_route_index_unwrapped": opp_progress,
@@ -344,8 +421,11 @@ class TakeoverEvaluator(Node):
             "body_clearance_m": body_clearance,
             "collision": int(collision),
             "boundary_violation": int(boundary),
+            "lead_boundary_violation": int(lead_boundary),
             "speed_command_mps": speed_command,
             "acceleration_command_est_mps2": acceleration,
+            "mpc_acceleration_command_mps2": controller.get("acceleration_command_mps2"),
+            "mpc_acceleration_limit_mps2": controller.get("configured_acceleration_limit_mps2"),
             "steering_angle_rad": steering,
             "steering_rate_radps": steering_rate,
             "planner_valid": self.status.get("planner_valid"),
@@ -382,7 +462,7 @@ class TakeoverEvaluator(Node):
         horizon_position = self.finite_values(self.rows, "timed_horizon_max_position_error_m")
         horizon_speed = self.finite_values(self.rows, "timed_horizon_speed_rmse_mps")
         rejoined = [row for row in self.rows if self.overtake_time is not None
-                    and row['time_s'] >= self.overtake_time]
+                    and row['time_s'] >= self.overtake_time and row['behavior'] == 'CRUISE']
         rejoin_error = self.finite_values(rejoined, 'route_lateral_error_m')
         rejection_reasons = Counter(
             row.get("controller_error") for row in self.rows
@@ -391,7 +471,13 @@ class TakeoverEvaluator(Node):
         overtakes = int(self.status.get("overtakes_completed", 0))
         safe = bool(self.rows) and self.collision_events == 0 and self.boundary_events == 0
         behavior_samples = dict(self.behaviors)
-        if self.expected_outcome in ("overtake", "fitzpatrick_long_straight_overtake"):
+        if self.expected_outcome == "single_pass_and_rejoin":
+            expected_behavior_pass = (overtakes >= 1 and len(self.truth_passes.events) >= 1
+                                      and self.lead_boundary_events == 0)
+        elif self.expected_outcome == "two_overtakes":
+            expected_behavior_pass = (overtakes >= 2 and len(self.truth_passes.events) >= 2
+                                      and self.lead_boundary_events == 0)
+        elif self.expected_outcome in ("overtake", "fitzpatrick_long_straight_overtake"):
             expected_behavior_pass = overtakes > 0 and self.truth_overtake_confirmed
         elif self.expected_outcome == "follow_wait_or_cancel":
             expected_behavior_pass = (
@@ -423,11 +509,14 @@ class TakeoverEvaluator(Node):
             "safety": {
                 "collision_events": self.collision_events,
                 "boundary_violation_events": self.boundary_events,
+                "lead_boundary_violation_events": self.lead_boundary_events,
                 "minimum_body_clearance_m": float(body.min()) if body.size else None,
             },
             "overtaking": {
                 "truth_verified_pass_and_rejoin": self.truth_overtake_confirmed,
                 "completed": overtakes,
+                "truth_completed": len(self.truth_passes.events),
+                "truth_events": self.truth_passes.events,
                 "first_completion_time_s": self.overtake_time,
                 "behavior_sample_counts": behavior_samples,
             },
@@ -457,6 +546,10 @@ class TakeoverEvaluator(Node):
                 "mpc_mean_ms": float(solve.mean()) if solve.size else None,
                 "mpc_p95_ms": float(np.percentile(solve, 95)) if solve.size else None,
                 "planner_failures": int(self.status.get("planner_failures", 0)),
+                "planning_backend": self.status.get("planning_backend", "frenet_candidates"),
+                "sqp_calls": self.status.get("sqp_calls", 0),
+                "sqp_failures": self.status.get("sqp_failures", 0),
+                "sqp_timeouts": self.status.get("sqp_timeouts", 0),
                 "controller_failures": int(self.status.get("controller_failures", 0)),
                 "solver_timeouts": int(self.status.get("solver_timeouts", 0)),
                 "infeasible_count": int(self.status.get("infeasible_count", 0)),
@@ -464,6 +557,10 @@ class TakeoverEvaluator(Node):
                 "rejected_track_jumps": int(self.status.get("rejected_track_jumps", 0)),
                 "freshness_triggered_replans": int(self.status.get("freshness_triggered_replans", 0)),
                 "controller_rejection_reasons": dict(rejection_reasons),
+                "return_preview_checks": self.status.get("return_preview_checks", 0),
+                "return_preview_rejections": self.status.get("return_preview_rejections", {}),
+                "sqp_preview_checks": self.status.get("sqp_preview_checks", 0),
+                "sqp_preview_rejections": self.status.get("sqp_preview_rejections", {}),
             },
             "ground_truth_policy": "Opponent ground truth is used only by its own controller and the independent evaluator, never by ego tracking/planning/MPC.",
         }
@@ -485,8 +582,11 @@ class TakeoverEvaluator(Node):
     def write_summary(self):
         if not self.rows:
             return
-        with open(os.path.join(self.output_dir, "summary.json"), "w", encoding="utf-8") as handle:
+        destination=os.path.join(self.output_dir,"summary.json")
+        temporary=destination+".tmp"
+        with open(temporary, "w", encoding="utf-8") as handle:
             json.dump(self.summary(), handle, indent=2, sort_keys=True)
+        os.replace(temporary,destination)
 
     def finalize(self):
         if self.finalized:

@@ -57,5 +57,33 @@ class GeometryTests(unittest.TestCase):
         self.assertAlmostEqual(evaluator.polygon_distance(a, b), 0.42)
 
 
+class PassCounterTests(unittest.TestCase):
+    def test_two_independent_lap_encounters(self):
+        counter = evaluator.TruthPassCounter(45.)
+        for lap in range(2):
+            base = lap*10.
+            counter.update(base, lap*45.-3., 0., 0., 'FOLLOW')
+            counter.update(base+1, lap*45.-2., .6, 0., 'OVERTAKE')
+            counter.update(base+2, lap*45.+1.5, 0., 0., 'CRUISE')
+            counter.update(base+2.6, lap*45.+1.8, 0., 0., 'CRUISE')
+            for j in range(5):
+                counter.update(base+3+j, lap*45.+2., 0., 0., 'CRUISE')
+            self.assertEqual(len(counter.events), lap+1)
+
+    def test_spawn_ahead_does_not_count(self):
+        counter = evaluator.TruthPassCounter(45.)
+        for i in range(10):
+            counter.update(i, 2., 0., 0., 'CRUISE')
+        self.assertEqual(counter.events, [])
+
+    def test_collision_or_failed_rejoin_does_not_count(self):
+        for unsafe, offset in ((True, 0.), (False, .3)):
+            counter = evaluator.TruthPassCounter(45.)
+            counter.update(0., -2., 0., 0., 'OVERTAKE')
+            for i in range(1, 10):
+                counter.update(i, 2., offset, 0., 'CRUISE', not unsafe)
+            self.assertEqual(counter.events, [])
+
+
 if __name__ == '__main__':
     unittest.main()

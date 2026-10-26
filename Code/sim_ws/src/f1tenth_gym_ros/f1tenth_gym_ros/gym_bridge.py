@@ -23,6 +23,9 @@
 import rclpy
 from rclpy.executors import ExternalShutdownException
 from rclpy.node import Node
+from rclpy.clock import Clock, ClockType
+from builtin_interfaces.msg import Time
+from rosgraph_msgs.msg import Clock as ClockMessage
 
 from sensor_msgs.msg import LaserScan
 from nav_msgs.msg import Odometry
@@ -49,6 +52,10 @@ class GymBridge(Node):
         self.declare_parameter('ego_scan_topic')
         self.declare_parameter('ego_drive_topic')
         self.declare_parameter('drive_timeout', 0.25)
+        self.declare_parameter('publish_sim_clock', False)
+        self.publish_sim_clock = bool(self.get_parameter('publish_sim_clock').value)
+        self.physics_ticks = 0
+        self.clock_pub = self.create_publisher(ClockMessage, '/clock', 10) if self.publish_sim_clock else None
         self.declare_parameter('opp_namespace')
         self.declare_parameter('opp_odom_topic')
         self.declare_parameter('opp_ego_odom_topic')
@@ -131,9 +138,11 @@ class GymBridge(Node):
             self.ego_scan = list(self.obs['scans'][0])
 
         # sim physical step timer
-        self.drive_timer = self.create_timer(0.01, self.drive_timer_callback)
+        self.physics_clock = Clock(clock_type=ClockType.STEADY_TIME)
+        self.drive_timer = self.create_timer(0.01, self.drive_timer_callback,
+            clock=self.physics_clock if self.publish_sim_clock else self.get_clock())
         # topic publishing timer
-        self.timer = self.create_timer(0.004, self.timer_callback)
+        self.timer = None if self.publish_sim_clock else self.create_timer(0.004, self.timer_callback)
 
         # transform broadcaster
         self.br = TransformBroadcaster(self)
@@ -231,22 +240,42 @@ class GymBridge(Node):
         else:
             self.ego_steer = 0.0
 
+    def _physics_stamp(self):
+        return Time(sec=self.physics_ticks // 100,
+                    nanosec=(self.physics_ticks % 100) * 10000000)
+
     def drive_timer_callback(self):
         if self.last_ego_drive_time is not None:
             drive_age = (self.get_clock().now() - self.last_ego_drive_time).nanoseconds * 1e-9
             if drive_age > self.drive_timeout:
                 self.ego_requested_speed = 0.0
                 self.ego_steer = 0.0
-        if self.ego_drive_published and not self.has_opp:
+        if self.publish_sim_clock:
+            # Physics must advance with zero commands before ROS-time timers
+            # start. A wall-clock stall does NOT advance simulated physics time.
+            commands = [[self.ego_steer, self.ego_requested_speed]]
+            if self.has_opp:
+                commands.append([self.opp_steer, self.opp_requested_speed])
+            self.obs, _, self.done, _ = self.env.step(np.array(commands))
+            self.physics_ticks += 1
+        elif self.ego_drive_published and not self.has_opp:
             self.obs, _, self.done, _ = self.env.step(np.array([[self.ego_steer, self.ego_requested_speed]]))
         elif self.has_opp and self.opp_drive_published:
             self.obs, _, self.done, _ = self.env.step(np.array([[self.ego_steer, self.ego_requested_speed], [self.opp_steer, self.opp_requested_speed]]))
         self._update_sim_state()
+        if self.publish_sim_clock:
+            ts = self._physics_stamp()
+            self.clock_pub.publish(ClockMessage(clock=ts))
+            # One fresh scan per two physics states, not 250 Hz duplicates
+            # stamped as new observations. All sensor stamps use physics time.
+            if self.physics_ticks % 2 == 0:
+                self.timer_callback()
 
     def timer_callback(self):
         if not rclpy.ok():
             return
-        ts = self.get_clock().now().to_msg()
+        ts = (self._physics_stamp()
+              if self.publish_sim_clock else self.get_clock().now().to_msg())
 
         # pub scans
         scan = LaserScan()
