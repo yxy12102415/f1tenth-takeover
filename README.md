@@ -4,6 +4,14 @@ Fixed-route navigation and static-obstacle avoidance on a real F1TENTH vehicle.
 
 **Latest validated result: Dynamic MPC v8, Fitzpatrick, 2026-09-27.** One complete lap with two static obstacles; the operator reported no contact, minimal oscillation, and a natural stop. This is one successful run, not a repeated-trial reliability claim.
 
+## Onboard obstacle-avoidance demo
+
+[![Onboard MPC obstacle-avoidance demo](media/MPC_Avoidance_preview.gif)](media/MPC_Avoidance.mp4)
+
+[Watch or download the full video](media/MPC_Avoidance.mp4) — 32.4 s, with original audio. The silent looping preview shows a 12-second excerpt; the MP4 preserves the complete recording.
+
+## Field result
+
 | Measure | Result |
 |---|---:|
 | Route length | 44.73 m |
@@ -55,6 +63,7 @@ These commands build a non-actuating probe and run model tests. They do not laun
 |---|---|
 | `real_vehicle/` | Latest exported physical-vehicle source, configurations, Fitzpatrick map and route |
 | `results/` | Selected successful v8 field evidence and English trajectory figures |
+| `media/` | Onboard obstacle-avoidance video and animated README preview |
 | `tools/` | Non-actuating native build and model tests |
 | `docs/` | Status, operation, build, provenance and cleanup records |
 | `Code/sim_ws/` | Independent risk-aware following simulation and shadow-mode reference |
