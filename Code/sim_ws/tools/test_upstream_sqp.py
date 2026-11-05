@@ -57,6 +57,10 @@ class SqpChecks(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'empty_corridor'):
             worker.solve(self.core, request)
 
+    def test_warmup_before_runtime_requests(self):
+        worker.warm_up(self.core)
+        self.assertTrue(worker.solve(self.core,self.fixture())['ok'])
+
     def test_incompatible_endpoint_curvature_rejected_before_sqp(self):
         request = self.fixture()
         request['initial_second_derivative'] = 3.

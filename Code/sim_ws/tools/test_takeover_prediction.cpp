@@ -66,6 +66,46 @@ int main(int argc, char **argv) {
   assets.res=1;assets.ox=-10;assets.oy=-15;assets.width=130;assets.height=30;
   assets.grid.assign(3900,5.);
   takeover::DynamicOvertakingPlanner planner(assets);
+  takeover::DynamicOvertakingPlanner speed_release(assets);
+  speed_release.cruise_speed=3.;
+  assert(speed_release.passing_speed_cap(.67,1.5,.31)==1.55);
+  assert(speed_release.passing_speed_cap(.68,1.5,.31)==3.);
+  speed_release.progressive_pass_speed=true;
+  assert(speed_release.passing_speed_cap(.38,1.5,.31)==1.55);
+  assert(speed_release.passing_speed_cap(.8,1.5,.31)==3.);
+  double last_cap=1.55;
+  for(int i=0;i<=100;++i) {
+    const double cap=speed_release.passing_speed_cap(i*.01,1.5,.31);
+    assert(cap>=last_cap && cap<=3. && cap-last_cap<.07);
+    last_cap=cap;
+  }
+  assert(speed_release.passing_speed_cap(.55,1.5,.31)>1.55);
+  assert(speed_release.passing_speed_cap(.55,1.5,.60)<
+         speed_release.passing_speed_cap(.55,1.5,.31));
+  // Reachable braking includes positive acceleration, jerk and response lag.
+  speed_release.deceleration_max=3.;speed_release.acceleration_max=3.;
+  const double stopping=speed_release.braking_distance(3.,1.2,0.,0.);
+  assert(stopping>(9.-1.44)/6.); // cannot assume instantaneous full braking
+  assert(speed_release.braking_distance(3.,1.2,.2,1.5)>stopping);
+  assert(speed_release.braking_speed_cap(stopping+.01,1.2,3.,0.,0.)==3.);
+  assert(speed_release.braking_speed_cap(0.,1.2,3.,0.,0.)==1.2);
+  assert(speed_release.braking_speed_cap(1.,1.2,3.,0.,0.)<
+         speed_release.braking_speed_cap(2.,1.2,3.,0.,0.));
+  // The same future geometry can release speed later in the forecast without
+  // granting cruise speed at the measured still-aligned entry position.
+  takeover::Track moving;
+  moving.valid=true;moving.position={14,0};moving.velocity={1.5,0};
+  moving.yaw=0.;moving.position_variance=.0001;moving.velocity_variance=.0001;
+  speed_release.initial_command=1.5;speed_release.progressive_pass_speed=false;
+  const auto held_entry=speed_release.build_candidate_scaled({10,0,0},1.5,moving,1,
+      takeover::Behavior::OVERTAKE,1.55,1.,.82);
+  speed_release.predictive_speed_profile=true;
+  const auto released=speed_release.build_candidate_scaled({10,0,0},1.5,moving,1,
+      takeover::Behavior::OVERTAKE,3.,1.,.82);
+  assert(held_entry.valid && released.valid);
+  assert(released.timed.front().speed==1.5 && released.timed[1].speed<1.56);
+  assert(released.timed.back().speed>held_entry.timed.back().speed+.5);
+  assert(released.timed.back().s>held_entry.timed.back().s+.5);
   planner.initial_command=1.5; planner.initial_acceleration=0;
   takeover::Track absent;
   auto braking=planner.build_candidate({10,0,0},1.5,absent,0,takeover::Behavior::FOLLOW,.8);
@@ -109,6 +149,15 @@ int main(int argc, char **argv) {
   assert(bend.valid && bend.timed.front().speed==3.);
   assert(bend.timed[1].speed>2.9 && bend.timed[1].speed<3.);
   assert(bend.timed[30].speed<1.9);
+  fast_planner.predictive_speed_profile=true;
+  fast_planner.acceleration_max=3.;fast_planner.deceleration_max=3.;
+  const auto reachable_bend=fast_planner.build_candidate({15,0,0},3.,absent,0,
+      takeover::Behavior::CRUISE,3.);
+  assert(reachable_bend.valid && reachable_bend.timed.front().speed==3.);
+  assert(reachable_bend.timed[5].speed>bend.timed[5].speed);
+  for(const auto &p:reachable_bend.timed)
+    if(p.s>20.2 && p.s<22.8) assert(p.speed<1.75);
+  fast_planner.predictive_speed_profile=false;
   fast_planner.require_target=false;
   assert(!fast_planner.plan({15,0,0},3.,absent,5.).stop);
   fast_planner.require_target=true;
@@ -132,6 +181,24 @@ int main(int argc, char **argv) {
   const auto controlled_recovery=recovery_speed.plan({10,.65,0},.8,target,2.);
   assert(controlled_recovery.behavior==takeover::Behavior::REJOIN);
   assert(controlled_recovery.candidate.valid && controlled_recovery.candidate.speed_cap<=.8);
+  // Below the old desired_gap+0.8 threshold, an early recovery is admitted
+  // only by a checked return, not by reducing the geometric safety margin.
+  auto close_lead=target;close_lead.position={11.5,0};
+  recovery_speed.behavior_=takeover::Behavior::CANCEL;
+  recovery_speed.cancel_start_=0.;recovery_speed.aborting_=true;
+  recovery_speed.committed_side_=1;
+  assert(!recovery_speed.early_verified_return);
+  assert(recovery_speed.plan({10,.65,0},.8,close_lead,2.).behavior==takeover::Behavior::CANCEL);
+  recovery_speed.early_verified_return=true;
+  const auto early=recovery_speed.plan({10,.65,0},.8,close_lead,2.);
+  assert(early.behavior==takeover::Behavior::REJOIN && !early.stop);
+  assert(early.transition=="abort_early_return_verified");
+  assert(early.committed_side==1 && early.overtakes_completed==0);
+  recovery_speed.behavior_=takeover::Behavior::CANCEL;
+  recovery_speed.return_feasibility=[](const takeover::Candidate &) {return false;};
+  const auto denied_early=recovery_speed.plan({10,.65,0},.8,close_lead,2.);
+  assert(denied_early.behavior==takeover::Behavior::CANCEL);
+  recovery_speed.return_feasibility={};
   recovery_speed.overtakes_completed_=1;recovery_speed.behavior_=takeover::Behavior::REJOIN;
   recovery_speed.aborting_=true;recovery_speed.committed_side_=1;
   target.position={19,0};target.observation_stamp=0.;
@@ -244,6 +311,47 @@ int main(int argc, char **argv) {
       takeover::Behavior::REJOIN,1.5);
   assert(!rejected_return.valid && rejected_return.reason=="mpc_return_preview_rejected");
   adaptive.return_feasibility={};
+  // A return rejected after passing must try a freshly validated same-side
+  // continuation, not brake back into the opponent. A failed continuation
+  // still falls through to cancellation/stop; side switching is prohibited.
+  takeover::DynamicOvertakingPlanner return_retry(assets);
+  return_retry.adaptive_offset=true;return_retry.cruise_speed=1.8;
+  return_retry.initial_command=1.5;return_retry.initial_curvature=0.;
+  return_retry.behavior_=takeover::Behavior::REJOIN;
+  return_retry.committed_side_=1;return_retry.committed_offset_=.82;
+  return_retry.maneuver_start_s_=10.;
+  return_retry.return_feasibility=[](const takeover::Candidate &) {return false;};
+  auto trailing=target;trailing.position={8.5,0};trailing.velocity={.8,0};
+  trailing.observation_stamp=2.;
+  const auto held=return_retry.plan({10,.7,0},1.5,trailing,2.);
+  assert(held.behavior==takeover::Behavior::OVERTAKE && !held.stop);
+  assert(held.transition=="return_blocked_same_side_continuation");
+  assert(held.committed_side==1 && held.candidate.valid);
+  assert(!return_retry.aborting_ && return_retry.return_retry_after_==2.5);
+  assert(held.overtakes_completed==0);
+  return_retry.behavior_=takeover::Behavior::REJOIN;
+  assets.grid.assign(3900,.20);
+  const auto blocked_hold=return_retry.plan({10,.7,0},1.5,trailing,2.);
+  assert(blocked_hold.stop && blocked_hold.behavior==takeover::Behavior::CANCEL);
+  assert(blocked_hold.committed_side==1 && !blocked_hold.candidate.valid);
+  assets.grid.assign(3900,5.);
+  // Search the existing finite scale set for a delayed return when the first
+  // one intersects the target. Acceptance geometry is unchanged.
+  takeover::DynamicOvertakingPlanner return_search(assets);
+  return_search.initial_command=1.5;return_search.maneuver_start_s_=10.;
+  int rescued_body_conflicts=0;
+  for(double lead_s=8.;lead_s<=14.;lead_s+=.25) {
+    auto moving=trailing;moving.position={lead_s,0};moving.velocity={1.2,0};
+    const auto short_return=return_search.build_candidate_scaled({10,.82,0},1.5,moving,1,
+        takeover::Behavior::REJOIN,1.5,1.,.82);
+    const auto searched_return=return_search.build_candidate({10,.82,0},1.5,moving,1,
+        takeover::Behavior::REJOIN,1.5);
+    if(short_return.reason=="time_aligned_body_conflict" && searched_return.valid) {
+      ++rescued_body_conflicts;
+      assert(searched_return.transition_length>short_return.transition_length);
+    }
+  }
+  assert(rescued_body_conflicts>0);
   assert(!takeover::return_clearance_reserved(.0035));
   assert(!takeover::return_clearance_reserved(std::numeric_limits<double>::quiet_NaN()));
   assert(takeover::return_clearance_reserved(.10));
@@ -281,6 +389,17 @@ int main(int argc, char **argv) {
   assert(!rejected_sqp.valid && rejected_sqp.reason=="mpc_sqp_preview_rejected" && sqp_checks==3);
   sqp.overtake_feasibility=[](const takeover::Candidate &) {return true;};
   assert(sqp.build_candidate({10,.82,0},1.5,distant,1,takeover::Behavior::OVERTAKE,1.5).valid);
+  // Speed search must respect an MPC veto of the fastest proposal rather
+  // than dropping straight back to following, or accepting the vetoed speed.
+  sqp.predictive_speed_profile=true;sqp.cruise_speed=3.;
+  sqp.overtake_feasibility=[](const takeover::Candidate &c) {return c.speed_cap<=2.;};
+  const auto intermediate=sqp.build_candidate({10,.82,0},1.5,distant,1,
+      takeover::Behavior::OVERTAKE,3.);
+  assert(intermediate.valid && intermediate.speed_cap>.85 && intermediate.speed_cap<=2.);
+  sqp.overtake_feasibility=[](const takeover::Candidate &) {return false;};
+  assert(!sqp.build_candidate({10,.82,0},1.5,distant,1,takeover::Behavior::OVERTAKE,3.).valid);
+  sqp.predictive_speed_profile=false;sqp.cruise_speed=1.5;
+  sqp.overtake_feasibility=[](const takeover::Candidate &) {return true;};
   assets.grid.assign(3900,.30);
   assert(!sqp.build_candidate({10,.82,0},1.5,distant,1,takeover::Behavior::OVERTAKE,1.5).valid);
   assets.grid.assign(3900,5.);

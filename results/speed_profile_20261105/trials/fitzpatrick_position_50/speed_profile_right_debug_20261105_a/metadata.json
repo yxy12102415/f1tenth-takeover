@@ -1,0 +1,10 @@
+{
+  "created_utc": "2026-11-04T21:56:53.194587+00:00",
+  "expected_outcome": "single_pass_and_rejoin",
+  "ground_truth_consumer": "takeover_evaluator only",
+  "map_name": "Fitzpatrick_sim",
+  "require_lead": true,
+  "run_id": "speed_profile_right_debug_20261105_a",
+  "scenario": "fitzpatrick_position_50",
+  "seed": 1
+}

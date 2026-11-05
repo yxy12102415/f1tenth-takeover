@@ -1,0 +1,2203 @@
+{
+  "run_prefix": "speed_profile_",
+  "run_count": 30,
+  "source_root": "/data/projects/F1-Tenth-Duke/f1tenth-takeover/Code/sim_ws/results/takeover",
+  "note": "All matching runs included, irrespective of outcome. CSV gzip is lossless. ROS subdirectory logs remain at source.",
+  "files": [
+    {
+      "path": "fitzpatrick_position_00/speed_profile_screen_20261105_legacy_speed_r1/build.log",
+      "sha256": "0524bc64061949f507916669d04796553f7a66b70dcfb3bf2eb027fe4af54b64",
+      "bytes": 605
+    },
+    {
+      "path": "fitzpatrick_position_00/speed_profile_screen_20261105_legacy_speed_r1/codegen.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "fitzpatrick_position_00/speed_profile_screen_20261105_legacy_speed_r1/config.json",
+      "sha256": "a536dab99e2905534245e76ef0b8266d9a0f34dd9ed10ffabdafa9651dda228b",
+      "bytes": 4074
+    },
+    {
+      "path": "fitzpatrick_position_00/speed_profile_screen_20261105_legacy_speed_r1/graph_audit.json",
+      "sha256": "a44d3f30a614ae9922a46becd363bb7f62bf139897ded168df9e77c5bb90f69b",
+      "bytes": 290
+    },
+    {
+      "path": "fitzpatrick_position_00/speed_profile_screen_20261105_legacy_speed_r1/graph_audit.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "fitzpatrick_position_00/speed_profile_screen_20261105_legacy_speed_r1/launch.log",
+      "sha256": "6bd8fb91f3082e016baff02c73077803e75affe50a6754f5174375e2a0218329",
+      "bytes": 20649
+    },
+    {
+      "path": "fitzpatrick_position_00/speed_profile_screen_20261105_legacy_speed_r1/metadata.json",
+      "sha256": "a5e751f2803764c1e0ea9ff54bb1433916bfa09a1d5e5867b1aa06febd36de19",
+      "bytes": 329
+    },
+    {
+      "path": "fitzpatrick_position_00/speed_profile_screen_20261105_legacy_speed_r1/prediction_en.png",
+      "sha256": "033daa02e4d7ee9efd0df8b72259d728e4a89bfb8c370759da3fb1acdc89708c",
+      "bytes": 63209
+    },
+    {
+      "path": "fitzpatrick_position_00/speed_profile_screen_20261105_legacy_speed_r1/predictions.csv.gz",
+      "sha256": "437ec42c02b7bd50bd16955a7d72fd515f5a84c7d16e015dd6c3521384771f23",
+      "bytes": 1284660
+    },
+    {
+      "path": "fitzpatrick_position_00/speed_profile_screen_20261105_legacy_speed_r1/source.patch",
+      "sha256": "ccf9ec7a5e1df9aab4d7938c845ade8e49179540cc7f3f2f5282d2980c3db5f0",
+      "bytes": 31886
+    },
+    {
+      "path": "fitzpatrick_position_00/speed_profile_screen_20261105_legacy_speed_r1/summary.json",
+      "sha256": "24723a4feec86214406a2b2d3d4b3ab00f22f09f2f8fc8b37ba69c8b9f1b46e1",
+      "bytes": 2763
+    },
+    {
+      "path": "fitzpatrick_position_00/speed_profile_screen_20261105_legacy_speed_r1/trajectory.csv.gz",
+      "sha256": "1bb37640cc44b79897cd67624ba3a85761f1eb6828eb3cc15e086b70679b28bf",
+      "bytes": 175092
+    },
+    {
+      "path": "fitzpatrick_position_00/speed_profile_screen_20261105_legacy_speed_r1/trajectory_en.png",
+      "sha256": "0f055d564202bfaf78866e741404b3ec14868ceb13c3be5939231dbcbef6c86e",
+      "bytes": 150684
+    },
+    {
+      "path": "fitzpatrick_position_00/speed_profile_screen_20261105_predictive_profile_r1/build.log",
+      "sha256": "734c9b4256811ef12b9435f7a2cc9844741bc70a9b7e28a7488efee1677605e0",
+      "bytes": 605
+    },
+    {
+      "path": "fitzpatrick_position_00/speed_profile_screen_20261105_predictive_profile_r1/codegen.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "fitzpatrick_position_00/speed_profile_screen_20261105_predictive_profile_r1/config.json",
+      "sha256": "2149fe0129647db85dc1b4728ea8fdeb22ade19984f5ad5a989738d83e8d2494",
+      "bytes": 4079
+    },
+    {
+      "path": "fitzpatrick_position_00/speed_profile_screen_20261105_predictive_profile_r1/graph_audit.json",
+      "sha256": "a44d3f30a614ae9922a46becd363bb7f62bf139897ded168df9e77c5bb90f69b",
+      "bytes": 290
+    },
+    {
+      "path": "fitzpatrick_position_00/speed_profile_screen_20261105_predictive_profile_r1/graph_audit.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "fitzpatrick_position_00/speed_profile_screen_20261105_predictive_profile_r1/launch.log",
+      "sha256": "1e43cbe51b948d5a4a664058b6e01db6389c1de47d17f7e43b3c3c9aa23c91c1",
+      "bytes": 20661
+    },
+    {
+      "path": "fitzpatrick_position_00/speed_profile_screen_20261105_predictive_profile_r1/metadata.json",
+      "sha256": "21e1ff0ac32ab9243bcbf85a113e47e141584329ff4db54e78ab402abe463d13",
+      "bytes": 335
+    },
+    {
+      "path": "fitzpatrick_position_00/speed_profile_screen_20261105_predictive_profile_r1/prediction_en.png",
+      "sha256": "7567cac681cc88fae311d6c95472aa6a1bd722bf92c44ecade9f9a6e87c54c9f",
+      "bytes": 63215
+    },
+    {
+      "path": "fitzpatrick_position_00/speed_profile_screen_20261105_predictive_profile_r1/predictions.csv.gz",
+      "sha256": "f61d5081891f0ba7e34038e08db58bcd91a1c4f597feea73501595faee177c2d",
+      "bytes": 1281580
+    },
+    {
+      "path": "fitzpatrick_position_00/speed_profile_screen_20261105_predictive_profile_r1/source.patch",
+      "sha256": "288c58ee94ed5d82018577220cd141b9ee78b409f15f9848c7af53648a04674b",
+      "bytes": 32849
+    },
+    {
+      "path": "fitzpatrick_position_00/speed_profile_screen_20261105_predictive_profile_r1/sqp_solver_failures.jsonl",
+      "sha256": "b8461fc3ced7bf3239766c25926edd318b1740fc791b7e073ffa403857b9ff43",
+      "bytes": 48096
+    },
+    {
+      "path": "fitzpatrick_position_00/speed_profile_screen_20261105_predictive_profile_r1/summary.json",
+      "sha256": "a8827fb5cb40223576b5910f0627d50f006d8a306c51e2d0403442dfbdb74a46",
+      "bytes": 2758
+    },
+    {
+      "path": "fitzpatrick_position_00/speed_profile_screen_20261105_predictive_profile_r1/trajectory.csv.gz",
+      "sha256": "d1a9a9d871fbe833e91e614fd58872f190576bfd87c7cbb5535899c2d9c81665",
+      "bytes": 174443
+    },
+    {
+      "path": "fitzpatrick_position_00/speed_profile_screen_20261105_predictive_profile_r1/trajectory_en.png",
+      "sha256": "d61e65a8b474288566d3fe637056476a78b4defb83b3efe8ed7f50c1c71e7887",
+      "bytes": 153648
+    },
+    {
+      "path": "fitzpatrick_position_00/speed_profile_v2_20261105_legacy_speed_r1/build.log",
+      "sha256": "f251eab82d147f1a44164ae6cbfd5dc18a2c9260c54623945cbe0bfe592d3488",
+      "bytes": 605
+    },
+    {
+      "path": "fitzpatrick_position_00/speed_profile_v2_20261105_legacy_speed_r1/codegen.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "fitzpatrick_position_00/speed_profile_v2_20261105_legacy_speed_r1/config.json",
+      "sha256": "7f5a44e763d92572b00a3959d3a4f6ff49f2a971dee1277f3448b991433a73dd",
+      "bytes": 4070
+    },
+    {
+      "path": "fitzpatrick_position_00/speed_profile_v2_20261105_legacy_speed_r1/graph_audit.json",
+      "sha256": "a44d3f30a614ae9922a46becd363bb7f62bf139897ded168df9e77c5bb90f69b",
+      "bytes": 290
+    },
+    {
+      "path": "fitzpatrick_position_00/speed_profile_v2_20261105_legacy_speed_r1/graph_audit.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "fitzpatrick_position_00/speed_profile_v2_20261105_legacy_speed_r1/launch.log",
+      "sha256": "036d45f8b1bee52b34d1ef6e7cb550b5cbbd42d06426b80c2ef1265b408cd1e1",
+      "bytes": 20641
+    },
+    {
+      "path": "fitzpatrick_position_00/speed_profile_v2_20261105_legacy_speed_r1/metadata.json",
+      "sha256": "6329836b7da42eb394563bb3b3eebed26907749aa629cb57442896bf4037d8e0",
+      "bytes": 325
+    },
+    {
+      "path": "fitzpatrick_position_00/speed_profile_v2_20261105_legacy_speed_r1/prediction_en.png",
+      "sha256": "59ff431d46b3bf266f5aa55ee699712fbf0123875f6521f712e82ba6bf961daa",
+      "bytes": 63168
+    },
+    {
+      "path": "fitzpatrick_position_00/speed_profile_v2_20261105_legacy_speed_r1/predictions.csv.gz",
+      "sha256": "b711116a2f7765a3cab64e5943a97db0444db14488d30155589226b2b0836832",
+      "bytes": 1290700
+    },
+    {
+      "path": "fitzpatrick_position_00/speed_profile_v2_20261105_legacy_speed_r1/source.patch",
+      "sha256": "1b8aad34e8e3f5db0d857a90eda3b2c3ffcde9a0e868e4f1e37a16be6b98985c",
+      "bytes": 35306
+    },
+    {
+      "path": "fitzpatrick_position_00/speed_profile_v2_20261105_legacy_speed_r1/sqp_solver_failures.jsonl",
+      "sha256": "b29dc38b32acafdf05dc475c284e3b460c6ae6eb8fac23baf05730aa75a8a302",
+      "bytes": 12071
+    },
+    {
+      "path": "fitzpatrick_position_00/speed_profile_v2_20261105_legacy_speed_r1/summary.json",
+      "sha256": "62022d50e8c4622fff2e4635f3c79233fb09546de81fe6a20dc641a2d2f26410",
+      "bytes": 2745
+    },
+    {
+      "path": "fitzpatrick_position_00/speed_profile_v2_20261105_legacy_speed_r1/trajectory.csv.gz",
+      "sha256": "8da9be8a26c4adc705f5e86d3cf42790d0b1b0d50c4e70939e6147dd6f40d7f1",
+      "bytes": 175669
+    },
+    {
+      "path": "fitzpatrick_position_00/speed_profile_v2_20261105_legacy_speed_r1/trajectory_en.png",
+      "sha256": "72723f07ea7df6ba8b872a18f08ac11d312120226c6f74f1ef360ef238d0f7f8",
+      "bytes": 152452
+    },
+    {
+      "path": "fitzpatrick_position_00/speed_profile_v2_20261105_predictive_profile_r1/build.log",
+      "sha256": "14f37ca616f943f60871817ff026a91b389aeeda9daf0220207ee588404340a7",
+      "bytes": 605
+    },
+    {
+      "path": "fitzpatrick_position_00/speed_profile_v2_20261105_predictive_profile_r1/codegen.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "fitzpatrick_position_00/speed_profile_v2_20261105_predictive_profile_r1/config.json",
+      "sha256": "68becf2889b48dd80b1a28230a1f815f6ab8bd971234fe5d523496b3bef24f47",
+      "bytes": 4075
+    },
+    {
+      "path": "fitzpatrick_position_00/speed_profile_v2_20261105_predictive_profile_r1/graph_audit.json",
+      "sha256": "a44d3f30a614ae9922a46becd363bb7f62bf139897ded168df9e77c5bb90f69b",
+      "bytes": 290
+    },
+    {
+      "path": "fitzpatrick_position_00/speed_profile_v2_20261105_predictive_profile_r1/graph_audit.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "fitzpatrick_position_00/speed_profile_v2_20261105_predictive_profile_r1/launch.log",
+      "sha256": "2e316f984ce4c96cd834d3f195e836652ec391e9cbbaaabe78c155472e7b560d",
+      "bytes": 20653
+    },
+    {
+      "path": "fitzpatrick_position_00/speed_profile_v2_20261105_predictive_profile_r1/metadata.json",
+      "sha256": "301e631290246cf664b839c55ce8fbbdbca94f4c81b2799e98d59ba951a9538a",
+      "bytes": 331
+    },
+    {
+      "path": "fitzpatrick_position_00/speed_profile_v2_20261105_predictive_profile_r1/prediction_en.png",
+      "sha256": "033daa02e4d7ee9efd0df8b72259d728e4a89bfb8c370759da3fb1acdc89708c",
+      "bytes": 63209
+    },
+    {
+      "path": "fitzpatrick_position_00/speed_profile_v2_20261105_predictive_profile_r1/predictions.csv.gz",
+      "sha256": "d429e625332b2a010dfa075c182fa13f3023c7f80953b7227abbcb7ff38108d7",
+      "bytes": 1281479
+    },
+    {
+      "path": "fitzpatrick_position_00/speed_profile_v2_20261105_predictive_profile_r1/source.patch",
+      "sha256": "1b8aad34e8e3f5db0d857a90eda3b2c3ffcde9a0e868e4f1e37a16be6b98985c",
+      "bytes": 35306
+    },
+    {
+      "path": "fitzpatrick_position_00/speed_profile_v2_20261105_predictive_profile_r1/sqp_solver_failures.jsonl",
+      "sha256": "eaf20e2820ae83d327e3ae794735cf5db19f7d9748af89a6b86e73de6527e29b",
+      "bytes": 124049
+    },
+    {
+      "path": "fitzpatrick_position_00/speed_profile_v2_20261105_predictive_profile_r1/summary.json",
+      "sha256": "340c6b4aad9ecd4859c7cf34c4922969d3ccd53948bcc03f87cfe9a1ff8f3e3d",
+      "bytes": 2750
+    },
+    {
+      "path": "fitzpatrick_position_00/speed_profile_v2_20261105_predictive_profile_r1/trajectory.csv.gz",
+      "sha256": "f53509f29d97615ce80f85a1fe737fc24da778e605925dfab6cf5b5136dbc168",
+      "bytes": 173026
+    },
+    {
+      "path": "fitzpatrick_position_00/speed_profile_v2_20261105_predictive_profile_r1/trajectory_en.png",
+      "sha256": "4cf00a81086c05651c7b62971b40e4476a24a47cd2a06c12e007d9843701711d",
+      "bytes": 149786
+    },
+    {
+      "path": "fitzpatrick_position_00/speed_profile_v3_20261105_legacy_speed_r1/build.log",
+      "sha256": "ab205abf07627acae8784500439bf7db2ab3690b2f32e4713b34e169add780a9",
+      "bytes": 605
+    },
+    {
+      "path": "fitzpatrick_position_00/speed_profile_v3_20261105_legacy_speed_r1/codegen.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "fitzpatrick_position_00/speed_profile_v3_20261105_legacy_speed_r1/config.json",
+      "sha256": "a70c2a906bed577ef08ef6c97f80863609ec96db2f85d7c3ff9aa3c3fd8965a0",
+      "bytes": 4070
+    },
+    {
+      "path": "fitzpatrick_position_00/speed_profile_v3_20261105_legacy_speed_r1/graph_audit.json",
+      "sha256": "a44d3f30a614ae9922a46becd363bb7f62bf139897ded168df9e77c5bb90f69b",
+      "bytes": 290
+    },
+    {
+      "path": "fitzpatrick_position_00/speed_profile_v3_20261105_legacy_speed_r1/graph_audit.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "fitzpatrick_position_00/speed_profile_v3_20261105_legacy_speed_r1/launch.log",
+      "sha256": "8d8b6deec5bd87d3526dde1a2b68849e66fa2ac6896b360741eaf70a5c749cda",
+      "bytes": 20641
+    },
+    {
+      "path": "fitzpatrick_position_00/speed_profile_v3_20261105_legacy_speed_r1/metadata.json",
+      "sha256": "529985d65bbd240a066ae2b27c14041a68885725bbbbddf64c636dcd77b92a4a",
+      "bytes": 325
+    },
+    {
+      "path": "fitzpatrick_position_00/speed_profile_v3_20261105_legacy_speed_r1/prediction_en.png",
+      "sha256": "37fbb7c833aa58170c39255cdf1dae4a5a933e203637624eaf97bab106ad4fe1",
+      "bytes": 63170
+    },
+    {
+      "path": "fitzpatrick_position_00/speed_profile_v3_20261105_legacy_speed_r1/predictions.csv.gz",
+      "sha256": "0afe2aef4a453b78876ac382b013bdf849ef4766e3fa364c441780c4050a9edb",
+      "bytes": 1282739
+    },
+    {
+      "path": "fitzpatrick_position_00/speed_profile_v3_20261105_legacy_speed_r1/source.patch",
+      "sha256": "e7849d9567e8d7c5d1b7bdfb2b3aa1c6f1654758ac431d6d206542ef60da2965",
+      "bytes": 39137
+    },
+    {
+      "path": "fitzpatrick_position_00/speed_profile_v3_20261105_legacy_speed_r1/sqp_solver_failures.jsonl",
+      "sha256": "595ed98b2a791d759c38623df3341d75830635e4468f20fec99ec62a887b7576",
+      "bytes": 3306
+    },
+    {
+      "path": "fitzpatrick_position_00/speed_profile_v3_20261105_legacy_speed_r1/summary.json",
+      "sha256": "1a345247b89c2fa6fbeda4a848c43c2fcb8f6b35b69d1b202654fb90212686c7",
+      "bytes": 2762
+    },
+    {
+      "path": "fitzpatrick_position_00/speed_profile_v3_20261105_legacy_speed_r1/trajectory.csv.gz",
+      "sha256": "5bc1d8903bdcaf6d6bf27108c9e5a5bbedc91ad6c5f4aa90a5842e4bf00ac137",
+      "bytes": 175328
+    },
+    {
+      "path": "fitzpatrick_position_00/speed_profile_v3_20261105_legacy_speed_r1/trajectory_en.png",
+      "sha256": "02356dd4ac6973a84a6e4e495ca28676cf96fdce43fe9429ef5ac01360444dab",
+      "bytes": 152085
+    },
+    {
+      "path": "fitzpatrick_position_00/speed_profile_v3_20261105_predictive_profile_r1/build.log",
+      "sha256": "ed271a96311483e01b3426c252fa018f72d99159e09204fe06e91997859be882",
+      "bytes": 605
+    },
+    {
+      "path": "fitzpatrick_position_00/speed_profile_v3_20261105_predictive_profile_r1/codegen.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "fitzpatrick_position_00/speed_profile_v3_20261105_predictive_profile_r1/config.json",
+      "sha256": "2392a16d4eec624867e22322d2525fc8683218d0dddd977adf96c5b53c814148",
+      "bytes": 4075
+    },
+    {
+      "path": "fitzpatrick_position_00/speed_profile_v3_20261105_predictive_profile_r1/graph_audit.json",
+      "sha256": "a44d3f30a614ae9922a46becd363bb7f62bf139897ded168df9e77c5bb90f69b",
+      "bytes": 290
+    },
+    {
+      "path": "fitzpatrick_position_00/speed_profile_v3_20261105_predictive_profile_r1/graph_audit.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "fitzpatrick_position_00/speed_profile_v3_20261105_predictive_profile_r1/launch.log",
+      "sha256": "59a28e6140979bc82dd326551e4ee85df32a369dacf531d707d6116beb140647",
+      "bytes": 20653
+    },
+    {
+      "path": "fitzpatrick_position_00/speed_profile_v3_20261105_predictive_profile_r1/metadata.json",
+      "sha256": "e990b3f8c9c3414ef8747e382a380354f993db96730e070c59829c40ee74a283",
+      "bytes": 331
+    },
+    {
+      "path": "fitzpatrick_position_00/speed_profile_v3_20261105_predictive_profile_r1/prediction_en.png",
+      "sha256": "b720ffcc5735a2328e29be06fc7d1fad07c35a182a2506509d910443d380d2f9",
+      "bytes": 66638
+    },
+    {
+      "path": "fitzpatrick_position_00/speed_profile_v3_20261105_predictive_profile_r1/predictions.csv.gz",
+      "sha256": "f2f77a8d12be5a707c29e0b20a3da365a68fc9fe05da57ea04ba7c5aa6b9e5e2",
+      "bytes": 1277449
+    },
+    {
+      "path": "fitzpatrick_position_00/speed_profile_v3_20261105_predictive_profile_r1/source.patch",
+      "sha256": "e7849d9567e8d7c5d1b7bdfb2b3aa1c6f1654758ac431d6d206542ef60da2965",
+      "bytes": 39137
+    },
+    {
+      "path": "fitzpatrick_position_00/speed_profile_v3_20261105_predictive_profile_r1/sqp_solver_failures.jsonl",
+      "sha256": "bc7d12b36053260bb220b70718e565e14701ed69c631dc3b88d7526599f71e32",
+      "bytes": 6194
+    },
+    {
+      "path": "fitzpatrick_position_00/speed_profile_v3_20261105_predictive_profile_r1/summary.json",
+      "sha256": "7f73d9e30251f524ecc5dd1871c466d2e473b017d24c81dbc419fd60a45a89a2",
+      "bytes": 2766
+    },
+    {
+      "path": "fitzpatrick_position_00/speed_profile_v3_20261105_predictive_profile_r1/trajectory.csv.gz",
+      "sha256": "3d79d8f2bbba9117c4ae1a8d0493d077701b801494b33b3d862c73b0afa927f9",
+      "bytes": 172862
+    },
+    {
+      "path": "fitzpatrick_position_00/speed_profile_v3_20261105_predictive_profile_r1/trajectory_en.png",
+      "sha256": "2a946eb5355d1c27579f018bdcc41f17477cdb90ef5363c61b9b23b30757f3b3",
+      "bytes": 148017
+    },
+    {
+      "path": "fitzpatrick_position_00/speed_profile_v3_repeat_20261105_repeat1/build.log",
+      "sha256": "bda2bdfaa826f533299c2958121c7c9d7e85ebfa76a520d99666320abe311d15",
+      "bytes": 605
+    },
+    {
+      "path": "fitzpatrick_position_00/speed_profile_v3_repeat_20261105_repeat1/codegen.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "fitzpatrick_position_00/speed_profile_v3_repeat_20261105_repeat1/config.json",
+      "sha256": "7a7d80db01f7e879a5890829e606e017556efe0e17666bc3d1d71f0ca370ef4d",
+      "bytes": 4068
+    },
+    {
+      "path": "fitzpatrick_position_00/speed_profile_v3_repeat_20261105_repeat1/graph_audit.json",
+      "sha256": "a44d3f30a614ae9922a46becd363bb7f62bf139897ded168df9e77c5bb90f69b",
+      "bytes": 290
+    },
+    {
+      "path": "fitzpatrick_position_00/speed_profile_v3_repeat_20261105_repeat1/graph_audit.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "fitzpatrick_position_00/speed_profile_v3_repeat_20261105_repeat1/launch.log",
+      "sha256": "6ca190a0cdc86c7ab9ff9b01b0d5b748e5b1c353d2cd19d0df5c9a1885e133b5",
+      "bytes": 20639
+    },
+    {
+      "path": "fitzpatrick_position_00/speed_profile_v3_repeat_20261105_repeat1/metadata.json",
+      "sha256": "1ec6e040a3d383533b8dc912531cbe135c9b2bd0cd2310535835065d622d5c77",
+      "bytes": 324
+    },
+    {
+      "path": "fitzpatrick_position_00/speed_profile_v3_repeat_20261105_repeat1/prediction_en.png",
+      "sha256": "971c26896f6a5157ee9bc97011773ad869cf5ce0211dfdda584d1a54290bfff1",
+      "bytes": 66798
+    },
+    {
+      "path": "fitzpatrick_position_00/speed_profile_v3_repeat_20261105_repeat1/predictions.csv.gz",
+      "sha256": "737ebd33b9aa5b4abb22c37a01584f2d8191e1574da083a905a216bdf99811be",
+      "bytes": 1280025
+    },
+    {
+      "path": "fitzpatrick_position_00/speed_profile_v3_repeat_20261105_repeat1/source.patch",
+      "sha256": "0e273d8f4c554dec2be511b8bb3d2db8ae08a1a99e281a62433ecddf305d0541",
+      "bytes": 41155
+    },
+    {
+      "path": "fitzpatrick_position_00/speed_profile_v3_repeat_20261105_repeat1/summary.json",
+      "sha256": "215de792fe7e0dd236bda18b8dffbf113cdaded485c03cf5e65d80eed305361b",
+      "bytes": 2742
+    },
+    {
+      "path": "fitzpatrick_position_00/speed_profile_v3_repeat_20261105_repeat1/trajectory.csv.gz",
+      "sha256": "61e5afc6fef6d7cbee32e9b358a1539a172b8b2ce095a4a4ab9b181ecc81766e",
+      "bytes": 173209
+    },
+    {
+      "path": "fitzpatrick_position_00/speed_profile_v3_repeat_20261105_repeat1/trajectory_en.png",
+      "sha256": "795919abeebed61eeadbf46150333a21f2ffa2197a5d09fbb100039e0b38d808",
+      "bytes": 148152
+    },
+    {
+      "path": "fitzpatrick_position_25/speed_profile_screen_20261105_legacy_speed_r1/build.log",
+      "sha256": "af0f2dc5ebe94d567dacc8f723613d4d2174eddc4ee324aba4e756a9fb5e39a0",
+      "bytes": 605
+    },
+    {
+      "path": "fitzpatrick_position_25/speed_profile_screen_20261105_legacy_speed_r1/codegen.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "fitzpatrick_position_25/speed_profile_screen_20261105_legacy_speed_r1/config.json",
+      "sha256": "87ab1db31acdb13fb8dc9a7204cf746c4ff95e5b12e480985ac17a3c181e4a57",
+      "bytes": 4081
+    },
+    {
+      "path": "fitzpatrick_position_25/speed_profile_screen_20261105_legacy_speed_r1/graph_audit.json",
+      "sha256": "a44d3f30a614ae9922a46becd363bb7f62bf139897ded168df9e77c5bb90f69b",
+      "bytes": 290
+    },
+    {
+      "path": "fitzpatrick_position_25/speed_profile_screen_20261105_legacy_speed_r1/graph_audit.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "fitzpatrick_position_25/speed_profile_screen_20261105_legacy_speed_r1/launch.log",
+      "sha256": "24f94a843f8a8fca0febc179c02eeeb9ec0e9da472f2aa51aee156dd9b109d01",
+      "bytes": 20877
+    },
+    {
+      "path": "fitzpatrick_position_25/speed_profile_screen_20261105_legacy_speed_r1/metadata.json",
+      "sha256": "4b56447b1c675cd27e38c71481aece0f9ef290e8e0e27467e5d1283d43bc56b0",
+      "bytes": 329
+    },
+    {
+      "path": "fitzpatrick_position_25/speed_profile_screen_20261105_legacy_speed_r1/prediction_en.png",
+      "sha256": "343323c9a36cfb2c25e244d22bfa21ed272a6907f648c36118a523720022e7bf",
+      "bytes": 57725
+    },
+    {
+      "path": "fitzpatrick_position_25/speed_profile_screen_20261105_legacy_speed_r1/prediction_entry_2_en.png",
+      "sha256": "2c9de683177d7f4af690eeb8581e45c3bfc41fff06cdff931919043715c4381e",
+      "bytes": 75661
+    },
+    {
+      "path": "fitzpatrick_position_25/speed_profile_screen_20261105_legacy_speed_r1/predictions.csv.gz",
+      "sha256": "2be4b1ac2ebf29b1a000c0713ce6e9a8f35b06cc2e3f17696baf6b36ef5f6199",
+      "bytes": 1275324
+    },
+    {
+      "path": "fitzpatrick_position_25/speed_profile_screen_20261105_legacy_speed_r1/source.patch",
+      "sha256": "288c58ee94ed5d82018577220cd141b9ee78b409f15f9848c7af53648a04674b",
+      "bytes": 32849
+    },
+    {
+      "path": "fitzpatrick_position_25/speed_profile_screen_20261105_legacy_speed_r1/sqp_solver_failures.jsonl",
+      "sha256": "568c0dcbba38d77e796f639634f21bfdf05c837d95c4c5f515b29fbe9e051536",
+      "bytes": 119384
+    },
+    {
+      "path": "fitzpatrick_position_25/speed_profile_screen_20261105_legacy_speed_r1/summary.json",
+      "sha256": "cf4c49d75d92f6206f904c094c53251abea0bc0406ad98e1801d20a325895d5c",
+      "bytes": 2824
+    },
+    {
+      "path": "fitzpatrick_position_25/speed_profile_screen_20261105_legacy_speed_r1/trajectory.csv.gz",
+      "sha256": "c658764c487d758d14ce08239414b876dd53de86191dd6ddac5932ff4568300c",
+      "bytes": 189456
+    },
+    {
+      "path": "fitzpatrick_position_25/speed_profile_screen_20261105_legacy_speed_r1/trajectory_en.png",
+      "sha256": "2e0e704fea290c0b2bf90b66a3f7ae278900f7d5078bf1b1ac0c9d6e02592ab8",
+      "bytes": 164139
+    },
+    {
+      "path": "fitzpatrick_position_25/speed_profile_screen_20261105_predictive_profile_r1/build.log",
+      "sha256": "1b86433747ff98b8f1d24a0b2526a5309dd4cdfab2e2d08be0705b69cac76a9a",
+      "bytes": 605
+    },
+    {
+      "path": "fitzpatrick_position_25/speed_profile_screen_20261105_predictive_profile_r1/codegen.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "fitzpatrick_position_25/speed_profile_screen_20261105_predictive_profile_r1/config.json",
+      "sha256": "f18daa6a4df861e311bbdf05d0d86a5a1eb5d72d8d4aefe75740078807573413",
+      "bytes": 4086
+    },
+    {
+      "path": "fitzpatrick_position_25/speed_profile_screen_20261105_predictive_profile_r1/graph_audit.json",
+      "sha256": "a44d3f30a614ae9922a46becd363bb7f62bf139897ded168df9e77c5bb90f69b",
+      "bytes": 290
+    },
+    {
+      "path": "fitzpatrick_position_25/speed_profile_screen_20261105_predictive_profile_r1/graph_audit.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "fitzpatrick_position_25/speed_profile_screen_20261105_predictive_profile_r1/launch.log",
+      "sha256": "c21c3a6cf1aec13766bc614cbfe0d99b4b628ce7722c7c1208230885591ed9a7",
+      "bytes": 20965
+    },
+    {
+      "path": "fitzpatrick_position_25/speed_profile_screen_20261105_predictive_profile_r1/metadata.json",
+      "sha256": "2ac199423be89f4468887d4232595d3a4706ce14d4d0ede51cbb05042253401a",
+      "bytes": 335
+    },
+    {
+      "path": "fitzpatrick_position_25/speed_profile_screen_20261105_predictive_profile_r1/prediction_en.png",
+      "sha256": "ad5bb856541fdadd3f945f3e567a8fd97a9c35d49665cb3becc6be26ea1da313",
+      "bytes": 57745
+    },
+    {
+      "path": "fitzpatrick_position_25/speed_profile_screen_20261105_predictive_profile_r1/prediction_entry_2_en.png",
+      "sha256": "48e76aa4194a2c8b1efa5e14031e9afec8cde004c99af55894e409f0b2964bcb",
+      "bytes": 76073
+    },
+    {
+      "path": "fitzpatrick_position_25/speed_profile_screen_20261105_predictive_profile_r1/predictions.csv.gz",
+      "sha256": "abb1e63e57fffe6d2a66751ef349381462090aebfd725bfb8f84e285515cfa66",
+      "bytes": 1277111
+    },
+    {
+      "path": "fitzpatrick_position_25/speed_profile_screen_20261105_predictive_profile_r1/source.patch",
+      "sha256": "288c58ee94ed5d82018577220cd141b9ee78b409f15f9848c7af53648a04674b",
+      "bytes": 32849
+    },
+    {
+      "path": "fitzpatrick_position_25/speed_profile_screen_20261105_predictive_profile_r1/sqp_solver_failures.jsonl",
+      "sha256": "493bf7dccd18080eece13f3c34fd2f96d5088ecda82695a303e59ae8794ce893",
+      "bytes": 77770
+    },
+    {
+      "path": "fitzpatrick_position_25/speed_profile_screen_20261105_predictive_profile_r1/summary.json",
+      "sha256": "dee8bba8e65db6f0dead0b7b1136562cba559a988d86b7e1e05deac17210d698",
+      "bytes": 2797
+    },
+    {
+      "path": "fitzpatrick_position_25/speed_profile_screen_20261105_predictive_profile_r1/trajectory.csv.gz",
+      "sha256": "175ab1b71b90167a41b052ccd4508be46655ebfb7234ed4697cdfa841681ba74",
+      "bytes": 189287
+    },
+    {
+      "path": "fitzpatrick_position_25/speed_profile_screen_20261105_predictive_profile_r1/trajectory_en.png",
+      "sha256": "22f0b80505b9a6de924f7485b25c44ee6de7375e0c5f4dbc940148d297c3a96e",
+      "bytes": 165772
+    },
+    {
+      "path": "fitzpatrick_position_25/speed_profile_v2_20261105_legacy_speed_r1/build.log",
+      "sha256": "85fb7287226afe7845fce0fedd4ad4bfa6af5b358b98401af77e53866cbab6bc",
+      "bytes": 605
+    },
+    {
+      "path": "fitzpatrick_position_25/speed_profile_v2_20261105_legacy_speed_r1/codegen.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "fitzpatrick_position_25/speed_profile_v2_20261105_legacy_speed_r1/config.json",
+      "sha256": "5e341f389a8e8f26a291a9d04d17f006c27be0ab474ca354c357060a4a402d58",
+      "bytes": 4077
+    },
+    {
+      "path": "fitzpatrick_position_25/speed_profile_v2_20261105_legacy_speed_r1/graph_audit.json",
+      "sha256": "a44d3f30a614ae9922a46becd363bb7f62bf139897ded168df9e77c5bb90f69b",
+      "bytes": 290
+    },
+    {
+      "path": "fitzpatrick_position_25/speed_profile_v2_20261105_legacy_speed_r1/graph_audit.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "fitzpatrick_position_25/speed_profile_v2_20261105_legacy_speed_r1/launch.log",
+      "sha256": "0c1fb305d347758d81cf00be37c66b42bc1a7e541ef33cc6de937b5949f9b59a",
+      "bytes": 20641
+    },
+    {
+      "path": "fitzpatrick_position_25/speed_profile_v2_20261105_legacy_speed_r1/metadata.json",
+      "sha256": "b86ba43b39ab5f391eab83de2e6a6c03751af07f18e06cb7144d382b093e4dd0",
+      "bytes": 325
+    },
+    {
+      "path": "fitzpatrick_position_25/speed_profile_v2_20261105_legacy_speed_r1/prediction_en.png",
+      "sha256": "1f7bb592c51da2bf7617597eba4df63e1dc9caebc0759a253a3bf78567c59f98",
+      "bytes": 57666
+    },
+    {
+      "path": "fitzpatrick_position_25/speed_profile_v2_20261105_legacy_speed_r1/prediction_entry_2_en.png",
+      "sha256": "09fc39458f728a99a0f699daa954df27999037b34a96c5576b4bbe45c70e9a0a",
+      "bytes": 63159
+    },
+    {
+      "path": "fitzpatrick_position_25/speed_profile_v2_20261105_legacy_speed_r1/prediction_entry_3_en.png",
+      "sha256": "bc37fff0c23ec8295a30294b64fc0e9613d93f3ee408d21fe01ea67306b63231",
+      "bytes": 75393
+    },
+    {
+      "path": "fitzpatrick_position_25/speed_profile_v2_20261105_legacy_speed_r1/predictions.csv.gz",
+      "sha256": "b35681ee08f8d19c1e15ea09fbbae69a1a869c9d742f9da0aa739ab691344f77",
+      "bytes": 1293115
+    },
+    {
+      "path": "fitzpatrick_position_25/speed_profile_v2_20261105_legacy_speed_r1/source.patch",
+      "sha256": "1b8aad34e8e3f5db0d857a90eda3b2c3ffcde9a0e868e4f1e37a16be6b98985c",
+      "bytes": 35306
+    },
+    {
+      "path": "fitzpatrick_position_25/speed_profile_v2_20261105_legacy_speed_r1/sqp_solver_failures.jsonl",
+      "sha256": "882cc1566b2c78575693dab5df601dc4079db5f439b5bb98480ff43dc2f3ceb6",
+      "bytes": 67288
+    },
+    {
+      "path": "fitzpatrick_position_25/speed_profile_v2_20261105_legacy_speed_r1/summary.json",
+      "sha256": "12a1758494a4f3f82886036cb11a08003c3171af0967d96eb0c7b40b0c5bde65",
+      "bytes": 2655
+    },
+    {
+      "path": "fitzpatrick_position_25/speed_profile_v2_20261105_legacy_speed_r1/trajectory.csv.gz",
+      "sha256": "24dda2cb641f5e191d06b94cf8a4b41520747a5e2ddb6222895714f49252d625",
+      "bytes": 193528
+    },
+    {
+      "path": "fitzpatrick_position_25/speed_profile_v2_20261105_legacy_speed_r1/trajectory_en.png",
+      "sha256": "0155a945f2fa3a9a0b03f21311bda679cfb81949440d3972b9ccf8ad79c6c853",
+      "bytes": 160756
+    },
+    {
+      "path": "fitzpatrick_position_25/speed_profile_v2_20261105_predictive_profile_r1/build.log",
+      "sha256": "7b7ed80814f02c4ea68ee13b0a5d62d15c83d58c5392b1ba14e6ba31a8fc577f",
+      "bytes": 605
+    },
+    {
+      "path": "fitzpatrick_position_25/speed_profile_v2_20261105_predictive_profile_r1/codegen.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "fitzpatrick_position_25/speed_profile_v2_20261105_predictive_profile_r1/config.json",
+      "sha256": "1c0189e9f11025b2f57e4b6740d02338fdafaeba6303fceb1dff6612316bf80b",
+      "bytes": 4082
+    },
+    {
+      "path": "fitzpatrick_position_25/speed_profile_v2_20261105_predictive_profile_r1/graph_audit.json",
+      "sha256": "a44d3f30a614ae9922a46becd363bb7f62bf139897ded168df9e77c5bb90f69b",
+      "bytes": 290
+    },
+    {
+      "path": "fitzpatrick_position_25/speed_profile_v2_20261105_predictive_profile_r1/graph_audit.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "fitzpatrick_position_25/speed_profile_v2_20261105_predictive_profile_r1/launch.log",
+      "sha256": "6b8f18604507999f38fa45df43068f0caec71200d2e400bafbf32c155c91ccbf",
+      "bytes": 21641
+    },
+    {
+      "path": "fitzpatrick_position_25/speed_profile_v2_20261105_predictive_profile_r1/metadata.json",
+      "sha256": "0cc70ca033d7adca35820811a87b8290e3a2af38cb9f3f89656230880611e2ff",
+      "bytes": 331
+    },
+    {
+      "path": "fitzpatrick_position_25/speed_profile_v2_20261105_predictive_profile_r1/prediction_en.png",
+      "sha256": "c4b012eb6b693ef6ba8c95b33beec196af85bf829e4abb7c782ef99e741e1143",
+      "bytes": 60454
+    },
+    {
+      "path": "fitzpatrick_position_25/speed_profile_v2_20261105_predictive_profile_r1/prediction_entry_2_en.png",
+      "sha256": "84ba5b65e744356f4755431864cb8e49cac927d429e1c9b2e8fa3b515803c0f2",
+      "bytes": 64810
+    },
+    {
+      "path": "fitzpatrick_position_25/speed_profile_v2_20261105_predictive_profile_r1/prediction_entry_3_en.png",
+      "sha256": "f20f1ee451f56296fade5ef5665135987fe0456e919d9fd632735d726f1ef590",
+      "bytes": 81479
+    },
+    {
+      "path": "fitzpatrick_position_25/speed_profile_v2_20261105_predictive_profile_r1/predictions.csv.gz",
+      "sha256": "38084d82bec424cb66559e2b0f4e9bb1d2ef70e898a5eb61bd200a2d18506a9c",
+      "bytes": 1289019
+    },
+    {
+      "path": "fitzpatrick_position_25/speed_profile_v2_20261105_predictive_profile_r1/source.patch",
+      "sha256": "1b8aad34e8e3f5db0d857a90eda3b2c3ffcde9a0e868e4f1e37a16be6b98985c",
+      "bytes": 35306
+    },
+    {
+      "path": "fitzpatrick_position_25/speed_profile_v2_20261105_predictive_profile_r1/sqp_solver_failures.jsonl",
+      "sha256": "5c94befef50057895999c18054f15dfe14348e4c8d774897259b036959fb2efa",
+      "bytes": 257004
+    },
+    {
+      "path": "fitzpatrick_position_25/speed_profile_v2_20261105_predictive_profile_r1/summary.json",
+      "sha256": "e3a7009b33216a81c6235a4c21ba41f8b2ccbe5c2d60a03a056bb931d16525f4",
+      "bytes": 2591
+    },
+    {
+      "path": "fitzpatrick_position_25/speed_profile_v2_20261105_predictive_profile_r1/trajectory.csv.gz",
+      "sha256": "5cf3edc8b99a7109ae74737b394a93d7d0cefcc8fd3c3f0c0f19b436e92e74a9",
+      "bytes": 191824
+    },
+    {
+      "path": "fitzpatrick_position_25/speed_profile_v2_20261105_predictive_profile_r1/trajectory_en.png",
+      "sha256": "5a272cd5ca75aef4dbbecbb3335be8c16398e08b37308e6cfc2e1b888906b67d",
+      "bytes": 164135
+    },
+    {
+      "path": "fitzpatrick_position_25/speed_profile_v3_20261105_legacy_speed_r1/build.log",
+      "sha256": "ab02cf4b891edf931424d88b316b78c4f7ce60c1f625298ff8bf840519acc7ff",
+      "bytes": 605
+    },
+    {
+      "path": "fitzpatrick_position_25/speed_profile_v3_20261105_legacy_speed_r1/codegen.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "fitzpatrick_position_25/speed_profile_v3_20261105_legacy_speed_r1/config.json",
+      "sha256": "8e0685bc29798cc2842a3eca8251ac59a23c9db2ef1a6ad3517bb350dba53033",
+      "bytes": 4077
+    },
+    {
+      "path": "fitzpatrick_position_25/speed_profile_v3_20261105_legacy_speed_r1/graph_audit.json",
+      "sha256": "a44d3f30a614ae9922a46becd363bb7f62bf139897ded168df9e77c5bb90f69b",
+      "bytes": 290
+    },
+    {
+      "path": "fitzpatrick_position_25/speed_profile_v3_20261105_legacy_speed_r1/graph_audit.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "fitzpatrick_position_25/speed_profile_v3_20261105_legacy_speed_r1/launch.log",
+      "sha256": "4b8db1a77e3cbf55aa89ecdc9cdac8770865704f1ef32d4d2b546a619743c5fd",
+      "bytes": 20793
+    },
+    {
+      "path": "fitzpatrick_position_25/speed_profile_v3_20261105_legacy_speed_r1/metadata.json",
+      "sha256": "5c5c10e2a52bb8c393be8c64bdf31920901b281a4a72bd667c0e405f38209b47",
+      "bytes": 325
+    },
+    {
+      "path": "fitzpatrick_position_25/speed_profile_v3_20261105_legacy_speed_r1/prediction_en.png",
+      "sha256": "de313e917d85828a3417feb9d25db83e1f51f076555035ffa38301bc13c9662f",
+      "bytes": 57738
+    },
+    {
+      "path": "fitzpatrick_position_25/speed_profile_v3_20261105_legacy_speed_r1/prediction_entry_2_en.png",
+      "sha256": "42bb71916fdca49def76932eb6fe5b84a73e7d1c7e78156b26c3a00bea348aa3",
+      "bytes": 63844
+    },
+    {
+      "path": "fitzpatrick_position_25/speed_profile_v3_20261105_legacy_speed_r1/prediction_entry_3_en.png",
+      "sha256": "34bb7e03fd51341b3882243dc090b5e452460f48507b830aef4eaf4144dfdd94",
+      "bytes": 73844
+    },
+    {
+      "path": "fitzpatrick_position_25/speed_profile_v3_20261105_legacy_speed_r1/predictions.csv.gz",
+      "sha256": "209bf0afc63fc178680564564e6204fe0781a7e100a9bd44817c8f35a2a7ce94",
+      "bytes": 1290533
+    },
+    {
+      "path": "fitzpatrick_position_25/speed_profile_v3_20261105_legacy_speed_r1/source.patch",
+      "sha256": "e7849d9567e8d7c5d1b7bdfb2b3aa1c6f1654758ac431d6d206542ef60da2965",
+      "bytes": 39137
+    },
+    {
+      "path": "fitzpatrick_position_25/speed_profile_v3_20261105_legacy_speed_r1/sqp_solver_failures.jsonl",
+      "sha256": "989292c2871622bbd1a9784852876036637b67b2972684d856116acfd08e5dce",
+      "bytes": 66532
+    },
+    {
+      "path": "fitzpatrick_position_25/speed_profile_v3_20261105_legacy_speed_r1/summary.json",
+      "sha256": "f76d250fc40ded61fd74c5c64d7ab1e91d7f35bfa4ffb6d19c5cd5d77e6d94f3",
+      "bytes": 2657
+    },
+    {
+      "path": "fitzpatrick_position_25/speed_profile_v3_20261105_legacy_speed_r1/trajectory.csv.gz",
+      "sha256": "fb4511cd17543a8710d8db583e8a58f99c23714db2d823736ae25141a561cd29",
+      "bytes": 193591
+    },
+    {
+      "path": "fitzpatrick_position_25/speed_profile_v3_20261105_legacy_speed_r1/trajectory_en.png",
+      "sha256": "23e589749c574bb791a5dd7dfae15080ce01f250eff58f5be87e5edc2c0383c9",
+      "bytes": 162073
+    },
+    {
+      "path": "fitzpatrick_position_25/speed_profile_v3_20261105_predictive_profile_r1/build.log",
+      "sha256": "b33a89d3da603d8913bd94d3f14a3d15f8ab6e486880d727f1eb2ebe95f8e459",
+      "bytes": 605
+    },
+    {
+      "path": "fitzpatrick_position_25/speed_profile_v3_20261105_predictive_profile_r1/codegen.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "fitzpatrick_position_25/speed_profile_v3_20261105_predictive_profile_r1/config.json",
+      "sha256": "a2de76e0c5cc19be0bf2a6c2d80cab988f6cc3f3fb1fa3bf41cf13a64508104b",
+      "bytes": 4082
+    },
+    {
+      "path": "fitzpatrick_position_25/speed_profile_v3_20261105_predictive_profile_r1/graph_audit.json",
+      "sha256": "a44d3f30a614ae9922a46becd363bb7f62bf139897ded168df9e77c5bb90f69b",
+      "bytes": 290
+    },
+    {
+      "path": "fitzpatrick_position_25/speed_profile_v3_20261105_predictive_profile_r1/graph_audit.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "fitzpatrick_position_25/speed_profile_v3_20261105_predictive_profile_r1/launch.log",
+      "sha256": "ed6c2bb4f0c6423b181d00a18d61c727c717f960082aec2b962ba856d3702c69",
+      "bytes": 20653
+    },
+    {
+      "path": "fitzpatrick_position_25/speed_profile_v3_20261105_predictive_profile_r1/metadata.json",
+      "sha256": "b553ea657df28ee788cf33f9c72d4afaa6db2e348c1477a8d521aad7cf97ee6d",
+      "bytes": 331
+    },
+    {
+      "path": "fitzpatrick_position_25/speed_profile_v3_20261105_predictive_profile_r1/prediction_en.png",
+      "sha256": "a0e63596b6cbc5828302e70728031fcd87b009b9e1e63a6a99ed849cf0033985",
+      "bytes": 60178
+    },
+    {
+      "path": "fitzpatrick_position_25/speed_profile_v3_20261105_predictive_profile_r1/predictions.csv.gz",
+      "sha256": "adb900594d7ac9d3fa020a2fe103f02b8783f3b8ac138b6b3c2b230acb132c3b",
+      "bytes": 1275111
+    },
+    {
+      "path": "fitzpatrick_position_25/speed_profile_v3_20261105_predictive_profile_r1/source.patch",
+      "sha256": "e7849d9567e8d7c5d1b7bdfb2b3aa1c6f1654758ac431d6d206542ef60da2965",
+      "bytes": 39137
+    },
+    {
+      "path": "fitzpatrick_position_25/speed_profile_v3_20261105_predictive_profile_r1/sqp_solver_failures.jsonl",
+      "sha256": "a2f57ed883b0e326c953a3d532a6e70d1568b38631738ec1b88d8d9d30ade765",
+      "bytes": 24334
+    },
+    {
+      "path": "fitzpatrick_position_25/speed_profile_v3_20261105_predictive_profile_r1/summary.json",
+      "sha256": "4e0292fa2b722469baaad44ed6b8b582bc85d8f2645a539b33a8c3ae789ccca0",
+      "bytes": 2747
+    },
+    {
+      "path": "fitzpatrick_position_25/speed_profile_v3_20261105_predictive_profile_r1/trajectory.csv.gz",
+      "sha256": "4ef13952784cff413c57a70df53975de215547e68157d7592a968f91be8ecf6c",
+      "bytes": 172157
+    },
+    {
+      "path": "fitzpatrick_position_25/speed_profile_v3_20261105_predictive_profile_r1/trajectory_en.png",
+      "sha256": "dbec789b624a0b2d52ab0438378b70a876ec443562dbaedb700e0ea670951f15",
+      "bytes": 145032
+    },
+    {
+      "path": "fitzpatrick_position_25/speed_profile_v3_repeat_20261105_repeat1/build.log",
+      "sha256": "9755c86d72d3347cb48643174e3dcafda5f649f40715a3e1fd4ff8edcdc9ae67",
+      "bytes": 605
+    },
+    {
+      "path": "fitzpatrick_position_25/speed_profile_v3_repeat_20261105_repeat1/codegen.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "fitzpatrick_position_25/speed_profile_v3_repeat_20261105_repeat1/config.json",
+      "sha256": "74aa682b4943394cc399fb07f63bb7f577869ebe4b510a14372904b58011519c",
+      "bytes": 4075
+    },
+    {
+      "path": "fitzpatrick_position_25/speed_profile_v3_repeat_20261105_repeat1/graph_audit.json",
+      "sha256": "a44d3f30a614ae9922a46becd363bb7f62bf139897ded168df9e77c5bb90f69b",
+      "bytes": 290
+    },
+    {
+      "path": "fitzpatrick_position_25/speed_profile_v3_repeat_20261105_repeat1/graph_audit.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "fitzpatrick_position_25/speed_profile_v3_repeat_20261105_repeat1/launch.log",
+      "sha256": "dbf30fd17488d75fcdf20e2606ab583d0f9e388a1e17712a20c0bd4a28d8daae",
+      "bytes": 20639
+    },
+    {
+      "path": "fitzpatrick_position_25/speed_profile_v3_repeat_20261105_repeat1/metadata.json",
+      "sha256": "10617070a364c3f54eff1c2e5a7820f782a40a753d51ef1cad4cac004cbd963a",
+      "bytes": 324
+    },
+    {
+      "path": "fitzpatrick_position_25/speed_profile_v3_repeat_20261105_repeat1/prediction_en.png",
+      "sha256": "7fe8ea3dcd1ba2cf7f218b272f6cf29fb04e8d111c5d5ce44bae9b171154027a",
+      "bytes": 59976
+    },
+    {
+      "path": "fitzpatrick_position_25/speed_profile_v3_repeat_20261105_repeat1/predictions.csv.gz",
+      "sha256": "28f218e9b40bf00ea6a9fc408ef623ff1346966b74b93b8f1bb8c8329e97be28",
+      "bytes": 1269931
+    },
+    {
+      "path": "fitzpatrick_position_25/speed_profile_v3_repeat_20261105_repeat1/source.patch",
+      "sha256": "0e273d8f4c554dec2be511b8bb3d2db8ae08a1a99e281a62433ecddf305d0541",
+      "bytes": 41155
+    },
+    {
+      "path": "fitzpatrick_position_25/speed_profile_v3_repeat_20261105_repeat1/sqp_solver_failures.jsonl",
+      "sha256": "328d610012247c19861bd6a73d4bbd4e6e4d538af7e3e567ac4a8a5b215eb8f1",
+      "bytes": 12470
+    },
+    {
+      "path": "fitzpatrick_position_25/speed_profile_v3_repeat_20261105_repeat1/summary.json",
+      "sha256": "c503fc912459805e0e77f22441e640816d21e7b63d2a7132ffe5f1dabf93659d",
+      "bytes": 2764
+    },
+    {
+      "path": "fitzpatrick_position_25/speed_profile_v3_repeat_20261105_repeat1/trajectory.csv.gz",
+      "sha256": "89a50c16dd6a0bf3341c40fdc0c7352d18333aabfdbee23df40898e89d3520ff",
+      "bytes": 171547
+    },
+    {
+      "path": "fitzpatrick_position_25/speed_profile_v3_repeat_20261105_repeat1/trajectory_en.png",
+      "sha256": "75e886a521bc8a47e8aed95579cfbc611e3561c8c7f5be32673ce28ef17f69e7",
+      "bytes": 146940
+    },
+    {
+      "path": "fitzpatrick_position_50/speed_profile_debug_20261105_a/build.log",
+      "sha256": "d3225492e7b9516310c80dc58a0151c0f9f3aeec219db0f43216119f5095fb79",
+      "bytes": 605
+    },
+    {
+      "path": "fitzpatrick_position_50/speed_profile_debug_20261105_a/codegen.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "fitzpatrick_position_50/speed_profile_debug_20261105_a/config.json",
+      "sha256": "95c15aedbb056518f67fd65eee503ef62b99b6bd546abe7f5509c345b815a65f",
+      "bytes": 4068
+    },
+    {
+      "path": "fitzpatrick_position_50/speed_profile_debug_20261105_a/graph_audit.json",
+      "sha256": "a44d3f30a614ae9922a46becd363bb7f62bf139897ded168df9e77c5bb90f69b",
+      "bytes": 290
+    },
+    {
+      "path": "fitzpatrick_position_50/speed_profile_debug_20261105_a/graph_audit.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "fitzpatrick_position_50/speed_profile_debug_20261105_a/launch.log",
+      "sha256": "35f7057f1c59f801154eff39545511901dafd124c8790ce729a950693e39c472",
+      "bytes": 21254
+    },
+    {
+      "path": "fitzpatrick_position_50/speed_profile_debug_20261105_a/metadata.json",
+      "sha256": "d3bc330af2e13027d8fbe1e1addee18bba00632c4c5f707ba0055ac24c900e7d",
+      "bytes": 314
+    },
+    {
+      "path": "fitzpatrick_position_50/speed_profile_debug_20261105_a/prediction_en.png",
+      "sha256": "dfe67a2a82cd7dc86cc1c4bb3bf7303bf8f9adb1707a0a43fbc4b2a7e9eeee39",
+      "bytes": 65987
+    },
+    {
+      "path": "fitzpatrick_position_50/speed_profile_debug_20261105_a/prediction_entry_2_en.png",
+      "sha256": "a66b3210e4d3fe3eb78ad2b98737d373d50d6b70e6eb8b8155ec84536806ebb4",
+      "bytes": 72931
+    },
+    {
+      "path": "fitzpatrick_position_50/speed_profile_debug_20261105_a/prediction_entry_3_en.png",
+      "sha256": "0e99107cdd2ac42d760034c84459ca40eed037070abcb48dbb8ff055d9604bf5",
+      "bytes": 63391
+    },
+    {
+      "path": "fitzpatrick_position_50/speed_profile_debug_20261105_a/predictions.csv.gz",
+      "sha256": "6b4f053a4c555e3e68b9564af89a803d96c6587a602c7238c75e0da3c1e28915",
+      "bytes": 1250412
+    },
+    {
+      "path": "fitzpatrick_position_50/speed_profile_debug_20261105_a/source.patch",
+      "sha256": "828ff009722cd6f9b6e25a1821038eb436bf162fa666e94e3ed9a83e275c3def",
+      "bytes": 30203
+    },
+    {
+      "path": "fitzpatrick_position_50/speed_profile_debug_20261105_a/sqp_solver_failures.jsonl",
+      "sha256": "17a5e5bd7bb706080017cf817cc8d5d34d967f28ba62d215bfc7b59b5c434544",
+      "bytes": 209583
+    },
+    {
+      "path": "fitzpatrick_position_50/speed_profile_debug_20261105_a/summary.json",
+      "sha256": "576484c00c6fcc751bf73ce6230c937c4fc4e4b555af7c51fed01f3cf514acd2",
+      "bytes": 2631
+    },
+    {
+      "path": "fitzpatrick_position_50/speed_profile_debug_20261105_a/trajectory.csv.gz",
+      "sha256": "8ef562d6f78a0835b5b6d9aae286fd46a7e5c237eaacaa12571bffce1a8fb529",
+      "bytes": 189683
+    },
+    {
+      "path": "fitzpatrick_position_50/speed_profile_debug_20261105_a/trajectory_en.png",
+      "sha256": "4f41c6fb0bed07440ae359f73bf08b4ffd83c66287ffc9fec8fd1d4bf1d560d3",
+      "bytes": 153580
+    },
+    {
+      "path": "fitzpatrick_position_50/speed_profile_right_debug_20261105_a/build.log",
+      "sha256": "25183a6fdee06f1c64721f254cfdc92c670011f75529571079911d980db5d7d4",
+      "bytes": 605
+    },
+    {
+      "path": "fitzpatrick_position_50/speed_profile_right_debug_20261105_a/codegen.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "fitzpatrick_position_50/speed_profile_right_debug_20261105_a/config.json",
+      "sha256": "a69df033106ca5391ada245fae1f4513e54fec2480d63edccbb6d65accac1d46",
+      "bytes": 4075
+    },
+    {
+      "path": "fitzpatrick_position_50/speed_profile_right_debug_20261105_a/graph_audit.json",
+      "sha256": "a44d3f30a614ae9922a46becd363bb7f62bf139897ded168df9e77c5bb90f69b",
+      "bytes": 290
+    },
+    {
+      "path": "fitzpatrick_position_50/speed_profile_right_debug_20261105_a/graph_audit.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "fitzpatrick_position_50/speed_profile_right_debug_20261105_a/launch.log",
+      "sha256": "88b484b4e2f29967f9c2dabf4253d76605805ef02292cdc8e92fda148a63aa46",
+      "bytes": 20631
+    },
+    {
+      "path": "fitzpatrick_position_50/speed_profile_right_debug_20261105_a/metadata.json",
+      "sha256": "ce454505ae84af089da8334614b69586c3bd71ea45e0f67a6f0ad350c625e1a7",
+      "bytes": 320
+    },
+    {
+      "path": "fitzpatrick_position_50/speed_profile_right_debug_20261105_a/prediction_en.png",
+      "sha256": "a8363364a747979ace68225b31fa8adfd78ec0a3124502d3169f14cbe3bec531",
+      "bytes": 74702
+    },
+    {
+      "path": "fitzpatrick_position_50/speed_profile_right_debug_20261105_a/predictions.csv.gz",
+      "sha256": "d2c3e66c60f14f885c659bb1f7d5e0e5c83c2d537603dd72c69c056cc5c4e407",
+      "bytes": 1256338
+    },
+    {
+      "path": "fitzpatrick_position_50/speed_profile_right_debug_20261105_a/source.patch",
+      "sha256": "828ff009722cd6f9b6e25a1821038eb436bf162fa666e94e3ed9a83e275c3def",
+      "bytes": 30203
+    },
+    {
+      "path": "fitzpatrick_position_50/speed_profile_right_debug_20261105_a/sqp_solver_failures.jsonl",
+      "sha256": "6a8384ba65d1f21f29c2d3e7716f79040337cbd1969faf39de112ca4360196ee",
+      "bytes": 61137
+    },
+    {
+      "path": "fitzpatrick_position_50/speed_profile_right_debug_20261105_a/summary.json",
+      "sha256": "3bfcaf91841993f558eb07d1c9aedac2f1b8441141c37f8b4b55c21204677fde",
+      "bytes": 2781
+    },
+    {
+      "path": "fitzpatrick_position_50/speed_profile_right_debug_20261105_a/trajectory.csv.gz",
+      "sha256": "48ab7e2851b9f235d46594b85e4d21363d1a8ef2cfcae52c7c8cca6eaa8ed4d7",
+      "bytes": 184992
+    },
+    {
+      "path": "fitzpatrick_position_50/speed_profile_right_debug_20261105_a/trajectory_en.png",
+      "sha256": "788624597120aa6234f8708a6da8ac37d7ed0f88354471f834d31c575a8f31a5",
+      "bytes": 151102
+    },
+    {
+      "path": "fitzpatrick_position_50/speed_profile_screen_20261105_legacy_speed_r1/build.log",
+      "sha256": "2c822e20f929a680a61b1f0538337383f31277aeba28b08cbe314b60bdf9db9f",
+      "bytes": 605
+    },
+    {
+      "path": "fitzpatrick_position_50/speed_profile_screen_20261105_legacy_speed_r1/codegen.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "fitzpatrick_position_50/speed_profile_screen_20261105_legacy_speed_r1/config.json",
+      "sha256": "89d6ef2e59fdfeb30ac090ea99dc182ae5faf084d327c6bc1f5ee1a168abdf85",
+      "bytes": 4084
+    },
+    {
+      "path": "fitzpatrick_position_50/speed_profile_screen_20261105_legacy_speed_r1/graph_audit.json",
+      "sha256": "a44d3f30a614ae9922a46becd363bb7f62bf139897ded168df9e77c5bb90f69b",
+      "bytes": 290
+    },
+    {
+      "path": "fitzpatrick_position_50/speed_profile_screen_20261105_legacy_speed_r1/graph_audit.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "fitzpatrick_position_50/speed_profile_screen_20261105_legacy_speed_r1/launch.log",
+      "sha256": "b51c6ee80c6ebf8658b0b77d859811e8a4c8d98a9dd1fd4fb9bcac1277ae3a7c",
+      "bytes": 20725
+    },
+    {
+      "path": "fitzpatrick_position_50/speed_profile_screen_20261105_legacy_speed_r1/metadata.json",
+      "sha256": "63764c10f933d1a092489545c5db36bcf5402311373f8e018b518857db8bc75b",
+      "bytes": 329
+    },
+    {
+      "path": "fitzpatrick_position_50/speed_profile_screen_20261105_legacy_speed_r1/prediction_en.png",
+      "sha256": "e25a08608fdcbf5a87327987a51ca4a37e8503d64bc8efa4adb61c7192ab3952",
+      "bytes": 66096
+    },
+    {
+      "path": "fitzpatrick_position_50/speed_profile_screen_20261105_legacy_speed_r1/prediction_entry_2_en.png",
+      "sha256": "0acfd9f68a76ed19e44b6ec038ee79b0fb0db86370e7b091a6a3680e8426a77c",
+      "bytes": 76039
+    },
+    {
+      "path": "fitzpatrick_position_50/speed_profile_screen_20261105_legacy_speed_r1/predictions.csv.gz",
+      "sha256": "5757ed69fbc12259065f854bc136569787364a3e7ca32ea72ba9412017891c7f",
+      "bytes": 1275288
+    },
+    {
+      "path": "fitzpatrick_position_50/speed_profile_screen_20261105_legacy_speed_r1/source.patch",
+      "sha256": "288c58ee94ed5d82018577220cd141b9ee78b409f15f9848c7af53648a04674b",
+      "bytes": 32849
+    },
+    {
+      "path": "fitzpatrick_position_50/speed_profile_screen_20261105_legacy_speed_r1/sqp_solver_failures.jsonl",
+      "sha256": "c221a5d82fd98ed477d4715b25ecfdd4ae8d24a9ca971e2ae69aaf9daa90db0b",
+      "bytes": 57794
+    },
+    {
+      "path": "fitzpatrick_position_50/speed_profile_screen_20261105_legacy_speed_r1/summary.json",
+      "sha256": "891321757b45ed2d1964726cf2db0d12d844f51d6dbe0281d2bbee0e70f14a51",
+      "bytes": 2835
+    },
+    {
+      "path": "fitzpatrick_position_50/speed_profile_screen_20261105_legacy_speed_r1/trajectory.csv.gz",
+      "sha256": "f0bdf281f6024bbed9bbfb21e43369532edca596cfd72b6a18a2337aae7fdfc6",
+      "bytes": 187951
+    },
+    {
+      "path": "fitzpatrick_position_50/speed_profile_screen_20261105_legacy_speed_r1/trajectory_en.png",
+      "sha256": "d28e73536ba8512fd8322a5fd71ecf34b999ece2c061954e097a295b5526f4a5",
+      "bytes": 157986
+    },
+    {
+      "path": "fitzpatrick_position_50/speed_profile_screen_20261105_predictive_profile_r1/build.log",
+      "sha256": "f1af2465fd16838d003c1b61a17b1a405e7577dd534cb11f9ee247ee39c821a4",
+      "bytes": 605
+    },
+    {
+      "path": "fitzpatrick_position_50/speed_profile_screen_20261105_predictive_profile_r1/codegen.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "fitzpatrick_position_50/speed_profile_screen_20261105_predictive_profile_r1/config.json",
+      "sha256": "61a002eae5a2352b2cd67bd6b8be2b6fac44168cf27184592bd7aa090e14c4a7",
+      "bytes": 4089
+    },
+    {
+      "path": "fitzpatrick_position_50/speed_profile_screen_20261105_predictive_profile_r1/graph_audit.json",
+      "sha256": "a44d3f30a614ae9922a46becd363bb7f62bf139897ded168df9e77c5bb90f69b",
+      "bytes": 290
+    },
+    {
+      "path": "fitzpatrick_position_50/speed_profile_screen_20261105_predictive_profile_r1/graph_audit.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "fitzpatrick_position_50/speed_profile_screen_20261105_predictive_profile_r1/launch.log",
+      "sha256": "02b2eaa88e7012835b45a5ced18b28db3bea4dcc0b745cbddb8959212d43c4d4",
+      "bytes": 20889
+    },
+    {
+      "path": "fitzpatrick_position_50/speed_profile_screen_20261105_predictive_profile_r1/metadata.json",
+      "sha256": "356ccbc28d3226422c7106347a53943b24a7c550d0dcdc63ebd0a48aa80a755f",
+      "bytes": 335
+    },
+    {
+      "path": "fitzpatrick_position_50/speed_profile_screen_20261105_predictive_profile_r1/prediction_en.png",
+      "sha256": "3d72324ae2fd8837b7f685e30f94767d96dfe9c714839d53d7580044e6499091",
+      "bytes": 65796
+    },
+    {
+      "path": "fitzpatrick_position_50/speed_profile_screen_20261105_predictive_profile_r1/prediction_entry_2_en.png",
+      "sha256": "4df82d45c2365e91a0d833a3460fb953669eb91ebb450baf1802ffa599a75924",
+      "bytes": 71897
+    },
+    {
+      "path": "fitzpatrick_position_50/speed_profile_screen_20261105_predictive_profile_r1/predictions.csv.gz",
+      "sha256": "89910510c214f3550b2be93cd6be20816b2bc3b31323589da5a747a4e28793d8",
+      "bytes": 1273246
+    },
+    {
+      "path": "fitzpatrick_position_50/speed_profile_screen_20261105_predictive_profile_r1/source.patch",
+      "sha256": "288c58ee94ed5d82018577220cd141b9ee78b409f15f9848c7af53648a04674b",
+      "bytes": 32849
+    },
+    {
+      "path": "fitzpatrick_position_50/speed_profile_screen_20261105_predictive_profile_r1/sqp_solver_failures.jsonl",
+      "sha256": "5fdf3a550ec4e8dc297a2d1c0f3d71c51905735f840c21e9323b86f9c1003b3f",
+      "bytes": 161887
+    },
+    {
+      "path": "fitzpatrick_position_50/speed_profile_screen_20261105_predictive_profile_r1/summary.json",
+      "sha256": "22af9d74de735ff04386fa41189c86935adb554daf1a32ec54bd3561e6378808",
+      "bytes": 2825
+    },
+    {
+      "path": "fitzpatrick_position_50/speed_profile_screen_20261105_predictive_profile_r1/trajectory.csv.gz",
+      "sha256": "8a3b68135447155776dcdc4814e6bd0e46f64957493cedd2aa65ad7d76b8104d",
+      "bytes": 188302
+    },
+    {
+      "path": "fitzpatrick_position_50/speed_profile_screen_20261105_predictive_profile_r1/trajectory_en.png",
+      "sha256": "8f34e2b0c9f5c7acf3405f3810a58ff453c093732d1beec41b701c093660fd42",
+      "bytes": 158804
+    },
+    {
+      "path": "fitzpatrick_position_50/speed_profile_v2_20261105_legacy_speed_r1/build.log",
+      "sha256": "c9cc45487d3125e0564c761f865dc42a4da24732e698a4c13d3a53d0ecb3577a",
+      "bytes": 605
+    },
+    {
+      "path": "fitzpatrick_position_50/speed_profile_v2_20261105_legacy_speed_r1/codegen.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "fitzpatrick_position_50/speed_profile_v2_20261105_legacy_speed_r1/config.json",
+      "sha256": "336988c529e5c414ad95fe4a801e723d381f7bfe6768aa48b99bb2e2d9e3d463",
+      "bytes": 4080
+    },
+    {
+      "path": "fitzpatrick_position_50/speed_profile_v2_20261105_legacy_speed_r1/graph_audit.json",
+      "sha256": "a44d3f30a614ae9922a46becd363bb7f62bf139897ded168df9e77c5bb90f69b",
+      "bytes": 290
+    },
+    {
+      "path": "fitzpatrick_position_50/speed_profile_v2_20261105_legacy_speed_r1/graph_audit.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "fitzpatrick_position_50/speed_profile_v2_20261105_legacy_speed_r1/launch.log",
+      "sha256": "be66934e5a4511fbed2c2548e8b4f8d09d10d63ff7f79171aa2d3944bba78a1c",
+      "bytes": 20641
+    },
+    {
+      "path": "fitzpatrick_position_50/speed_profile_v2_20261105_legacy_speed_r1/metadata.json",
+      "sha256": "22da6db4feb93c719c7f11abd7550d9e1a5d943e5064e3cae9994304b2d14120",
+      "bytes": 325
+    },
+    {
+      "path": "fitzpatrick_position_50/speed_profile_v2_20261105_legacy_speed_r1/prediction_en.png",
+      "sha256": "d4d34abb1ece98a01fee509dce79c940c0d1e20eaa7c0c21e74b2c843905a2c3",
+      "bytes": 68755
+    },
+    {
+      "path": "fitzpatrick_position_50/speed_profile_v2_20261105_legacy_speed_r1/prediction_entry_2_en.png",
+      "sha256": "bd6459ff9ab4be2596cd4b44fbd5c44dcead9b8b0183bf12e5fe86b00f76c2fa",
+      "bytes": 75136
+    },
+    {
+      "path": "fitzpatrick_position_50/speed_profile_v2_20261105_legacy_speed_r1/prediction_entry_3_en.png",
+      "sha256": "371ec09d1bdf797872b72a36816cd4f76dcbd48c98461cab963f99f2d1fcf6c5",
+      "bytes": 64560
+    },
+    {
+      "path": "fitzpatrick_position_50/speed_profile_v2_20261105_legacy_speed_r1/predictions.csv.gz",
+      "sha256": "7c47d0676a279c2089ff1c5bef04bf1ec5e1297cfc4a52c3655ca32f5448add5",
+      "bytes": 1269786
+    },
+    {
+      "path": "fitzpatrick_position_50/speed_profile_v2_20261105_legacy_speed_r1/source.patch",
+      "sha256": "1b8aad34e8e3f5db0d857a90eda3b2c3ffcde9a0e868e4f1e37a16be6b98985c",
+      "bytes": 35306
+    },
+    {
+      "path": "fitzpatrick_position_50/speed_profile_v2_20261105_legacy_speed_r1/sqp_solver_failures.jsonl",
+      "sha256": "3be918ccd80f00d071de466ad262eb36f7ec1db4e56281ba31a13e7894ae5923",
+      "bytes": 119002
+    },
+    {
+      "path": "fitzpatrick_position_50/speed_profile_v2_20261105_legacy_speed_r1/summary.json",
+      "sha256": "6930c32c08286a92c19f4104a3903f2e1daa7d47a5fe6ee9a8c4701e83bc3ac7",
+      "bytes": 2561
+    },
+    {
+      "path": "fitzpatrick_position_50/speed_profile_v2_20261105_legacy_speed_r1/trajectory.csv.gz",
+      "sha256": "1fd5b84c150b5c4e4679240b367c5924c1f8ec7254325f2965f284b06b0c7ccd",
+      "bytes": 192207
+    },
+    {
+      "path": "fitzpatrick_position_50/speed_profile_v2_20261105_legacy_speed_r1/trajectory_en.png",
+      "sha256": "3ed65e4ffc7400b6e9462cbe99940ad67894d43d47b14e111992ebde59600d81",
+      "bytes": 152034
+    },
+    {
+      "path": "fitzpatrick_position_50/speed_profile_v2_20261105_predictive_profile_r1/build.log",
+      "sha256": "78251fa8138c70239fcec677b602aee6c7bade861c25445e6f874747b032b539",
+      "bytes": 605
+    },
+    {
+      "path": "fitzpatrick_position_50/speed_profile_v2_20261105_predictive_profile_r1/codegen.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "fitzpatrick_position_50/speed_profile_v2_20261105_predictive_profile_r1/config.json",
+      "sha256": "293a260b5dd45480a590c7b15d93918480540faf0056af4be090ac587b5158b9",
+      "bytes": 4085
+    },
+    {
+      "path": "fitzpatrick_position_50/speed_profile_v2_20261105_predictive_profile_r1/graph_audit.json",
+      "sha256": "a44d3f30a614ae9922a46becd363bb7f62bf139897ded168df9e77c5bb90f69b",
+      "bytes": 290
+    },
+    {
+      "path": "fitzpatrick_position_50/speed_profile_v2_20261105_predictive_profile_r1/graph_audit.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "fitzpatrick_position_50/speed_profile_v2_20261105_predictive_profile_r1/launch.log",
+      "sha256": "28afd2363495057e4b7eed97b40e1c78bb2a72c93fe3c540a646cb32ecfebdf8",
+      "bytes": 21340
+    },
+    {
+      "path": "fitzpatrick_position_50/speed_profile_v2_20261105_predictive_profile_r1/metadata.json",
+      "sha256": "25548007312c19042d56dafacf3ccbdd0ad9c1694cd4fd7046962747f2a53f43",
+      "bytes": 331
+    },
+    {
+      "path": "fitzpatrick_position_50/speed_profile_v2_20261105_predictive_profile_r1/prediction_en.png",
+      "sha256": "69824b41f6d7785b599818ed8c7b0667bb21144342592536c7a214504034f4ef",
+      "bytes": 67023
+    },
+    {
+      "path": "fitzpatrick_position_50/speed_profile_v2_20261105_predictive_profile_r1/prediction_entry_2_en.png",
+      "sha256": "52226dbb6f57fa326574dcc4eb8154667cb7540d1fb96f24360f9159a93e129b",
+      "bytes": 73035
+    },
+    {
+      "path": "fitzpatrick_position_50/speed_profile_v2_20261105_predictive_profile_r1/predictions.csv.gz",
+      "sha256": "112855a97e6f14c807d9e93fbcdd2bc316cfe541364d73ce55ec308484a9e9c3",
+      "bytes": 1273583
+    },
+    {
+      "path": "fitzpatrick_position_50/speed_profile_v2_20261105_predictive_profile_r1/source.patch",
+      "sha256": "1b8aad34e8e3f5db0d857a90eda3b2c3ffcde9a0e868e4f1e37a16be6b98985c",
+      "bytes": 35306
+    },
+    {
+      "path": "fitzpatrick_position_50/speed_profile_v2_20261105_predictive_profile_r1/sqp_solver_failures.jsonl",
+      "sha256": "b2fa72b12cad49591a02b481456e8088c2ab2ba52be87f6501a5e35b8d03ae92",
+      "bytes": 346470
+    },
+    {
+      "path": "fitzpatrick_position_50/speed_profile_v2_20261105_predictive_profile_r1/summary.json",
+      "sha256": "d030521276eb2b2e420f5e8cb73baf7303e43343e4734542990e57407d65e74c",
+      "bytes": 2820
+    },
+    {
+      "path": "fitzpatrick_position_50/speed_profile_v2_20261105_predictive_profile_r1/trajectory.csv.gz",
+      "sha256": "904fa3aee7db462e451c1be7bdce841d66f68fe659218688a9c2705ae1d479ed",
+      "bytes": 186817
+    },
+    {
+      "path": "fitzpatrick_position_50/speed_profile_v2_20261105_predictive_profile_r1/trajectory_en.png",
+      "sha256": "a188600d415a629dcad293fa54432b40da9bf80041fd9d9588d8c263fb4573a9",
+      "bytes": 159099
+    },
+    {
+      "path": "fitzpatrick_position_50/speed_profile_v3_20261105_legacy_speed_r1/build.log",
+      "sha256": "045ed3a78fc94691e1fe5bddb017baa0556bb0fca6d74d454aabfc2b1ad82a6e",
+      "bytes": 605
+    },
+    {
+      "path": "fitzpatrick_position_50/speed_profile_v3_20261105_legacy_speed_r1/codegen.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "fitzpatrick_position_50/speed_profile_v3_20261105_legacy_speed_r1/config.json",
+      "sha256": "a2795066c17370a71275829b92d57c0e2548de497cf1c6b64e78d86018caa9a7",
+      "bytes": 4080
+    },
+    {
+      "path": "fitzpatrick_position_50/speed_profile_v3_20261105_legacy_speed_r1/graph_audit.json",
+      "sha256": "a44d3f30a614ae9922a46becd363bb7f62bf139897ded168df9e77c5bb90f69b",
+      "bytes": 290
+    },
+    {
+      "path": "fitzpatrick_position_50/speed_profile_v3_20261105_legacy_speed_r1/graph_audit.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "fitzpatrick_position_50/speed_profile_v3_20261105_legacy_speed_r1/launch.log",
+      "sha256": "6f9126b2be1d8af1b6af46c0bae691db3ce322464cfb11cefce57ed5b7995db0",
+      "bytes": 21097
+    },
+    {
+      "path": "fitzpatrick_position_50/speed_profile_v3_20261105_legacy_speed_r1/metadata.json",
+      "sha256": "4c84cd2534b18b677c83d3bbc80af61cdf18007c79203cb04f918ea3d2a2279b",
+      "bytes": 325
+    },
+    {
+      "path": "fitzpatrick_position_50/speed_profile_v3_20261105_legacy_speed_r1/prediction_en.png",
+      "sha256": "91c8d94caa09835ea99f60c870e8bf51ea44ca35d4c44e3e5a6c9f99b77438e3",
+      "bytes": 67331
+    },
+    {
+      "path": "fitzpatrick_position_50/speed_profile_v3_20261105_legacy_speed_r1/prediction_entry_2_en.png",
+      "sha256": "20fa4404f427011c71b5bf88fbf28128f4580e15ea089966b8071c8bc7ad9b84",
+      "bytes": 82911
+    },
+    {
+      "path": "fitzpatrick_position_50/speed_profile_v3_20261105_legacy_speed_r1/predictions.csv.gz",
+      "sha256": "8692018ee6d82165686147c692940d47c058a138e29839c8e60d6e810f085d69",
+      "bytes": 1262381
+    },
+    {
+      "path": "fitzpatrick_position_50/speed_profile_v3_20261105_legacy_speed_r1/source.patch",
+      "sha256": "e7849d9567e8d7c5d1b7bdfb2b3aa1c6f1654758ac431d6d206542ef60da2965",
+      "bytes": 39137
+    },
+    {
+      "path": "fitzpatrick_position_50/speed_profile_v3_20261105_legacy_speed_r1/sqp_solver_failures.jsonl",
+      "sha256": "49c2e0cd764454ea1416a15ac03d6085a9f58b9531ef1cab554490093a4a5444",
+      "bytes": 65751
+    },
+    {
+      "path": "fitzpatrick_position_50/speed_profile_v3_20261105_legacy_speed_r1/summary.json",
+      "sha256": "9f8c5a683515f4ca6ec3ce6d9b9c80961a81fffcdab948b8808390dfc689e06c",
+      "bytes": 2813
+    },
+    {
+      "path": "fitzpatrick_position_50/speed_profile_v3_20261105_legacy_speed_r1/trajectory.csv.gz",
+      "sha256": "4b6a46f7440085010d02c57e10d209b292e435efdfef4975d965e186042f4ab7",
+      "bytes": 185416
+    },
+    {
+      "path": "fitzpatrick_position_50/speed_profile_v3_20261105_legacy_speed_r1/trajectory_en.png",
+      "sha256": "a63fe56958c2b057b41c70a0b87f9b53231ac7520875e3661d8267e4018e0e3e",
+      "bytes": 152671
+    },
+    {
+      "path": "fitzpatrick_position_50/speed_profile_v3_20261105_predictive_profile_r1/build.log",
+      "sha256": "f56336f6f40cff59bc106715ceb9e90c2fd37c23437471e16fa1feca3d466e30",
+      "bytes": 605
+    },
+    {
+      "path": "fitzpatrick_position_50/speed_profile_v3_20261105_predictive_profile_r1/codegen.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "fitzpatrick_position_50/speed_profile_v3_20261105_predictive_profile_r1/config.json",
+      "sha256": "44198919da5628c6d1e35fdea848240ad7b216c41f2a52843082857b0c5df2f4",
+      "bytes": 4085
+    },
+    {
+      "path": "fitzpatrick_position_50/speed_profile_v3_20261105_predictive_profile_r1/graph_audit.json",
+      "sha256": "a44d3f30a614ae9922a46becd363bb7f62bf139897ded168df9e77c5bb90f69b",
+      "bytes": 290
+    },
+    {
+      "path": "fitzpatrick_position_50/speed_profile_v3_20261105_predictive_profile_r1/graph_audit.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "fitzpatrick_position_50/speed_profile_v3_20261105_predictive_profile_r1/launch.log",
+      "sha256": "47b937635555731fd5b7fbdb659216796c55cca7d7987cc8ade6be60462ccb78",
+      "bytes": 21784
+    },
+    {
+      "path": "fitzpatrick_position_50/speed_profile_v3_20261105_predictive_profile_r1/metadata.json",
+      "sha256": "5683adc94b67b47ccc919e3b4ada7a2031726fe1aea7b8e86f44b3b2d68062ec",
+      "bytes": 331
+    },
+    {
+      "path": "fitzpatrick_position_50/speed_profile_v3_20261105_predictive_profile_r1/prediction_en.png",
+      "sha256": "53b508f4c6478ccb34074c0030893e205b55eb58f3c85d9adad2cd7665b58fd8",
+      "bytes": 66428
+    },
+    {
+      "path": "fitzpatrick_position_50/speed_profile_v3_20261105_predictive_profile_r1/prediction_entry_2_en.png",
+      "sha256": "5e85754a07b4ecaf510f1588718c7aa4e976915aa51647693c3181f0e02b7414",
+      "bytes": 62119
+    },
+    {
+      "path": "fitzpatrick_position_50/speed_profile_v3_20261105_predictive_profile_r1/prediction_entry_3_en.png",
+      "sha256": "2c045c8e6738e71c5c8cd6a49d1e83b58795516c4a8e2f97f4da251f0e08107d",
+      "bytes": 74751
+    },
+    {
+      "path": "fitzpatrick_position_50/speed_profile_v3_20261105_predictive_profile_r1/predictions.csv.gz",
+      "sha256": "f48cad89ceacd32e6a95f865a377d72d66a69c0fcfa49ba5978ec065e723c94c",
+      "bytes": 1269784
+    },
+    {
+      "path": "fitzpatrick_position_50/speed_profile_v3_20261105_predictive_profile_r1/source.patch",
+      "sha256": "e7849d9567e8d7c5d1b7bdfb2b3aa1c6f1654758ac431d6d206542ef60da2965",
+      "bytes": 39137
+    },
+    {
+      "path": "fitzpatrick_position_50/speed_profile_v3_20261105_predictive_profile_r1/sqp_solver_failures.jsonl",
+      "sha256": "aba414d175302d6cd9e0de18b9417e1a13aeaeef5814dbb73a038374fb3772a6",
+      "bytes": 44648
+    },
+    {
+      "path": "fitzpatrick_position_50/speed_profile_v3_20261105_predictive_profile_r1/summary.json",
+      "sha256": "37f0feb2c4e7ae2af46c5f200841562d7d6f51ba52fe6faa3b3440853e8201a8",
+      "bytes": 2865
+    },
+    {
+      "path": "fitzpatrick_position_50/speed_profile_v3_20261105_predictive_profile_r1/trajectory.csv.gz",
+      "sha256": "571e7310cfc1d16dde90083c00ccef1b7206622b0544b5088672c2d59478b5dd",
+      "bytes": 185262
+    },
+    {
+      "path": "fitzpatrick_position_50/speed_profile_v3_20261105_predictive_profile_r1/trajectory_en.png",
+      "sha256": "3e36498426e55195eb0ad81ff4b74b9d12e04b54a6d5c7fe0b5d2fc75364a144",
+      "bytes": 161072
+    },
+    {
+      "path": "fitzpatrick_position_50/speed_profile_v3_repeat_20261105_repeat1/build.log",
+      "sha256": "1da16365ae8f4ac69b653964034ee63618b8d30e1f27c05540ee6799f5c26b77",
+      "bytes": 605
+    },
+    {
+      "path": "fitzpatrick_position_50/speed_profile_v3_repeat_20261105_repeat1/codegen.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "fitzpatrick_position_50/speed_profile_v3_repeat_20261105_repeat1/config.json",
+      "sha256": "16c2320b805fe53bc06617c28ede7a561b7e0d4ad85e7b347e4e0af8acb8c714",
+      "bytes": 4078
+    },
+    {
+      "path": "fitzpatrick_position_50/speed_profile_v3_repeat_20261105_repeat1/graph_audit.json",
+      "sha256": "a44d3f30a614ae9922a46becd363bb7f62bf139897ded168df9e77c5bb90f69b",
+      "bytes": 290
+    },
+    {
+      "path": "fitzpatrick_position_50/speed_profile_v3_repeat_20261105_repeat1/graph_audit.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "fitzpatrick_position_50/speed_profile_v3_repeat_20261105_repeat1/launch.log",
+      "sha256": "64e24e669852c0cf2da0aeef2e6fe0da27e44cad695ca91146862766dfc6bee0",
+      "bytes": 20639
+    },
+    {
+      "path": "fitzpatrick_position_50/speed_profile_v3_repeat_20261105_repeat1/metadata.json",
+      "sha256": "dd0c642b332331bc916c39aa1edd2604a9a8b7951358e27ecdf1ca571b799900",
+      "bytes": 324
+    },
+    {
+      "path": "fitzpatrick_position_50/speed_profile_v3_repeat_20261105_repeat1/prediction_en.png",
+      "sha256": "60a983aab5a36718e95a26db9690826dc0781e1deb0abb3c439b425547212531",
+      "bytes": 76105
+    },
+    {
+      "path": "fitzpatrick_position_50/speed_profile_v3_repeat_20261105_repeat1/prediction_entry_2_en.png",
+      "sha256": "3d0621e80916b408f75de8bd3009448b3f5e7bb4bdaf1b64257311385c89e609",
+      "bytes": 72534
+    },
+    {
+      "path": "fitzpatrick_position_50/speed_profile_v3_repeat_20261105_repeat1/predictions.csv.gz",
+      "sha256": "5bf018fb09ee33227dbc4c57b1dfb8767b9eab34ba6377ffdce77cc9bddfc392",
+      "bytes": 1260527
+    },
+    {
+      "path": "fitzpatrick_position_50/speed_profile_v3_repeat_20261105_repeat1/source.patch",
+      "sha256": "0e273d8f4c554dec2be511b8bb3d2db8ae08a1a99e281a62433ecddf305d0541",
+      "bytes": 41155
+    },
+    {
+      "path": "fitzpatrick_position_50/speed_profile_v3_repeat_20261105_repeat1/sqp_solver_failures.jsonl",
+      "sha256": "50a833889ffc3a2023db48620523a9972d35f5e79abb3615ce305c6514ce0e3a",
+      "bytes": 58486
+    },
+    {
+      "path": "fitzpatrick_position_50/speed_profile_v3_repeat_20261105_repeat1/summary.json",
+      "sha256": "65fe5a1da534e3344fd0755141bac163adb4df9c5bc1de7ef0c5806b253ea6cd",
+      "bytes": 2813
+    },
+    {
+      "path": "fitzpatrick_position_50/speed_profile_v3_repeat_20261105_repeat1/trajectory.csv.gz",
+      "sha256": "169d0315c6001544566f0d9ed0f76390481fdb2926620f757623bb58ca108eaf",
+      "bytes": 184309
+    },
+    {
+      "path": "fitzpatrick_position_50/speed_profile_v3_repeat_20261105_repeat1/trajectory_en.png",
+      "sha256": "cc9f5cdfcf8fa516d4deeee0b2bb864a8af9e84438f06c6091aab00c6dd6927f",
+      "bytes": 159738
+    },
+    {
+      "path": "fitzpatrick_position_75/speed_profile_screen_20261105_legacy_speed_r1/build.log",
+      "sha256": "5848c77d90db882b0923b7250bc2a64fdeded0eebb25a255c365ba4434ef08e8",
+      "bytes": 605
+    },
+    {
+      "path": "fitzpatrick_position_75/speed_profile_screen_20261105_legacy_speed_r1/codegen.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "fitzpatrick_position_75/speed_profile_screen_20261105_legacy_speed_r1/config.json",
+      "sha256": "ec17147b3988a0455d857638e8c69c30e572a70dfb9cdbfec48c40a1848a9f6d",
+      "bytes": 4085
+    },
+    {
+      "path": "fitzpatrick_position_75/speed_profile_screen_20261105_legacy_speed_r1/graph_audit.json",
+      "sha256": "a44d3f30a614ae9922a46becd363bb7f62bf139897ded168df9e77c5bb90f69b",
+      "bytes": 290
+    },
+    {
+      "path": "fitzpatrick_position_75/speed_profile_screen_20261105_legacy_speed_r1/graph_audit.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "fitzpatrick_position_75/speed_profile_screen_20261105_legacy_speed_r1/launch.log",
+      "sha256": "fdca918c6b2902c27bd8729c84b676a2ccaf5337c6b7507a65a02923d3952d3c",
+      "bytes": 20649
+    },
+    {
+      "path": "fitzpatrick_position_75/speed_profile_screen_20261105_legacy_speed_r1/metadata.json",
+      "sha256": "ae662e7cdb32b823a767decdba80bb1e91533eec44ab9dbb242834ef7241b430",
+      "bytes": 329
+    },
+    {
+      "path": "fitzpatrick_position_75/speed_profile_screen_20261105_legacy_speed_r1/prediction_en.png",
+      "sha256": "b43a68fa2c2a1eb89b3a26449aa6e49471701091c72567ebdeee5710ece28384",
+      "bytes": 75481
+    },
+    {
+      "path": "fitzpatrick_position_75/speed_profile_screen_20261105_legacy_speed_r1/predictions.csv.gz",
+      "sha256": "4c14be2be9c58d3b4346a959bc8a61b7feb1cf9e998378a956e849b55d252a33",
+      "bytes": 1246127
+    },
+    {
+      "path": "fitzpatrick_position_75/speed_profile_screen_20261105_legacy_speed_r1/source.patch",
+      "sha256": "ccf9ec7a5e1df9aab4d7938c845ade8e49179540cc7f3f2f5282d2980c3db5f0",
+      "bytes": 31886
+    },
+    {
+      "path": "fitzpatrick_position_75/speed_profile_screen_20261105_legacy_speed_r1/sqp_solver_failures.jsonl",
+      "sha256": "b70be1887139bd56de65427845d670f7a3cef28d898d6a87a6930b70504163b6",
+      "bytes": 59834
+    },
+    {
+      "path": "fitzpatrick_position_75/speed_profile_screen_20261105_legacy_speed_r1/summary.json",
+      "sha256": "98d62aa70ebd8bb0c17f65c417b456df525a6eeb3627b5cf2d4c47388329f14c",
+      "bytes": 2753
+    },
+    {
+      "path": "fitzpatrick_position_75/speed_profile_screen_20261105_legacy_speed_r1/trajectory.csv.gz",
+      "sha256": "024a59d62450505f0184527879adb651feac89491a37db8fcc05baf49e61853d",
+      "bytes": 175525
+    },
+    {
+      "path": "fitzpatrick_position_75/speed_profile_screen_20261105_legacy_speed_r1/trajectory_en.png",
+      "sha256": "c12d38e5fb8b83ec927eaa8c3e1a5c6fc41b82393f836fcb0cb699eaa13025e0",
+      "bytes": 151363
+    },
+    {
+      "path": "fitzpatrick_position_75/speed_profile_screen_20261105_predictive_profile_r1/build.log",
+      "sha256": "9ff3ad57657740c9174f6a5f30ac2787f97269efc90fd746abd16be5d5b5970e",
+      "bytes": 605
+    },
+    {
+      "path": "fitzpatrick_position_75/speed_profile_screen_20261105_predictive_profile_r1/codegen.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "fitzpatrick_position_75/speed_profile_screen_20261105_predictive_profile_r1/config.json",
+      "sha256": "81428b3a5d12df5b22065b60a8c6189a8eaef2c4319544524393edc792a7bcd7",
+      "bytes": 4090
+    },
+    {
+      "path": "fitzpatrick_position_75/speed_profile_screen_20261105_predictive_profile_r1/graph_audit.json",
+      "sha256": "a44d3f30a614ae9922a46becd363bb7f62bf139897ded168df9e77c5bb90f69b",
+      "bytes": 290
+    },
+    {
+      "path": "fitzpatrick_position_75/speed_profile_screen_20261105_predictive_profile_r1/graph_audit.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "fitzpatrick_position_75/speed_profile_screen_20261105_predictive_profile_r1/launch.log",
+      "sha256": "d2c1b4538d9ca61a465ec12757bf255f698274ad1bd948c0b0a8d2601eb7d185",
+      "bytes": 20661
+    },
+    {
+      "path": "fitzpatrick_position_75/speed_profile_screen_20261105_predictive_profile_r1/metadata.json",
+      "sha256": "a5c4c6f73a5c95ff7fd06b5ce11c93ab7ad99a651b82bfa711cd519e2e5402a4",
+      "bytes": 335
+    },
+    {
+      "path": "fitzpatrick_position_75/speed_profile_screen_20261105_predictive_profile_r1/prediction_en.png",
+      "sha256": "bc250462dc95475dd0c56b3fa1353468ba7638f5c064ece52640b2c15095fe95",
+      "bytes": 75106
+    },
+    {
+      "path": "fitzpatrick_position_75/speed_profile_screen_20261105_predictive_profile_r1/predictions.csv.gz",
+      "sha256": "ffe76f02ec10c2aab93d03f2ffe124e59d92f842c1b2838fbca50b21d4652251",
+      "bytes": 1252317
+    },
+    {
+      "path": "fitzpatrick_position_75/speed_profile_screen_20261105_predictive_profile_r1/source.patch",
+      "sha256": "ccf9ec7a5e1df9aab4d7938c845ade8e49179540cc7f3f2f5282d2980c3db5f0",
+      "bytes": 31886
+    },
+    {
+      "path": "fitzpatrick_position_75/speed_profile_screen_20261105_predictive_profile_r1/sqp_solver_failures.jsonl",
+      "sha256": "610b826d9941c56e96f3f7d7eeca9d2c8f1cec456aaa6edaa1730939d3c11cfe",
+      "bytes": 24696
+    },
+    {
+      "path": "fitzpatrick_position_75/speed_profile_screen_20261105_predictive_profile_r1/summary.json",
+      "sha256": "f3dcb2aba0f865315df2587ca438d17b5661a5a930ac1dfe7d42efc56108ba56",
+      "bytes": 2754
+    },
+    {
+      "path": "fitzpatrick_position_75/speed_profile_screen_20261105_predictive_profile_r1/trajectory.csv.gz",
+      "sha256": "62197eebe2b53e63b932995cf2d021c3d20495becfa0d3526b66ee1ecadabf70",
+      "bytes": 176184
+    },
+    {
+      "path": "fitzpatrick_position_75/speed_profile_screen_20261105_predictive_profile_r1/trajectory_en.png",
+      "sha256": "d154e3a38a31f30a3db1f6fdbe6f08a570b28dcb6849c5515b437563c43c20f4",
+      "bytes": 150758
+    },
+    {
+      "path": "fitzpatrick_position_75/speed_profile_v2_20261105_legacy_speed_r1/build.log",
+      "sha256": "84a0dce13fc6b27a714261f3096b9ff9fbc33dc1a1f061feecdda5cdd03d9da1",
+      "bytes": 605
+    },
+    {
+      "path": "fitzpatrick_position_75/speed_profile_v2_20261105_legacy_speed_r1/codegen.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "fitzpatrick_position_75/speed_profile_v2_20261105_legacy_speed_r1/config.json",
+      "sha256": "706a05786f42240bf86e859e39e702a5d07914a5cd897b126d834d6b06b51108",
+      "bytes": 4081
+    },
+    {
+      "path": "fitzpatrick_position_75/speed_profile_v2_20261105_legacy_speed_r1/graph_audit.json",
+      "sha256": "a44d3f30a614ae9922a46becd363bb7f62bf139897ded168df9e77c5bb90f69b",
+      "bytes": 290
+    },
+    {
+      "path": "fitzpatrick_position_75/speed_profile_v2_20261105_legacy_speed_r1/graph_audit.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "fitzpatrick_position_75/speed_profile_v2_20261105_legacy_speed_r1/launch.log",
+      "sha256": "10141ed1e174e6c56aea01c574568645ade3808aefed868eaaa4490fafaa6794",
+      "bytes": 20717
+    },
+    {
+      "path": "fitzpatrick_position_75/speed_profile_v2_20261105_legacy_speed_r1/metadata.json",
+      "sha256": "be54ccb6eabe041afaefb24bdcc515bee7659924b102c41f5234f64795cf25cb",
+      "bytes": 325
+    },
+    {
+      "path": "fitzpatrick_position_75/speed_profile_v2_20261105_legacy_speed_r1/prediction_en.png",
+      "sha256": "3447ecd4f6a796297c27298fe585beb92d40e5b62dee06f3767c5615a2ca63ce",
+      "bytes": 75495
+    },
+    {
+      "path": "fitzpatrick_position_75/speed_profile_v2_20261105_legacy_speed_r1/predictions.csv.gz",
+      "sha256": "354ff5ca8c934bd9e14721a6a9214b011541a8f82ca5e84f94e727108c4ef88d",
+      "bytes": 1246935
+    },
+    {
+      "path": "fitzpatrick_position_75/speed_profile_v2_20261105_legacy_speed_r1/source.patch",
+      "sha256": "1b8aad34e8e3f5db0d857a90eda3b2c3ffcde9a0e868e4f1e37a16be6b98985c",
+      "bytes": 35306
+    },
+    {
+      "path": "fitzpatrick_position_75/speed_profile_v2_20261105_legacy_speed_r1/sqp_solver_failures.jsonl",
+      "sha256": "3e79b44207d4a1e56c4b7cfe4f9bd59c853db1d65706226cb7a1c68c5765829a",
+      "bytes": 56810
+    },
+    {
+      "path": "fitzpatrick_position_75/speed_profile_v2_20261105_legacy_speed_r1/summary.json",
+      "sha256": "24e0ae022c9712940758104190af33b637e350ead3ef2beb1277b1443438e2a4",
+      "bytes": 2762
+    },
+    {
+      "path": "fitzpatrick_position_75/speed_profile_v2_20261105_legacy_speed_r1/trajectory.csv.gz",
+      "sha256": "8977c585d0532a23c45c67ce8f475fcb67302a7342eb0be4cadb9883f14c8eed",
+      "bytes": 175792
+    },
+    {
+      "path": "fitzpatrick_position_75/speed_profile_v2_20261105_legacy_speed_r1/trajectory_en.png",
+      "sha256": "bed3623ea6cb0dff178e9af7fb9f9aa291494889d3b8625376cdcaf2363d4f48",
+      "bytes": 152208
+    },
+    {
+      "path": "fitzpatrick_position_75/speed_profile_v2_20261105_predictive_profile_r1/build.log",
+      "sha256": "57b048faad782e570b019f6f33ba273dd96ab79f8156a3f62e37ef2a6abd0e7a",
+      "bytes": 605
+    },
+    {
+      "path": "fitzpatrick_position_75/speed_profile_v2_20261105_predictive_profile_r1/codegen.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "fitzpatrick_position_75/speed_profile_v2_20261105_predictive_profile_r1/config.json",
+      "sha256": "3061b3bde8fc8012df7270f306e519ad94b5a8facf3b2afb2b510447f721cd72",
+      "bytes": 4086
+    },
+    {
+      "path": "fitzpatrick_position_75/speed_profile_v2_20261105_predictive_profile_r1/graph_audit.json",
+      "sha256": "a44d3f30a614ae9922a46becd363bb7f62bf139897ded168df9e77c5bb90f69b",
+      "bytes": 290
+    },
+    {
+      "path": "fitzpatrick_position_75/speed_profile_v2_20261105_predictive_profile_r1/graph_audit.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "fitzpatrick_position_75/speed_profile_v2_20261105_predictive_profile_r1/launch.log",
+      "sha256": "ce0a7853879d86afc1e6b25a408cb6fef2e038276e4214475dc57e37921b6efc",
+      "bytes": 21109
+    },
+    {
+      "path": "fitzpatrick_position_75/speed_profile_v2_20261105_predictive_profile_r1/metadata.json",
+      "sha256": "58d01aaf925b8a9a62cb4e2b2bc3f081533ba730d483b2c85e87497504377b2b",
+      "bytes": 331
+    },
+    {
+      "path": "fitzpatrick_position_75/speed_profile_v2_20261105_predictive_profile_r1/prediction_en.png",
+      "sha256": "7a96b8f73e689de595ff734ced3aa3ca5730ab8a3a4c1827b8ce60853237949c",
+      "bytes": 74881
+    },
+    {
+      "path": "fitzpatrick_position_75/speed_profile_v2_20261105_predictive_profile_r1/prediction_entry_2_en.png",
+      "sha256": "4faf5d1d7b9b45b6c6b01414f278bfa039d6768e489141226f7301850fe6ec7c",
+      "bytes": 64113
+    },
+    {
+      "path": "fitzpatrick_position_75/speed_profile_v2_20261105_predictive_profile_r1/predictions.csv.gz",
+      "sha256": "39ddefe19aea3fdb7e6e6c7f033acc6b62b482c8417cae762d646e93f87a3316",
+      "bytes": 1238812
+    },
+    {
+      "path": "fitzpatrick_position_75/speed_profile_v2_20261105_predictive_profile_r1/source.patch",
+      "sha256": "1b8aad34e8e3f5db0d857a90eda3b2c3ffcde9a0e868e4f1e37a16be6b98985c",
+      "bytes": 35306
+    },
+    {
+      "path": "fitzpatrick_position_75/speed_profile_v2_20261105_predictive_profile_r1/sqp_solver_failures.jsonl",
+      "sha256": "6f3b67ffcec919b7851c243f66bd192ecdd85d80907010f1d3a887543852a83a",
+      "bytes": 331375
+    },
+    {
+      "path": "fitzpatrick_position_75/speed_profile_v2_20261105_predictive_profile_r1/summary.json",
+      "sha256": "d3c880de1e6be16f8f9528de350b80bf367eab9d2768521efa63ed05f61e03f8",
+      "bytes": 2548
+    },
+    {
+      "path": "fitzpatrick_position_75/speed_profile_v2_20261105_predictive_profile_r1/trajectory.csv.gz",
+      "sha256": "5e782fc5d54b8356b909b301752e4e5955913d000805151c7b4994a4260d8d3c",
+      "bytes": 185752
+    },
+    {
+      "path": "fitzpatrick_position_75/speed_profile_v2_20261105_predictive_profile_r1/trajectory_en.png",
+      "sha256": "8fe86fcfd56d211ddf2240bed7e8ce3f69484634b27db976bdc4263be92bd222",
+      "bytes": 155142
+    },
+    {
+      "path": "fitzpatrick_position_75/speed_profile_v3_20261105_legacy_speed_r1/build.log",
+      "sha256": "c0bd25e866cb9f0766ce552b9c5053018cdd1e4da38d49490c1d13bbeee30830",
+      "bytes": 605
+    },
+    {
+      "path": "fitzpatrick_position_75/speed_profile_v3_20261105_legacy_speed_r1/codegen.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "fitzpatrick_position_75/speed_profile_v3_20261105_legacy_speed_r1/config.json",
+      "sha256": "9d59becdf77d183a5b8d22ee7e9adc0f1a13728eed6ada8b5e22ce0f694ee9bd",
+      "bytes": 4081
+    },
+    {
+      "path": "fitzpatrick_position_75/speed_profile_v3_20261105_legacy_speed_r1/graph_audit.json",
+      "sha256": "a44d3f30a614ae9922a46becd363bb7f62bf139897ded168df9e77c5bb90f69b",
+      "bytes": 290
+    },
+    {
+      "path": "fitzpatrick_position_75/speed_profile_v3_20261105_legacy_speed_r1/graph_audit.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "fitzpatrick_position_75/speed_profile_v3_20261105_legacy_speed_r1/launch.log",
+      "sha256": "0d2dfdfa5dcad0dddab9f9b020d61d4996374b4bca130b970b664b46761c9d55",
+      "bytes": 21173
+    },
+    {
+      "path": "fitzpatrick_position_75/speed_profile_v3_20261105_legacy_speed_r1/metadata.json",
+      "sha256": "85de857b1a2947c63fa9017c92506fa0a305be49c0c3e169a0b3952d78e14bad",
+      "bytes": 325
+    },
+    {
+      "path": "fitzpatrick_position_75/speed_profile_v3_20261105_legacy_speed_r1/prediction_en.png",
+      "sha256": "fb8290e080948f87ec9bea08301f7fb549c84c3f69074cfa27fc640e420f2533",
+      "bytes": 75445
+    },
+    {
+      "path": "fitzpatrick_position_75/speed_profile_v3_20261105_legacy_speed_r1/prediction_entry_2_en.png",
+      "sha256": "eea4056a16d07d919ac711d008b0848a8be110a7c38943a8a70868ddd26c8344",
+      "bytes": 63457
+    },
+    {
+      "path": "fitzpatrick_position_75/speed_profile_v3_20261105_legacy_speed_r1/predictions.csv.gz",
+      "sha256": "3b69e69356671aacf3a5ec7a5552c2b6a0157844078acb32f660e42000408e8f",
+      "bytes": 1245956
+    },
+    {
+      "path": "fitzpatrick_position_75/speed_profile_v3_20261105_legacy_speed_r1/source.patch",
+      "sha256": "e7849d9567e8d7c5d1b7bdfb2b3aa1c6f1654758ac431d6d206542ef60da2965",
+      "bytes": 39137
+    },
+    {
+      "path": "fitzpatrick_position_75/speed_profile_v3_20261105_legacy_speed_r1/sqp_solver_failures.jsonl",
+      "sha256": "08323f84807878270c2681e3c0a61366be14742622c3726346a55e9942c6a405",
+      "bytes": 119129
+    },
+    {
+      "path": "fitzpatrick_position_75/speed_profile_v3_20261105_legacy_speed_r1/summary.json",
+      "sha256": "67c666d715eb430e9e8e78604f737ef1d01698c5f9f1837de44b7861b19dba3f",
+      "bytes": 2531
+    },
+    {
+      "path": "fitzpatrick_position_75/speed_profile_v3_20261105_legacy_speed_r1/trajectory.csv.gz",
+      "sha256": "d4bdf659cc600cbd4f3a8b8a200f31238797fb3f108d1b1b221e04ef9d1d8086",
+      "bytes": 188219
+    },
+    {
+      "path": "fitzpatrick_position_75/speed_profile_v3_20261105_legacy_speed_r1/trajectory_en.png",
+      "sha256": "f1c64e52b5f2c866738fc828442042564c660eb613303f790b327632bdc7a6c2",
+      "bytes": 147255
+    },
+    {
+      "path": "fitzpatrick_position_75/speed_profile_v3_20261105_predictive_profile_r1/build.log",
+      "sha256": "a0ae7aa7ead8999b0ee058d7bd357a84dc9006a0fbc1608c985e295eed47e650",
+      "bytes": 605
+    },
+    {
+      "path": "fitzpatrick_position_75/speed_profile_v3_20261105_predictive_profile_r1/codegen.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "fitzpatrick_position_75/speed_profile_v3_20261105_predictive_profile_r1/config.json",
+      "sha256": "ba31405e9df9e40c561a5f720198df90c22dff95016a81827829900fde455846",
+      "bytes": 4086
+    },
+    {
+      "path": "fitzpatrick_position_75/speed_profile_v3_20261105_predictive_profile_r1/graph_audit.json",
+      "sha256": "a44d3f30a614ae9922a46becd363bb7f62bf139897ded168df9e77c5bb90f69b",
+      "bytes": 290
+    },
+    {
+      "path": "fitzpatrick_position_75/speed_profile_v3_20261105_predictive_profile_r1/graph_audit.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "fitzpatrick_position_75/speed_profile_v3_20261105_predictive_profile_r1/launch.log",
+      "sha256": "10eb13757333e91cca6feaf3f49c41ea893a99ee2064b4a244896f847b61d788",
+      "bytes": 20653
+    },
+    {
+      "path": "fitzpatrick_position_75/speed_profile_v3_20261105_predictive_profile_r1/metadata.json",
+      "sha256": "92a2f1c807642e7d626dfd655d9471f15ee3abfa964b4c324647e73f0e57dfd5",
+      "bytes": 331
+    },
+    {
+      "path": "fitzpatrick_position_75/speed_profile_v3_20261105_predictive_profile_r1/prediction_en.png",
+      "sha256": "af2c66fb9ee37b8518dd4a03bde310148a87253432094916273f71833d178265",
+      "bytes": 72592
+    },
+    {
+      "path": "fitzpatrick_position_75/speed_profile_v3_20261105_predictive_profile_r1/predictions.csv.gz",
+      "sha256": "4672ab1479adeb0e0b59e27a99cd33670ccf3dc99b8bf0c0448d66bd1f5c936e",
+      "bytes": 1249403
+    },
+    {
+      "path": "fitzpatrick_position_75/speed_profile_v3_20261105_predictive_profile_r1/source.patch",
+      "sha256": "e7849d9567e8d7c5d1b7bdfb2b3aa1c6f1654758ac431d6d206542ef60da2965",
+      "bytes": 39137
+    },
+    {
+      "path": "fitzpatrick_position_75/speed_profile_v3_20261105_predictive_profile_r1/sqp_solver_failures.jsonl",
+      "sha256": "d9544791bfd881a9f9d0f04f7cb60833e10121fdfd919c8967f9a695c83163f9",
+      "bytes": 24571
+    },
+    {
+      "path": "fitzpatrick_position_75/speed_profile_v3_20261105_predictive_profile_r1/summary.json",
+      "sha256": "e652ee2d8056f476f4a6afac457911799c27931772b58cc630cc392b7d6ed19e",
+      "bytes": 2783
+    },
+    {
+      "path": "fitzpatrick_position_75/speed_profile_v3_20261105_predictive_profile_r1/trajectory.csv.gz",
+      "sha256": "7ce70dee44923bea608b1f7ca55df790da0754ba7dec5a421ae24aa15613a15a",
+      "bytes": 177140
+    },
+    {
+      "path": "fitzpatrick_position_75/speed_profile_v3_20261105_predictive_profile_r1/trajectory_en.png",
+      "sha256": "9efec1d3a0fb5385ab22933df3999a79ffe85383050915a6b7aa0b309525f237",
+      "bytes": 149230
+    },
+    {
+      "path": "fitzpatrick_position_75/speed_profile_v3_repeat_20261105_repeat1/build.log",
+      "sha256": "afa55ed3bfbdb5e529324a3d811eb3ca1bb1f4703560e5ac63db549ca9b05522",
+      "bytes": 605
+    },
+    {
+      "path": "fitzpatrick_position_75/speed_profile_v3_repeat_20261105_repeat1/codegen.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "fitzpatrick_position_75/speed_profile_v3_repeat_20261105_repeat1/config.json",
+      "sha256": "8361264d887ae5c5d3f32cb788a771f8ecc258605f2b8b34e78c5386521d070b",
+      "bytes": 4079
+    },
+    {
+      "path": "fitzpatrick_position_75/speed_profile_v3_repeat_20261105_repeat1/graph_audit.json",
+      "sha256": "a44d3f30a614ae9922a46becd363bb7f62bf139897ded168df9e77c5bb90f69b",
+      "bytes": 290
+    },
+    {
+      "path": "fitzpatrick_position_75/speed_profile_v3_repeat_20261105_repeat1/graph_audit.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "fitzpatrick_position_75/speed_profile_v3_repeat_20261105_repeat1/launch.log",
+      "sha256": "61b0b475467803dfd3f9982275745b6705c7511a215caf499b99bd1eb0ec731d",
+      "bytes": 20639
+    },
+    {
+      "path": "fitzpatrick_position_75/speed_profile_v3_repeat_20261105_repeat1/metadata.json",
+      "sha256": "caeb82705c3c066c4dd5f03b71ae222020bd1dfa1f96d2a4f7dcb0484671c323",
+      "bytes": 324
+    },
+    {
+      "path": "fitzpatrick_position_75/speed_profile_v3_repeat_20261105_repeat1/prediction_en.png",
+      "sha256": "2676d6e93064c4571803c0fd5f3f01f8302495c48245cd234ecf46c87887b545",
+      "bytes": 72310
+    },
+    {
+      "path": "fitzpatrick_position_75/speed_profile_v3_repeat_20261105_repeat1/predictions.csv.gz",
+      "sha256": "68a1d94d7987d2220d6f9bc8d38e9e3e841e6d3720bcf38fc3339ebc59df2787",
+      "bytes": 1243673
+    },
+    {
+      "path": "fitzpatrick_position_75/speed_profile_v3_repeat_20261105_repeat1/source.patch",
+      "sha256": "0e273d8f4c554dec2be511b8bb3d2db8ae08a1a99e281a62433ecddf305d0541",
+      "bytes": 41155
+    },
+    {
+      "path": "fitzpatrick_position_75/speed_profile_v3_repeat_20261105_repeat1/sqp_solver_failures.jsonl",
+      "sha256": "37dd8b7bdbdc8cb00f28ef73d7862d43f4b8bde9f45da49f23b5388a036c426b",
+      "bytes": 26983
+    },
+    {
+      "path": "fitzpatrick_position_75/speed_profile_v3_repeat_20261105_repeat1/summary.json",
+      "sha256": "433a119c5b56c6a8ab924972b47c44d2c4e79399dd6e1d6ac35fbfac9ee61032",
+      "bytes": 2751
+    },
+    {
+      "path": "fitzpatrick_position_75/speed_profile_v3_repeat_20261105_repeat1/trajectory.csv.gz",
+      "sha256": "15dcef2b14c6168f3af0844aabf06492465caa5c8c19c0f47a69a0b42fca6bff",
+      "bytes": 176225
+    },
+    {
+      "path": "fitzpatrick_position_75/speed_profile_v3_repeat_20261105_repeat1/trajectory_en.png",
+      "sha256": "3b3efb26ef035d951be0072a67ac028779b0de10df939b324a63fb31d05f166c",
+      "bytes": 149764
+    }
+  ]
+}

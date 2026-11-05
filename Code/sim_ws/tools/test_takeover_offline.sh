@@ -45,6 +45,7 @@ fi
 python3 tools/test_takeover_geometry.py
 python3 tools/test_tracker_side_geometry.py
 python3 tools/test_sim_clock.py
+python3 tools/test_stability_schedule.py
 g++ -O1 -std=c++14 -I/usr/include/jsoncpp -Isrc/takeover_sim/include \
   tools/test_sqp_socket.cpp -ljsoncpp -o build/takeover_offline_tests/test_sqp_socket
 build/takeover_offline_tests/test_sqp_socket tools/sqp_socket_test_fixture.py

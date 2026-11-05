@@ -1,5 +1,18 @@
 # Laptop Dynamic-Overtaking Simulation
 
+## Stability follow-up (2026-11-04, development only)
+
+Bounded recovery-length search and checked same-side continuation were added.
+An eight-run speed-policy screen completed all passes, but only four were
+clean. A subsequent eight-run early-return repeat screen completed only four
+passes (three clean). All recorded runs in these screens had zero scored
+collisions/boundary events; **this is not full overtaking acceptance**.
+Both experimental flags `TAKEOVER_PROGRESSIVE_PASS_SPEED` and
+`TAKEOVER_EARLY_VERIFIED_RETURN` default to `false`. Do not promote either
+based on one faster run. Current-default seed-2 smoke tests still failed
+position-25 completion and position-50 clean motion, so the conservative
+default is also not a release. [Changes, exact versions and failures](STABILITY_20261104.md).
+
 ## Multi-position single-pass trials (2026-10-24)
 
 The active test objective is now **one complete pass and rejoin**, with no
@@ -407,3 +420,20 @@ Older/default profiles retain their wall-clock mode. Plant dynamics, body sizes,
 freshness thresholds and collision checks are not changed by selecting a clock.
 Solver/deadline computation measurements remain wall-clock measurements; slow
 simulation is not evidence of hardware real-time performance.
+
+## Optional predictive speed experiment (2026-11-05)
+
+This development mode tries checked passing-speed proposals and model-informed
+retiming. It is not uniformly faster or fully accepted; legacy defaults are
+preserved. The wrapper forces `upstream_sqp`, enables the new speed profile and
+leaves the older progressive/early-return experiments off. Arguments are the
+same as the normal trial runner. Use a new run ID each time.
+
+```bash
+cd /data/projects/F1-Tenth-Duke/f1tenth-takeover/Code/sim_ws
+bash run_predictive_speed_trial.sh fitzpatrick_position_00 '' 1 speed_experiment_gui_01 true
+```
+
+For headless execution replace `true` with `false`. See
+[test evidence and limitations](SPEED_PROFILE_20261105.md) before comparing
+times or considering Jetson deployment. No vehicle network is used by this mode.

@@ -1,0 +1,547 @@
+diff --git a/Code/sim_ws/run_takeover_trial.sh b/Code/sim_ws/run_takeover_trial.sh
+index 35d82ac..61d518c 100755
+--- a/Code/sim_ws/run_takeover_trial.sh
++++ b/Code/sim_ws/run_takeover_trial.sh
+@@ -13,9 +13,12 @@ export TAKEOVER_PLANNING_BACKEND="${TAKEOVER_PLANNING_BACKEND:-frenet_candidates
+ case "$TAKEOVER_PLANNING_BACKEND" in frenet_candidates|upstream_sqp) ;; *) echo 'Unknown planning backend' >&2; exit 2 ;; esac
+ export TAKEOVER_TRACK_PREDICTION="${TAKEOVER_TRACK_PREDICTION:-true}"
+ export TAKEOVER_TIMED_CONTROL="${TAKEOVER_TIMED_CONTROL:-true}"
++export TAKEOVER_PROGRESSIVE_PASS_SPEED="${TAKEOVER_PROGRESSIVE_PASS_SPEED:-false}"
++export TAKEOVER_PREDICTIVE_SPEED_PROFILE="${TAKEOVER_PREDICTIVE_SPEED_PROFILE:-false}"
++export TAKEOVER_EARLY_VERIFIED_RETURN="${TAKEOVER_EARLY_VERIFIED_RETURN:-false}"
+ export TAKEOVER_PASS_SIDE="${TAKEOVER_PASS_SIDE:-0}"
+ case "$TAKEOVER_PASS_SIDE" in -1|0|1) ;; *) echo 'Pass side must be -1, 0 or 1' >&2; exit 2 ;; esac
+-for value in "$TAKEOVER_TRACK_PREDICTION" "$TAKEOVER_TIMED_CONTROL"; do
++for value in "$TAKEOVER_TRACK_PREDICTION" "$TAKEOVER_TIMED_CONTROL" "$TAKEOVER_PROGRESSIVE_PASS_SPEED" "$TAKEOVER_PREDICTIVE_SPEED_PROFILE" "$TAKEOVER_EARLY_VERIFIED_RETURN"; do
+   case "$value" in true|false) ;; *) echo 'Feature flags must be true or false' >&2; exit 2 ;; esac
+ done
+ 
+@@ -168,6 +171,9 @@ if config.get('controller_model')=='official_gym_native':
+     config['generated_gym_dynamics_sha256']=hashlib.sha256(generated.read_bytes()).hexdigest()
+ config['track_assisted_prediction'] = os.environ['TAKEOVER_TRACK_PREDICTION'] == 'true'
+ config['timed_control'] = os.environ['TAKEOVER_TIMED_CONTROL'] == 'true'
++config['progressive_pass_speed'] = os.environ['TAKEOVER_PROGRESSIVE_PASS_SPEED'] == 'true'
++config['predictive_speed_profile'] = os.environ['TAKEOVER_PREDICTIVE_SPEED_PROFILE'] == 'true'
++config['early_verified_return'] = os.environ['TAKEOVER_EARLY_VERIFIED_RETURN'] == 'true'
+ config['planning_backend'] = os.environ['TAKEOVER_PLANNING_BACKEND']
+ if config['planning_backend'] == 'upstream_sqp':
+     import numpy
+@@ -203,6 +209,9 @@ setsid ros2 launch takeover_sim gym_takeover_launch.py \
+   num_agents:="$NUM_AGENTS" lead_enabled:="$LEAD_ENABLED" \
+   pass_offset:="$PASS_OFFSET" \
+   adaptive_offset:="$ADAPTIVE_OFFSET" lateral_amplitude:="$LATERAL_AMPLITUDE" \
++  progressive_pass_speed:="$TAKEOVER_PROGRESSIVE_PASS_SPEED" \
++  predictive_speed_profile:="$TAKEOVER_PREDICTIVE_SPEED_PROFILE" \
++  early_verified_return:="$TAKEOVER_EARLY_VERIFIED_RETURN" \
+   planning_backend:="$TAKEOVER_PLANNING_BACKEND" \
+   sqp_worker_script:="$PWD/tools/upstream_sqp_worker.py" sqp_upstream_source:="$SQP_SOURCE" \
+   track_assisted_prediction:="$TAKEOVER_TRACK_PREDICTION" timed_control:="$TAKEOVER_TIMED_CONTROL" \
+diff --git a/Code/sim_ws/src/takeover_sim/include/takeover_sim/dynamic_overtaking.hpp b/Code/sim_ws/src/takeover_sim/include/takeover_sim/dynamic_overtaking.hpp
+index 8af38ed..5ba4cdb 100644
+--- a/Code/sim_ws/src/takeover_sim/include/takeover_sim/dynamic_overtaking.hpp
++++ b/Code/sim_ws/src/takeover_sim/include/takeover_sim/dynamic_overtaking.hpp
+@@ -365,6 +365,9 @@ public:
+   // the 2.20 m benchmark corridor.
+   double pass_offset = 0.82;
+   bool adaptive_offset = false; // opt-in; retain the frozen fixed-offset baseline
++  bool progressive_pass_speed = false; // explicit simulation experiment
++  bool predictive_speed_profile = false; // per-stage passing/braking proposal
++  bool early_verified_return = false; // failed repeatability screen; opt-in only
+   // Optional upstream SQP lateral optimizer. Other behaviors, the predictor,
+   // time parameterization, collision checks and MPC remain ours, not upstream.
+   std::function<Json::Value(const Json::Value &)> sqp_optimizer;
+@@ -399,6 +402,57 @@ public:
+         closing*closing/(2*std::max(.1,deceleration_max));
+   }
+ 
++  double passing_speed_cap(double lateral_separation, double lead_speed,
++                           double lead_width) const {
++    const double base = std::min(cruise_speed, std::max(.70, lead_speed+.05));
++    if (!progressive_pass_speed && !predictive_speed_profile)
++      return lateral_separation < .68 ? base : cruise_speed;
++    // Begin releasing speed only after the physical widths plus the existing
++    // body margin separate. Release smoothly through the worst-case inflation
++    // band instead of a discontinuous jump at 0.68 m. This is a proposal, NOT
++    // collision admission: timed inflated bodies and MPC preview still veto it.
++    const double begin = .5*(vehicle_width+lead_width)+body_margin;
++    const double end = std::max(.68, begin+.30+
++        .5*std::abs(cruise_speed-lead_speed)*step);
++    const double fraction = smoothstep((lateral_separation-begin)/(end-begin));
++    return base + (cruise_speed-base)*fraction;
++  }
++
++  // Distance needed to reach a lower physical speed, with the same 50 ms
++  // command integrator, jerk and longitudinal lag as the timed/MPC model.
++  // Reserve one planning tick (0.2 s) plus the speed-reference response
++  // (1 / gain 2 = 0.5 s) before braking; the speed target cannot command full
++  // braking instantly. Positive command lead and acceleration are retained.
++  double braking_distance(double from, double to, double command_lead,
++                          double current_acceleration) const {
++    if (from <= to) return 0.;
++    const double h=.05, target=std::max(0.,to);
++    double v=from, u=from+std::max(0.,command_lead);
++    double a=clip(std::max(0.,current_acceleration),0.,acceleration_max), distance=0.;
++    for(int j=0;j<240;++j) {
++      if(j>=14) a=std::max(-deceleration_max,a-3*h);
++      u=clip(u+h*a,0.,cruise_speed);
++      const double tau=u>=v?acceleration_response:braking_response;
++      const double next=v+h/(tau+h)*(u-v);
++      distance+=.5*(v+next)*h;v=next;
++      if(j>=14 && v<=target) return distance;
++    }
++    return INF; // no finite stop certificate from this model
++  }
++
++  double braking_speed_cap(double distance, double bend_speed, double cap,
++                           double command_lead, double a) const {
++    if(cap<=bend_speed) return cap;
++    if(braking_distance(cap,bend_speed,command_lead,a)<=distance) return cap;
++    double lo=bend_speed,hi=cap;
++    for(int j=0;j<9;++j) {
++      const double mid=.5*(lo+hi);
++      if(braking_distance(mid,bend_speed,command_lead,a)<=distance)lo=mid;
++      else hi=mid;
++    }
++    return lo;
++  }
++
+   Decision plan(Pose ego, double ego_speed, const Track &track, double now) {
+     const double begin = frenet::mono();
+     Decision decision;
+@@ -482,6 +536,24 @@ public:
+       } else if (gap < -1.2 || gap > desired_gap + .8) {
+         maneuver_start_s_ = ego_projection.s;
+         set_behavior(Behavior::REJOIN, "abort_rejoin_clear");
++      } else if (early_verified_return && gap > .5*(vehicle_length+track.length)+body_margin) {
++        // A fixed large gap can keep a cancelled vehicle on an inner offset
++        // until that offset becomes unsteerable at the next bend. An earlier
++        // return BEHIND the lead is allowed only after validating its complete
++        // timed body checks and the existing MPC return preview. Do not simply
++        // lower the old gap threshold or reuse the cancelled trajectory.
++        const double old_s=maneuver_start_s_, old_d=maneuver_start_d_;
++        maneuver_start_s_=ego_projection.s;
++        maneuver_start_d_=ego_projection.d;
++        const double recovery_cap=std::min(cruise_speed,std::max(.70,lead_speed));
++        const auto recovery=build_candidate(ego,ego_speed,track,committed_side_,
++                                             Behavior::REJOIN,recovery_cap);
++        if(recovery.valid && return_clearance_reserved(recovery.minimum_body_clearance)) {
++          set_behavior(Behavior::REJOIN,"abort_early_return_verified");
++        } else {
++          maneuver_start_s_=old_s;
++          maneuver_start_d_=old_d;
++        }
+       }
+     }
+     if (behavior_ == Behavior::CRUISE && lead_ahead) {
+@@ -546,9 +618,11 @@ public:
+       // during the lane-entry transient repeatedly invalidates an otherwise
+       // safe pass and produces a speed saw-tooth.  Once footprint separation
+       // exists, the same time-aligned check below permits the full pass speed.
+-      cap = offset_progress < 0.68
+-          ? std::min(cruise_speed, std::max(0.70, lead_speed + 0.05))
+-          : cruise_speed;
++      cap = passing_speed_cap(offset_progress, lead_speed, track.width);
++      // Admission uses the entire timed forecast below. Holding today's
++      // entry cap for all four seconds postpones acceleration to a later
++      // replan even when that same forecast already has lateral separation.
++      if(predictive_speed_profile) cap=cruise_speed;
+       // Start returning as soon as full longitudinal body separation exists
+       // AND a complete inflated, time-aligned return is feasible. Waiting for
+       // a fixed extra metre wastes the bounded prediction window on the outer
+@@ -557,8 +631,17 @@ public:
+       // worst-case inflated gap before even considering a gradual diagonal
+       // return: the full time-aligned inflated-body check below, 0.10 m return
+       // reserve and non-actuating MPC preview already validate the maneuver.
+-      const double return_gap = .5 * (vehicle_length + track.length) + body_margin;
+-      if (gap < -return_gap) {
++      double return_gap = .5 * (vehicle_length + track.length) + body_margin;
++      if(predictive_speed_profile) {
++        // Faster passing must not trade its new longitudinal progress for an
++        // early lateral merge. Establish full inflated longitudinal clearance
++        // before testing the diagonal return; retain the complete checks too.
++        const double inflation=std::min(.30,uncertainty_sigma*std::sqrt(
++            std::max(0.,track.position_variance)))+process_sigma_rate*horizon;
++        return_gap+=std::min(.30,inflation)+
++            .5*std::abs(ego_speed-lead_speed)*step+.10;
++      }
++      if (gap < -return_gap && now >= return_retry_after_) {
+         const double old_start_s = maneuver_start_s_;
+         const double old_start_d = maneuver_start_d_;
+         maneuver_start_s_ = current_projection.s;
+@@ -618,6 +701,29 @@ public:
+           conservative_cap);
+       if (conservative.valid) candidate = std::move(conservative);
+     }
++    // A return that was feasible at the previous observation can become
++    // blocked before alignment. If we are already ahead, first validate a
++    // continuation on the LOCKED passing side. Braking to the cancellation
++    // floor here lets the opponent catch up while we are still alongside.
++    // This is a newly checked trajectory, never reuse of the rejected return.
++    if (!candidate.valid && behavior_ == Behavior::REJOIN && !aborting_ &&
++        decision.target_fresh && gap < 0. && committed_side_ != 0) {
++      const double old_start_s = maneuver_start_s_;
++      const double old_start_d = maneuver_start_d_;
++      maneuver_start_s_ = current_projection.s;
++      maneuver_start_d_ = current_projection.d;
++      auto continuation = build_candidate(ego, ego_speed, track, committed_side_,
++                                          Behavior::OVERTAKE, cruise_speed);
++      if (continuation.valid &&
++          return_clearance_reserved(continuation.minimum_body_clearance)) {
++        candidate = std::move(continuation);
++        return_retry_after_ = now + .5;
++        set_behavior(Behavior::OVERTAKE, "return_blocked_same_side_continuation");
++      } else {
++        maneuver_start_s_ = old_start_s;
++        maneuver_start_d_ = old_start_d;
++      }
++    }
+     if (!candidate.valid && (behavior_ == Behavior::OVERTAKE || behavior_ == Behavior::REJOIN)) {
+       cancel_start_ = now;
+       aborting_ = true;
+@@ -650,6 +756,7 @@ private:
+   double maneuver_start_s_ = 0.0;
+   double maneuver_start_d_ = 0.0;
+   double cancel_start_ = -INF;
++  double return_retry_after_ = -INF;
+   bool aborting_ = false;
+   std::string transition_ = "initialized";
+   struct SqpMemory { double s=0., length=0.; std::vector<double> d; };
+@@ -801,8 +908,12 @@ private:
+         best.reason="mpc_return_preview_rejected";
+       }
+       if (best.valid) return best;
+-      if (best.reason != "curvature_limit" && best.reason != "mpc_return_preview_rejected" &&
+-          scale == 1.) return best;
++      // Map/body failures of a short return do not imply that a longer return
++      // fails: it crosses the opponent corridor at a later time and position.
++      // Keep the same side, footprint margins and preview on every attempt.
++      const bool recovery_search = behavior == Behavior::REJOIN || behavior == Behavior::CANCEL;
++      if (!recovery_search && best.reason != "curvature_limit" &&
++          best.reason != "mpc_return_preview_rejected" && scale == 1.) return best;
+     }
+     return best;
+   }
+@@ -1008,6 +1119,12 @@ private:
+       double travel = 0.;
+       if (timed_control) {
+         double local_cap=candidate.speed_cap;
++        if(predictive_speed_profile && track.valid && behavior==Behavior::OVERTAKE) {
++          const double d=lateral_state(clip((s-start.s)/remaining_distance,0.,1.))[0];
++          const double lead_d=project(assets_,prediction[i-1].pose.xy()).d;
++          local_cap=std::min(local_cap,passing_speed_cap(side*(d-lead_d),
++              track.velocity.norm(),track.width));
++        }
+         if(track.valid && (behavior==Behavior::FOLLOW || behavior==Behavior::PREPARE_OVERTAKE)) {
+           // Re-evaluate the gap throughout the forecast, not only at t=0.
+           // Holding today's catch-up speed for four seconds predicts a
+@@ -1019,8 +1136,14 @@ private:
+                                          .70,cruise_speed));
+         }
+         const double brake_speed=std::max(speed,command);
+-        const double braking_preview=cruise_speed>2.0 ?
+-            std::max(1.5,brake_speed*brake_speed/(2*.60)+brake_speed*.4+1.) : 1.5;
++        // Keep the established cancellation/return response. A faster approach
++        // alone must not retime an already adjacent merge into the opponent.
++        const bool reachable_braking=predictive_speed_profile &&
++            (behavior==Behavior::OVERTAKE || behavior==Behavior::CRUISE);
++        const double braking_preview=reachable_braking ?
++            std::max(1.5,braking_distance(cruise_speed,.70,
++                std::max(0.,command-speed),acceleration)+1.) :
++            cruise_speed>2.0 ? std::max(1.5,brake_speed*brake_speed/(2*.60)+brake_speed*.4+1.) : 1.5;
+         for(double ahead=0.;ahead<=braking_preview;ahead+=.25) {
+           // Forward-only samples: there is no planned pre-start trajectory.
+           const Point a=spatial_pose(s+ahead).xy();
+@@ -1039,7 +1162,10 @@ private:
+           // Original <=2 m/s timing remains the frozen regression profile.
+           const double braking_distance=cruise_speed>2.0 ?
+               std::max(0.,ahead-brake_speed*.4) : 0.;
+-          local_cap=std::min(local_cap,std::sqrt(bend_speed_squared+2*.60*braking_distance));
++          local_cap=reachable_braking ?
++              braking_speed_cap(ahead,std::sqrt(bend_speed_squared),local_cap,
++                  std::max(0.,command-speed),acceleration) :
++              std::min(local_cap,std::sqrt(bend_speed_squared+2*.60*braking_distance));
+         }
+         if(local_cap<.70) {candidate.reason="curvature_limit";return candidate;}
+         // Match MPC command integration, jerk limits and longitudinal lag.
+@@ -1141,7 +1267,9 @@ private:
+       if (!track.valid) continue;
+ 
+       const Prediction &opponent = prediction[std::min(i, prediction.size() - 1)];
+-      const double sampling_margin = 0.5 * relative_speed * step;
++      const double stage_relative_speed=predictive_speed_profile ?
++          std::max(relative_speed,std::abs(candidate.timed[i].speed-track.velocity.norm())) : relative_speed;
++      const double sampling_margin = 0.5 * stage_relative_speed * step;
+       const double uncertainty = std::min(0.30, uncertainty_sigma * opponent.sigma);
+       const double inflation = body_margin + sampling_margin + uncertainty;
+       const Polygon opponent_body = rectangle(opponent.pose,
+diff --git a/Code/sim_ws/src/takeover_sim/launch/gym_takeover_launch.py b/Code/sim_ws/src/takeover_sim/launch/gym_takeover_launch.py
+index a92ad9f..8989819 100644
+--- a/Code/sim_ws/src/takeover_sim/launch/gym_takeover_launch.py
++++ b/Code/sim_ws/src/takeover_sim/launch/gym_takeover_launch.py
+@@ -64,6 +64,9 @@ def generate_launch_description():
+         DeclareLaunchArgument("track_assisted_prediction", default_value="true"),
+         DeclareLaunchArgument("timed_control", default_value="true"),
+         DeclareLaunchArgument("adaptive_offset", default_value="false"),
++        DeclareLaunchArgument("progressive_pass_speed", default_value="false"),
++        DeclareLaunchArgument("predictive_speed_profile", default_value="false"),
++        DeclareLaunchArgument("early_verified_return", default_value="false"),
+         DeclareLaunchArgument("planning_backend", default_value="frenet_candidates"),
+         DeclareLaunchArgument("sqp_worker_script", default_value=""),
+         DeclareLaunchArgument("sqp_upstream_source", default_value=""),
+@@ -164,6 +167,9 @@ def generate_launch_description():
+                 "track_assisted_prediction": ParameterValue(LaunchConfiguration("track_assisted_prediction"), value_type=bool),
+                 "timed_control": ParameterValue(LaunchConfiguration("timed_control"), value_type=bool),
+                 "adaptive_offset": ParameterValue(LaunchConfiguration("adaptive_offset"), value_type=bool),
++                "progressive_pass_speed": ParameterValue(LaunchConfiguration("progressive_pass_speed"), value_type=bool),
++                "predictive_speed_profile": ParameterValue(LaunchConfiguration("predictive_speed_profile"), value_type=bool),
++                "early_verified_return": ParameterValue(LaunchConfiguration("early_verified_return"), value_type=bool),
+                 "allowed_pass_side": ParameterValue(LaunchConfiguration("allowed_pass_side"), value_type=int),
+                 "pass_offset": ParameterValue(LaunchConfiguration("pass_offset"), value_type=float),
+                 "cruise_speed": ParameterValue(ego_max_speed, value_type=float),
+diff --git a/Code/sim_ws/src/takeover_sim/src/takeover_controller_node.cpp b/Code/sim_ws/src/takeover_sim/src/takeover_controller_node.cpp
+index 99649bc..c0e5bb0 100644
+--- a/Code/sim_ws/src/takeover_sim/src/takeover_controller_node.cpp
++++ b/Code/sim_ws/src/takeover_sim/src/takeover_controller_node.cpp
+@@ -57,6 +57,9 @@ public:
+     declare_parameter<bool>("lead_enabled", true);
+     declare_parameter<double>("ego_start_delay_s", 0.0);
+     declare_parameter<bool>("adaptive_offset", false);
++    declare_parameter<bool>("progressive_pass_speed", false);
++    declare_parameter<bool>("predictive_speed_profile", false);
++    declare_parameter<bool>("early_verified_return", false);
+     declare_parameter<std::string>("planning_backend", "frenet_candidates");
+     declare_parameter<std::string>("sqp_worker_script", "");
+     declare_parameter<std::string>("sqp_upstream_source", "");
+@@ -92,6 +95,9 @@ public:
+     if (!std::isfinite(ego_start_delay_) || ego_start_delay_ < 0.)
+       throw std::runtime_error("invalid_ego_start_delay_s");
+     dynamic_planner_->adaptive_offset = get_parameter("adaptive_offset").as_bool();
++    dynamic_planner_->progressive_pass_speed = get_parameter("progressive_pass_speed").as_bool();
++    dynamic_planner_->predictive_speed_profile = get_parameter("predictive_speed_profile").as_bool();
++    dynamic_planner_->early_verified_return = get_parameter("early_verified_return").as_bool();
+     planning_backend_=get_parameter("planning_backend").as_string();
+     if(planning_backend_!="frenet_candidates" && planning_backend_!="upstream_sqp")
+       throw std::runtime_error("unknown_planning_backend");
+@@ -524,6 +530,9 @@ private:
+     value["speed_cap_mps"] = decision_.candidate.speed_cap;
+     value["prediction_model"] = dynamic_planner_->track_assisted_prediction?"track_assisted_with_cv_fallback":"cartesian_cv";
+     value["timed_control"] = dynamic_planner_->timed_control;
++    value["progressive_pass_speed"] = dynamic_planner_->progressive_pass_speed;
++    value["predictive_speed_profile"] = dynamic_planner_->predictive_speed_profile;
++    value["early_verified_return"] = dynamic_planner_->early_verified_return;
+     value["transition_length_m"] = decision_.candidate.transition_length;
+     value["adaptive_offset"] = dynamic_planner_->adaptive_offset;
+     value["planning_backend"] = planning_backend_;
+diff --git a/Code/sim_ws/tools/test_takeover_offline.sh b/Code/sim_ws/tools/test_takeover_offline.sh
+index baeb0fd..6f16e4d 100644
+--- a/Code/sim_ws/tools/test_takeover_offline.sh
++++ b/Code/sim_ws/tools/test_takeover_offline.sh
+@@ -45,6 +45,7 @@ fi
+ python3 tools/test_takeover_geometry.py
+ python3 tools/test_tracker_side_geometry.py
+ python3 tools/test_sim_clock.py
++python3 tools/test_stability_schedule.py
+ g++ -O1 -std=c++14 -I/usr/include/jsoncpp -Isrc/takeover_sim/include \
+   tools/test_sqp_socket.cpp -ljsoncpp -o build/takeover_offline_tests/test_sqp_socket
+ build/takeover_offline_tests/test_sqp_socket tools/sqp_socket_test_fixture.py
+diff --git a/Code/sim_ws/tools/test_takeover_prediction.cpp b/Code/sim_ws/tools/test_takeover_prediction.cpp
+index a41ed09..e19f861 100644
+--- a/Code/sim_ws/tools/test_takeover_prediction.cpp
++++ b/Code/sim_ws/tools/test_takeover_prediction.cpp
+@@ -66,6 +66,46 @@ int main(int argc, char **argv) {
+   assets.res=1;assets.ox=-10;assets.oy=-15;assets.width=130;assets.height=30;
+   assets.grid.assign(3900,5.);
+   takeover::DynamicOvertakingPlanner planner(assets);
++  takeover::DynamicOvertakingPlanner speed_release(assets);
++  speed_release.cruise_speed=3.;
++  assert(speed_release.passing_speed_cap(.67,1.5,.31)==1.55);
++  assert(speed_release.passing_speed_cap(.68,1.5,.31)==3.);
++  speed_release.progressive_pass_speed=true;
++  assert(speed_release.passing_speed_cap(.38,1.5,.31)==1.55);
++  assert(speed_release.passing_speed_cap(.8,1.5,.31)==3.);
++  double last_cap=1.55;
++  for(int i=0;i<=100;++i) {
++    const double cap=speed_release.passing_speed_cap(i*.01,1.5,.31);
++    assert(cap>=last_cap && cap<=3. && cap-last_cap<.07);
++    last_cap=cap;
++  }
++  assert(speed_release.passing_speed_cap(.55,1.5,.31)>1.55);
++  assert(speed_release.passing_speed_cap(.55,1.5,.60)<
++         speed_release.passing_speed_cap(.55,1.5,.31));
++  // Reachable braking includes positive acceleration, jerk and response lag.
++  speed_release.deceleration_max=3.;speed_release.acceleration_max=3.;
++  const double stopping=speed_release.braking_distance(3.,1.2,0.,0.);
++  assert(stopping>(9.-1.44)/6.); // cannot assume instantaneous full braking
++  assert(speed_release.braking_distance(3.,1.2,.2,1.5)>stopping);
++  assert(speed_release.braking_speed_cap(stopping+.01,1.2,3.,0.,0.)==3.);
++  assert(speed_release.braking_speed_cap(0.,1.2,3.,0.,0.)==1.2);
++  assert(speed_release.braking_speed_cap(1.,1.2,3.,0.,0.)<
++         speed_release.braking_speed_cap(2.,1.2,3.,0.,0.));
++  // The same future geometry can release speed later in the forecast without
++  // granting cruise speed at the measured still-aligned entry position.
++  takeover::Track moving;
++  moving.valid=true;moving.position={14,0};moving.velocity={1.5,0};
++  moving.yaw=0.;moving.position_variance=.0001;moving.velocity_variance=.0001;
++  speed_release.initial_command=1.5;speed_release.progressive_pass_speed=false;
++  const auto held=speed_release.build_candidate_scaled({10,0,0},1.5,moving,1,
++      takeover::Behavior::OVERTAKE,1.55,1.,.82);
++  speed_release.predictive_speed_profile=true;
++  const auto released=speed_release.build_candidate_scaled({10,0,0},1.5,moving,1,
++      takeover::Behavior::OVERTAKE,3.,1.,.82);
++  assert(held.valid && released.valid);
++  assert(released.timed.front().speed==1.5 && released.timed[1].speed<1.56);
++  assert(released.timed.back().speed>held.timed.back().speed+.5);
++  assert(released.timed.back().s>held.timed.back().s+.5);
+   planner.initial_command=1.5; planner.initial_acceleration=0;
+   takeover::Track absent;
+   auto braking=planner.build_candidate({10,0,0},1.5,absent,0,takeover::Behavior::FOLLOW,.8);
+@@ -109,6 +149,15 @@ int main(int argc, char **argv) {
+   assert(bend.valid && bend.timed.front().speed==3.);
+   assert(bend.timed[1].speed>2.9 && bend.timed[1].speed<3.);
+   assert(bend.timed[30].speed<1.9);
++  fast_planner.predictive_speed_profile=true;
++  fast_planner.acceleration_max=3.;fast_planner.deceleration_max=3.;
++  const auto reachable_bend=fast_planner.build_candidate({15,0,0},3.,absent,0,
++      takeover::Behavior::CRUISE,3.);
++  assert(reachable_bend.valid && reachable_bend.timed.front().speed==3.);
++  assert(reachable_bend.timed[5].speed>bend.timed[5].speed);
++  for(const auto &p:reachable_bend.timed)
++    if(p.s>20.2 && p.s<22.8) assert(p.speed<1.75);
++  fast_planner.predictive_speed_profile=false;
+   fast_planner.require_target=false;
+   assert(!fast_planner.plan({15,0,0},3.,absent,5.).stop);
+   fast_planner.require_target=true;
+@@ -132,6 +181,24 @@ int main(int argc, char **argv) {
+   const auto controlled_recovery=recovery_speed.plan({10,.65,0},.8,target,2.);
+   assert(controlled_recovery.behavior==takeover::Behavior::REJOIN);
+   assert(controlled_recovery.candidate.valid && controlled_recovery.candidate.speed_cap<=.8);
++  // Below the old desired_gap+0.8 threshold, an early recovery is admitted
++  // only by a checked return, not by reducing the geometric safety margin.
++  auto close_lead=target;close_lead.position={11.5,0};
++  recovery_speed.behavior_=takeover::Behavior::CANCEL;
++  recovery_speed.cancel_start_=0.;recovery_speed.aborting_=true;
++  recovery_speed.committed_side_=1;
++  assert(!recovery_speed.early_verified_return);
++  assert(recovery_speed.plan({10,.65,0},.8,close_lead,2.).behavior==takeover::Behavior::CANCEL);
++  recovery_speed.early_verified_return=true;
++  const auto early=recovery_speed.plan({10,.65,0},.8,close_lead,2.);
++  assert(early.behavior==takeover::Behavior::REJOIN && !early.stop);
++  assert(early.transition=="abort_early_return_verified");
++  assert(early.committed_side==1 && early.overtakes_completed==0);
++  recovery_speed.behavior_=takeover::Behavior::CANCEL;
++  recovery_speed.return_feasibility=[](const takeover::Candidate &) {return false;};
++  const auto denied_early=recovery_speed.plan({10,.65,0},.8,close_lead,2.);
++  assert(denied_early.behavior==takeover::Behavior::CANCEL);
++  recovery_speed.return_feasibility={};
+   recovery_speed.overtakes_completed_=1;recovery_speed.behavior_=takeover::Behavior::REJOIN;
+   recovery_speed.aborting_=true;recovery_speed.committed_side_=1;
+   target.position={19,0};target.observation_stamp=0.;
+@@ -244,6 +311,47 @@ int main(int argc, char **argv) {
+       takeover::Behavior::REJOIN,1.5);
+   assert(!rejected_return.valid && rejected_return.reason=="mpc_return_preview_rejected");
+   adaptive.return_feasibility={};
++  // A return rejected after passing must try a freshly validated same-side
++  // continuation, not brake back into the opponent. A failed continuation
++  // still falls through to cancellation/stop; side switching is prohibited.
++  takeover::DynamicOvertakingPlanner return_retry(assets);
++  return_retry.adaptive_offset=true;return_retry.cruise_speed=1.8;
++  return_retry.initial_command=1.5;return_retry.initial_curvature=0.;
++  return_retry.behavior_=takeover::Behavior::REJOIN;
++  return_retry.committed_side_=1;return_retry.committed_offset_=.82;
++  return_retry.maneuver_start_s_=10.;
++  return_retry.return_feasibility=[](const takeover::Candidate &) {return false;};
++  auto trailing=target;trailing.position={8.5,0};trailing.velocity={.8,0};
++  trailing.observation_stamp=2.;
++  const auto held=return_retry.plan({10,.7,0},1.5,trailing,2.);
++  assert(held.behavior==takeover::Behavior::OVERTAKE && !held.stop);
++  assert(held.transition=="return_blocked_same_side_continuation");
++  assert(held.committed_side==1 && held.candidate.valid);
++  assert(!return_retry.aborting_ && return_retry.return_retry_after_==2.5);
++  assert(held.overtakes_completed==0);
++  return_retry.behavior_=takeover::Behavior::REJOIN;
++  assets.grid.assign(3900,.20);
++  const auto blocked_hold=return_retry.plan({10,.7,0},1.5,trailing,2.);
++  assert(blocked_hold.stop && blocked_hold.behavior==takeover::Behavior::CANCEL);
++  assert(blocked_hold.committed_side==1 && !blocked_hold.candidate.valid);
++  assets.grid.assign(3900,5.);
++  // Search the existing finite scale set for a delayed return when the first
++  // one intersects the target. Acceptance geometry is unchanged.
++  takeover::DynamicOvertakingPlanner return_search(assets);
++  return_search.initial_command=1.5;return_search.maneuver_start_s_=10.;
++  int rescued_body_conflicts=0;
++  for(double lead_s=8.;lead_s<=14.;lead_s+=.25) {
++    auto moving=trailing;moving.position={lead_s,0};moving.velocity={1.2,0};
++    const auto short_return=return_search.build_candidate_scaled({10,.82,0},1.5,moving,1,
++        takeover::Behavior::REJOIN,1.5,1.,.82);
++    const auto searched_return=return_search.build_candidate({10,.82,0},1.5,moving,1,
++        takeover::Behavior::REJOIN,1.5);
++    if(short_return.reason=="time_aligned_body_conflict" && searched_return.valid) {
++      ++rescued_body_conflicts;
++      assert(searched_return.transition_length>short_return.transition_length);
++    }
++  }
++  assert(rescued_body_conflicts>0);
+   assert(!takeover::return_clearance_reserved(.0035));
+   assert(!takeover::return_clearance_reserved(std::numeric_limits<double>::quiet_NaN()));
+   assert(takeover::return_clearance_reserved(.10));
+diff --git a/README.md b/README.md
+index a77f31b..7becb9e 100644
+--- a/README.md
++++ b/README.md
+@@ -3,7 +3,11 @@
+ Fixed-route navigation and static-obstacle avoidance on a real F1TENTH vehicle,
+ plus a laptop-tested dynamic-obstacle overtaking simulation.
+ 
+-**Latest validated result: Dynamic MPC v8, Fitzpatrick, 2026-09-27.** One complete lap with two static obstacles; the operator reported no contact, minimal oscillation, and a natural stop. This is one successful run, not a repeated-trial reliability claim.
++**Latest recorded physical result: Dynamic MPC v8, Fitzpatrick, 2026-09-27.** One complete lap with two static obstacles; the operator reported no contact, minimal oscillation, and a natural stop. This is one successful run, not a repeated-trial reliability claim.
++
++**Laptop update, 2026-11-04:** recovery improvements are under test; repeated
++dynamic-overtaking trials still fail some completion/clean-motion checks.
++[Current evidence and remaining issues](docs/STABILITY_20261104.md).
+ 
+ | Measure | Result |
+ |---|---:|
+diff --git a/docs/LAPTOP_TAKEOVER_SIM.md b/docs/LAPTOP_TAKEOVER_SIM.md
+index ac45a82..cbb0104 100644
+--- a/docs/LAPTOP_TAKEOVER_SIM.md
++++ b/docs/LAPTOP_TAKEOVER_SIM.md
+@@ -1,5 +1,18 @@
+ # Laptop Dynamic-Overtaking Simulation
+ 
++## Stability follow-up (2026-11-04, development only)
++
++Bounded recovery-length search and checked same-side continuation were added.
++An eight-run speed-policy screen completed all passes, but only four were
++clean. A subsequent eight-run early-return repeat screen completed only four
++passes (three clean). All recorded runs in these screens had zero scored
++collisions/boundary events; **this is not full overtaking acceptance**.
++Both experimental flags `TAKEOVER_PROGRESSIVE_PASS_SPEED` and
++`TAKEOVER_EARLY_VERIFIED_RETURN` default to `false`. Do not promote either
++based on one faster run. Current-default seed-2 smoke tests still failed
++position-25 completion and position-50 clean motion, so the conservative
++default is also not a release. [Changes, exact versions and failures](STABILITY_20261104.md).
++
+ ## Multi-position single-pass trials (2026-10-24)
+ 
+ The active test objective is now **one complete pass and rejoin**, with no
+diff --git a/docs/STATUS.md b/docs/STATUS.md
+index 8ccc399..442b291 100644
+--- a/docs/STATUS.md
++++ b/docs/STATUS.md
+@@ -1,4 +1,15 @@
+-# Current status — source export 2026-10-06
++# Current status
++
++## Laptop stability work — 2026-11-04 (not release acceptance)
++
++Recovery fixes and opt-in progressive passing-speed/early-return experiments
++have been implemented and actually tested. Repeated trials still expose
++infeasible SQP corridors, recovery failures and an occasional SQP deadline
++miss. Neither experimental policy is enabled by default. Dynamic overtaking
++is **not fully accepted in simulation or on the physical vehicle**.
++See [the current implementation and evidence](STABILITY_20261104.md).
++
++## Historical source export — 2026-10-06
+ 
+ ## Development snapshot — 2026-10-20 (not release acceptance)
+ 

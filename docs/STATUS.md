@@ -1,4 +1,27 @@
-# Current status — source export 2026-10-06
+# Current status
+
+## Laptop speed experiment — 2026-11-05 (opt-in)
+
+Implemented checked speed-proposal search, physical-path braking distance and
+separate geometric steerability versus timed lateral acceleration limits.
+The retained dynamic MPC, hard collision/map tests and real-v8 deployment are
+unchanged. Position 00 improved in the latest candidate comparison from
+10.95 s to 8.70 s, but other positions still show slower completion, cancelled
+attempts and occasional controller failures. This is not overall acceptance.
+Defaults remain legacy; use the explicit experimental wrapper to reproduce.
+See [experiment evidence](SPEED_PROFILE_20261105.md) and
+[method choices/tradeoffs](PLANNING_CONTROL_TRADEOFFS.md).
+
+## Laptop stability work — 2026-11-04 (not release acceptance)
+
+Recovery fixes and opt-in progressive passing-speed/early-return experiments
+have been implemented and actually tested. Repeated trials still expose
+infeasible SQP corridors, recovery failures and an occasional SQP deadline
+miss. Neither experimental policy is enabled by default. Dynamic overtaking
+is **not fully accepted in simulation or on the physical vehicle**.
+See [the current implementation and evidence](STABILITY_20261104.md).
+
+## Historical source export — 2026-10-06
 
 ## Development snapshot — 2026-10-20 (not release acceptance)
 

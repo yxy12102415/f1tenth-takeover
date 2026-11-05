@@ -57,6 +57,9 @@ public:
     declare_parameter<bool>("lead_enabled", true);
     declare_parameter<double>("ego_start_delay_s", 0.0);
     declare_parameter<bool>("adaptive_offset", false);
+    declare_parameter<bool>("progressive_pass_speed", false);
+    declare_parameter<bool>("predictive_speed_profile", false);
+    declare_parameter<bool>("early_verified_return", false);
     declare_parameter<std::string>("planning_backend", "frenet_candidates");
     declare_parameter<std::string>("sqp_worker_script", "");
     declare_parameter<std::string>("sqp_upstream_source", "");
@@ -92,6 +95,9 @@ public:
     if (!std::isfinite(ego_start_delay_) || ego_start_delay_ < 0.)
       throw std::runtime_error("invalid_ego_start_delay_s");
     dynamic_planner_->adaptive_offset = get_parameter("adaptive_offset").as_bool();
+    dynamic_planner_->progressive_pass_speed = get_parameter("progressive_pass_speed").as_bool();
+    dynamic_planner_->predictive_speed_profile = get_parameter("predictive_speed_profile").as_bool();
+    dynamic_planner_->early_verified_return = get_parameter("early_verified_return").as_bool();
     planning_backend_=get_parameter("planning_backend").as_string();
     if(planning_backend_!="frenet_candidates" && planning_backend_!="upstream_sqp")
       throw std::runtime_error("unknown_planning_backend");
@@ -524,6 +530,9 @@ private:
     value["speed_cap_mps"] = decision_.candidate.speed_cap;
     value["prediction_model"] = dynamic_planner_->track_assisted_prediction?"track_assisted_with_cv_fallback":"cartesian_cv";
     value["timed_control"] = dynamic_planner_->timed_control;
+    value["progressive_pass_speed"] = dynamic_planner_->progressive_pass_speed;
+    value["predictive_speed_profile"] = dynamic_planner_->predictive_speed_profile;
+    value["early_verified_return"] = dynamic_planner_->early_verified_return;
     value["transition_length_m"] = decision_.candidate.transition_length;
     value["adaptive_offset"] = dynamic_planner_->adaptive_offset;
     value["planning_backend"] = planning_backend_;

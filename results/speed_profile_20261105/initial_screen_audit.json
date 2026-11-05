@@ -1,0 +1,649 @@
+{
+  "design": {
+    "schedule_seed": 20261105,
+    "schedule": [
+      {
+        "scenario": "fitzpatrick_position_75",
+        "repeat": 1,
+        "seed": 1,
+        "progressive_pass_speed": false,
+        "predictive_speed_profile": true,
+        "run_id": "speed_profile_screen_20261105_predictive_profile_r1"
+      },
+      {
+        "scenario": "fitzpatrick_position_75",
+        "repeat": 1,
+        "seed": 1,
+        "progressive_pass_speed": false,
+        "predictive_speed_profile": false,
+        "run_id": "speed_profile_screen_20261105_legacy_speed_r1"
+      },
+      {
+        "scenario": "fitzpatrick_position_00",
+        "repeat": 1,
+        "seed": 1,
+        "progressive_pass_speed": false,
+        "predictive_speed_profile": false,
+        "run_id": "speed_profile_screen_20261105_legacy_speed_r1"
+      },
+      {
+        "scenario": "fitzpatrick_position_00",
+        "repeat": 1,
+        "seed": 1,
+        "progressive_pass_speed": false,
+        "predictive_speed_profile": true,
+        "run_id": "speed_profile_screen_20261105_predictive_profile_r1"
+      },
+      {
+        "scenario": "fitzpatrick_position_50",
+        "repeat": 1,
+        "seed": 1,
+        "progressive_pass_speed": false,
+        "predictive_speed_profile": true,
+        "run_id": "speed_profile_screen_20261105_predictive_profile_r1"
+      },
+      {
+        "scenario": "fitzpatrick_position_50",
+        "repeat": 1,
+        "seed": 1,
+        "progressive_pass_speed": false,
+        "predictive_speed_profile": false,
+        "run_id": "speed_profile_screen_20261105_legacy_speed_r1"
+      },
+      {
+        "scenario": "fitzpatrick_position_25",
+        "repeat": 1,
+        "seed": 1,
+        "progressive_pass_speed": false,
+        "predictive_speed_profile": false,
+        "run_id": "speed_profile_screen_20261105_legacy_speed_r1"
+      },
+      {
+        "scenario": "fitzpatrick_position_25",
+        "repeat": 1,
+        "seed": 1,
+        "progressive_pass_speed": false,
+        "predictive_speed_profile": true,
+        "run_id": "speed_profile_screen_20261105_predictive_profile_r1"
+      }
+    ],
+    "early_verified_return": false,
+    "profile_comparison": true,
+    "unit": "One fresh ROS/Gym process; not individual CSV samples",
+    "blocking": "Matched position and seed; randomized arm order inside each block",
+    "scope": "Small engineering screen, not a statistical success-rate estimate",
+    "acceptance": "Existing single-pass/rejoin, body collision and boundary checks unchanged"
+  },
+  "runs": [
+    {
+      "scenario": "fitzpatrick_position_75",
+      "run_id": "speed_profile_screen_20261105_predictive_profile_r1",
+      "seed": 1,
+      "predictive_speed_profile": true,
+      "results_dir": "/data/projects/F1-Tenth-Duke/f1tenth-takeover/Code/sim_ws/results/takeover/fitzpatrick_position_75/speed_profile_screen_20261105_predictive_profile_r1",
+      "passed": true,
+      "clean": false,
+      "truth_completion_time_s": 20.150000000000002,
+      "safety": {
+        "boundary_violation_events": 0,
+        "collision_events": 0,
+        "lead_boundary_violation_events": 0,
+        "minimum_body_clearance_m": 0.4422466424163244
+      },
+      "runtime": {
+        "controller_failures": 0,
+        "controller_rejection_reasons": {},
+        "freshness_triggered_replans": 1,
+        "infeasible_count": 0,
+        "mpc_mean_ms": 1.7043297411231506,
+        "mpc_p95_ms": 2.66734900009169,
+        "planner_failures": 6,
+        "planning_backend": "upstream_sqp",
+        "planning_mean_ms": 10.91126254844155,
+        "planning_p95_ms": 37.283588000036616,
+        "rejected_track_jumps": 0,
+        "return_preview_checks": 9,
+        "return_preview_rejections": {},
+        "solver_recoveries": 0,
+        "solver_timeouts": 0,
+        "sqp_calls": 96,
+        "sqp_failures": 10,
+        "sqp_preview_checks": 73,
+        "sqp_preview_rejections": {},
+        "sqp_timeouts": 2
+      },
+      "invalid_samples_after_2s": 0,
+      "cancellations": 0,
+      "maximum_ego_speed_mps": 2.986359811957615,
+      "mean_overtake_speed_mps": 1.9181047506198996,
+      "maximum_abs_mpc_acceleration_command_mps2": 1.3992766984094422,
+      "graph_audit": {
+        "opponent_truth_subscribers": [
+          "takeover_evaluator",
+          "takeover_lead_controller"
+        ],
+        "final_command_publishers": [
+          "takeover_safety_arbiter"
+        ],
+        "nominal_command_publishers": [
+          "takeover_controller"
+        ],
+        "tracker_measurement_source": "lidar",
+        "passed": true
+      },
+      "runtime_source_sha256": {
+        "Code/sim_ws/src/takeover_sim/src/takeover_controller_node.cpp": "0284685372107ee81d9b0eb7cbc3e7c0d5c83b02d67a475380669f4c0f6f9b84",
+        "Code/sim_ws/src/takeover_sim/include/takeover_sim/dynamic_overtaking.hpp": "4cb8b3abc0e0ab13e7056816652faf5cb1e819f7c2fef83c9c54331faa776029",
+        "Code/sim_ws/src/takeover_sim/include/takeover_sim/sqp_worker.hpp": "dc3a24b95336f93be01aeb85c98c5b98069182a06969a885610f49bab9c8b110",
+        "Code/sim_ws/src/takeover_sim/launch/gym_takeover_launch.py": "8189b2d03a81f30c2fc454cb5ccafac80946c3f2dcd88f10a8ff13a8f18e751d",
+        "Code/sim_ws/src/f1tenth_gym_ros/f1tenth_gym_ros/gym_bridge.py": "dc9539245ce05679085a227f34c47c7981386213e594d7aa0027a546b6c59cb6",
+        "Code/sim_ws/src/f1tenth_gym_ros/launch/gym_bridge_launch.py": "1e1391f5045c27a11c868292765ffe090585f84b51313c074857bf93b9169a00",
+        "Code/sim_ws/src/f1tenth_mpc-main/mpc/scripts/opponent_ekf_tracker.py": "778081542c9bae590ed02f1388763b587c751c7ba2127c9758cfa811023dc1f0",
+        "Code/sim_ws/src/f1tenth_mpc-main/mpc/scripts/opp_pid_node.py": "acf82e5f04abf6750b8a19228afd545f4abb6a4ba8aed48811b5ae7604236ad7",
+        "Code/sim_ws/src/f1tenth_mpc-main/mpc/scripts/takeover_evaluator.py": "75f7a149a3fa76ba022f94b560eda9c2029dff5089a7cd35600daaea6edf8a5a",
+        "Code/sim_ws/tools/upstream_sqp_worker.py": "62fda9957d4732f31490c3024a95f4c50bbb1c492c487bfff9793ab34eaf26a4",
+        "real_vehicle/candidate_cpp_gpu_20260909/ground_fitzpatrick_joint_20260927_v8/src/cpp_frenet/joint_control.hpp": "ab8fd0df9fba6669d0069569d920a3c1f2e455e1274a03c3503a1edc426b7c5b",
+        "real_vehicle/candidate_cpp_gpu_20260909/ground_fitzpatrick_joint_20260927_v8/generate_joint_solver.py": "b3390fa120fc51232a5ed46fa1de0d4c2aef9bf7b973c0fe70a99e30a70356e2"
+      }
+    },
+    {
+      "scenario": "fitzpatrick_position_75",
+      "run_id": "speed_profile_screen_20261105_legacy_speed_r1",
+      "seed": 1,
+      "predictive_speed_profile": false,
+      "results_dir": "/data/projects/F1-Tenth-Duke/f1tenth-takeover/Code/sim_ws/results/takeover/fitzpatrick_position_75/speed_profile_screen_20261105_legacy_speed_r1",
+      "passed": true,
+      "clean": false,
+      "truth_completion_time_s": 18.900000000000002,
+      "safety": {
+        "boundary_violation_events": 0,
+        "collision_events": 0,
+        "lead_boundary_violation_events": 0,
+        "minimum_body_clearance_m": 0.43087295737335757
+      },
+      "runtime": {
+        "controller_failures": 0,
+        "controller_rejection_reasons": {},
+        "freshness_triggered_replans": 1,
+        "infeasible_count": 0,
+        "mpc_mean_ms": 1.599005321958489,
+        "mpc_p95_ms": 2.667900500057388,
+        "planner_failures": 6,
+        "planning_backend": "upstream_sqp",
+        "planning_mean_ms": 10.516866630014517,
+        "planning_p95_ms": 42.53294099999039,
+        "rejected_track_jumps": 0,
+        "return_preview_checks": 8,
+        "return_preview_rejections": {},
+        "solver_recoveries": 0,
+        "solver_timeouts": 0,
+        "sqp_calls": 94,
+        "sqp_failures": 13,
+        "sqp_preview_checks": 69,
+        "sqp_preview_rejections": {},
+        "sqp_timeouts": 1
+      },
+      "invalid_samples_after_2s": 0,
+      "cancellations": 0,
+      "maximum_ego_speed_mps": 2.97126974981795,
+      "mean_overtake_speed_mps": 1.897235272886313,
+      "maximum_abs_mpc_acceleration_command_mps2": 1.3562510895810302,
+      "graph_audit": {
+        "opponent_truth_subscribers": [
+          "takeover_evaluator",
+          "takeover_lead_controller"
+        ],
+        "final_command_publishers": [
+          "takeover_safety_arbiter"
+        ],
+        "nominal_command_publishers": [
+          "takeover_controller"
+        ],
+        "tracker_measurement_source": "lidar",
+        "passed": true
+      },
+      "runtime_source_sha256": {
+        "Code/sim_ws/src/takeover_sim/src/takeover_controller_node.cpp": "0284685372107ee81d9b0eb7cbc3e7c0d5c83b02d67a475380669f4c0f6f9b84",
+        "Code/sim_ws/src/takeover_sim/include/takeover_sim/dynamic_overtaking.hpp": "4cb8b3abc0e0ab13e7056816652faf5cb1e819f7c2fef83c9c54331faa776029",
+        "Code/sim_ws/src/takeover_sim/include/takeover_sim/sqp_worker.hpp": "dc3a24b95336f93be01aeb85c98c5b98069182a06969a885610f49bab9c8b110",
+        "Code/sim_ws/src/takeover_sim/launch/gym_takeover_launch.py": "8189b2d03a81f30c2fc454cb5ccafac80946c3f2dcd88f10a8ff13a8f18e751d",
+        "Code/sim_ws/src/f1tenth_gym_ros/f1tenth_gym_ros/gym_bridge.py": "dc9539245ce05679085a227f34c47c7981386213e594d7aa0027a546b6c59cb6",
+        "Code/sim_ws/src/f1tenth_gym_ros/launch/gym_bridge_launch.py": "1e1391f5045c27a11c868292765ffe090585f84b51313c074857bf93b9169a00",
+        "Code/sim_ws/src/f1tenth_mpc-main/mpc/scripts/opponent_ekf_tracker.py": "778081542c9bae590ed02f1388763b587c751c7ba2127c9758cfa811023dc1f0",
+        "Code/sim_ws/src/f1tenth_mpc-main/mpc/scripts/opp_pid_node.py": "acf82e5f04abf6750b8a19228afd545f4abb6a4ba8aed48811b5ae7604236ad7",
+        "Code/sim_ws/src/f1tenth_mpc-main/mpc/scripts/takeover_evaluator.py": "75f7a149a3fa76ba022f94b560eda9c2029dff5089a7cd35600daaea6edf8a5a",
+        "Code/sim_ws/tools/upstream_sqp_worker.py": "62fda9957d4732f31490c3024a95f4c50bbb1c492c487bfff9793ab34eaf26a4",
+        "real_vehicle/candidate_cpp_gpu_20260909/ground_fitzpatrick_joint_20260927_v8/src/cpp_frenet/joint_control.hpp": "ab8fd0df9fba6669d0069569d920a3c1f2e455e1274a03c3503a1edc426b7c5b",
+        "real_vehicle/candidate_cpp_gpu_20260909/ground_fitzpatrick_joint_20260927_v8/generate_joint_solver.py": "b3390fa120fc51232a5ed46fa1de0d4c2aef9bf7b973c0fe70a99e30a70356e2"
+      }
+    },
+    {
+      "scenario": "fitzpatrick_position_00",
+      "run_id": "speed_profile_screen_20261105_legacy_speed_r1",
+      "seed": 1,
+      "predictive_speed_profile": false,
+      "results_dir": "/data/projects/F1-Tenth-Duke/f1tenth-takeover/Code/sim_ws/results/takeover/fitzpatrick_position_00/speed_profile_screen_20261105_legacy_speed_r1",
+      "passed": true,
+      "clean": true,
+      "truth_completion_time_s": 10.450000000000001,
+      "safety": {
+        "boundary_violation_events": 0,
+        "collision_events": 0,
+        "lead_boundary_violation_events": 0,
+        "minimum_body_clearance_m": 0.45496392516082595
+      },
+      "runtime": {
+        "controller_failures": 0,
+        "controller_rejection_reasons": {},
+        "freshness_triggered_replans": 1,
+        "infeasible_count": 0,
+        "mpc_mean_ms": 1.7177031286516802,
+        "mpc_p95_ms": 2.578719549967446,
+        "planner_failures": 4,
+        "planning_backend": "upstream_sqp",
+        "planning_mean_ms": 4.224348770326281,
+        "planning_p95_ms": 16.458691000025283,
+        "rejected_track_jumps": 0,
+        "return_preview_checks": 7,
+        "return_preview_rejections": {},
+        "solver_recoveries": 0,
+        "solver_timeouts": 0,
+        "sqp_calls": 33,
+        "sqp_failures": 0,
+        "sqp_preview_checks": 33,
+        "sqp_preview_rejections": {},
+        "sqp_timeouts": 0
+      },
+      "invalid_samples_after_2s": 0,
+      "cancellations": 0,
+      "maximum_ego_speed_mps": 2.993087007449681,
+      "mean_overtake_speed_mps": 1.2712667352554974,
+      "maximum_abs_mpc_acceleration_command_mps2": 1.327730030727564,
+      "graph_audit": {
+        "opponent_truth_subscribers": [
+          "takeover_evaluator",
+          "takeover_lead_controller"
+        ],
+        "final_command_publishers": [
+          "takeover_safety_arbiter"
+        ],
+        "nominal_command_publishers": [
+          "takeover_controller"
+        ],
+        "tracker_measurement_source": "lidar",
+        "passed": true
+      },
+      "runtime_source_sha256": {
+        "Code/sim_ws/src/takeover_sim/src/takeover_controller_node.cpp": "0284685372107ee81d9b0eb7cbc3e7c0d5c83b02d67a475380669f4c0f6f9b84",
+        "Code/sim_ws/src/takeover_sim/include/takeover_sim/dynamic_overtaking.hpp": "4cb8b3abc0e0ab13e7056816652faf5cb1e819f7c2fef83c9c54331faa776029",
+        "Code/sim_ws/src/takeover_sim/include/takeover_sim/sqp_worker.hpp": "dc3a24b95336f93be01aeb85c98c5b98069182a06969a885610f49bab9c8b110",
+        "Code/sim_ws/src/takeover_sim/launch/gym_takeover_launch.py": "8189b2d03a81f30c2fc454cb5ccafac80946c3f2dcd88f10a8ff13a8f18e751d",
+        "Code/sim_ws/src/f1tenth_gym_ros/f1tenth_gym_ros/gym_bridge.py": "dc9539245ce05679085a227f34c47c7981386213e594d7aa0027a546b6c59cb6",
+        "Code/sim_ws/src/f1tenth_gym_ros/launch/gym_bridge_launch.py": "1e1391f5045c27a11c868292765ffe090585f84b51313c074857bf93b9169a00",
+        "Code/sim_ws/src/f1tenth_mpc-main/mpc/scripts/opponent_ekf_tracker.py": "778081542c9bae590ed02f1388763b587c751c7ba2127c9758cfa811023dc1f0",
+        "Code/sim_ws/src/f1tenth_mpc-main/mpc/scripts/opp_pid_node.py": "acf82e5f04abf6750b8a19228afd545f4abb6a4ba8aed48811b5ae7604236ad7",
+        "Code/sim_ws/src/f1tenth_mpc-main/mpc/scripts/takeover_evaluator.py": "75f7a149a3fa76ba022f94b560eda9c2029dff5089a7cd35600daaea6edf8a5a",
+        "Code/sim_ws/tools/upstream_sqp_worker.py": "62fda9957d4732f31490c3024a95f4c50bbb1c492c487bfff9793ab34eaf26a4",
+        "real_vehicle/candidate_cpp_gpu_20260909/ground_fitzpatrick_joint_20260927_v8/src/cpp_frenet/joint_control.hpp": "ab8fd0df9fba6669d0069569d920a3c1f2e455e1274a03c3503a1edc426b7c5b",
+        "real_vehicle/candidate_cpp_gpu_20260909/ground_fitzpatrick_joint_20260927_v8/generate_joint_solver.py": "b3390fa120fc51232a5ed46fa1de0d4c2aef9bf7b973c0fe70a99e30a70356e2"
+      }
+    },
+    {
+      "scenario": "fitzpatrick_position_00",
+      "run_id": "speed_profile_screen_20261105_predictive_profile_r1",
+      "seed": 1,
+      "predictive_speed_profile": true,
+      "results_dir": "/data/projects/F1-Tenth-Duke/f1tenth-takeover/Code/sim_ws/results/takeover/fitzpatrick_position_00/speed_profile_screen_20261105_predictive_profile_r1",
+      "passed": true,
+      "clean": false,
+      "truth_completion_time_s": 11.950000000000001,
+      "safety": {
+        "boundary_violation_events": 0,
+        "collision_events": 0,
+        "lead_boundary_violation_events": 0,
+        "minimum_body_clearance_m": 0.4736325111552576
+      },
+      "runtime": {
+        "controller_failures": 0,
+        "controller_rejection_reasons": {},
+        "freshness_triggered_replans": 1,
+        "infeasible_count": 0,
+        "mpc_mean_ms": 1.4924834470528314,
+        "mpc_p95_ms": 2.1683669000481127,
+        "planner_failures": 4,
+        "planning_backend": "upstream_sqp",
+        "planning_mean_ms": 5.136983237489156,
+        "planning_p95_ms": 18.22249599990755,
+        "rejected_track_jumps": 0,
+        "return_preview_checks": 9,
+        "return_preview_rejections": {},
+        "solver_recoveries": 0,
+        "solver_timeouts": 0,
+        "sqp_calls": 51,
+        "sqp_failures": 14,
+        "sqp_preview_checks": 37,
+        "sqp_preview_rejections": {},
+        "sqp_timeouts": 1
+      },
+      "invalid_samples_after_2s": 0,
+      "cancellations": 0,
+      "maximum_ego_speed_mps": 2.9871487668273113,
+      "mean_overtake_speed_mps": 1.3562788840056064,
+      "maximum_abs_mpc_acceleration_command_mps2": 1.3327598893104342,
+      "graph_audit": {
+        "opponent_truth_subscribers": [
+          "takeover_evaluator",
+          "takeover_lead_controller"
+        ],
+        "final_command_publishers": [
+          "takeover_safety_arbiter"
+        ],
+        "nominal_command_publishers": [
+          "takeover_controller"
+        ],
+        "tracker_measurement_source": "lidar",
+        "passed": true
+      },
+      "runtime_source_sha256": {
+        "Code/sim_ws/src/takeover_sim/src/takeover_controller_node.cpp": "0284685372107ee81d9b0eb7cbc3e7c0d5c83b02d67a475380669f4c0f6f9b84",
+        "Code/sim_ws/src/takeover_sim/include/takeover_sim/dynamic_overtaking.hpp": "4cb8b3abc0e0ab13e7056816652faf5cb1e819f7c2fef83c9c54331faa776029",
+        "Code/sim_ws/src/takeover_sim/include/takeover_sim/sqp_worker.hpp": "dc3a24b95336f93be01aeb85c98c5b98069182a06969a885610f49bab9c8b110",
+        "Code/sim_ws/src/takeover_sim/launch/gym_takeover_launch.py": "8189b2d03a81f30c2fc454cb5ccafac80946c3f2dcd88f10a8ff13a8f18e751d",
+        "Code/sim_ws/src/f1tenth_gym_ros/f1tenth_gym_ros/gym_bridge.py": "dc9539245ce05679085a227f34c47c7981386213e594d7aa0027a546b6c59cb6",
+        "Code/sim_ws/src/f1tenth_gym_ros/launch/gym_bridge_launch.py": "1e1391f5045c27a11c868292765ffe090585f84b51313c074857bf93b9169a00",
+        "Code/sim_ws/src/f1tenth_mpc-main/mpc/scripts/opponent_ekf_tracker.py": "778081542c9bae590ed02f1388763b587c751c7ba2127c9758cfa811023dc1f0",
+        "Code/sim_ws/src/f1tenth_mpc-main/mpc/scripts/opp_pid_node.py": "acf82e5f04abf6750b8a19228afd545f4abb6a4ba8aed48811b5ae7604236ad7",
+        "Code/sim_ws/src/f1tenth_mpc-main/mpc/scripts/takeover_evaluator.py": "75f7a149a3fa76ba022f94b560eda9c2029dff5089a7cd35600daaea6edf8a5a",
+        "Code/sim_ws/tools/upstream_sqp_worker.py": "62fda9957d4732f31490c3024a95f4c50bbb1c492c487bfff9793ab34eaf26a4",
+        "real_vehicle/candidate_cpp_gpu_20260909/ground_fitzpatrick_joint_20260927_v8/src/cpp_frenet/joint_control.hpp": "ab8fd0df9fba6669d0069569d920a3c1f2e455e1274a03c3503a1edc426b7c5b",
+        "real_vehicle/candidate_cpp_gpu_20260909/ground_fitzpatrick_joint_20260927_v8/generate_joint_solver.py": "b3390fa120fc51232a5ed46fa1de0d4c2aef9bf7b973c0fe70a99e30a70356e2"
+      }
+    },
+    {
+      "scenario": "fitzpatrick_position_50",
+      "run_id": "speed_profile_screen_20261105_predictive_profile_r1",
+      "seed": 1,
+      "predictive_speed_profile": true,
+      "results_dir": "/data/projects/F1-Tenth-Duke/f1tenth-takeover/Code/sim_ws/results/takeover/fitzpatrick_position_50/speed_profile_screen_20261105_predictive_profile_r1",
+      "passed": true,
+      "clean": false,
+      "truth_completion_time_s": 30.150000000000002,
+      "safety": {
+        "boundary_violation_events": 0,
+        "collision_events": 0,
+        "lead_boundary_violation_events": 0,
+        "minimum_body_clearance_m": 0.4970947565615936
+      },
+      "runtime": {
+        "controller_failures": 0,
+        "controller_rejection_reasons": {},
+        "freshness_triggered_replans": 1,
+        "infeasible_count": 0,
+        "mpc_mean_ms": 1.5947191195824084,
+        "mpc_p95_ms": 2.5531693999255367,
+        "planner_failures": 7,
+        "planning_backend": "upstream_sqp",
+        "planning_mean_ms": 16.991571314293065,
+        "planning_p95_ms": 58.63522290011358,
+        "rejected_track_jumps": 0,
+        "return_preview_checks": 21,
+        "return_preview_rejections": {},
+        "solver_recoveries": 0,
+        "solver_timeouts": 0,
+        "sqp_calls": 177,
+        "sqp_failures": 52,
+        "sqp_preview_checks": 101,
+        "sqp_preview_rejections": {},
+        "sqp_timeouts": 4
+      },
+      "invalid_samples_after_2s": 5,
+      "cancellations": 1,
+      "maximum_ego_speed_mps": 2.4760294374283665,
+      "mean_overtake_speed_mps": 1.809654844386324,
+      "maximum_abs_mpc_acceleration_command_mps2": 2.078791134157677,
+      "graph_audit": {
+        "opponent_truth_subscribers": [
+          "takeover_evaluator",
+          "takeover_lead_controller"
+        ],
+        "final_command_publishers": [
+          "takeover_safety_arbiter"
+        ],
+        "nominal_command_publishers": [
+          "takeover_controller"
+        ],
+        "tracker_measurement_source": "lidar",
+        "passed": true
+      },
+      "runtime_source_sha256": {
+        "Code/sim_ws/src/takeover_sim/src/takeover_controller_node.cpp": "0284685372107ee81d9b0eb7cbc3e7c0d5c83b02d67a475380669f4c0f6f9b84",
+        "Code/sim_ws/src/takeover_sim/include/takeover_sim/dynamic_overtaking.hpp": "4cb8b3abc0e0ab13e7056816652faf5cb1e819f7c2fef83c9c54331faa776029",
+        "Code/sim_ws/src/takeover_sim/include/takeover_sim/sqp_worker.hpp": "dc3a24b95336f93be01aeb85c98c5b98069182a06969a885610f49bab9c8b110",
+        "Code/sim_ws/src/takeover_sim/launch/gym_takeover_launch.py": "8189b2d03a81f30c2fc454cb5ccafac80946c3f2dcd88f10a8ff13a8f18e751d",
+        "Code/sim_ws/src/f1tenth_gym_ros/f1tenth_gym_ros/gym_bridge.py": "dc9539245ce05679085a227f34c47c7981386213e594d7aa0027a546b6c59cb6",
+        "Code/sim_ws/src/f1tenth_gym_ros/launch/gym_bridge_launch.py": "1e1391f5045c27a11c868292765ffe090585f84b51313c074857bf93b9169a00",
+        "Code/sim_ws/src/f1tenth_mpc-main/mpc/scripts/opponent_ekf_tracker.py": "778081542c9bae590ed02f1388763b587c751c7ba2127c9758cfa811023dc1f0",
+        "Code/sim_ws/src/f1tenth_mpc-main/mpc/scripts/opp_pid_node.py": "acf82e5f04abf6750b8a19228afd545f4abb6a4ba8aed48811b5ae7604236ad7",
+        "Code/sim_ws/src/f1tenth_mpc-main/mpc/scripts/takeover_evaluator.py": "75f7a149a3fa76ba022f94b560eda9c2029dff5089a7cd35600daaea6edf8a5a",
+        "Code/sim_ws/tools/upstream_sqp_worker.py": "62fda9957d4732f31490c3024a95f4c50bbb1c492c487bfff9793ab34eaf26a4",
+        "real_vehicle/candidate_cpp_gpu_20260909/ground_fitzpatrick_joint_20260927_v8/src/cpp_frenet/joint_control.hpp": "ab8fd0df9fba6669d0069569d920a3c1f2e455e1274a03c3503a1edc426b7c5b",
+        "real_vehicle/candidate_cpp_gpu_20260909/ground_fitzpatrick_joint_20260927_v8/generate_joint_solver.py": "b3390fa120fc51232a5ed46fa1de0d4c2aef9bf7b973c0fe70a99e30a70356e2"
+      }
+    },
+    {
+      "scenario": "fitzpatrick_position_50",
+      "run_id": "speed_profile_screen_20261105_legacy_speed_r1",
+      "seed": 1,
+      "predictive_speed_profile": false,
+      "results_dir": "/data/projects/F1-Tenth-Duke/f1tenth-takeover/Code/sim_ws/results/takeover/fitzpatrick_position_50/speed_profile_screen_20261105_legacy_speed_r1",
+      "passed": true,
+      "clean": false,
+      "truth_completion_time_s": 28.650000000000002,
+      "safety": {
+        "boundary_violation_events": 0,
+        "collision_events": 0,
+        "lead_boundary_violation_events": 0,
+        "minimum_body_clearance_m": 0.4371755012087858
+      },
+      "runtime": {
+        "controller_failures": 0,
+        "controller_rejection_reasons": {},
+        "freshness_triggered_replans": 1,
+        "infeasible_count": 0,
+        "mpc_mean_ms": 1.6473263785415695,
+        "mpc_p95_ms": 2.4390060000314406,
+        "planner_failures": 7,
+        "planning_backend": "upstream_sqp",
+        "planning_mean_ms": 14.489990874651092,
+        "planning_p95_ms": 52.982420000034836,
+        "rejected_track_jumps": 0,
+        "return_preview_checks": 23,
+        "return_preview_rejections": {},
+        "solver_recoveries": 0,
+        "solver_timeouts": 0,
+        "sqp_calls": 135,
+        "sqp_failures": 20,
+        "sqp_preview_checks": 91,
+        "sqp_preview_rejections": {},
+        "sqp_timeouts": 2
+      },
+      "invalid_samples_after_2s": 5,
+      "cancellations": 1,
+      "maximum_ego_speed_mps": 2.516015241356237,
+      "mean_overtake_speed_mps": 1.794537482729669,
+      "maximum_abs_mpc_acceleration_command_mps2": 2.0717169121363157,
+      "graph_audit": {
+        "opponent_truth_subscribers": [
+          "takeover_evaluator",
+          "takeover_lead_controller"
+        ],
+        "final_command_publishers": [
+          "takeover_safety_arbiter"
+        ],
+        "nominal_command_publishers": [
+          "takeover_controller"
+        ],
+        "tracker_measurement_source": "lidar",
+        "passed": true
+      },
+      "runtime_source_sha256": {
+        "Code/sim_ws/src/takeover_sim/src/takeover_controller_node.cpp": "0284685372107ee81d9b0eb7cbc3e7c0d5c83b02d67a475380669f4c0f6f9b84",
+        "Code/sim_ws/src/takeover_sim/include/takeover_sim/dynamic_overtaking.hpp": "4cb8b3abc0e0ab13e7056816652faf5cb1e819f7c2fef83c9c54331faa776029",
+        "Code/sim_ws/src/takeover_sim/include/takeover_sim/sqp_worker.hpp": "dc3a24b95336f93be01aeb85c98c5b98069182a06969a885610f49bab9c8b110",
+        "Code/sim_ws/src/takeover_sim/launch/gym_takeover_launch.py": "8189b2d03a81f30c2fc454cb5ccafac80946c3f2dcd88f10a8ff13a8f18e751d",
+        "Code/sim_ws/src/f1tenth_gym_ros/f1tenth_gym_ros/gym_bridge.py": "dc9539245ce05679085a227f34c47c7981386213e594d7aa0027a546b6c59cb6",
+        "Code/sim_ws/src/f1tenth_gym_ros/launch/gym_bridge_launch.py": "1e1391f5045c27a11c868292765ffe090585f84b51313c074857bf93b9169a00",
+        "Code/sim_ws/src/f1tenth_mpc-main/mpc/scripts/opponent_ekf_tracker.py": "778081542c9bae590ed02f1388763b587c751c7ba2127c9758cfa811023dc1f0",
+        "Code/sim_ws/src/f1tenth_mpc-main/mpc/scripts/opp_pid_node.py": "acf82e5f04abf6750b8a19228afd545f4abb6a4ba8aed48811b5ae7604236ad7",
+        "Code/sim_ws/src/f1tenth_mpc-main/mpc/scripts/takeover_evaluator.py": "75f7a149a3fa76ba022f94b560eda9c2029dff5089a7cd35600daaea6edf8a5a",
+        "Code/sim_ws/tools/upstream_sqp_worker.py": "62fda9957d4732f31490c3024a95f4c50bbb1c492c487bfff9793ab34eaf26a4",
+        "real_vehicle/candidate_cpp_gpu_20260909/ground_fitzpatrick_joint_20260927_v8/src/cpp_frenet/joint_control.hpp": "ab8fd0df9fba6669d0069569d920a3c1f2e455e1274a03c3503a1edc426b7c5b",
+        "real_vehicle/candidate_cpp_gpu_20260909/ground_fitzpatrick_joint_20260927_v8/generate_joint_solver.py": "b3390fa120fc51232a5ed46fa1de0d4c2aef9bf7b973c0fe70a99e30a70356e2"
+      }
+    },
+    {
+      "scenario": "fitzpatrick_position_25",
+      "run_id": "speed_profile_screen_20261105_legacy_speed_r1",
+      "seed": 1,
+      "predictive_speed_profile": false,
+      "results_dir": "/data/projects/F1-Tenth-Duke/f1tenth-takeover/Code/sim_ws/results/takeover/fitzpatrick_position_25/speed_profile_screen_20261105_legacy_speed_r1",
+      "passed": true,
+      "clean": false,
+      "truth_completion_time_s": 33.9,
+      "safety": {
+        "boundary_violation_events": 0,
+        "collision_events": 0,
+        "lead_boundary_violation_events": 0,
+        "minimum_body_clearance_m": 0.3835694476838771
+      },
+      "runtime": {
+        "controller_failures": 0,
+        "controller_rejection_reasons": {},
+        "freshness_triggered_replans": 1,
+        "infeasible_count": 0,
+        "mpc_mean_ms": 1.5681842640354735,
+        "mpc_p95_ms": 2.6510174999202727,
+        "planner_failures": 9,
+        "planning_backend": "upstream_sqp",
+        "planning_mean_ms": 14.131272342377006,
+        "planning_p95_ms": 42.66787699998531,
+        "rejected_track_jumps": 0,
+        "return_preview_checks": 25,
+        "return_preview_rejections": {
+          "mpc_actual_dynamic_conflict": 2
+        },
+        "solver_recoveries": 0,
+        "solver_timeouts": 0,
+        "sqp_calls": 155,
+        "sqp_failures": 35,
+        "sqp_preview_checks": 90,
+        "sqp_preview_rejections": {},
+        "sqp_timeouts": 2
+      },
+      "invalid_samples_after_2s": 25,
+      "cancellations": 1,
+      "maximum_ego_speed_mps": 2.579413116104977,
+      "mean_overtake_speed_mps": 1.446599512885735,
+      "maximum_abs_mpc_acceleration_command_mps2": 1.954581204602461,
+      "graph_audit": {
+        "opponent_truth_subscribers": [
+          "takeover_evaluator",
+          "takeover_lead_controller"
+        ],
+        "final_command_publishers": [
+          "takeover_safety_arbiter"
+        ],
+        "nominal_command_publishers": [
+          "takeover_controller"
+        ],
+        "tracker_measurement_source": "lidar",
+        "passed": true
+      },
+      "runtime_source_sha256": {
+        "Code/sim_ws/src/takeover_sim/src/takeover_controller_node.cpp": "0284685372107ee81d9b0eb7cbc3e7c0d5c83b02d67a475380669f4c0f6f9b84",
+        "Code/sim_ws/src/takeover_sim/include/takeover_sim/dynamic_overtaking.hpp": "4cb8b3abc0e0ab13e7056816652faf5cb1e819f7c2fef83c9c54331faa776029",
+        "Code/sim_ws/src/takeover_sim/include/takeover_sim/sqp_worker.hpp": "dc3a24b95336f93be01aeb85c98c5b98069182a06969a885610f49bab9c8b110",
+        "Code/sim_ws/src/takeover_sim/launch/gym_takeover_launch.py": "8189b2d03a81f30c2fc454cb5ccafac80946c3f2dcd88f10a8ff13a8f18e751d",
+        "Code/sim_ws/src/f1tenth_gym_ros/f1tenth_gym_ros/gym_bridge.py": "dc9539245ce05679085a227f34c47c7981386213e594d7aa0027a546b6c59cb6",
+        "Code/sim_ws/src/f1tenth_gym_ros/launch/gym_bridge_launch.py": "1e1391f5045c27a11c868292765ffe090585f84b51313c074857bf93b9169a00",
+        "Code/sim_ws/src/f1tenth_mpc-main/mpc/scripts/opponent_ekf_tracker.py": "778081542c9bae590ed02f1388763b587c751c7ba2127c9758cfa811023dc1f0",
+        "Code/sim_ws/src/f1tenth_mpc-main/mpc/scripts/opp_pid_node.py": "acf82e5f04abf6750b8a19228afd545f4abb6a4ba8aed48811b5ae7604236ad7",
+        "Code/sim_ws/src/f1tenth_mpc-main/mpc/scripts/takeover_evaluator.py": "75f7a149a3fa76ba022f94b560eda9c2029dff5089a7cd35600daaea6edf8a5a",
+        "Code/sim_ws/tools/upstream_sqp_worker.py": "62fda9957d4732f31490c3024a95f4c50bbb1c492c487bfff9793ab34eaf26a4",
+        "real_vehicle/candidate_cpp_gpu_20260909/ground_fitzpatrick_joint_20260927_v8/src/cpp_frenet/joint_control.hpp": "ab8fd0df9fba6669d0069569d920a3c1f2e455e1274a03c3503a1edc426b7c5b",
+        "real_vehicle/candidate_cpp_gpu_20260909/ground_fitzpatrick_joint_20260927_v8/generate_joint_solver.py": "b3390fa120fc51232a5ed46fa1de0d4c2aef9bf7b973c0fe70a99e30a70356e2"
+      }
+    },
+    {
+      "scenario": "fitzpatrick_position_25",
+      "run_id": "speed_profile_screen_20261105_predictive_profile_r1",
+      "seed": 1,
+      "predictive_speed_profile": true,
+      "results_dir": "/data/projects/F1-Tenth-Duke/f1tenth-takeover/Code/sim_ws/results/takeover/fitzpatrick_position_25/speed_profile_screen_20261105_predictive_profile_r1",
+      "passed": true,
+      "clean": false,
+      "truth_completion_time_s": 33.9,
+      "safety": {
+        "boundary_violation_events": 0,
+        "collision_events": 0,
+        "lead_boundary_violation_events": 0,
+        "minimum_body_clearance_m": 0.370247072837873
+      },
+      "runtime": {
+        "controller_failures": 0,
+        "controller_rejection_reasons": {},
+        "freshness_triggered_replans": 1,
+        "infeasible_count": 0,
+        "mpc_mean_ms": 1.7877272123471988,
+        "mpc_p95_ms": 4.754627200077269,
+        "planner_failures": 8,
+        "planning_backend": "upstream_sqp",
+        "planning_mean_ms": 13.330913739322144,
+        "planning_p95_ms": 44.86076099988168,
+        "rejected_track_jumps": 0,
+        "return_preview_checks": 22,
+        "return_preview_rejections": {},
+        "solver_recoveries": 0,
+        "solver_timeouts": 0,
+        "sqp_calls": 142,
+        "sqp_failures": 23,
+        "sqp_preview_checks": 91,
+        "sqp_preview_rejections": {},
+        "sqp_timeouts": 0
+      },
+      "invalid_samples_after_2s": 20,
+      "cancellations": 1,
+      "maximum_ego_speed_mps": 2.4713982414271802,
+      "mean_overtake_speed_mps": 1.4897068386819796,
+      "maximum_abs_mpc_acceleration_command_mps2": 1.9581626702809751,
+      "graph_audit": {
+        "opponent_truth_subscribers": [
+          "takeover_evaluator",
+          "takeover_lead_controller"
+        ],
+        "final_command_publishers": [
+          "takeover_safety_arbiter"
+        ],
+        "nominal_command_publishers": [
+          "takeover_controller"
+        ],
+        "tracker_measurement_source": "lidar",
+        "passed": true
+      },
+      "runtime_source_sha256": {
+        "Code/sim_ws/src/takeover_sim/src/takeover_controller_node.cpp": "0284685372107ee81d9b0eb7cbc3e7c0d5c83b02d67a475380669f4c0f6f9b84",
+        "Code/sim_ws/src/takeover_sim/include/takeover_sim/dynamic_overtaking.hpp": "4cb8b3abc0e0ab13e7056816652faf5cb1e819f7c2fef83c9c54331faa776029",
+        "Code/sim_ws/src/takeover_sim/include/takeover_sim/sqp_worker.hpp": "dc3a24b95336f93be01aeb85c98c5b98069182a06969a885610f49bab9c8b110",
+        "Code/sim_ws/src/takeover_sim/launch/gym_takeover_launch.py": "8189b2d03a81f30c2fc454cb5ccafac80946c3f2dcd88f10a8ff13a8f18e751d",
+        "Code/sim_ws/src/f1tenth_gym_ros/f1tenth_gym_ros/gym_bridge.py": "dc9539245ce05679085a227f34c47c7981386213e594d7aa0027a546b6c59cb6",
+        "Code/sim_ws/src/f1tenth_gym_ros/launch/gym_bridge_launch.py": "1e1391f5045c27a11c868292765ffe090585f84b51313c074857bf93b9169a00",
+        "Code/sim_ws/src/f1tenth_mpc-main/mpc/scripts/opponent_ekf_tracker.py": "778081542c9bae590ed02f1388763b587c751c7ba2127c9758cfa811023dc1f0",
+        "Code/sim_ws/src/f1tenth_mpc-main/mpc/scripts/opp_pid_node.py": "acf82e5f04abf6750b8a19228afd545f4abb6a4ba8aed48811b5ae7604236ad7",
+        "Code/sim_ws/src/f1tenth_mpc-main/mpc/scripts/takeover_evaluator.py": "75f7a149a3fa76ba022f94b560eda9c2029dff5089a7cd35600daaea6edf8a5a",
+        "Code/sim_ws/tools/upstream_sqp_worker.py": "62fda9957d4732f31490c3024a95f4c50bbb1c492c487bfff9793ab34eaf26a4",
+        "real_vehicle/candidate_cpp_gpu_20260909/ground_fitzpatrick_joint_20260927_v8/src/cpp_frenet/joint_control.hpp": "ab8fd0df9fba6669d0069569d920a3c1f2e455e1274a03c3503a1edc426b7c5b",
+        "real_vehicle/candidate_cpp_gpu_20260909/ground_fitzpatrick_joint_20260927_v8/generate_joint_solver.py": "b3390fa120fc51232a5ed46fa1de0d4c2aef9bf7b973c0fe70a99e30a70356e2"
+      }
+    }
+  ]
+}

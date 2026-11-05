@@ -365,6 +365,9 @@ public:
   // the 2.20 m benchmark corridor.
   double pass_offset = 0.82;
   bool adaptive_offset = false; // opt-in; retain the frozen fixed-offset baseline
+  bool progressive_pass_speed = false; // explicit simulation experiment
+  bool predictive_speed_profile = false; // per-stage passing/braking proposal
+  bool early_verified_return = false; // failed repeatability screen; opt-in only
   // Optional upstream SQP lateral optimizer. Other behaviors, the predictor,
   // time parameterization, collision checks and MPC remain ours, not upstream.
   std::function<Json::Value(const Json::Value &)> sqp_optimizer;
@@ -397,6 +400,57 @@ public:
     // braking relative to a moving lead, not keep the low-speed fixed gap.
     return desired_gap+.45*lead_speed+.40*closing+
         closing*closing/(2*std::max(.1,deceleration_max));
+  }
+
+  double passing_speed_cap(double lateral_separation, double lead_speed,
+                           double lead_width) const {
+    const double base = std::min(cruise_speed, std::max(.70, lead_speed+.05));
+    if (!progressive_pass_speed && !predictive_speed_profile)
+      return lateral_separation < .68 ? base : cruise_speed;
+    // Begin releasing speed only after the physical widths plus the existing
+    // body margin separate. Release smoothly through the worst-case inflation
+    // band instead of a discontinuous jump at 0.68 m. This is a proposal, NOT
+    // collision admission: timed inflated bodies and MPC preview still veto it.
+    const double begin = .5*(vehicle_width+lead_width)+body_margin;
+    const double end = std::max(.68, begin+.30+
+        .5*std::abs(cruise_speed-lead_speed)*step);
+    const double fraction = smoothstep((lateral_separation-begin)/(end-begin));
+    return base + (cruise_speed-base)*fraction;
+  }
+
+  // Distance needed to reach a lower physical speed, with the same 50 ms
+  // command integrator, jerk and longitudinal lag as the timed/MPC model.
+  // Reserve one planning tick (0.2 s) plus the speed-reference response
+  // (1 / gain 2 = 0.5 s) before braking; the speed target cannot command full
+  // braking instantly. Positive command lead and acceleration are retained.
+  double braking_distance(double from, double to, double command_lead,
+                          double current_acceleration) const {
+    if (from <= to) return 0.;
+    const double h=.05, target=std::max(0.,to);
+    double v=from, u=from+std::max(0.,command_lead);
+    double a=clip(std::max(0.,current_acceleration),0.,acceleration_max), distance=0.;
+    for(int j=0;j<240;++j) {
+      if(j>=14) a=std::max(-deceleration_max,a-3*h);
+      u=clip(u+h*a,0.,cruise_speed);
+      const double tau=u>=v?acceleration_response:braking_response;
+      const double next=v+h/(tau+h)*(u-v);
+      distance+=.5*(v+next)*h;v=next;
+      if(j>=14 && v<=target) return distance;
+    }
+    return INF; // no finite stop certificate from this model
+  }
+
+  double braking_speed_cap(double distance, double bend_speed, double cap,
+                           double command_lead, double a) const {
+    if(cap<=bend_speed) return cap;
+    if(braking_distance(cap,bend_speed,command_lead,a)<=distance) return cap;
+    double lo=bend_speed,hi=cap;
+    for(int j=0;j<9;++j) {
+      const double mid=.5*(lo+hi);
+      if(braking_distance(mid,bend_speed,command_lead,a)<=distance)lo=mid;
+      else hi=mid;
+    }
+    return lo;
   }
 
   Decision plan(Pose ego, double ego_speed, const Track &track, double now) {
@@ -482,6 +536,24 @@ public:
       } else if (gap < -1.2 || gap > desired_gap + .8) {
         maneuver_start_s_ = ego_projection.s;
         set_behavior(Behavior::REJOIN, "abort_rejoin_clear");
+      } else if (early_verified_return && gap > .5*(vehicle_length+track.length)+body_margin) {
+        // A fixed large gap can keep a cancelled vehicle on an inner offset
+        // until that offset becomes unsteerable at the next bend. An earlier
+        // return BEHIND the lead is allowed only after validating its complete
+        // timed body checks and the existing MPC return preview. Do not simply
+        // lower the old gap threshold or reuse the cancelled trajectory.
+        const double old_s=maneuver_start_s_, old_d=maneuver_start_d_;
+        maneuver_start_s_=ego_projection.s;
+        maneuver_start_d_=ego_projection.d;
+        const double recovery_cap=std::min(cruise_speed,std::max(.70,lead_speed));
+        const auto recovery=build_candidate(ego,ego_speed,track,committed_side_,
+                                             Behavior::REJOIN,recovery_cap);
+        if(recovery.valid && return_clearance_reserved(recovery.minimum_body_clearance)) {
+          set_behavior(Behavior::REJOIN,"abort_early_return_verified");
+        } else {
+          maneuver_start_s_=old_s;
+          maneuver_start_d_=old_d;
+        }
       }
     }
     if (behavior_ == Behavior::CRUISE && lead_ahead) {
@@ -510,10 +582,12 @@ public:
         observation_ready) {
       maneuver_start_s_ = ego_projection.s;
       maneuver_start_d_ = ego_projection.d;
+      const double entry_cap=predictive_speed_profile ? cruise_speed :
+          std::max(0.70,lead_speed+.05);
       Candidate left = build_candidate(ego, ego_speed, track, +1, Behavior::OVERTAKE,
-                                       std::max(0.70, lead_speed + 0.05));
+                                       entry_cap);
       Candidate right = build_candidate(ego, ego_speed, track, -1, Behavior::OVERTAKE,
-                                        std::max(0.70, lead_speed + 0.05));
+                                        entry_cap);
       if (allowed_pass_side < 0) left.valid = false;
       if (allowed_pass_side > 0) right.valid = false;
       if (left.valid || right.valid) {
@@ -546,9 +620,11 @@ public:
       // during the lane-entry transient repeatedly invalidates an otherwise
       // safe pass and produces a speed saw-tooth.  Once footprint separation
       // exists, the same time-aligned check below permits the full pass speed.
-      cap = offset_progress < 0.68
-          ? std::min(cruise_speed, std::max(0.70, lead_speed + 0.05))
-          : cruise_speed;
+      cap = passing_speed_cap(offset_progress, lead_speed, track.width);
+      // Admission uses the entire timed forecast below. Holding today's
+      // entry cap for all four seconds postpones acceleration to a later
+      // replan even when that same forecast already has lateral separation.
+      if(predictive_speed_profile) cap=cruise_speed;
       // Start returning as soon as full longitudinal body separation exists
       // AND a complete inflated, time-aligned return is feasible. Waiting for
       // a fixed extra metre wastes the bounded prediction window on the outer
@@ -557,8 +633,17 @@ public:
       // worst-case inflated gap before even considering a gradual diagonal
       // return: the full time-aligned inflated-body check below, 0.10 m return
       // reserve and non-actuating MPC preview already validate the maneuver.
-      const double return_gap = .5 * (vehicle_length + track.length) + body_margin;
-      if (gap < -return_gap) {
+      double return_gap = .5 * (vehicle_length + track.length) + body_margin;
+      if(predictive_speed_profile) {
+        // Faster passing must not trade its new longitudinal progress for an
+        // early lateral merge. Establish full inflated longitudinal clearance
+        // before testing the diagonal return; retain the complete checks too.
+        const double inflation=std::min(.30,uncertainty_sigma*std::sqrt(
+            std::max(0.,track.position_variance)))+process_sigma_rate*horizon;
+        return_gap+=std::min(.30,inflation)+
+            .5*std::abs(ego_speed-lead_speed)*step+.10;
+      }
+      if (gap < -return_gap && now >= return_retry_after_) {
         const double old_start_s = maneuver_start_s_;
         const double old_start_d = maneuver_start_d_;
         maneuver_start_s_ = current_projection.s;
@@ -607,7 +692,7 @@ public:
     if (!candidate.valid && behavior_ == Behavior::PREPARE_OVERTAKE) {
       candidate = build_candidate(ego, ego_speed, track, 0, Behavior::FOLLOW, cap);
     }
-    if (!candidate.valid && behavior_ == Behavior::OVERTAKE) {
+    if (!candidate.valid && behavior_ == Behavior::OVERTAKE && !predictive_speed_profile) {
       // A full-speed candidate can be temporarily unsafe while the bodies are
       // still longitudinally adjacent.  Keep the committed side and retry at
       // lead speed before cancelling; side switching here is prohibited.
@@ -617,6 +702,29 @@ public:
           ego, ego_speed, track, committed_side_, Behavior::OVERTAKE,
           conservative_cap);
       if (conservative.valid) candidate = std::move(conservative);
+    }
+    // A return that was feasible at the previous observation can become
+    // blocked before alignment. If we are already ahead, first validate a
+    // continuation on the LOCKED passing side. Braking to the cancellation
+    // floor here lets the opponent catch up while we are still alongside.
+    // This is a newly checked trajectory, never reuse of the rejected return.
+    if (!candidate.valid && behavior_ == Behavior::REJOIN && !aborting_ &&
+        decision.target_fresh && gap < 0. && committed_side_ != 0) {
+      const double old_start_s = maneuver_start_s_;
+      const double old_start_d = maneuver_start_d_;
+      maneuver_start_s_ = current_projection.s;
+      maneuver_start_d_ = current_projection.d;
+      auto continuation = build_candidate(ego, ego_speed, track, committed_side_,
+                                          Behavior::OVERTAKE, cruise_speed);
+      if (continuation.valid &&
+          return_clearance_reserved(continuation.minimum_body_clearance)) {
+        candidate = std::move(continuation);
+        return_retry_after_ = now + .5;
+        set_behavior(Behavior::OVERTAKE, "return_blocked_same_side_continuation");
+      } else {
+        maneuver_start_s_ = old_start_s;
+        maneuver_start_d_ = old_start_d;
+      }
     }
     if (!candidate.valid && (behavior_ == Behavior::OVERTAKE || behavior_ == Behavior::REJOIN)) {
       cancel_start_ = now;
@@ -650,6 +758,7 @@ private:
   double maneuver_start_s_ = 0.0;
   double maneuver_start_d_ = 0.0;
   double cancel_start_ = -INF;
+  double return_retry_after_ = -INF;
   bool aborting_ = false;
   std::string transition_ = "initialized";
   struct SqpMemory { double s=0., length=0.; std::vector<double> d; };
@@ -728,10 +837,23 @@ private:
       const double target_d = track.valid ? project(assets_, track.position).d : 0.;
       Candidate c;
       int evaluated=0;
-      for(double scale:{1.,1.4,2.}) {
-        c=build_candidate_scaled(ego,ego_speed,track,side,behavior,speed_cap,scale,
-            side*clip(side*target_d+pass_offset,.50,1.25));
-        ++evaluated;
+      std::vector<double> speed_proposals{speed_cap};
+      const double following_cap=std::min(cruise_speed,std::max(.70,track.velocity.norm()+.05));
+      if(predictive_speed_profile && speed_cap>following_cap+.10) {
+        speed_proposals.push_back(.5*(speed_cap+following_cap));
+        speed_proposals.push_back(following_cap);
+      }
+      // Select the fastest complete, retimed and MPC-admitted candidate.
+      // No current-lateral-offset threshold can admit a faster trajectory;
+      // each speed changes collision times and requires a fresh check.
+      for(double proposal:speed_proposals) {
+        for(double scale:{1.,1.4,2.}) {
+          c=build_candidate_scaled(ego,ego_speed,track,side,behavior,proposal,scale,
+              side*clip(side*target_d+pass_offset,.50,1.25));
+          ++evaluated;
+          if(c.valid)break;
+          if(predictive_speed_profile && c.reason=="time_aligned_body_conflict")break;
+        }
         if(c.valid)break;
       }
       c.evaluated_candidates = evaluated;
@@ -801,8 +923,12 @@ private:
         best.reason="mpc_return_preview_rejected";
       }
       if (best.valid) return best;
-      if (best.reason != "curvature_limit" && best.reason != "mpc_return_preview_rejected" &&
-          scale == 1.) return best;
+      // Map/body failures of a short return do not imply that a longer return
+      // fails: it crosses the opponent corridor at a later time and position.
+      // Keep the same side, footprint margins and preview on every attempt.
+      const bool recovery_search = behavior == Behavior::REJOIN || behavior == Behavior::CANCEL;
+      if (!recovery_search && best.reason != "curvature_limit" &&
+          best.reason != "mpc_return_preview_rejected" && scale == 1.) return best;
     }
     return best;
   }
@@ -962,6 +1088,11 @@ private:
         }
       }
       request["max_curvature"]=std::min(std::tan(maximum_steering)/wheelbase,request["max_curvature"].asDouble());
+      // Geometry is bounded by steering. The separate timed rollout must
+      // brake for v^2*kappa <= 1.20; constraining every future knot by today's
+      // speed rejects paths that become executable after slowing down.
+      if(predictive_speed_profile)
+        request["max_curvature"]=std::tan(maximum_steering)/wheelbase;
       const auto solved=sqp_optimizer(request);
       if(!solved["ok"].asBool() || solved["coefficients"].size()!=unsigned(n-1)) {
         candidate.reason="upstream_sqp_rejected:"+solved["message"].asString();return candidate;
@@ -1019,11 +1150,21 @@ private:
                                          .70,cruise_speed));
         }
         const double brake_speed=std::max(speed,command);
-        const double braking_preview=cruise_speed>2.0 ?
-            std::max(1.5,brake_speed*brake_speed/(2*.60)+brake_speed*.4+1.) : 1.5;
+        // Keep the established cancellation/return response. A faster approach
+        // alone must not retime an already adjacent merge into the opponent.
+        const bool reachable_braking=predictive_speed_profile &&
+            (behavior==Behavior::OVERTAKE || behavior==Behavior::CRUISE);
+        const double braking_preview=reachable_braking ?
+            2*std::max(1.5,braking_distance(cruise_speed,.70,
+                std::max(0.,command-speed),acceleration)+1.) :
+            cruise_speed>2.0 ? std::max(1.5,brake_speed*brake_speed/(2*.60)+brake_speed*.4+1.) : 1.5;
+        Point previous_preview=spatial_pose(s).xy();
+        double preview_path_distance=0.;
         for(double ahead=0.;ahead<=braking_preview;ahead+=.25) {
           // Forward-only samples: there is no planned pre-start trajectory.
           const Point a=spatial_pose(s+ahead).xy();
+          preview_path_distance+=(a-previous_preview).norm();
+          previous_preview=a;
           const Point b=spatial_pose(s+ahead+.08).xy();
           const Point c=spatial_pose(s+ahead+.16).xy();
           const Point ab=b-a,bc=c-b,ac=c-a;
@@ -1039,7 +1180,10 @@ private:
           // Original <=2 m/s timing remains the frozen regression profile.
           const double braking_distance=cruise_speed>2.0 ?
               std::max(0.,ahead-brake_speed*.4) : 0.;
-          local_cap=std::min(local_cap,std::sqrt(bend_speed_squared+2*.60*braking_distance));
+          local_cap=reachable_braking ?
+              braking_speed_cap(preview_path_distance,std::sqrt(bend_speed_squared),local_cap,
+                  std::max(0.,command-speed),acceleration) :
+              std::min(local_cap,std::sqrt(bend_speed_squared+2*.60*braking_distance));
         }
         if(local_cap<.70) {candidate.reason="curvature_limit";return candidate;}
         // Match MPC command integration, jerk limits and longitudinal lag.
@@ -1141,7 +1285,9 @@ private:
       if (!track.valid) continue;
 
       const Prediction &opponent = prediction[std::min(i, prediction.size() - 1)];
-      const double sampling_margin = 0.5 * relative_speed * step;
+      const double stage_relative_speed=predictive_speed_profile ?
+          std::max(relative_speed,std::abs(candidate.timed[i].speed-track.velocity.norm())) : relative_speed;
+      const double sampling_margin = 0.5 * stage_relative_speed * step;
       const double uncertainty = std::min(0.30, uncertainty_sigma * opponent.sigma);
       const double inflation = body_margin + sampling_margin + uncertainty;
       const Polygon opponent_body = rectangle(opponent.pose,

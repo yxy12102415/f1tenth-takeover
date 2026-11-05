@@ -13,9 +13,12 @@ export TAKEOVER_PLANNING_BACKEND="${TAKEOVER_PLANNING_BACKEND:-frenet_candidates
 case "$TAKEOVER_PLANNING_BACKEND" in frenet_candidates|upstream_sqp) ;; *) echo 'Unknown planning backend' >&2; exit 2 ;; esac
 export TAKEOVER_TRACK_PREDICTION="${TAKEOVER_TRACK_PREDICTION:-true}"
 export TAKEOVER_TIMED_CONTROL="${TAKEOVER_TIMED_CONTROL:-true}"
+export TAKEOVER_PROGRESSIVE_PASS_SPEED="${TAKEOVER_PROGRESSIVE_PASS_SPEED:-false}"
+export TAKEOVER_PREDICTIVE_SPEED_PROFILE="${TAKEOVER_PREDICTIVE_SPEED_PROFILE:-false}"
+export TAKEOVER_EARLY_VERIFIED_RETURN="${TAKEOVER_EARLY_VERIFIED_RETURN:-false}"
 export TAKEOVER_PASS_SIDE="${TAKEOVER_PASS_SIDE:-0}"
 case "$TAKEOVER_PASS_SIDE" in -1|0|1) ;; *) echo 'Pass side must be -1, 0 or 1' >&2; exit 2 ;; esac
-for value in "$TAKEOVER_TRACK_PREDICTION" "$TAKEOVER_TIMED_CONTROL"; do
+for value in "$TAKEOVER_TRACK_PREDICTION" "$TAKEOVER_TIMED_CONTROL" "$TAKEOVER_PROGRESSIVE_PASS_SPEED" "$TAKEOVER_PREDICTIVE_SPEED_PROFILE" "$TAKEOVER_EARLY_VERIFIED_RETURN"; do
   case "$value" in true|false) ;; *) echo 'Feature flags must be true or false' >&2; exit 2 ;; esac
 done
 
@@ -168,6 +171,9 @@ if config.get('controller_model')=='official_gym_native':
     config['generated_gym_dynamics_sha256']=hashlib.sha256(generated.read_bytes()).hexdigest()
 config['track_assisted_prediction'] = os.environ['TAKEOVER_TRACK_PREDICTION'] == 'true'
 config['timed_control'] = os.environ['TAKEOVER_TIMED_CONTROL'] == 'true'
+config['progressive_pass_speed'] = os.environ['TAKEOVER_PROGRESSIVE_PASS_SPEED'] == 'true'
+config['predictive_speed_profile'] = os.environ['TAKEOVER_PREDICTIVE_SPEED_PROFILE'] == 'true'
+config['early_verified_return'] = os.environ['TAKEOVER_EARLY_VERIFIED_RETURN'] == 'true'
 config['planning_backend'] = os.environ['TAKEOVER_PLANNING_BACKEND']
 if config['planning_backend'] == 'upstream_sqp':
     import numpy
@@ -203,6 +209,9 @@ setsid ros2 launch takeover_sim gym_takeover_launch.py \
   num_agents:="$NUM_AGENTS" lead_enabled:="$LEAD_ENABLED" \
   pass_offset:="$PASS_OFFSET" \
   adaptive_offset:="$ADAPTIVE_OFFSET" lateral_amplitude:="$LATERAL_AMPLITUDE" \
+  progressive_pass_speed:="$TAKEOVER_PROGRESSIVE_PASS_SPEED" \
+  predictive_speed_profile:="$TAKEOVER_PREDICTIVE_SPEED_PROFILE" \
+  early_verified_return:="$TAKEOVER_EARLY_VERIFIED_RETURN" \
   planning_backend:="$TAKEOVER_PLANNING_BACKEND" \
   sqp_worker_script:="$PWD/tools/upstream_sqp_worker.py" sqp_upstream_source:="$SQP_SOURCE" \
   track_assisted_prediction:="$TAKEOVER_TRACK_PREDICTION" timed_control:="$TAKEOVER_TIMED_CONTROL" \

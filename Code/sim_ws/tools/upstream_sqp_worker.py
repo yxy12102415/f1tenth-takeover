@@ -224,9 +224,20 @@ def solve(core, request):
     return output
 
 
+def warm_up(core):
+    """Initialize HiGHS/SLSQP before ready, inside the existing startup bound."""
+    result=solve(core,dict(s=[0.,1.,2.,3.,4.], initial=[0.]*5,
+        bounds=[[-1.,1.]]*5, initial_slope=0., max_curvature=.6,
+        curvature=[0.]*3, obstacle_indices=[], obstacle_d=[], obstacle_clearance=[]))
+    if not result['ok']:
+        raise RuntimeError('sqp_warmup_failed:'+result['message'])
+
+
 def main():
     core = load_core(sys.argv[1])
-    print(json.dumps(dict(ready=True, upstream_commit=COMMIT, source_sha256=SOURCE_SHA256)), flush=True)
+    warm_up(core)
+    print(json.dumps(dict(ready=True, warmed_up=True, upstream_commit=COMMIT,
+                         source_sha256=SOURCE_SHA256)), flush=True)
     traced = 0
     for line in sys.stdin:
         try:

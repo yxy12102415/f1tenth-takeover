@@ -33,7 +33,7 @@ def main():
                 with source.open('rb') as src, target.open('wb') as out:
                     with gzip.GzipFile(filename='', mode='wb', fileobj=out, mtime=0) as zipped:
                         shutil.copyfileobj(src, zipped)
-            elif source.suffix in ('.json', '.png', '.patch', '.log'):
+            elif source.suffix in ('.json', '.jsonl', '.png', '.patch', '.log'):
                 target = dest / source.name
                 shutil.copyfile(source, target)
             else:
