@@ -336,6 +336,11 @@ struct Decision {
   std::string transition = "initialized";
 };
 
+inline bool retryable_control_rejection(const std::string &reason) {
+  return reason=="mpc_actual_dynamic_conflict" || reason=="joint_mpc_solver_4" ||
+      reason.find("joint_mpc_nonlinear_infeasible")==0;
+}
+
 // The control clock can cross a freshness boundary between planner ticks.
 // Re-evaluate behavior first, using the same timeout; never bypass expiry in
 // the MPC or extend the age of an observation. A completed rejoin may become
@@ -367,6 +372,9 @@ public:
   bool adaptive_offset = false; // opt-in; retain the frozen fixed-offset baseline
   bool progressive_pass_speed = false; // explicit simulation experiment
   bool predictive_speed_profile = false; // per-stage passing/braking proposal
+  bool fast_pass_geometry = false; // opt-in curvature-aware speed experiment
+  bool fast_pass_response = false; // opt-in faster retiming, same physical limits
+  bool verified_exit_recovery = false; // new checked return, never last-command reuse
   bool early_verified_return = false; // failed repeatability screen; opt-in only
   // Optional upstream SQP lateral optimizer. Other behaviors, the predictor,
   // time parameterization, collision checks and MPC remain ours, not upstream.
@@ -421,23 +429,67 @@ public:
   // Distance needed to reach a lower physical speed, with the same 50 ms
   // command integrator, jerk and longitudinal lag as the timed/MPC model.
   // Reserve one planning tick (0.2 s) plus the speed-reference response
-  // (1 / gain 2 = 0.5 s) before braking; the speed target cannot command full
+  // (1 / reference gain) before braking; the speed target cannot command full
   // braking instantly. Positive command lead and acceleration are retained.
   double braking_distance(double from, double to, double command_lead,
                           double current_acceleration) const {
     if (from <= to) return 0.;
     const double h=.05, target=std::max(0.,to);
+    const int reserve_steps=int(std::ceil((.20+1./speed_reference_gain())/h-1e-9));
     double v=from, u=from+std::max(0.,command_lead);
     double a=clip(std::max(0.,current_acceleration),0.,acceleration_max), distance=0.;
     for(int j=0;j<240;++j) {
-      if(j>=14) a=std::max(-deceleration_max,a-3*h);
+      if(j>=reserve_steps) a=std::max(-deceleration_max,a-3*h);
       u=clip(u+h*a,0.,cruise_speed);
       const double tau=u>=v?acceleration_response:braking_response;
       const double next=v+h/(tau+h)*(u-v);
       distance+=.5*(v+next)*h;v=next;
-      if(j>=14 && v<=target) return distance;
+      if(j>=reserve_steps && v<=target) return distance;
     }
     return INF; // no finite stop certificate from this model
+  }
+
+  double speed_reference_gain() const { return fast_pass_response ? 4. : 2.; }
+
+  // A control rejection is feedback, not permission to drive. After physical
+  // longitudinal separation, try a NEW same-side hold with a full timed body/
+  // map rollout and a mandatory MPC callback. No side switch or stale reuse.
+  Decision recover_control_rejection(Pose ego,double ego_speed,const Track &track,
+      double now,const std::string &reason) {
+    Decision d;
+    d.behavior=behavior_;d.committed_side=committed_side_;
+    d.overtakes_completed=overtakes_completed_;
+    d.transition="control_recovery_not_eligible";
+    d.candidate.reason=d.transition;
+    if(!retryable_control_rejection(reason) || !adaptive_offset || !timed_control ||
+       !overtake_feasibility || aborting_ ||
+       (behavior_!=Behavior::REJOIN && behavior_!=Behavior::OVERTAKE) ||
+       committed_side_==0 || !track.valid ||
+       now-track.observation_stamp>committed_prediction_timeout) return d;
+    const auto p=project(assets_,ego.xy());
+    const auto q=project(assets_,track.position);
+    d.target_gap=signed_progress(q.s,p.s,assets_.arc.back());
+    if(std::abs(p.d)<.10 ||
+       d.target_gap>=-(.5*(vehicle_length+track.length)+body_margin)) return d;
+    d.target_age=std::max(0.,now-track.observation_stamp);d.target_fresh=true;
+    d.target_speed=track.velocity.norm();
+    const double begin=frenet::mono();
+    const double old_s=maneuver_start_s_,old_d=maneuver_start_d_;
+    maneuver_start_s_=p.s;maneuver_start_d_=p.d;
+    auto hold=build_candidate(ego,ego_speed,track,committed_side_,Behavior::CANCEL,cruise_speed);
+    if(!hold.valid || !return_clearance_reserved(hold.minimum_body_clearance) ||
+       !overtake_feasibility(hold)) {
+      maneuver_start_s_=old_s;maneuver_start_d_=old_d;
+      d.candidate.reason=hold.valid?"mpc_control_recovery_rejected":hold.reason;
+      return d;
+    }
+    control_hold_until_=return_retry_after_=now+.50;
+    set_behavior(Behavior::OVERTAKE,"control_rejected_checked_same_side:"+reason);
+    d.behavior=behavior_;d.transition=transition_;d.candidate=std::move(hold);
+    d.target_prediction=predict_track(assets_,track,horizon,step,process_sigma_rate,
+                                      track_assisted_prediction);
+    d.stop=false;d.planning_ms=(frenet::mono()-begin)*1000.;
+    return d;
   }
 
   double braking_speed_cap(double distance, double bend_speed, double cap,
@@ -687,8 +739,14 @@ public:
 
     Track collision_track = track;
     if (post_pass_cruise && !decision.target_fresh) collision_track.valid = false;
+    const bool control_hold=behavior_==Behavior::OVERTAKE && now<control_hold_until_;
     Candidate candidate = build_candidate(ego, ego_speed, collision_track, committed_side_,
-                                          behavior_, cap);
+                                          control_hold?Behavior::CANCEL:behavior_, cap);
+    if(control_hold && candidate.valid &&
+       (!return_clearance_reserved(candidate.minimum_body_clearance) ||
+        !overtake_feasibility || !overtake_feasibility(candidate))) {
+      candidate.valid=false;candidate.reason="mpc_control_hold_rejected";
+    }
     if (!candidate.valid && behavior_ == Behavior::PREPARE_OVERTAKE) {
       candidate = build_candidate(ego, ego_speed, track, 0, Behavior::FOLLOW, cap);
     }
@@ -726,6 +784,32 @@ public:
         maneuver_start_d_ = old_start_d;
       }
     }
+    if (!candidate.valid && behavior_ == Behavior::OVERTAKE &&
+        verified_exit_recovery && adaptive_offset && return_feasibility &&
+        decision.target_fresh && !aborting_ && committed_side_ != 0 &&
+        gap < -(.5*(vehicle_length+track.length)+body_margin)) {
+      // A failing forward passing corridor does not prove that a fresh return
+      // is impossible. Once physically ahead, try the complete checked exit
+      // before dropping to CANCEL's low-speed cap and letting the lead catch
+      // up. This is a recovery branch, not a lower collision/return threshold:
+      // footprint uncertainty, reserve and the existing MPC return admission
+      // still decide execution. Without a preview callback it is disabled.
+      const std::string failure=candidate.reason;
+      const double old_s=maneuver_start_s_, old_d=maneuver_start_d_;
+      maneuver_start_s_=current_projection.s;
+      maneuver_start_d_=current_projection.d;
+      auto exit=build_candidate(ego,ego_speed,track,committed_side_,
+                                Behavior::REJOIN,cruise_speed);
+      const double deadline=committed_prediction_timeout-decision.target_age;
+      if(exit.valid && return_clearance_reserved(exit.minimum_body_clearance) &&
+          return_alignment_before(assets_,exit,deadline)) {
+        candidate=std::move(exit);
+        set_behavior(Behavior::REJOIN,"passing_failed_verified_exit:"+failure);
+      } else {
+        maneuver_start_s_=old_s;
+        maneuver_start_d_=old_d;
+      }
+    }
     if (!candidate.valid && (behavior_ == Behavior::OVERTAKE || behavior_ == Behavior::REJOIN)) {
       cancel_start_ = now;
       aborting_ = true;
@@ -759,6 +843,7 @@ private:
   double maneuver_start_d_ = 0.0;
   double cancel_start_ = -INF;
   double return_retry_after_ = -INF;
+  double control_hold_until_ = -INF;
   bool aborting_ = false;
   std::string transition_ = "initialized";
   struct SqpMemory { double s=0., length=0.; std::vector<double> d; };
@@ -1025,6 +1110,13 @@ private:
       };
       request["initial_slope"]=initial_slope;
       request["initial_second_derivative"]=second_derivative;
+      if(fast_pass_geometry) {
+        // Reduce actual route-plus-offset curvature, not merely d''.
+        // This changes a preference only: corridor, timing and MPC admission
+        // remain mandatory and all hard limits are unchanged.
+        request["actual_curvature_cost"]=true;
+        request["curvature_weight"]=250.;
+      }
       // Geometry must be steerable, not drivable everywhere at cruise speed.
       // The timed trajectory below reduces speed for curvature and the MPC
       // independently enforces lateral acceleration. Using 1.2/v_cruise^2
@@ -1190,7 +1282,7 @@ private:
         const int substeps = std::max(1, int(std::round(step / .05)));
         const double h = step / substeps;
         for (int j = 0; j < substeps; ++j) {
-          const double desired_a = clip(2.0 * (local_cap - command),
+          const double desired_a = clip(speed_reference_gain() * (local_cap - command),
                                          -deceleration_max, acceleration_max);
           // MPC permits 4 m/s^3 only in its first wall-time step, but 3 in
           // subsequent 50 ms stages (0.15 m/s^2). Use the common stricter bound.

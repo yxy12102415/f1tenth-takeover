@@ -1,0 +1,10 @@
+{
+  "created_utc": "2026-11-06T17:24:50.499464+00:00",
+  "expected_outcome": "single_pass_and_rejoin",
+  "ground_truth_consumer": "takeover_evaluator only",
+  "map_name": "Fitzpatrick_sim",
+  "require_lead": true,
+  "run_id": "control_recovery_screen_20261107_checked_control_r1",
+  "scenario": "fitzpatrick_position_25",
+  "seed": 1
+}

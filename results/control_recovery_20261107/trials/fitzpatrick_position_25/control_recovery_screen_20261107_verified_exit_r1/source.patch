@@ -1,0 +1,1054 @@
+diff --git a/Code/sim_ws/run_takeover_trial.sh b/Code/sim_ws/run_takeover_trial.sh
+index 61d518c..d758e26 100755
+--- a/Code/sim_ws/run_takeover_trial.sh
++++ b/Code/sim_ws/run_takeover_trial.sh
+@@ -15,10 +15,14 @@ export TAKEOVER_TRACK_PREDICTION="${TAKEOVER_TRACK_PREDICTION:-true}"
+ export TAKEOVER_TIMED_CONTROL="${TAKEOVER_TIMED_CONTROL:-true}"
+ export TAKEOVER_PROGRESSIVE_PASS_SPEED="${TAKEOVER_PROGRESSIVE_PASS_SPEED:-false}"
+ export TAKEOVER_PREDICTIVE_SPEED_PROFILE="${TAKEOVER_PREDICTIVE_SPEED_PROFILE:-false}"
++export TAKEOVER_FAST_PASS_GEOMETRY="${TAKEOVER_FAST_PASS_GEOMETRY:-false}"
++export TAKEOVER_FAST_PASS_RESPONSE="${TAKEOVER_FAST_PASS_RESPONSE:-false}"
++export TAKEOVER_VERIFIED_EXIT_RECOVERY="${TAKEOVER_VERIFIED_EXIT_RECOVERY:-false}"
++export TAKEOVER_CHECKED_CONTROL_RECOVERY="${TAKEOVER_CHECKED_CONTROL_RECOVERY:-false}"
+ export TAKEOVER_EARLY_VERIFIED_RETURN="${TAKEOVER_EARLY_VERIFIED_RETURN:-false}"
+ export TAKEOVER_PASS_SIDE="${TAKEOVER_PASS_SIDE:-0}"
+ case "$TAKEOVER_PASS_SIDE" in -1|0|1) ;; *) echo 'Pass side must be -1, 0 or 1' >&2; exit 2 ;; esac
+-for value in "$TAKEOVER_TRACK_PREDICTION" "$TAKEOVER_TIMED_CONTROL" "$TAKEOVER_PROGRESSIVE_PASS_SPEED" "$TAKEOVER_PREDICTIVE_SPEED_PROFILE" "$TAKEOVER_EARLY_VERIFIED_RETURN"; do
++for value in "$TAKEOVER_TRACK_PREDICTION" "$TAKEOVER_TIMED_CONTROL" "$TAKEOVER_PROGRESSIVE_PASS_SPEED" "$TAKEOVER_PREDICTIVE_SPEED_PROFILE" "$TAKEOVER_FAST_PASS_GEOMETRY" "$TAKEOVER_FAST_PASS_RESPONSE" "$TAKEOVER_VERIFIED_EXIT_RECOVERY" "$TAKEOVER_CHECKED_CONTROL_RECOVERY" "$TAKEOVER_EARLY_VERIFIED_RETURN"; do
+   case "$value" in true|false) ;; *) echo 'Feature flags must be true or false' >&2; exit 2 ;; esac
+ done
+ 
+@@ -145,6 +149,7 @@ root=Path('../..').resolve()
+ runtime_sources=[
+     'Code/sim_ws/src/takeover_sim/src/takeover_controller_node.cpp',
+     'Code/sim_ws/src/takeover_sim/include/takeover_sim/dynamic_overtaking.hpp',
++    'Code/sim_ws/src/takeover_sim/include/takeover_sim/checked_execution.hpp',
+     'Code/sim_ws/src/takeover_sim/include/takeover_sim/sqp_worker.hpp',
+     'Code/sim_ws/src/takeover_sim/launch/gym_takeover_launch.py',
+     'Code/sim_ws/src/f1tenth_gym_ros/f1tenth_gym_ros/gym_bridge.py',
+@@ -173,6 +178,10 @@ config['track_assisted_prediction'] = os.environ['TAKEOVER_TRACK_PREDICTION'] ==
+ config['timed_control'] = os.environ['TAKEOVER_TIMED_CONTROL'] == 'true'
+ config['progressive_pass_speed'] = os.environ['TAKEOVER_PROGRESSIVE_PASS_SPEED'] == 'true'
+ config['predictive_speed_profile'] = os.environ['TAKEOVER_PREDICTIVE_SPEED_PROFILE'] == 'true'
++config['fast_pass_geometry'] = os.environ['TAKEOVER_FAST_PASS_GEOMETRY'] == 'true'
++config['fast_pass_response'] = os.environ['TAKEOVER_FAST_PASS_RESPONSE'] == 'true'
++config['verified_exit_recovery'] = os.environ['TAKEOVER_VERIFIED_EXIT_RECOVERY'] == 'true'
++config['checked_control_recovery'] = os.environ['TAKEOVER_CHECKED_CONTROL_RECOVERY'] == 'true'
+ config['early_verified_return'] = os.environ['TAKEOVER_EARLY_VERIFIED_RETURN'] == 'true'
+ config['planning_backend'] = os.environ['TAKEOVER_PLANNING_BACKEND']
+ if config['planning_backend'] == 'upstream_sqp':
+@@ -194,6 +203,7 @@ if config['planning_backend'] == 'upstream_sqp':
+     snapshot.mkdir()
+     config['adapter_source_sha256'] = {}
+     for relative in ['tools/upstream_sqp_worker.py', 'src/takeover_sim/include/takeover_sim/sqp_worker.hpp',
++                     'src/takeover_sim/include/takeover_sim/checked_execution.hpp',
+                      'tools/generate_gym_mpc.sh']:
+         source = Path(relative)
+         shutil.copy2(source, snapshot / source.name)
+@@ -211,6 +221,10 @@ setsid ros2 launch takeover_sim gym_takeover_launch.py \
+   adaptive_offset:="$ADAPTIVE_OFFSET" lateral_amplitude:="$LATERAL_AMPLITUDE" \
+   progressive_pass_speed:="$TAKEOVER_PROGRESSIVE_PASS_SPEED" \
+   predictive_speed_profile:="$TAKEOVER_PREDICTIVE_SPEED_PROFILE" \
++  fast_pass_geometry:="$TAKEOVER_FAST_PASS_GEOMETRY" \
++  fast_pass_response:="$TAKEOVER_FAST_PASS_RESPONSE" \
++  verified_exit_recovery:="$TAKEOVER_VERIFIED_EXIT_RECOVERY" \
++  checked_control_recovery:="$TAKEOVER_CHECKED_CONTROL_RECOVERY" \
+   early_verified_return:="$TAKEOVER_EARLY_VERIFIED_RETURN" \
+   planning_backend:="$TAKEOVER_PLANNING_BACKEND" \
+   sqp_worker_script:="$PWD/tools/upstream_sqp_worker.py" sqp_upstream_source:="$SQP_SOURCE" \
+diff --git a/Code/sim_ws/src/f1tenth_mpc-main/mpc/scripts/takeover_evaluator.py b/Code/sim_ws/src/f1tenth_mpc-main/mpc/scripts/takeover_evaluator.py
+index 3f2ec74..32cc7c1 100755
+--- a/Code/sim_ws/src/f1tenth_mpc-main/mpc/scripts/takeover_evaluator.py
++++ b/Code/sim_ws/src/f1tenth_mpc-main/mpc/scripts/takeover_evaluator.py
+@@ -156,6 +156,7 @@ class TakeoverEvaluator(Node):
+         self.ego = self.opp = self.estimate = self.control = None
+         self.tracker = {}
+         self.status = {}
++        self.last_control_rejection_count = 0
+         self.last_status_receive = None
+         self.rows = []
+         self.prediction_rows = []
+@@ -226,6 +227,17 @@ class TakeoverEvaluator(Node):
+         except json.JSONDecodeError:
+             return
+         self.last_status_receive = self.get_clock().now()
++        rejection_count = int(self.status.get("control_rejections", 0))
++        if rejection_count > self.last_control_rejection_count:
++            # Event-only bounded diagnostics, not a high-rate ROS/status dump.
++            with open(os.path.join(self.output_dir, "control_rejections.jsonl"), "a", encoding="utf-8") as handle:
++                handle.write(json.dumps({"stamp": self.status.get("stamp"),
++                    "behavior": self.status.get("behavior"),
++                    "transition": self.status.get("transition"),
++                    "stop": self.status.get("stop"),
++                    "rejection_count": rejection_count,
++                    "execution": self.status.get("execution", {})}, sort_keys=True) + "\n")
++            self.last_control_rejection_count = rejection_count
+         if int(self.status.get("overtakes_completed", 0)) > 0 and self.overtake_time is None:
+             self.overtake_time = self.elapsed()
+         stamp = float(self.status.get("stamp", self.elapsed()))
+@@ -392,6 +404,11 @@ class TakeoverEvaluator(Node):
+             "planner_reason": self.status.get("planner_reason"),
+             "speed_cap_mps": self.status.get("speed_cap_mps"),
+             "controller_error": controller.get("controller_error"),
++            "execution_first_rejection": (self.status.get("execution") or {}).get("first_rejection"),
++            "execution_cold_recovered": (self.status.get("execution") or {}).get("cold_recovered", False),
++            "execution_same_side_recovered": (self.status.get("execution") or {}).get("same_side_recovered", False),
++            "control_rejections": self.status.get("control_rejections", 0),
++            "control_recovery_successes": self.status.get("control_recovery_successes", 0),
+             "timed_position_error_m": controller.get("timed_position_error_m"),
+             "timed_speed_error_mps": controller.get("timed_speed_error_mps"),
+             "timed_reference_age_s": controller.get("timed_reference_age_s"),
+@@ -551,6 +568,11 @@ class TakeoverEvaluator(Node):
+                 "sqp_failures": self.status.get("sqp_failures", 0),
+                 "sqp_timeouts": self.status.get("sqp_timeouts", 0),
+                 "controller_failures": int(self.status.get("controller_failures", 0)),
++                "control_rejections": int(self.status.get("control_rejections", 0)),
++                "control_rejection_reasons": self.status.get("control_rejection_reasons", {}),
++                "cold_control_recoveries": int(self.status.get("cold_control_recoveries", 0)),
++                "control_recovery_attempts": int(self.status.get("control_recovery_attempts", 0)),
++                "control_recovery_successes": int(self.status.get("control_recovery_successes", 0)),
+                 "solver_timeouts": int(self.status.get("solver_timeouts", 0)),
+                 "infeasible_count": int(self.status.get("infeasible_count", 0)),
+                 "solver_recoveries": int(self.status.get("solver_recoveries", 0)),
+diff --git a/Code/sim_ws/src/takeover_sim/include/takeover_sim/dynamic_overtaking.hpp b/Code/sim_ws/src/takeover_sim/include/takeover_sim/dynamic_overtaking.hpp
+index 7ae7c19..dc9350b 100644
+--- a/Code/sim_ws/src/takeover_sim/include/takeover_sim/dynamic_overtaking.hpp
++++ b/Code/sim_ws/src/takeover_sim/include/takeover_sim/dynamic_overtaking.hpp
+@@ -336,6 +336,11 @@ struct Decision {
+   std::string transition = "initialized";
+ };
+ 
++inline bool retryable_control_rejection(const std::string &reason) {
++  return reason=="mpc_actual_dynamic_conflict" || reason=="joint_mpc_solver_4" ||
++      reason.find("joint_mpc_nonlinear_infeasible")==0;
++}
++
+ // The control clock can cross a freshness boundary between planner ticks.
+ // Re-evaluate behavior first, using the same timeout; never bypass expiry in
+ // the MPC or extend the age of an observation. A completed rejoin may become
+@@ -367,6 +372,9 @@ public:
+   bool adaptive_offset = false; // opt-in; retain the frozen fixed-offset baseline
+   bool progressive_pass_speed = false; // explicit simulation experiment
+   bool predictive_speed_profile = false; // per-stage passing/braking proposal
++  bool fast_pass_geometry = false; // opt-in curvature-aware speed experiment
++  bool fast_pass_response = false; // opt-in faster retiming, same physical limits
++  bool verified_exit_recovery = false; // new checked return, never last-command reuse
+   bool early_verified_return = false; // failed repeatability screen; opt-in only
+   // Optional upstream SQP lateral optimizer. Other behaviors, the predictor,
+   // time parameterization, collision checks and MPC remain ours, not upstream.
+@@ -421,25 +429,69 @@ public:
+   // Distance needed to reach a lower physical speed, with the same 50 ms
+   // command integrator, jerk and longitudinal lag as the timed/MPC model.
+   // Reserve one planning tick (0.2 s) plus the speed-reference response
+-  // (1 / gain 2 = 0.5 s) before braking; the speed target cannot command full
++  // (1 / reference gain) before braking; the speed target cannot command full
+   // braking instantly. Positive command lead and acceleration are retained.
+   double braking_distance(double from, double to, double command_lead,
+                           double current_acceleration) const {
+     if (from <= to) return 0.;
+     const double h=.05, target=std::max(0.,to);
++    const int reserve_steps=int(std::ceil((.20+1./speed_reference_gain())/h-1e-9));
+     double v=from, u=from+std::max(0.,command_lead);
+     double a=clip(std::max(0.,current_acceleration),0.,acceleration_max), distance=0.;
+     for(int j=0;j<240;++j) {
+-      if(j>=14) a=std::max(-deceleration_max,a-3*h);
++      if(j>=reserve_steps) a=std::max(-deceleration_max,a-3*h);
+       u=clip(u+h*a,0.,cruise_speed);
+       const double tau=u>=v?acceleration_response:braking_response;
+       const double next=v+h/(tau+h)*(u-v);
+       distance+=.5*(v+next)*h;v=next;
+-      if(j>=14 && v<=target) return distance;
++      if(j>=reserve_steps && v<=target) return distance;
+     }
+     return INF; // no finite stop certificate from this model
+   }
+ 
++  double speed_reference_gain() const { return fast_pass_response ? 4. : 2.; }
++
++  // A control rejection is feedback, not permission to drive. After physical
++  // longitudinal separation, try a NEW same-side hold with a full timed body/
++  // map rollout and a mandatory MPC callback. No side switch or stale reuse.
++  Decision recover_control_rejection(Pose ego,double ego_speed,const Track &track,
++      double now,const std::string &reason) {
++    Decision d;
++    d.behavior=behavior_;d.committed_side=committed_side_;
++    d.overtakes_completed=overtakes_completed_;
++    d.transition="control_recovery_not_eligible";
++    d.candidate.reason=d.transition;
++    if(!retryable_control_rejection(reason) || !adaptive_offset || !timed_control ||
++       !overtake_feasibility || aborting_ ||
++       (behavior_!=Behavior::REJOIN && behavior_!=Behavior::OVERTAKE) ||
++       committed_side_==0 || !track.valid ||
++       now-track.observation_stamp>committed_prediction_timeout) return d;
++    const auto p=project(assets_,ego.xy());
++    const auto q=project(assets_,track.position);
++    d.target_gap=signed_progress(q.s,p.s,assets_.arc.back());
++    if(std::abs(p.d)<.10 ||
++       d.target_gap>=-(.5*(vehicle_length+track.length)+body_margin)) return d;
++    d.target_age=std::max(0.,now-track.observation_stamp);d.target_fresh=true;
++    d.target_speed=track.velocity.norm();
++    const double begin=frenet::mono();
++    const double old_s=maneuver_start_s_,old_d=maneuver_start_d_;
++    maneuver_start_s_=p.s;maneuver_start_d_=p.d;
++    auto hold=build_candidate(ego,ego_speed,track,committed_side_,Behavior::CANCEL,cruise_speed);
++    if(!hold.valid || !return_clearance_reserved(hold.minimum_body_clearance) ||
++       !overtake_feasibility(hold)) {
++      maneuver_start_s_=old_s;maneuver_start_d_=old_d;
++      d.candidate.reason=hold.valid?"mpc_control_recovery_rejected":hold.reason;
++      return d;
++    }
++    control_hold_until_=return_retry_after_=now+.50;
++    set_behavior(Behavior::OVERTAKE,"control_rejected_checked_same_side:"+reason);
++    d.behavior=behavior_;d.transition=transition_;d.candidate=std::move(hold);
++    d.target_prediction=predict_track(assets_,track,horizon,step,process_sigma_rate,
++                                      track_assisted_prediction);
++    d.stop=false;d.planning_ms=(frenet::mono()-begin)*1000.;
++    return d;
++  }
++
+   double braking_speed_cap(double distance, double bend_speed, double cap,
+                            double command_lead, double a) const {
+     if(cap<=bend_speed) return cap;
+@@ -687,8 +739,14 @@ public:
+ 
+     Track collision_track = track;
+     if (post_pass_cruise && !decision.target_fresh) collision_track.valid = false;
++    const bool control_hold=behavior_==Behavior::OVERTAKE && now<control_hold_until_;
+     Candidate candidate = build_candidate(ego, ego_speed, collision_track, committed_side_,
+-                                          behavior_, cap);
++                                          control_hold?Behavior::CANCEL:behavior_, cap);
++    if(control_hold && candidate.valid &&
++       (!return_clearance_reserved(candidate.minimum_body_clearance) ||
++        !overtake_feasibility || !overtake_feasibility(candidate))) {
++      candidate.valid=false;candidate.reason="mpc_control_hold_rejected";
++    }
+     if (!candidate.valid && behavior_ == Behavior::PREPARE_OVERTAKE) {
+       candidate = build_candidate(ego, ego_speed, track, 0, Behavior::FOLLOW, cap);
+     }
+@@ -726,6 +784,32 @@ public:
+         maneuver_start_d_ = old_start_d;
+       }
+     }
++    if (!candidate.valid && behavior_ == Behavior::OVERTAKE &&
++        verified_exit_recovery && adaptive_offset && return_feasibility &&
++        decision.target_fresh && !aborting_ && committed_side_ != 0 &&
++        gap < -(.5*(vehicle_length+track.length)+body_margin)) {
++      // A failing forward passing corridor does not prove that a fresh return
++      // is impossible. Once physically ahead, try the complete checked exit
++      // before dropping to CANCEL's low-speed cap and letting the lead catch
++      // up. This is a recovery branch, not a lower collision/return threshold:
++      // footprint uncertainty, reserve and the existing MPC return admission
++      // still decide execution. Without a preview callback it is disabled.
++      const std::string failure=candidate.reason;
++      const double old_s=maneuver_start_s_, old_d=maneuver_start_d_;
++      maneuver_start_s_=current_projection.s;
++      maneuver_start_d_=current_projection.d;
++      auto exit=build_candidate(ego,ego_speed,track,committed_side_,
++                                Behavior::REJOIN,cruise_speed);
++      const double deadline=committed_prediction_timeout-decision.target_age;
++      if(exit.valid && return_clearance_reserved(exit.minimum_body_clearance) &&
++          return_alignment_before(assets_,exit,deadline)) {
++        candidate=std::move(exit);
++        set_behavior(Behavior::REJOIN,"passing_failed_verified_exit:"+failure);
++      } else {
++        maneuver_start_s_=old_s;
++        maneuver_start_d_=old_d;
++      }
++    }
+     if (!candidate.valid && (behavior_ == Behavior::OVERTAKE || behavior_ == Behavior::REJOIN)) {
+       cancel_start_ = now;
+       aborting_ = true;
+@@ -759,6 +843,7 @@ private:
+   double maneuver_start_d_ = 0.0;
+   double cancel_start_ = -INF;
+   double return_retry_after_ = -INF;
++  double control_hold_until_ = -INF;
+   bool aborting_ = false;
+   std::string transition_ = "initialized";
+   struct SqpMemory { double s=0., length=0.; std::vector<double> d; };
+@@ -1025,6 +1110,13 @@ private:
+       };
+       request["initial_slope"]=initial_slope;
+       request["initial_second_derivative"]=second_derivative;
++      if(fast_pass_geometry) {
++        // Reduce actual route-plus-offset curvature, not merely d''.
++        // This changes a preference only: corridor, timing and MPC admission
++        // remain mandatory and all hard limits are unchanged.
++        request["actual_curvature_cost"]=true;
++        request["curvature_weight"]=250.;
++      }
+       // Geometry must be steerable, not drivable everywhere at cruise speed.
+       // The timed trajectory below reduces speed for curvature and the MPC
+       // independently enforces lateral acceleration. Using 1.2/v_cruise^2
+@@ -1190,7 +1282,7 @@ private:
+         const int substeps = std::max(1, int(std::round(step / .05)));
+         const double h = step / substeps;
+         for (int j = 0; j < substeps; ++j) {
+-          const double desired_a = clip(2.0 * (local_cap - command),
++          const double desired_a = clip(speed_reference_gain() * (local_cap - command),
+                                          -deceleration_max, acceleration_max);
+           // MPC permits 4 m/s^3 only in its first wall-time step, but 3 in
+           // subsequent 50 ms stages (0.15 m/s^2). Use the common stricter bound.
+diff --git a/Code/sim_ws/src/takeover_sim/launch/gym_takeover_launch.py b/Code/sim_ws/src/takeover_sim/launch/gym_takeover_launch.py
+index 8989819..0238655 100644
+--- a/Code/sim_ws/src/takeover_sim/launch/gym_takeover_launch.py
++++ b/Code/sim_ws/src/takeover_sim/launch/gym_takeover_launch.py
+@@ -66,6 +66,10 @@ def generate_launch_description():
+         DeclareLaunchArgument("adaptive_offset", default_value="false"),
+         DeclareLaunchArgument("progressive_pass_speed", default_value="false"),
+         DeclareLaunchArgument("predictive_speed_profile", default_value="false"),
++        DeclareLaunchArgument("fast_pass_geometry", default_value="false"),
++        DeclareLaunchArgument("fast_pass_response", default_value="false"),
++        DeclareLaunchArgument("verified_exit_recovery", default_value="false"),
++        DeclareLaunchArgument("checked_control_recovery", default_value="false"),
+         DeclareLaunchArgument("early_verified_return", default_value="false"),
+         DeclareLaunchArgument("planning_backend", default_value="frenet_candidates"),
+         DeclareLaunchArgument("sqp_worker_script", default_value=""),
+@@ -169,6 +173,10 @@ def generate_launch_description():
+                 "adaptive_offset": ParameterValue(LaunchConfiguration("adaptive_offset"), value_type=bool),
+                 "progressive_pass_speed": ParameterValue(LaunchConfiguration("progressive_pass_speed"), value_type=bool),
+                 "predictive_speed_profile": ParameterValue(LaunchConfiguration("predictive_speed_profile"), value_type=bool),
++                "fast_pass_geometry": ParameterValue(LaunchConfiguration("fast_pass_geometry"), value_type=bool),
++                "fast_pass_response": ParameterValue(LaunchConfiguration("fast_pass_response"), value_type=bool),
++                "verified_exit_recovery": ParameterValue(LaunchConfiguration("verified_exit_recovery"), value_type=bool),
++                "checked_control_recovery": ParameterValue(LaunchConfiguration("checked_control_recovery"), value_type=bool),
+                 "early_verified_return": ParameterValue(LaunchConfiguration("early_verified_return"), value_type=bool),
+                 "allowed_pass_side": ParameterValue(LaunchConfiguration("allowed_pass_side"), value_type=int),
+                 "pass_offset": ParameterValue(LaunchConfiguration("pass_offset"), value_type=float),
+diff --git a/Code/sim_ws/src/takeover_sim/src/takeover_controller_node.cpp b/Code/sim_ws/src/takeover_sim/src/takeover_controller_node.cpp
+index c0e5bb0..418ba8c 100644
+--- a/Code/sim_ws/src/takeover_sim/src/takeover_controller_node.cpp
++++ b/Code/sim_ws/src/takeover_sim/src/takeover_controller_node.cpp
+@@ -13,6 +13,7 @@
+ #include <sensor_msgs/msg/laser_scan.hpp>
+ 
+ #include "joint_control.hpp"
++#include "takeover_sim/checked_execution.hpp"
+ #include "takeover_sim/dynamic_overtaking.hpp"
+ #include "takeover_sim/sqp_worker.hpp"
+ 
+@@ -59,6 +60,10 @@ public:
+     declare_parameter<bool>("adaptive_offset", false);
+     declare_parameter<bool>("progressive_pass_speed", false);
+     declare_parameter<bool>("predictive_speed_profile", false);
++    declare_parameter<bool>("fast_pass_geometry", false);
++    declare_parameter<bool>("fast_pass_response", false);
++    declare_parameter<bool>("verified_exit_recovery", false);
++    declare_parameter<bool>("checked_control_recovery", false);
+     declare_parameter<bool>("early_verified_return", false);
+     declare_parameter<std::string>("planning_backend", "frenet_candidates");
+     declare_parameter<std::string>("sqp_worker_script", "");
+@@ -97,6 +102,10 @@ public:
+     dynamic_planner_->adaptive_offset = get_parameter("adaptive_offset").as_bool();
+     dynamic_planner_->progressive_pass_speed = get_parameter("progressive_pass_speed").as_bool();
+     dynamic_planner_->predictive_speed_profile = get_parameter("predictive_speed_profile").as_bool();
++    dynamic_planner_->fast_pass_geometry = get_parameter("fast_pass_geometry").as_bool();
++    dynamic_planner_->fast_pass_response = get_parameter("fast_pass_response").as_bool();
++    dynamic_planner_->verified_exit_recovery = get_parameter("verified_exit_recovery").as_bool();
++    checked_control_recovery_=get_parameter("checked_control_recovery").as_bool();
+     dynamic_planner_->early_verified_return = get_parameter("early_verified_return").as_bool();
+     planning_backend_=get_parameter("planning_backend").as_string();
+     if(planning_backend_!="frenet_candidates" && planning_backend_!="upstream_sqp")
+@@ -115,6 +124,8 @@ public:
+     if(mode_=="static_v8" && simulation_limit>2.0)
+       throw std::runtime_error("static_v8_speed_limit_is_2_mps");
+     controller_ = std::make_unique<frenet::JointControl>(true,simulation_limit,mode_=="takeover");
++    if(checked_control_recovery_ && mode_=="takeover")
++      rollback_controller_=std::make_unique<frenet::JointControl>(true,simulation_limit,true);
+     if(dynamic_planner_->adaptive_offset)
+       preview_controller_ = std::make_unique<frenet::JointControl>(true,simulation_limit,mode_=="takeover");
+     tracker_ = std::make_unique<frenet::Tracker>("dynamic_mpc");
+@@ -153,6 +164,9 @@ public:
+         [this](std_msgs::msg::String::SharedPtr msg) { update_tracker_status(msg->data); });
+ 
+     const double control_rate = get_parameter("control_rate_hz").as_double();
++    if(checked_control_recovery_ && dynamic_planner_->timed_control &&
++       std::abs(control_rate-20.)>1e-6)
++      throw std::runtime_error("timed_execution_requires_20hz");
+     planning_period_ = 1.0 / get_parameter("planning_rate_hz").as_double();
+     timer_ = rclcpp::create_timer(this, get_clock(), rclcpp::Duration::from_seconds(1.0 / control_rate),
+                                [this]() { control_tick(); });
+@@ -191,6 +205,12 @@ private:
+   int freshness_triggered_replans_ = 0;
+   takeover::Decision decision_;
+   std::unique_ptr<frenet::JointControl> preview_controller_;
++  std::unique_ptr<frenet::JointControl> rollback_controller_;
++  bool checked_control_recovery_=false;
++  int control_rejections_=0,cold_control_recoveries_=0;
++  int control_recovery_attempts_=0,control_recovery_successes_=0;
++  Json::Value control_rejection_reasons_{Json::objectValue};
++  Json::Value execution_diagnostic_;
+   int return_preview_checks_=0;
+   Json::Value return_preview_rejections_{Json::objectValue};
+   int sqp_preview_checks_=0;
+@@ -321,8 +341,7 @@ private:
+     if(returning) ++return_preview_checks_; else ++sqp_preview_checks_;
+     try {
+       preview_controller_->copy_runtime_from(*controller_);
+-      frenet::TimedReference timed;
+-      for(const auto &p:candidate.timed) timed.points.push_back({p.t,p.pose,p.speed});
++      const auto timed=takeover::execution_reference(candidate,time,time);
+       preview_controller_->compute(*assets_,candidate.path,ego_pose(),ego_speed(),
+           ego_->twist.twist.linear.y,ego_->twist.twist.angular.z,100.,
+           dynamic_planner_->cruise_speed,.05,*tracker_,{},&timed);
+@@ -352,6 +371,7 @@ private:
+ 
+   void control_tick() {
+     const double time = now().seconds();
++    execution_diagnostic_=Json::Value(Json::objectValue);
+     if (dynamic_planner_->require_target && ego_start_delay_ > 0. &&
+         (!std::isfinite(lead_started_time_) || time < lead_started_time_ + ego_start_delay_)) {
+       publish_stop("waiting_for_lead_head_start");
+@@ -390,12 +410,57 @@ private:
+       const double remaining = 100.0;
+       frenet::TimedReference timed;
+       const bool use_timed = dynamic_planner_->timed_control && !decision_.candidate.timed.empty();
+-      if(use_timed) {
+-        timed.age=std::max(0.,time-last_plan_time_);
+-        for(const auto &p:decision_.candidate.timed) timed.points.push_back({p.t,p.pose,p.speed});
+-      }
++      if(use_timed) timed=takeover::execution_reference(decision_.candidate,last_plan_time_,time);
+       const double command_cap=use_timed?dynamic_planner_->cruise_speed:decision_.candidate.speed_cap;
+       frenet::Control command;
++      if(checked_control_recovery_ && use_timed && rollback_controller_) {
++        // Fixed shooting/control period in both previews and actual execution.
++        // No command is published until this exact solved prediction passes.
++        auto compute=[&](frenet::JointControl &model) {
++          return model.compute(*assets_,reference_path_,ego_pose(),speed,lateral,twist.angular.z,
++              remaining,dynamic_planner_->cruise_speed,.05,*tracker_,{},&timed);
++        };
++        auto validate=[&](frenet::JointControl &model) {validate_mpc_motion(time,model);};
++        takeover::ExecutionAttempt attempt;
++        const double execution_begin=frenet::mono();
++        try {
++          command=takeover::checked_execution(*controller_,*rollback_controller_,compute,validate,attempt);
++        } catch(const std::exception &error) {
++          record_execution_attempt(attempt);
++          if(!takeover::retryable_control_rejection(error.what()) ||
++             frenet::mono()-execution_begin>.030) throw;
++          ++control_recovery_attempts_;
++          // checked_execution rolled back the rejected command/observer state.
++          // Generate a new trajectory from that accepted physical runtime.
++          dynamic_planner_->initial_command=controller_->command_speed();
++          dynamic_planner_->initial_acceleration=controller_->command_acceleration();
++          dynamic_planner_->initial_curvature=speed>.2?twist.angular.z/speed:
++              std::numeric_limits<double>::quiet_NaN();
++          dynamic_planner_->overtake_feasibility=[this,time](const takeover::Candidate &c) {
++            return preview_candidate(c,time,false);
++          };
++          const auto recovery=dynamic_planner_->recover_control_rejection(
++              ego_pose(),speed,prediction_track(time),time,error.what());
++          execution_diagnostic_["recovery_reason"]=recovery.candidate.reason;
++          if(recovery.stop || !recovery.candidate.valid ||
++             frenet::mono()-execution_begin>.035) throw;
++          decision_=recovery;reference_path_=recovery.candidate.path;last_plan_time_=time;
++          publish_path(reference_pub_,reference_path_);
++          timed=takeover::execution_reference(recovery.candidate,time,time);
++          takeover::ExecutionAttempt retry;
++          try {
++            command=takeover::checked_execution(*controller_,*rollback_controller_,compute,validate,retry,false);
++          } catch(...) {record_execution_attempt(retry);throw;}
++          record_execution_attempt(retry);
++          execution_diagnostic_["same_side_recovered"]=true;
++        }
++        if(attempt.final_rejection.empty()) record_execution_attempt(attempt);
++        if(frenet::mono()-execution_begin>.045)
++          throw std::runtime_error("checked_execution_deadline");
++        if(execution_diagnostic_.get("same_side_recovered",false).asBool())
++          ++control_recovery_successes_;
++        execution_diagnostic_["execution_ms"]=(frenet::mono()-execution_begin)*1000.;
++      } else {
+       try {
+         command = controller_->compute(
+             *assets_, reference_path_, ego_pose(), speed, lateral, twist.angular.z,
+@@ -414,6 +479,7 @@ private:
+         controller_->diag["cold_retry_recovered"] = true;
+       }
+       if(use_timed) validate_mpc_motion(time,*controller_);
++      }
+       publish_drive(command.speed, command.angle);
+       diagnostic = controller_->diag;
+       stopped_ = false;
+@@ -430,6 +496,22 @@ private:
+     publish_status(time, diagnostic);
+   }
+ 
++  void record_execution_attempt(const takeover::ExecutionAttempt &a) {
++    if(a.first_rejection.empty()) return;
++    ++control_rejections_;
++    control_rejection_reasons_[a.first_rejection]=control_rejection_reasons_[a.first_rejection].asInt()+1;
++    execution_diagnostic_["first_rejection"]=a.first_rejection;
++    execution_diagnostic_["final_rejection"]=a.final_rejection;
++    execution_diagnostic_["cold_retry"]=a.cold_retry;
++    execution_diagnostic_["cold_recovered"]=a.cold_recovered;
++    execution_diagnostic_["rejected_controller"]=a.rejected_diagnostic;
++    Json::Value row;
++    row["first_rejection"]=a.first_rejection;row["final_rejection"]=a.final_rejection;
++    row["cold_recovered"]=a.cold_recovered;row["rejected_controller"]=a.rejected_diagnostic;
++    execution_diagnostic_["attempts"].append(row);
++    if(a.cold_recovered) ++cold_control_recoveries_;
++  }
++
+   void publish_drive(double speed, double steering) {
+     ackermann_msgs::msg::AckermannDriveStamped command;
+     command.header.stamp = now();
+@@ -465,8 +547,12 @@ private:
+           .5*(ego_speed()+target.velocity.norm())*.05;
+       const auto other=takeover::rectangle(lead[i].pose,target.length+2*inflation,target.width+2*inflation);
+       minimum=std::min(minimum,takeover::polygon_distance(body,other));
+-      if(takeover::polygons_overlap(body,other))
++      if(takeover::polygons_overlap(body,other)) {
++        model.diag["mpc_conflict_step"]=int(i);
++        model.diag["mpc_conflict_time_s"]=i*.05;
++        model.diag["mpc_conflict_target_age_s"]=age;
+         throw std::runtime_error("mpc_actual_dynamic_conflict");
++      }
+     }
+     model.diag["mpc_dynamic_check_passed"]=true;
+     model.diag["mpc_minimum_predicted_body_clearance_m"]=std::isfinite(minimum)?Json::Value(minimum):Json::Value();
+@@ -532,6 +618,16 @@ private:
+     value["timed_control"] = dynamic_planner_->timed_control;
+     value["progressive_pass_speed"] = dynamic_planner_->progressive_pass_speed;
+     value["predictive_speed_profile"] = dynamic_planner_->predictive_speed_profile;
++    value["fast_pass_geometry"] = dynamic_planner_->fast_pass_geometry;
++    value["fast_pass_response"] = dynamic_planner_->fast_pass_response;
++    value["verified_exit_recovery"] = dynamic_planner_->verified_exit_recovery;
++    value["checked_control_recovery"]=checked_control_recovery_;
++    value["control_rejections"]=control_rejections_;
++    value["control_rejection_reasons"]=control_rejection_reasons_;
++    value["cold_control_recoveries"]=cold_control_recoveries_;
++    value["control_recovery_attempts"]=control_recovery_attempts_;
++    value["control_recovery_successes"]=control_recovery_successes_;
++    value["execution"]=execution_diagnostic_;
+     value["early_verified_return"] = dynamic_planner_->early_verified_return;
+     value["transition_length_m"] = decision_.candidate.transition_length;
+     value["adaptive_offset"] = dynamic_planner_->adaptive_offset;
+diff --git a/Code/sim_ws/tools/audit_speed_comparison.py b/Code/sim_ws/tools/audit_speed_comparison.py
+index ed85d9f..7e8f8de 100644
+--- a/Code/sim_ws/tools/audit_speed_comparison.py
++++ b/Code/sim_ws/tools/audit_speed_comparison.py
+@@ -47,7 +47,8 @@ def main():
+         graph = json.loads((directory/'graph_audit.json').read_text())
+         runtime = summary['runtime']
+         entry = {k: run.get(k,config.get(k)) for k in ('scenario', 'run_id', 'seed',
+-                 'predictive_speed_profile', 'results_dir')}
++                 'predictive_speed_profile', 'fast_pass_geometry', 'fast_pass_response',
++                 'verified_exit_recovery', 'checked_control_recovery', 'results_dir')}
+         entry.update(passed=summary['passed'], clean=bool(summary['passed'] and
+                      not invalid and not runtime['controller_failures'] and
+                      not runtime['solver_timeouts'] and not runtime['sqp_timeouts']),
+@@ -55,12 +56,22 @@ def main():
+                 if summary['overtaking']['truth_events'] else None),
+             safety=summary['safety'], runtime=runtime,
+             invalid_samples_after_2s=invalid, cancellations=cancellations,
++            stop_events_after_2s=[{'time_s':float(r['time_s']), 'reason':r['stop_reason']}
++                for i,r in enumerate(rows) if float(r['time_s'])>2 and r['stop']=='True' and
++                (i==0 or rows[i-1]['stop']!='True' or r['stop_reason']!=rows[i-1]['stop_reason'])],
+             maximum_ego_speed_mps=max(finite(rows,'ego_speed_mps'), default=None),
+             mean_overtake_speed_mps=(statistics.mean(finite(passing,'ego_speed_mps'))
+                                     if passing else None),
+             maximum_abs_mpc_acceleration_command_mps2=max(
+                 (abs(v) for v in finite(rows,'mpc_acceleration_command_mps2')), default=None),
+             graph_audit=graph, runtime_source_sha256=config['runtime_source_sha256'])
++        completion=entry['truth_completion_time_s']
++        encounter=[r for r in rows if completion is not None and float(r['time_s'])<=completion]
++        entry['mean_encounter_speed_mps']=(statistics.mean(finite(encounter,'ego_speed_mps'))
++                                          if encounter else None)
++        entry['first_overtake_time_s']=(float(passing[0]['time_s']) if passing else None)
++        entry['entry_to_completion_s']=(completion-float(passing[0]['time_s'])
++                                        if completion is not None and passing else None)
+         output['runs'].append(entry)
+     rendered=json.dumps(output, indent=2)+'\n'
+     if args.output:
+diff --git a/Code/sim_ws/tools/run_position_overtake_batch.py b/Code/sim_ws/tools/run_position_overtake_batch.py
+index 4a4ad6d..6cd5128 100644
+--- a/Code/sim_ws/tools/run_position_overtake_batch.py
++++ b/Code/sim_ws/tools/run_position_overtake_batch.py
+@@ -18,6 +18,8 @@ def main():
+     p = argparse.ArgumentParser(description=__doc__)
+     p.add_argument('--repeats', type=int, default=1)
+     p.add_argument('--schedule-seed', type=int, default=20261024)
++    p.add_argument('--runner', choices=('run_takeover_trial.sh','run_fast_overtake_trial.sh'),
++                   default='run_takeover_trial.sh')
+     p.add_argument('--prefix', default='positions_' + datetime.datetime.now(datetime.timezone.utc).strftime('%Y%m%dT%H%M%SZ'))
+     args = p.parse_args()
+     if args.repeats < 1 or not re.fullmatch(r'[A-Za-z0-9_-]+', args.prefix):
+@@ -30,7 +32,7 @@ def main():
+         order = SCENARIOS.copy()
+         rng.shuffle(order)
+         schedule.extend(dict(scenario=s, repeat=repeat, run_id=f'{args.prefix}_repeat{repeat}') for s in order)
+-    design = dict(schedule_seed=args.schedule_seed, schedule=schedule,
++    design = dict(schedule_seed=args.schedule_seed, schedule=schedule, runner=args.runner,
+                   expected='single_pass_and_rejoin', ego_start_delay_s=0.,
+                   note='Exploratory location screen. Each fresh process is one run; CSV samples are not replicates. '
+                        'Same route gap, speed caps and duration. Entry is decided online, not forced at spawn.')
+@@ -39,7 +41,7 @@ def main():
+     reports = []
+     for trial in schedule:
+         print(f"Running {trial['scenario']} repeat {trial['repeat']}", flush=True)
+-        result = subprocess.run(['bash', 'run_takeover_trial.sh', trial['scenario'], '',
++        result = subprocess.run(['bash', args.runner, trial['scenario'], '',
+                                  str(trial['repeat']), trial['run_id'], 'false'], cwd=ROOT, env=env)
+         directory = ROOT/'results/takeover'/trial['scenario']/trial['run_id']
+         report = dict(trial, exit_code=result.returncode, results_dir=str(directory))
+diff --git a/Code/sim_ws/tools/run_stability_comparison.py b/Code/sim_ws/tools/run_stability_comparison.py
+index 85987dc..4e46d88 100644
+--- a/Code/sim_ws/tools/run_stability_comparison.py
++++ b/Code/sim_ws/tools/run_stability_comparison.py
+@@ -23,7 +23,17 @@ def main():
+     parser.add_argument('--plan-only', action='store_true')
+     parser.add_argument('--profile-comparison', action='store_true',
+                         help='Compare legacy timing with per-stage passing and reachable braking')
++    parser.add_argument('--fast-geometry-comparison', action='store_true',
++                        help='Compare current predictive speed profile with curvature-aware passing')
++    parser.add_argument('--fast-response-comparison', action='store_true',
++                        help='Compare curvature-aware passing with/without faster reference response')
++    parser.add_argument('--verified-exit-comparison', action='store_true',
++                        help='Compare geometry-only against checked ahead-of-target exit recovery')
++    parser.add_argument('--control-recovery-comparison', action='store_true',
++                        help='Same fast geometry/verified exit, checked control feedback off/on')
+     args = parser.parse_args()
++    if sum((args.profile_comparison,args.fast_geometry_comparison,args.fast_response_comparison,args.verified_exit_comparison,args.control_recovery_comparison))>1:
++        parser.error('Select only one comparison')
+     if args.repeats < 1 or not re.fullmatch(r'[A-Za-z0-9_-]+', args.prefix):
+         parser.error('Require positive repeats and a safe, unique prefix')
+     rng = random.Random(args.schedule_seed)
+@@ -36,13 +46,29 @@ def main():
+             rng.shuffle(policies)
+             for progressive in policies:
+                 arm = ('predictive_profile' if args.profile_comparison else 'progressive') if progressive else 'legacy_speed'
++                if args.fast_geometry_comparison:
++                    arm = 'fast_geometry' if progressive else 'predictive_profile'
++                if args.fast_response_comparison:
++                    arm = 'fast_response' if progressive else 'fast_geometry'
++                if args.verified_exit_comparison:
++                    arm = 'verified_exit' if progressive else 'fast_geometry'
++                if args.control_recovery_comparison:
++                    arm = 'checked_control' if progressive else 'verified_exit'
+                 schedule.append(dict(scenario=f'fitzpatrick_position_{position}',
+                     repeat=repeat, seed=repeat,
+-                    progressive_pass_speed=progressive and not args.profile_comparison,
+-                    predictive_speed_profile=progressive and args.profile_comparison,
++                    progressive_pass_speed=progressive and not (args.profile_comparison or args.fast_geometry_comparison or args.fast_response_comparison or args.verified_exit_comparison or args.control_recovery_comparison),
++                    predictive_speed_profile=args.control_recovery_comparison or args.fast_geometry_comparison or args.fast_response_comparison or args.verified_exit_comparison or (progressive and args.profile_comparison),
++                    fast_pass_geometry=args.control_recovery_comparison or args.fast_response_comparison or args.verified_exit_comparison or (progressive and args.fast_geometry_comparison),
++                    fast_pass_response=progressive and args.fast_response_comparison,
++                    verified_exit_recovery=args.control_recovery_comparison or (progressive and args.verified_exit_comparison),
++                    checked_control_recovery=progressive and args.control_recovery_comparison,
+                     run_id=f'{args.prefix}_{arm}_r{repeat}'))
+     design = dict(schedule_seed=args.schedule_seed, schedule=schedule,
+         early_verified_return=False, profile_comparison=args.profile_comparison,
++        fast_geometry_comparison=args.fast_geometry_comparison,
++        fast_response_comparison=args.fast_response_comparison,
++        verified_exit_comparison=args.verified_exit_comparison,
++        control_recovery_comparison=args.control_recovery_comparison,
+         unit='One fresh ROS/Gym process; not individual CSV samples',
+         blocking='Matched position and seed; randomized arm order inside each block',
+         scope='Small engineering screen, not a statistical success-rate estimate',
+@@ -59,6 +85,10 @@ def main():
+         env = dict(os.environ, TAKEOVER_PLANNING_BACKEND='upstream_sqp',
+                    TAKEOVER_EGO_START_DELAY_S='0',
+                    TAKEOVER_EARLY_VERIFIED_RETURN='false',
++                   TAKEOVER_FAST_PASS_GEOMETRY=str(trial['fast_pass_geometry']).lower(),
++                   TAKEOVER_FAST_PASS_RESPONSE=str(trial['fast_pass_response']).lower(),
++                   TAKEOVER_VERIFIED_EXIT_RECOVERY=str(trial['verified_exit_recovery']).lower(),
++                   TAKEOVER_CHECKED_CONTROL_RECOVERY=str(trial['checked_control_recovery']).lower(),
+                    TAKEOVER_PREDICTIVE_SPEED_PROFILE=str(trial['predictive_speed_profile']).lower(),
+                    TAKEOVER_PROGRESSIVE_PASS_SPEED=str(trial['progressive_pass_speed']).lower())
+         # The existing runner supervises simulated duration, tears down its
+diff --git a/Code/sim_ws/tools/test_stability_schedule.py b/Code/sim_ws/tools/test_stability_schedule.py
+index fcf2b53..ff20865 100644
+--- a/Code/sim_ws/tools/test_stability_schedule.py
++++ b/Code/sim_ws/tools/test_stability_schedule.py
+@@ -34,9 +34,57 @@ class Schedule(unittest.TestCase):
+     def test_invalid_repeats(self):
+         self.assertNotEqual(self.plan('--repeats', '0').returncode, 0)
+ 
++    def test_fast_geometry_pairs_current_profile(self):
++        result=self.plan('--fast-geometry-comparison')
++        self.assertEqual(result.returncode,0,result.stderr)
++        schedule=json.loads(result.stdout)['schedule']
++        self.assertEqual(len(schedule),8)
++        for i in range(0,8,2):
++            pair=schedule[i:i+2]
++            self.assertEqual(pair[0]['scenario'],pair[1]['scenario'])
++            self.assertEqual(sorted(r['fast_pass_geometry'] for r in pair),[False,True])
++            self.assertTrue(all(r['predictive_speed_profile'] and not r['progressive_pass_speed'] for r in pair))
++
++    def test_fast_response_pairs_geometry_only(self):
++        result=self.plan('--fast-response-comparison')
++        self.assertEqual(result.returncode,0,result.stderr)
++        schedule=json.loads(result.stdout)['schedule']
++        for i in range(0,8,2):
++            pair=schedule[i:i+2]
++            self.assertEqual(pair[0]['scenario'],pair[1]['scenario'])
++            self.assertEqual(sorted(r['fast_pass_response'] for r in pair),[False,True])
++            self.assertTrue(all(r['predictive_speed_profile'] and r['fast_pass_geometry'] and
++                                not r['progressive_pass_speed'] for r in pair))
++        self.assertNotEqual(self.plan('--fast-response-comparison','--profile-comparison').returncode,0)
++
++    def test_verified_exit_pairs_geometry_only_without_fast_response(self):
++        result=self.plan('--verified-exit-comparison')
++        self.assertEqual(result.returncode,0,result.stderr)
++        schedule=json.loads(result.stdout)['schedule']
++        self.assertEqual(len(schedule),8)
++        for i in range(0,8,2):
++            pair=schedule[i:i+2]
++            self.assertEqual(pair[0]['scenario'],pair[1]['scenario'])
++            self.assertEqual(sorted(r['verified_exit_recovery'] for r in pair),[False,True])
++            self.assertTrue(all(r['predictive_speed_profile'] and r['fast_pass_geometry'] and
++                               not r['fast_pass_response'] and not r['progressive_pass_speed'] for r in pair))
++
+     def test_unsafe_prefix_rejected(self):
+         self.assertNotEqual(self.plan('--prefix', '../unsafe').returncode, 0)
+ 
++    def test_control_recovery_is_the_only_different_policy(self):
++        result=self.plan('--control-recovery-comparison')
++        self.assertEqual(result.returncode,0,result.stderr)
++        schedule=json.loads(result.stdout)['schedule']
++        for i in range(0,8,2):
++            pair=schedule[i:i+2]
++            self.assertEqual(pair[0]['scenario'],pair[1]['scenario'])
++            self.assertEqual(sorted(r['checked_control_recovery'] for r in pair),[False,True])
++            self.assertTrue(all(r['predictive_speed_profile'] and r['fast_pass_geometry'] and
++                               r['verified_exit_recovery'] and not r['fast_pass_response'] and
++                               not r['progressive_pass_speed'] for r in pair))
++        self.assertNotEqual(self.plan('--control-recovery-comparison','--verified-exit-comparison').returncode,0)
++
+ 
+ if __name__ == '__main__':
+     unittest.main()
+diff --git a/Code/sim_ws/tools/test_takeover_offline.sh b/Code/sim_ws/tools/test_takeover_offline.sh
+index 6f16e4d..96027e5 100644
+--- a/Code/sim_ws/tools/test_takeover_offline.sh
++++ b/Code/sim_ws/tools/test_takeover_offline.sh
+@@ -21,7 +21,7 @@ g++ -O1 -std=c++14 -I/usr/include/eigen3 -I/usr/include/jsoncpp \
+   -o build/takeover_offline_tests/test_prediction
+ build/takeover_offline_tests/test_prediction takeover_assets/Fitzpatrick_sim.json
+ g++ -O1 -std=c++14 -I/usr/include/eigen3 -I/usr/include/jsoncpp \
+-  -I"$V8_ROOT/src/cpp_frenet" -I"$V8_ROOT/generated_joint" \
++  -Isrc/takeover_sim/include -I"$V8_ROOT/src/cpp_frenet" -I"$V8_ROOT/generated_joint" \
+   -I"$ACADOS_PREFIX/include" -I"$ACADOS_PREFIX/include/blasfeo/include" \
+   -I"$ACADOS_PREFIX/include/hpipm/include" tools/test_takeover_preview.cpp \
+   "$V8_ROOT/src/dynamic_mpc.cpp" "$V8_ROOT/src/mpc_iteration.cpp" \
+@@ -32,7 +32,7 @@ LD_LIBRARY_PATH="build/takeover_sim:$ACADOS_PREFIX/lib:${LD_LIBRARY_PATH:-}" \
+   build/takeover_offline_tests/test_preview takeover_assets/Fitzpatrick_sim.json
+ if [ -f build/takeover_sim/libtakeover_gym_joint_solver.so ]; then
+   g++ -O1 -std=c++14 -DTAKEOVER_OFFICIAL_GYM_MODEL=1 \
+-    -I/usr/include/eigen3 -I/usr/include/jsoncpp -I"$V8_ROOT/src/cpp_frenet" \
++    -Isrc/takeover_sim/include -I/usr/include/eigen3 -I/usr/include/jsoncpp -I"$V8_ROOT/src/cpp_frenet" \
+     -Ibuild/takeover_sim/gym_model/generated_joint -I"$ACADOS_PREFIX/include" \
+     -I"$ACADOS_PREFIX/include/blasfeo/include" -I"$ACADOS_PREFIX/include/hpipm/include" \
+     tools/test_takeover_preview.cpp "$V8_ROOT/src/dynamic_mpc.cpp" "$V8_ROOT/src/mpc_iteration.cpp" \
+diff --git a/Code/sim_ws/tools/test_takeover_prediction.cpp b/Code/sim_ws/tools/test_takeover_prediction.cpp
+index db44581..32dac0a 100644
+--- a/Code/sim_ws/tools/test_takeover_prediction.cpp
++++ b/Code/sim_ws/tools/test_takeover_prediction.cpp
+@@ -65,6 +65,38 @@ int main(int argc, char **argv) {
+   for(int i=0;i<2000;++i) {assets.route.push_back({i*.05,0,0});assets.arc.push_back(i*.05);}
+   assets.res=1;assets.ox=-10;assets.oy=-15;assets.width=130;assets.height=30;
+   assets.grid.assign(3900,5.);
++  takeover::DynamicOvertakingPlanner feedback(assets);
++  feedback.adaptive_offset=true;feedback.cruise_speed=3.;
++  feedback.behavior_=takeover::Behavior::REJOIN;feedback.committed_side_=1;
++  feedback.initial_command=1.5;
++  takeover::Track behind;
++  behind.valid=true;behind.position={8,0};behind.velocity={.8,0};
++  behind.stamp=behind.observation_stamp=2.;
++  assert(feedback.recover_control_rejection({10,.82,0},1.5,behind,2.,
++      "mpc_actual_dynamic_conflict").stop); // mandatory MPC callback absent
++  int feedback_checks=0;
++  feedback.overtake_feasibility=[&](const takeover::Candidate &) {++feedback_checks;return true;};
++  const auto hold=feedback.recover_control_rejection({10,.82,0},1.5,behind,2.,
++      "mpc_actual_dynamic_conflict");
++  assert(!hold.stop && hold.behavior==takeover::Behavior::OVERTAKE && hold.committed_side==1);
++  assert(hold.candidate.valid && hold.candidate.target_offset==.82 && feedback_checks==1);
++  assert(hold.overtakes_completed==0 && feedback.control_hold_until_==2.5);
++  feedback.behavior_=takeover::Behavior::REJOIN;
++  feedback.overtake_feasibility=[](const takeover::Candidate &) {return false;};
++  assert(feedback.recover_control_rejection({10,.82,0},1.5,behind,2.,
++      "mpc_actual_dynamic_conflict").stop);
++  assert(feedback.behavior_==takeover::Behavior::REJOIN); // no speculative state commit
++  feedback.overtake_feasibility=[](const takeover::Candidate &) {return true;};
++  for(const std::string reason:{"mpc_actual_map_conflict","mpc_target_expired","joint_control_deadline"})
++    assert(feedback.recover_control_rejection({10,.82,0},1.5,behind,2.,reason).stop);
++  assert(feedback.recover_control_rejection({8.1,.82,0},1.5,behind,2.,
++      "mpc_actual_dynamic_conflict").stop); // still alongside, no blind merge/hold
++  assert(feedback.recover_control_rejection({10,.82,0},1.5,behind,6.1,
++      "mpc_actual_dynamic_conflict").stop);
++  assets.grid.assign(3900,.01);
++  assert(feedback.recover_control_rejection({10,.82,0},1.5,behind,2.,
++      "mpc_actual_dynamic_conflict").stop);
++  assets.grid.assign(3900,5.);
+   takeover::DynamicOvertakingPlanner planner(assets);
+   takeover::DynamicOvertakingPlanner speed_release(assets);
+   speed_release.cruise_speed=3.;
+@@ -91,6 +123,12 @@ int main(int argc, char **argv) {
+   assert(speed_release.braking_speed_cap(0.,1.2,3.,0.,0.)==1.2);
+   assert(speed_release.braking_speed_cap(1.,1.2,3.,0.,0.)<
+          speed_release.braking_speed_cap(2.,1.2,3.,0.,0.));
++  speed_release.fast_pass_response=true;
++  const double faster_stopping=speed_release.braking_distance(3.,1.2,0.,0.);
++  assert(faster_stopping<stopping && faster_stopping>(9.-1.44)/6.);
++  assert(speed_release.braking_distance(3.,1.2,.2,1.5)>faster_stopping);
++  assert(speed_release.braking_speed_cap(0.,1.2,3.,0.,0.)==1.2);
++  speed_release.fast_pass_response=false;
+   // The same future geometry can release speed later in the forecast without
+   // granting cruise speed at the measured still-aligned entry position.
+   takeover::Track moving;
+@@ -232,6 +270,54 @@ int main(int argc, char **argv) {
+   auto narrow=adaptive.build_candidate({10,0,0},.85,target,1,takeover::Behavior::OVERTAKE,.85);
+   assert(!narrow.valid && narrow.reason=="mpc_center_map_clearance");
+   assets.grid.assign(3900,5.);
++  // A failed passing corridor while already ahead may have a safe return.
++  // Only a NEW full body/map/preview-checked trajectory may rescue it.
++  const auto exit_fixture=[&]() {
++    takeover::DynamicOvertakingPlanner p(assets);
++    p.adaptive_offset=true;p.predictive_speed_profile=true;p.cruise_speed=3.;
++    p.initial_command=2.;p.initial_curvature=0.;
++    p.behavior_=takeover::Behavior::OVERTAKE;p.committed_side_=1;
++    p.committed_offset_=.82;p.maneuver_start_s_=10.;p.maneuver_start_d_=.82;
++    p.sqp_optimizer=[](const Json::Value &) {
++      Json::Value out;out["ok"]=false;out["message"]="injected_optimizer_failure";return out;
++    };
++    return p;
++  };
++  auto exit_target=target;
++  exit_target.valid=true;exit_target.position={8.95,0};exit_target.velocity={1.2,0};
++  exit_target.observation_stamp=2.;exit_target.stamp=2.;
++  exit_target.position_variance=.001;exit_target.velocity_variance=.001;
++  auto exit_off=exit_fixture();
++  exit_off.return_feasibility=[](const takeover::Candidate &) {return true;};
++  assert(exit_off.plan({10,.82,0},2.,exit_target,2.).behavior==takeover::Behavior::CANCEL);
++  auto exit_on=exit_fixture();exit_on.verified_exit_recovery=true;
++  int checked_exits=0;
++  exit_on.return_feasibility=[&](const takeover::Candidate &) {++checked_exits;return true;};
++  const auto recovered_exit=exit_on.plan({10,.82,0},2.,exit_target,2.);
++  assert(checked_exits>0 && recovered_exit.behavior==takeover::Behavior::REJOIN && !recovered_exit.stop);
++  assert(recovered_exit.candidate.valid && recovered_exit.committed_side==1);
++  assert(recovered_exit.transition.find("passing_failed_verified_exit:")==0);
++  assert(takeover::return_clearance_reserved(recovered_exit.candidate.minimum_body_clearance));
++  assert(recovered_exit.overtakes_completed==0 && !exit_on.aborting_);
++  auto veto_exit=exit_fixture();veto_exit.verified_exit_recovery=true;
++  veto_exit.return_feasibility=[](const takeover::Candidate &) {return false;};
++  assert(veto_exit.plan({10,.82,0},2.,exit_target,2.).behavior==takeover::Behavior::CANCEL);
++  auto missing_preview=exit_fixture();missing_preview.verified_exit_recovery=true;
++  assert(missing_preview.plan({10,.82,0},2.,exit_target,2.).behavior==takeover::Behavior::CANCEL);
++  auto adjacent_exit=exit_fixture();adjacent_exit.verified_exit_recovery=true;
++  adjacent_exit.return_feasibility=[](const takeover::Candidate &) {return true;};
++  auto adjacent_target=exit_target;adjacent_target.position={9.6,0};
++  assert(adjacent_exit.plan({10,.82,0},2.,adjacent_target,2.).behavior==takeover::Behavior::CANCEL);
++  auto stale_exit=exit_fixture();stale_exit.verified_exit_recovery=true;
++  stale_exit.return_feasibility=[](const takeover::Candidate &) {return true;};
++  auto stale_target=exit_target;stale_target.observation_stamp=-10.;
++  assert(stale_exit.plan({10,.82,0},2.,stale_target,2.).behavior==takeover::Behavior::WAIT);
++  auto wall_exit=exit_fixture();wall_exit.verified_exit_recovery=true;
++  wall_exit.return_feasibility=[](const takeover::Candidate &) {return true;};
++  assets.grid.assign(3900,.20);
++  const auto blocked_exit=wall_exit.plan({10,.82,0},2.,exit_target,2.);
++  assert(blocked_exit.stop && blocked_exit.behavior==takeover::Behavior::CANCEL);
++  assets.grid.assign(3900,5.);
+   // A downstream wall beyond the slow-entry horizon must prevent commitment
+   // on that side, without suppressing an otherwise open opposite corridor.
+   for(int row=0;row<assets.height;++row) for(int col=0;col<assets.width;++col) {
+diff --git a/Code/sim_ws/tools/test_takeover_preview.cpp b/Code/sim_ws/tools/test_takeover_preview.cpp
+index c65da54..bd7dac0 100644
+--- a/Code/sim_ws/tools/test_takeover_preview.cpp
++++ b/Code/sim_ws/tools/test_takeover_preview.cpp
+@@ -1,5 +1,6 @@
+ // Separate solver instances only: no ROS, publishers, devices or actuation.
+ #include "joint_control.hpp"
++#include "takeover_sim/checked_execution.hpp"
+ #include <cassert>
+ #include <iostream>
+ 
+@@ -71,5 +72,46 @@ int main(int argc,char **argv) {
+   measured_yaw.compute(assets,assets.route,{0,0,0},2.8,0,.1,100,3.,.05,tracker,{},&fast_ref);
+   assert(measured_yaw.diag["model_yaw_rate_rad_s"].asDouble()==.1);
+   assert(measured_yaw.diag["yaw_rate_source"].asString()=="measured_simulation_odom");
++  takeover::Candidate candidate;
++  for(const auto &p:fast_ref.points) candidate.timed.push_back({p.t,p.pose.x,0,p.speed,p.pose});
++  const auto aged=takeover::execution_reference(candidate,2.,2.2);
++  assert(std::abs(aged.age-.2)<1e-9);
++  assert(std::abs(aged.at(0).pose.x-.56)<1e-8);
++  for(double now:{1.9,5.0}) {
++    bool rejected=false;
++    try {takeover::execution_reference(candidate,2.,now);}
++    catch(const std::runtime_error &) {rejected=true;}
++    assert(rejected); // backward clock or insufficient remaining horizon
++  }
++  frenet::JointControl transactional(true,3.,true),snapshot(true,3.,true);
++  takeover::ExecutionAttempt attempt;
++  auto solve=[&](frenet::JointControl &model) {
++    return model.compute(assets,assets.route,{0,0,0},0,0,0,100,3.,.05,tracker,{},&timed);
++  };
++  int checks=0;
++  const auto recovered=takeover::checked_execution(transactional,snapshot,solve,
++      [&](frenet::JointControl &) {
++        if(++checks==1) throw std::runtime_error("mpc_actual_dynamic_conflict");
++      },attempt);
++  assert(checks==2 && attempt.cold_recovered && recovered.speed>0.);
++  const double before_speed=transactional.command_speed();
++  const double before_accel=transactional.command_acceleration();
++  checks=0;bool vetoed=false;
++  try {
++    takeover::checked_execution(transactional,snapshot,solve,
++        [&](frenet::JointControl &) {++checks;throw std::runtime_error("mpc_actual_map_conflict");},attempt);
++  } catch(const std::runtime_error &) {vetoed=true;}
++  assert(vetoed && checks==1 && !attempt.cold_retry);
++  assert(transactional.command_speed()==before_speed && transactional.command_acceleration()==before_accel);
++  checks=0;vetoed=false;
++  try {
++    takeover::checked_execution(transactional,snapshot,solve,
++        [&](frenet::JointControl &) {++checks;throw std::runtime_error("mpc_actual_dynamic_conflict");},attempt);
++  } catch(const std::runtime_error &) {vetoed=true;}
++  assert(vetoed && checks==2 && attempt.cold_retry && !attempt.cold_recovered);
++  assert(transactional.command_speed()==before_speed && transactional.command_acceleration()==before_accel);
++  assert(!takeover::retryable_control_rejection("mpc_target_expired"));
++  assert(!takeover::retryable_control_rejection("joint_control_deadline"));
++  std::cout<<"Checked execution rolls back rejected state; cold retry cannot bypass map/body/expiry checks\n";
+   std::cout<<"Non-actuating MPC preview preserves the live controller state\n";
+ }
+diff --git a/Code/sim_ws/tools/test_upstream_sqp.py b/Code/sim_ws/tools/test_upstream_sqp.py
+index df74f2d..7c5de39 100644
+--- a/Code/sim_ws/tools/test_upstream_sqp.py
++++ b/Code/sim_ws/tools/test_upstream_sqp.py
+@@ -95,6 +95,29 @@ class SqpChecks(unittest.TestCase):
+         solver.dense_bias=np.linspace(-.01,.01,19)
+         adapted=np.array([(worker.adapter_cost(solver,d+e)-worker.adapter_cost(solver,d-e))/2e-6 for e in delta])
+         np.testing.assert_allclose(worker.adapter_cost_jac(solver,d),adapted,atol=1e-6)
++        solver.actual_curvature_cost=True
++        solver.curvature_weight=250.
++        solver.dense_route_curvature=np.linspace(-.1,.4,19)
++        adapted=np.array([(worker.adapter_cost(solver,d+e)-worker.adapter_cost(solver,d-e))/2e-6 for e in delta])
++        np.testing.assert_allclose(worker.adapter_cost_jac(solver,d),adapted,atol=1e-6)
++
++    def test_fast_cost_retains_corridor_and_curvature_constraints(self):
++        request=self.fixture()
++        request.update(lateral_reference=request['initial'],
++                       actual_curvature_cost=True,curvature_weight=250.)
++        result=worker.solve(self.core,request)
++        self.assertTrue(result['ok'],result)
++        self.assertGreaterEqual(min(result['d'][12:]),.80-1e-6)
++        self.assertGreaterEqual(result['inequality_min'],-1e-4)
++        request['bounds'][0]=[.4,.5]
++        self.assertFalse(worker.solve(self.core,request)['ok'])
++
++    def test_bad_curvature_weight_rejected(self):
++        for weight in (-1.,float('nan'),float('inf'),10001.):
++            request=self.fixture()
++            request['curvature_weight']=weight
++            with self.assertRaisesRegex(ValueError,'bad_curvature_weight'):
++                worker.solve(self.core,request)
+ 
+ 
+ if __name__ == '__main__':
+diff --git a/Code/sim_ws/tools/upstream_sqp_worker.py b/Code/sim_ws/tools/upstream_sqp_worker.py
+index f9f6a44..dbdafa7 100644
+--- a/Code/sim_ws/tools/upstream_sqp_worker.py
++++ b/Code/sim_ws/tools/upstream_sqp_worker.py
+@@ -64,14 +64,20 @@ def inequality_jac(solver, d):
+ 
+ def adapter_cost(solver, d):
+     second = solver.dense_second @ d + solver.dense_bias
++    if getattr(solver, 'actual_curvature_cost', False):
++        second = second-solver.dense_route_curvature
++    weight = getattr(solver, 'curvature_weight', 5.)
+     return (solver.objective_function(d) + 1000*np.sum((d-solver.lateral_reference)**2)
+-            + 5*solver.spatial_length*np.mean(second**2))/1000
++            + weight*solver.spatial_length*np.mean(second**2))/1000
+ 
+ 
+ def adapter_cost_jac(solver, d):
+     second = solver.dense_second @ d + solver.dense_bias
++    if getattr(solver, 'actual_curvature_cost', False):
++        second = second-solver.dense_route_curvature
++    weight = getattr(solver, 'curvature_weight', 5.)
+     return (objective_jac(d) + 2000*(d-solver.lateral_reference)
+-            + 10*solver.spatial_length/len(second)*solver.dense_second.T @ second)/1000
++            + 2*weight*solver.spatial_length/len(second)*solver.dense_second.T @ second)/1000
+ 
+ 
+ def corridor_feasibility(solver, bounds):
+@@ -177,6 +183,10 @@ def solve(core, request):
+             raise ValueError('bad_lateral_reference')
+     solver.down_sampled_delta_s = ds
+     solver.spatial_length = x[-1]-x[0]
++    solver.actual_curvature_cost = bool(request.get('actual_curvature_cost', False))
++    solver.curvature_weight = float(request.get('curvature_weight', 5.))
++    if not np.isfinite(solver.curvature_weight) or not 0 <= solver.curvature_weight <= 10000:
++        raise ValueError('bad_curvature_weight')
+     solver.global_traj_kappas = np.asarray(request["curvature"], dtype=float)
+     solver.max_kappa = float(request["max_curvature"])
+     solver.obs_downsampled_indices = np.asarray(request["obstacle_indices"], dtype=int)
+diff --git a/README.md b/README.md
+index 253adc9..6b1d51a 100644
+--- a/README.md
++++ b/README.md
+@@ -5,7 +5,13 @@ plus a laptop-tested dynamic-obstacle overtaking simulation.
+ 
+ **Latest recorded physical result: Dynamic MPC v8, Fitzpatrick, 2026-09-27.** One complete lap with two static obstacles; the operator reported no contact, minimal oscillation, and a natural stop. This is one successful run, not a repeated-trial reliability claim.
+ 
+-**Laptop update, 2026-11-05:** an opt-in speed-proposal/retiming experiment
++**Laptop update, 2026-11-06:** checked MPC rollback/re-solve and ahead-only
++same-side control-feedback recovery are implemented in the simulation adapter.
++The current paired screen and limitations are recorded in
++[checked execution/recovery](docs/CONTROL_RECOVERY_20261106.md).
++This is not full dynamic-overtaking acceptance or physical deployment approval.
++
++**Earlier laptop update, 2026-11-05:** an opt-in speed-proposal/retiming experiment
+ improves some passing trials but is not a uniformly faster, stable release.
+ [Speed experiment and preserved failures](docs/SPEED_PROFILE_20261105.md) ·
+ [Why Frenet + spline + MPC, and alternatives](docs/PLANNING_CONTROL_TRADEOFFS.md) ·
+diff --git a/docs/LAPTOP_TAKEOVER_SIM.md b/docs/LAPTOP_TAKEOVER_SIM.md
+index 88d4f57..af81238 100644
+--- a/docs/LAPTOP_TAKEOVER_SIM.md
++++ b/docs/LAPTOP_TAKEOVER_SIM.md
+@@ -1,5 +1,25 @@
+ # Laptop Dynamic-Overtaking Simulation
+ 
++## Latest explicit development entry point (2026-11-06)
++
++```bash
++cd /data/projects/F1-Tenth-Duke/f1tenth-takeover/Code/sim_ws
++# GUI: native Gym, Fitzpatrick, 3.0/1.5 m/s caps, 35 simulation seconds.
++bash run_fast_overtake_trial.sh fitzpatrick_position_50 35 1 \
++  "gui_$(date +%Y%m%d_%H%M%S)" true
++```
++
++Change 50 to 00/25/75 for other encounter positions; `false` runs headless.
++Use RViz Fixed Frame `map`. One trial at a time; Ctrl+C tears down its local
++ROS group. The runner uses localhost-only domain 73 and is not a real-car
++launcher. This wrapper enables predictive timing, curvature-aware geometry,
++verified exit and checked-control feedback, not the rejected faster gain.
++To reproduce the prior wrapper policy, prefix with
++`TAKEOVER_CHECKED_CONTROL_RECOVERY=false`. Generic runner defaults remain OFF.
++Read [implementation, test outcomes and remaining limitations](CONTROL_RECOVERY_20261106.md)
++before treating a completed pass as uninterrupted/stable motion. No P2
++asynchronous planning or P3 whole-maneuver admission is claimed.
++
+ ## Stability follow-up (2026-11-04, development only)
+ 
+ Bounded recovery-length search and checked same-side continuation were added.
+diff --git a/docs/STATUS.md b/docs/STATUS.md
+index 38fe2bd..bc18c52 100644
+--- a/docs/STATUS.md
++++ b/docs/STATUS.md
+@@ -1,5 +1,17 @@
+ # Current status
+ 
++## Checked control feedback — 2026-11-06 (development, simulation only)
++
++P0/P1 implementation adds a shared timed-reference contract, transactional
++rollback of rejected MPC command/observer state, one fully checked cold solve,
++and a new checked same-side continuation after an ahead-of-target control veto.
++Clock/horizon, map/body, freshness, residual and deadline checks remain active.
++The user position-50 GUI failure is retained; a later clean diagnostic does not
++establish that the failure is fixed. Read the actual frozen-screen outcomes in
++[CONTROL_RECOVERY_20261106.md](CONTROL_RECOVERY_20261106.md).
++Planning remains synchronous; broader phase recovery, P2 and P3 are pending.
++Real-v8 source/model are unchanged. No physical dynamic-overtaking approval.
++
+ ## Laptop speed experiment — 2026-11-05 (opt-in)
+ 
+ Implemented checked speed-proposal search, physical-path braking distance and

@@ -156,6 +156,7 @@ class TakeoverEvaluator(Node):
         self.ego = self.opp = self.estimate = self.control = None
         self.tracker = {}
         self.status = {}
+        self.last_control_rejection_count = 0
         self.last_status_receive = None
         self.rows = []
         self.prediction_rows = []
@@ -226,6 +227,17 @@ class TakeoverEvaluator(Node):
         except json.JSONDecodeError:
             return
         self.last_status_receive = self.get_clock().now()
+        rejection_count = int(self.status.get("control_rejections", 0))
+        if rejection_count > self.last_control_rejection_count:
+            # Event-only bounded diagnostics, not a high-rate ROS/status dump.
+            with open(os.path.join(self.output_dir, "control_rejections.jsonl"), "a", encoding="utf-8") as handle:
+                handle.write(json.dumps({"stamp": self.status.get("stamp"),
+                    "behavior": self.status.get("behavior"),
+                    "transition": self.status.get("transition"),
+                    "stop": self.status.get("stop"),
+                    "rejection_count": rejection_count,
+                    "execution": self.status.get("execution", {})}, sort_keys=True) + "\n")
+            self.last_control_rejection_count = rejection_count
         if int(self.status.get("overtakes_completed", 0)) > 0 and self.overtake_time is None:
             self.overtake_time = self.elapsed()
         stamp = float(self.status.get("stamp", self.elapsed()))
@@ -392,6 +404,11 @@ class TakeoverEvaluator(Node):
             "planner_reason": self.status.get("planner_reason"),
             "speed_cap_mps": self.status.get("speed_cap_mps"),
             "controller_error": controller.get("controller_error"),
+            "execution_first_rejection": (self.status.get("execution") or {}).get("first_rejection"),
+            "execution_cold_recovered": (self.status.get("execution") or {}).get("cold_recovered", False),
+            "execution_same_side_recovered": (self.status.get("execution") or {}).get("same_side_recovered", False),
+            "control_rejections": self.status.get("control_rejections", 0),
+            "control_recovery_successes": self.status.get("control_recovery_successes", 0),
             "timed_position_error_m": controller.get("timed_position_error_m"),
             "timed_speed_error_mps": controller.get("timed_speed_error_mps"),
             "timed_reference_age_s": controller.get("timed_reference_age_s"),
@@ -551,6 +568,11 @@ class TakeoverEvaluator(Node):
                 "sqp_failures": self.status.get("sqp_failures", 0),
                 "sqp_timeouts": self.status.get("sqp_timeouts", 0),
                 "controller_failures": int(self.status.get("controller_failures", 0)),
+                "control_rejections": int(self.status.get("control_rejections", 0)),
+                "control_rejection_reasons": self.status.get("control_rejection_reasons", {}),
+                "cold_control_recoveries": int(self.status.get("cold_control_recoveries", 0)),
+                "control_recovery_attempts": int(self.status.get("control_recovery_attempts", 0)),
+                "control_recovery_successes": int(self.status.get("control_recovery_successes", 0)),
                 "solver_timeouts": int(self.status.get("solver_timeouts", 0)),
                 "infeasible_count": int(self.status.get("infeasible_count", 0)),
                 "solver_recoveries": int(self.status.get("solver_recoveries", 0)),

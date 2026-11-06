@@ -5,7 +5,13 @@ plus a laptop-tested dynamic-obstacle overtaking simulation.
 
 **Latest recorded physical result: Dynamic MPC v8, Fitzpatrick, 2026-09-27.** One complete lap with two static obstacles; the operator reported no contact, minimal oscillation, and a natural stop. This is one successful run, not a repeated-trial reliability claim.
 
-**Laptop update, 2026-11-05:** an opt-in speed-proposal/retiming experiment
+**Laptop update, 2026-11-06:** checked MPC rollback/re-solve and ahead-only
+same-side control-feedback recovery are implemented in the simulation adapter.
+The current paired screen and limitations are recorded in
+[checked execution/recovery](docs/CONTROL_RECOVERY_20261106.md).
+This is not full dynamic-overtaking acceptance or physical deployment approval.
+
+**Earlier laptop update, 2026-11-05:** an opt-in speed-proposal/retiming experiment
 improves some passing trials but is not a uniformly faster, stable release.
 [Speed experiment and preserved failures](docs/SPEED_PROFILE_20261105.md) ·
 [Why Frenet + spline + MPC, and alternatives](docs/PLANNING_CONTROL_TRADEOFFS.md) ·

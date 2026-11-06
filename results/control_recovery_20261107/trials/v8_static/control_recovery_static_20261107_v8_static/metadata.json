@@ -1,0 +1,10 @@
+{
+  "created_utc": "2026-11-06T17:31:50.122147+00:00",
+  "expected_outcome": "v8_static_avoidance_regression",
+  "ground_truth_consumer": "takeover_evaluator only",
+  "map_name": "benchmark_straight_obstacle_center",
+  "require_lead": true,
+  "run_id": "control_recovery_static_20261107_v8_static",
+  "scenario": "v8_static",
+  "seed": 1
+}

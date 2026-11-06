@@ -15,10 +15,14 @@ export TAKEOVER_TRACK_PREDICTION="${TAKEOVER_TRACK_PREDICTION:-true}"
 export TAKEOVER_TIMED_CONTROL="${TAKEOVER_TIMED_CONTROL:-true}"
 export TAKEOVER_PROGRESSIVE_PASS_SPEED="${TAKEOVER_PROGRESSIVE_PASS_SPEED:-false}"
 export TAKEOVER_PREDICTIVE_SPEED_PROFILE="${TAKEOVER_PREDICTIVE_SPEED_PROFILE:-false}"
+export TAKEOVER_FAST_PASS_GEOMETRY="${TAKEOVER_FAST_PASS_GEOMETRY:-false}"
+export TAKEOVER_FAST_PASS_RESPONSE="${TAKEOVER_FAST_PASS_RESPONSE:-false}"
+export TAKEOVER_VERIFIED_EXIT_RECOVERY="${TAKEOVER_VERIFIED_EXIT_RECOVERY:-false}"
+export TAKEOVER_CHECKED_CONTROL_RECOVERY="${TAKEOVER_CHECKED_CONTROL_RECOVERY:-false}"
 export TAKEOVER_EARLY_VERIFIED_RETURN="${TAKEOVER_EARLY_VERIFIED_RETURN:-false}"
 export TAKEOVER_PASS_SIDE="${TAKEOVER_PASS_SIDE:-0}"
 case "$TAKEOVER_PASS_SIDE" in -1|0|1) ;; *) echo 'Pass side must be -1, 0 or 1' >&2; exit 2 ;; esac
-for value in "$TAKEOVER_TRACK_PREDICTION" "$TAKEOVER_TIMED_CONTROL" "$TAKEOVER_PROGRESSIVE_PASS_SPEED" "$TAKEOVER_PREDICTIVE_SPEED_PROFILE" "$TAKEOVER_EARLY_VERIFIED_RETURN"; do
+for value in "$TAKEOVER_TRACK_PREDICTION" "$TAKEOVER_TIMED_CONTROL" "$TAKEOVER_PROGRESSIVE_PASS_SPEED" "$TAKEOVER_PREDICTIVE_SPEED_PROFILE" "$TAKEOVER_FAST_PASS_GEOMETRY" "$TAKEOVER_FAST_PASS_RESPONSE" "$TAKEOVER_VERIFIED_EXIT_RECOVERY" "$TAKEOVER_CHECKED_CONTROL_RECOVERY" "$TAKEOVER_EARLY_VERIFIED_RETURN"; do
   case "$value" in true|false) ;; *) echo 'Feature flags must be true or false' >&2; exit 2 ;; esac
 done
 
@@ -145,6 +149,7 @@ root=Path('../..').resolve()
 runtime_sources=[
     'Code/sim_ws/src/takeover_sim/src/takeover_controller_node.cpp',
     'Code/sim_ws/src/takeover_sim/include/takeover_sim/dynamic_overtaking.hpp',
+    'Code/sim_ws/src/takeover_sim/include/takeover_sim/checked_execution.hpp',
     'Code/sim_ws/src/takeover_sim/include/takeover_sim/sqp_worker.hpp',
     'Code/sim_ws/src/takeover_sim/launch/gym_takeover_launch.py',
     'Code/sim_ws/src/f1tenth_gym_ros/f1tenth_gym_ros/gym_bridge.py',
@@ -173,6 +178,10 @@ config['track_assisted_prediction'] = os.environ['TAKEOVER_TRACK_PREDICTION'] ==
 config['timed_control'] = os.environ['TAKEOVER_TIMED_CONTROL'] == 'true'
 config['progressive_pass_speed'] = os.environ['TAKEOVER_PROGRESSIVE_PASS_SPEED'] == 'true'
 config['predictive_speed_profile'] = os.environ['TAKEOVER_PREDICTIVE_SPEED_PROFILE'] == 'true'
+config['fast_pass_geometry'] = os.environ['TAKEOVER_FAST_PASS_GEOMETRY'] == 'true'
+config['fast_pass_response'] = os.environ['TAKEOVER_FAST_PASS_RESPONSE'] == 'true'
+config['verified_exit_recovery'] = os.environ['TAKEOVER_VERIFIED_EXIT_RECOVERY'] == 'true'
+config['checked_control_recovery'] = os.environ['TAKEOVER_CHECKED_CONTROL_RECOVERY'] == 'true'
 config['early_verified_return'] = os.environ['TAKEOVER_EARLY_VERIFIED_RETURN'] == 'true'
 config['planning_backend'] = os.environ['TAKEOVER_PLANNING_BACKEND']
 if config['planning_backend'] == 'upstream_sqp':
@@ -194,6 +203,7 @@ if config['planning_backend'] == 'upstream_sqp':
     snapshot.mkdir()
     config['adapter_source_sha256'] = {}
     for relative in ['tools/upstream_sqp_worker.py', 'src/takeover_sim/include/takeover_sim/sqp_worker.hpp',
+                     'src/takeover_sim/include/takeover_sim/checked_execution.hpp',
                      'tools/generate_gym_mpc.sh']:
         source = Path(relative)
         shutil.copy2(source, snapshot / source.name)
@@ -211,6 +221,10 @@ setsid ros2 launch takeover_sim gym_takeover_launch.py \
   adaptive_offset:="$ADAPTIVE_OFFSET" lateral_amplitude:="$LATERAL_AMPLITUDE" \
   progressive_pass_speed:="$TAKEOVER_PROGRESSIVE_PASS_SPEED" \
   predictive_speed_profile:="$TAKEOVER_PREDICTIVE_SPEED_PROFILE" \
+  fast_pass_geometry:="$TAKEOVER_FAST_PASS_GEOMETRY" \
+  fast_pass_response:="$TAKEOVER_FAST_PASS_RESPONSE" \
+  verified_exit_recovery:="$TAKEOVER_VERIFIED_EXIT_RECOVERY" \
+  checked_control_recovery:="$TAKEOVER_CHECKED_CONTROL_RECOVERY" \
   early_verified_return:="$TAKEOVER_EARLY_VERIFIED_RETURN" \
   planning_backend:="$TAKEOVER_PLANNING_BACKEND" \
   sqp_worker_script:="$PWD/tools/upstream_sqp_worker.py" sqp_upstream_source:="$SQP_SOURCE" \

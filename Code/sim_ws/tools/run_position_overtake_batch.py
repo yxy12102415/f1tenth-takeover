@@ -18,6 +18,8 @@ def main():
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument('--repeats', type=int, default=1)
     p.add_argument('--schedule-seed', type=int, default=20261024)
+    p.add_argument('--runner', choices=('run_takeover_trial.sh','run_fast_overtake_trial.sh'),
+                   default='run_takeover_trial.sh')
     p.add_argument('--prefix', default='positions_' + datetime.datetime.now(datetime.timezone.utc).strftime('%Y%m%dT%H%M%SZ'))
     args = p.parse_args()
     if args.repeats < 1 or not re.fullmatch(r'[A-Za-z0-9_-]+', args.prefix):
@@ -30,7 +32,7 @@ def main():
         order = SCENARIOS.copy()
         rng.shuffle(order)
         schedule.extend(dict(scenario=s, repeat=repeat, run_id=f'{args.prefix}_repeat{repeat}') for s in order)
-    design = dict(schedule_seed=args.schedule_seed, schedule=schedule,
+    design = dict(schedule_seed=args.schedule_seed, schedule=schedule, runner=args.runner,
                   expected='single_pass_and_rejoin', ego_start_delay_s=0.,
                   note='Exploratory location screen. Each fresh process is one run; CSV samples are not replicates. '
                        'Same route gap, speed caps and duration. Entry is decided online, not forced at spawn.')
@@ -39,7 +41,7 @@ def main():
     reports = []
     for trial in schedule:
         print(f"Running {trial['scenario']} repeat {trial['repeat']}", flush=True)
-        result = subprocess.run(['bash', 'run_takeover_trial.sh', trial['scenario'], '',
+        result = subprocess.run(['bash', args.runner, trial['scenario'], '',
                                  str(trial['repeat']), trial['run_id'], 'false'], cwd=ROOT, env=env)
         directory = ROOT/'results/takeover'/trial['scenario']/trial['run_id']
         report = dict(trial, exit_code=result.returncode, results_dir=str(directory))

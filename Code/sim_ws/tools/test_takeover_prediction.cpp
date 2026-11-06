@@ -65,6 +65,38 @@ int main(int argc, char **argv) {
   for(int i=0;i<2000;++i) {assets.route.push_back({i*.05,0,0});assets.arc.push_back(i*.05);}
   assets.res=1;assets.ox=-10;assets.oy=-15;assets.width=130;assets.height=30;
   assets.grid.assign(3900,5.);
+  takeover::DynamicOvertakingPlanner feedback(assets);
+  feedback.adaptive_offset=true;feedback.cruise_speed=3.;
+  feedback.behavior_=takeover::Behavior::REJOIN;feedback.committed_side_=1;
+  feedback.initial_command=1.5;
+  takeover::Track behind;
+  behind.valid=true;behind.position={8,0};behind.velocity={.8,0};
+  behind.stamp=behind.observation_stamp=2.;
+  assert(feedback.recover_control_rejection({10,.82,0},1.5,behind,2.,
+      "mpc_actual_dynamic_conflict").stop); // mandatory MPC callback absent
+  int feedback_checks=0;
+  feedback.overtake_feasibility=[&](const takeover::Candidate &) {++feedback_checks;return true;};
+  const auto hold=feedback.recover_control_rejection({10,.82,0},1.5,behind,2.,
+      "mpc_actual_dynamic_conflict");
+  assert(!hold.stop && hold.behavior==takeover::Behavior::OVERTAKE && hold.committed_side==1);
+  assert(hold.candidate.valid && hold.candidate.target_offset==.82 && feedback_checks==1);
+  assert(hold.overtakes_completed==0 && feedback.control_hold_until_==2.5);
+  feedback.behavior_=takeover::Behavior::REJOIN;
+  feedback.overtake_feasibility=[](const takeover::Candidate &) {return false;};
+  assert(feedback.recover_control_rejection({10,.82,0},1.5,behind,2.,
+      "mpc_actual_dynamic_conflict").stop);
+  assert(feedback.behavior_==takeover::Behavior::REJOIN); // no speculative state commit
+  feedback.overtake_feasibility=[](const takeover::Candidate &) {return true;};
+  for(const std::string reason:{"mpc_actual_map_conflict","mpc_target_expired","joint_control_deadline"})
+    assert(feedback.recover_control_rejection({10,.82,0},1.5,behind,2.,reason).stop);
+  assert(feedback.recover_control_rejection({8.1,.82,0},1.5,behind,2.,
+      "mpc_actual_dynamic_conflict").stop); // still alongside, no blind merge/hold
+  assert(feedback.recover_control_rejection({10,.82,0},1.5,behind,6.1,
+      "mpc_actual_dynamic_conflict").stop);
+  assets.grid.assign(3900,.01);
+  assert(feedback.recover_control_rejection({10,.82,0},1.5,behind,2.,
+      "mpc_actual_dynamic_conflict").stop);
+  assets.grid.assign(3900,5.);
   takeover::DynamicOvertakingPlanner planner(assets);
   takeover::DynamicOvertakingPlanner speed_release(assets);
   speed_release.cruise_speed=3.;
@@ -91,6 +123,12 @@ int main(int argc, char **argv) {
   assert(speed_release.braking_speed_cap(0.,1.2,3.,0.,0.)==1.2);
   assert(speed_release.braking_speed_cap(1.,1.2,3.,0.,0.)<
          speed_release.braking_speed_cap(2.,1.2,3.,0.,0.));
+  speed_release.fast_pass_response=true;
+  const double faster_stopping=speed_release.braking_distance(3.,1.2,0.,0.);
+  assert(faster_stopping<stopping && faster_stopping>(9.-1.44)/6.);
+  assert(speed_release.braking_distance(3.,1.2,.2,1.5)>faster_stopping);
+  assert(speed_release.braking_speed_cap(0.,1.2,3.,0.,0.)==1.2);
+  speed_release.fast_pass_response=false;
   // The same future geometry can release speed later in the forecast without
   // granting cruise speed at the measured still-aligned entry position.
   takeover::Track moving;
@@ -231,6 +269,54 @@ int main(int argc, char **argv) {
   assets.grid.assign(3900,.20);
   auto narrow=adaptive.build_candidate({10,0,0},.85,target,1,takeover::Behavior::OVERTAKE,.85);
   assert(!narrow.valid && narrow.reason=="mpc_center_map_clearance");
+  assets.grid.assign(3900,5.);
+  // A failed passing corridor while already ahead may have a safe return.
+  // Only a NEW full body/map/preview-checked trajectory may rescue it.
+  const auto exit_fixture=[&]() {
+    takeover::DynamicOvertakingPlanner p(assets);
+    p.adaptive_offset=true;p.predictive_speed_profile=true;p.cruise_speed=3.;
+    p.initial_command=2.;p.initial_curvature=0.;
+    p.behavior_=takeover::Behavior::OVERTAKE;p.committed_side_=1;
+    p.committed_offset_=.82;p.maneuver_start_s_=10.;p.maneuver_start_d_=.82;
+    p.sqp_optimizer=[](const Json::Value &) {
+      Json::Value out;out["ok"]=false;out["message"]="injected_optimizer_failure";return out;
+    };
+    return p;
+  };
+  auto exit_target=target;
+  exit_target.valid=true;exit_target.position={8.95,0};exit_target.velocity={1.2,0};
+  exit_target.observation_stamp=2.;exit_target.stamp=2.;
+  exit_target.position_variance=.001;exit_target.velocity_variance=.001;
+  auto exit_off=exit_fixture();
+  exit_off.return_feasibility=[](const takeover::Candidate &) {return true;};
+  assert(exit_off.plan({10,.82,0},2.,exit_target,2.).behavior==takeover::Behavior::CANCEL);
+  auto exit_on=exit_fixture();exit_on.verified_exit_recovery=true;
+  int checked_exits=0;
+  exit_on.return_feasibility=[&](const takeover::Candidate &) {++checked_exits;return true;};
+  const auto recovered_exit=exit_on.plan({10,.82,0},2.,exit_target,2.);
+  assert(checked_exits>0 && recovered_exit.behavior==takeover::Behavior::REJOIN && !recovered_exit.stop);
+  assert(recovered_exit.candidate.valid && recovered_exit.committed_side==1);
+  assert(recovered_exit.transition.find("passing_failed_verified_exit:")==0);
+  assert(takeover::return_clearance_reserved(recovered_exit.candidate.minimum_body_clearance));
+  assert(recovered_exit.overtakes_completed==0 && !exit_on.aborting_);
+  auto veto_exit=exit_fixture();veto_exit.verified_exit_recovery=true;
+  veto_exit.return_feasibility=[](const takeover::Candidate &) {return false;};
+  assert(veto_exit.plan({10,.82,0},2.,exit_target,2.).behavior==takeover::Behavior::CANCEL);
+  auto missing_preview=exit_fixture();missing_preview.verified_exit_recovery=true;
+  assert(missing_preview.plan({10,.82,0},2.,exit_target,2.).behavior==takeover::Behavior::CANCEL);
+  auto adjacent_exit=exit_fixture();adjacent_exit.verified_exit_recovery=true;
+  adjacent_exit.return_feasibility=[](const takeover::Candidate &) {return true;};
+  auto adjacent_target=exit_target;adjacent_target.position={9.6,0};
+  assert(adjacent_exit.plan({10,.82,0},2.,adjacent_target,2.).behavior==takeover::Behavior::CANCEL);
+  auto stale_exit=exit_fixture();stale_exit.verified_exit_recovery=true;
+  stale_exit.return_feasibility=[](const takeover::Candidate &) {return true;};
+  auto stale_target=exit_target;stale_target.observation_stamp=-10.;
+  assert(stale_exit.plan({10,.82,0},2.,stale_target,2.).behavior==takeover::Behavior::WAIT);
+  auto wall_exit=exit_fixture();wall_exit.verified_exit_recovery=true;
+  wall_exit.return_feasibility=[](const takeover::Candidate &) {return true;};
+  assets.grid.assign(3900,.20);
+  const auto blocked_exit=wall_exit.plan({10,.82,0},2.,exit_target,2.);
+  assert(blocked_exit.stop && blocked_exit.behavior==takeover::Behavior::CANCEL);
   assets.grid.assign(3900,5.);
   // A downstream wall beyond the slow-entry horizon must prevent commitment
   // on that side, without suppressing an otherwise open opposite corridor.

@@ -1,0 +1,506 @@
+diff --git a/Code/sim_ws/run_takeover_trial.sh b/Code/sim_ws/run_takeover_trial.sh
+index 61d518c..7561e32 100755
+--- a/Code/sim_ws/run_takeover_trial.sh
++++ b/Code/sim_ws/run_takeover_trial.sh
+@@ -15,10 +15,13 @@ export TAKEOVER_TRACK_PREDICTION="${TAKEOVER_TRACK_PREDICTION:-true}"
+ export TAKEOVER_TIMED_CONTROL="${TAKEOVER_TIMED_CONTROL:-true}"
+ export TAKEOVER_PROGRESSIVE_PASS_SPEED="${TAKEOVER_PROGRESSIVE_PASS_SPEED:-false}"
+ export TAKEOVER_PREDICTIVE_SPEED_PROFILE="${TAKEOVER_PREDICTIVE_SPEED_PROFILE:-false}"
++export TAKEOVER_FAST_PASS_GEOMETRY="${TAKEOVER_FAST_PASS_GEOMETRY:-false}"
++export TAKEOVER_FAST_PASS_RESPONSE="${TAKEOVER_FAST_PASS_RESPONSE:-false}"
++export TAKEOVER_VERIFIED_EXIT_RECOVERY="${TAKEOVER_VERIFIED_EXIT_RECOVERY:-false}"
+ export TAKEOVER_EARLY_VERIFIED_RETURN="${TAKEOVER_EARLY_VERIFIED_RETURN:-false}"
+ export TAKEOVER_PASS_SIDE="${TAKEOVER_PASS_SIDE:-0}"
+ case "$TAKEOVER_PASS_SIDE" in -1|0|1) ;; *) echo 'Pass side must be -1, 0 or 1' >&2; exit 2 ;; esac
+-for value in "$TAKEOVER_TRACK_PREDICTION" "$TAKEOVER_TIMED_CONTROL" "$TAKEOVER_PROGRESSIVE_PASS_SPEED" "$TAKEOVER_PREDICTIVE_SPEED_PROFILE" "$TAKEOVER_EARLY_VERIFIED_RETURN"; do
++for value in "$TAKEOVER_TRACK_PREDICTION" "$TAKEOVER_TIMED_CONTROL" "$TAKEOVER_PROGRESSIVE_PASS_SPEED" "$TAKEOVER_PREDICTIVE_SPEED_PROFILE" "$TAKEOVER_FAST_PASS_GEOMETRY" "$TAKEOVER_FAST_PASS_RESPONSE" "$TAKEOVER_VERIFIED_EXIT_RECOVERY" "$TAKEOVER_EARLY_VERIFIED_RETURN"; do
+   case "$value" in true|false) ;; *) echo 'Feature flags must be true or false' >&2; exit 2 ;; esac
+ done
+ 
+@@ -173,6 +176,9 @@ config['track_assisted_prediction'] = os.environ['TAKEOVER_TRACK_PREDICTION'] ==
+ config['timed_control'] = os.environ['TAKEOVER_TIMED_CONTROL'] == 'true'
+ config['progressive_pass_speed'] = os.environ['TAKEOVER_PROGRESSIVE_PASS_SPEED'] == 'true'
+ config['predictive_speed_profile'] = os.environ['TAKEOVER_PREDICTIVE_SPEED_PROFILE'] == 'true'
++config['fast_pass_geometry'] = os.environ['TAKEOVER_FAST_PASS_GEOMETRY'] == 'true'
++config['fast_pass_response'] = os.environ['TAKEOVER_FAST_PASS_RESPONSE'] == 'true'
++config['verified_exit_recovery'] = os.environ['TAKEOVER_VERIFIED_EXIT_RECOVERY'] == 'true'
+ config['early_verified_return'] = os.environ['TAKEOVER_EARLY_VERIFIED_RETURN'] == 'true'
+ config['planning_backend'] = os.environ['TAKEOVER_PLANNING_BACKEND']
+ if config['planning_backend'] == 'upstream_sqp':
+@@ -211,6 +217,9 @@ setsid ros2 launch takeover_sim gym_takeover_launch.py \
+   adaptive_offset:="$ADAPTIVE_OFFSET" lateral_amplitude:="$LATERAL_AMPLITUDE" \
+   progressive_pass_speed:="$TAKEOVER_PROGRESSIVE_PASS_SPEED" \
+   predictive_speed_profile:="$TAKEOVER_PREDICTIVE_SPEED_PROFILE" \
++  fast_pass_geometry:="$TAKEOVER_FAST_PASS_GEOMETRY" \
++  fast_pass_response:="$TAKEOVER_FAST_PASS_RESPONSE" \
++  verified_exit_recovery:="$TAKEOVER_VERIFIED_EXIT_RECOVERY" \
+   early_verified_return:="$TAKEOVER_EARLY_VERIFIED_RETURN" \
+   planning_backend:="$TAKEOVER_PLANNING_BACKEND" \
+   sqp_worker_script:="$PWD/tools/upstream_sqp_worker.py" sqp_upstream_source:="$SQP_SOURCE" \
+diff --git a/Code/sim_ws/src/takeover_sim/include/takeover_sim/dynamic_overtaking.hpp b/Code/sim_ws/src/takeover_sim/include/takeover_sim/dynamic_overtaking.hpp
+index 7ae7c19..b7873ae 100644
+--- a/Code/sim_ws/src/takeover_sim/include/takeover_sim/dynamic_overtaking.hpp
++++ b/Code/sim_ws/src/takeover_sim/include/takeover_sim/dynamic_overtaking.hpp
+@@ -367,6 +367,9 @@ public:
+   bool adaptive_offset = false; // opt-in; retain the frozen fixed-offset baseline
+   bool progressive_pass_speed = false; // explicit simulation experiment
+   bool predictive_speed_profile = false; // per-stage passing/braking proposal
++  bool fast_pass_geometry = false; // opt-in curvature-aware speed experiment
++  bool fast_pass_response = false; // opt-in faster retiming, same physical limits
++  bool verified_exit_recovery = false; // new checked return, never last-command reuse
+   bool early_verified_return = false; // failed repeatability screen; opt-in only
+   // Optional upstream SQP lateral optimizer. Other behaviors, the predictor,
+   // time parameterization, collision checks and MPC remain ours, not upstream.
+@@ -421,25 +424,28 @@ public:
+   // Distance needed to reach a lower physical speed, with the same 50 ms
+   // command integrator, jerk and longitudinal lag as the timed/MPC model.
+   // Reserve one planning tick (0.2 s) plus the speed-reference response
+-  // (1 / gain 2 = 0.5 s) before braking; the speed target cannot command full
++  // (1 / reference gain) before braking; the speed target cannot command full
+   // braking instantly. Positive command lead and acceleration are retained.
+   double braking_distance(double from, double to, double command_lead,
+                           double current_acceleration) const {
+     if (from <= to) return 0.;
+     const double h=.05, target=std::max(0.,to);
++    const int reserve_steps=int(std::ceil((.20+1./speed_reference_gain())/h-1e-9));
+     double v=from, u=from+std::max(0.,command_lead);
+     double a=clip(std::max(0.,current_acceleration),0.,acceleration_max), distance=0.;
+     for(int j=0;j<240;++j) {
+-      if(j>=14) a=std::max(-deceleration_max,a-3*h);
++      if(j>=reserve_steps) a=std::max(-deceleration_max,a-3*h);
+       u=clip(u+h*a,0.,cruise_speed);
+       const double tau=u>=v?acceleration_response:braking_response;
+       const double next=v+h/(tau+h)*(u-v);
+       distance+=.5*(v+next)*h;v=next;
+-      if(j>=14 && v<=target) return distance;
++      if(j>=reserve_steps && v<=target) return distance;
+     }
+     return INF; // no finite stop certificate from this model
+   }
+ 
++  double speed_reference_gain() const { return fast_pass_response ? 4. : 2.; }
++
+   double braking_speed_cap(double distance, double bend_speed, double cap,
+                            double command_lead, double a) const {
+     if(cap<=bend_speed) return cap;
+@@ -726,6 +732,32 @@ public:
+         maneuver_start_d_ = old_start_d;
+       }
+     }
++    if (!candidate.valid && behavior_ == Behavior::OVERTAKE &&
++        verified_exit_recovery && adaptive_offset && return_feasibility &&
++        decision.target_fresh && !aborting_ && committed_side_ != 0 &&
++        gap < -(.5*(vehicle_length+track.length)+body_margin)) {
++      // A failing forward passing corridor does not prove that a fresh return
++      // is impossible. Once physically ahead, try the complete checked exit
++      // before dropping to CANCEL's low-speed cap and letting the lead catch
++      // up. This is a recovery branch, not a lower collision/return threshold:
++      // footprint uncertainty, reserve and the existing MPC return admission
++      // still decide execution. Without a preview callback it is disabled.
++      const std::string failure=candidate.reason;
++      const double old_s=maneuver_start_s_, old_d=maneuver_start_d_;
++      maneuver_start_s_=current_projection.s;
++      maneuver_start_d_=current_projection.d;
++      auto exit=build_candidate(ego,ego_speed,track,committed_side_,
++                                Behavior::REJOIN,cruise_speed);
++      const double deadline=committed_prediction_timeout-decision.target_age;
++      if(exit.valid && return_clearance_reserved(exit.minimum_body_clearance) &&
++          return_alignment_before(assets_,exit,deadline)) {
++        candidate=std::move(exit);
++        set_behavior(Behavior::REJOIN,"passing_failed_verified_exit:"+failure);
++      } else {
++        maneuver_start_s_=old_s;
++        maneuver_start_d_=old_d;
++      }
++    }
+     if (!candidate.valid && (behavior_ == Behavior::OVERTAKE || behavior_ == Behavior::REJOIN)) {
+       cancel_start_ = now;
+       aborting_ = true;
+@@ -1025,6 +1057,13 @@ private:
+       };
+       request["initial_slope"]=initial_slope;
+       request["initial_second_derivative"]=second_derivative;
++      if(fast_pass_geometry) {
++        // Reduce actual route-plus-offset curvature, not merely d''.
++        // This changes a preference only: corridor, timing and MPC admission
++        // remain mandatory and all hard limits are unchanged.
++        request["actual_curvature_cost"]=true;
++        request["curvature_weight"]=250.;
++      }
+       // Geometry must be steerable, not drivable everywhere at cruise speed.
+       // The timed trajectory below reduces speed for curvature and the MPC
+       // independently enforces lateral acceleration. Using 1.2/v_cruise^2
+@@ -1190,7 +1229,7 @@ private:
+         const int substeps = std::max(1, int(std::round(step / .05)));
+         const double h = step / substeps;
+         for (int j = 0; j < substeps; ++j) {
+-          const double desired_a = clip(2.0 * (local_cap - command),
++          const double desired_a = clip(speed_reference_gain() * (local_cap - command),
+                                          -deceleration_max, acceleration_max);
+           // MPC permits 4 m/s^3 only in its first wall-time step, but 3 in
+           // subsequent 50 ms stages (0.15 m/s^2). Use the common stricter bound.
+diff --git a/Code/sim_ws/src/takeover_sim/launch/gym_takeover_launch.py b/Code/sim_ws/src/takeover_sim/launch/gym_takeover_launch.py
+index 8989819..fa716d6 100644
+--- a/Code/sim_ws/src/takeover_sim/launch/gym_takeover_launch.py
++++ b/Code/sim_ws/src/takeover_sim/launch/gym_takeover_launch.py
+@@ -66,6 +66,9 @@ def generate_launch_description():
+         DeclareLaunchArgument("adaptive_offset", default_value="false"),
+         DeclareLaunchArgument("progressive_pass_speed", default_value="false"),
+         DeclareLaunchArgument("predictive_speed_profile", default_value="false"),
++        DeclareLaunchArgument("fast_pass_geometry", default_value="false"),
++        DeclareLaunchArgument("fast_pass_response", default_value="false"),
++        DeclareLaunchArgument("verified_exit_recovery", default_value="false"),
+         DeclareLaunchArgument("early_verified_return", default_value="false"),
+         DeclareLaunchArgument("planning_backend", default_value="frenet_candidates"),
+         DeclareLaunchArgument("sqp_worker_script", default_value=""),
+@@ -169,6 +172,9 @@ def generate_launch_description():
+                 "adaptive_offset": ParameterValue(LaunchConfiguration("adaptive_offset"), value_type=bool),
+                 "progressive_pass_speed": ParameterValue(LaunchConfiguration("progressive_pass_speed"), value_type=bool),
+                 "predictive_speed_profile": ParameterValue(LaunchConfiguration("predictive_speed_profile"), value_type=bool),
++                "fast_pass_geometry": ParameterValue(LaunchConfiguration("fast_pass_geometry"), value_type=bool),
++                "fast_pass_response": ParameterValue(LaunchConfiguration("fast_pass_response"), value_type=bool),
++                "verified_exit_recovery": ParameterValue(LaunchConfiguration("verified_exit_recovery"), value_type=bool),
+                 "early_verified_return": ParameterValue(LaunchConfiguration("early_verified_return"), value_type=bool),
+                 "allowed_pass_side": ParameterValue(LaunchConfiguration("allowed_pass_side"), value_type=int),
+                 "pass_offset": ParameterValue(LaunchConfiguration("pass_offset"), value_type=float),
+diff --git a/Code/sim_ws/src/takeover_sim/src/takeover_controller_node.cpp b/Code/sim_ws/src/takeover_sim/src/takeover_controller_node.cpp
+index c0e5bb0..f0a6893 100644
+--- a/Code/sim_ws/src/takeover_sim/src/takeover_controller_node.cpp
++++ b/Code/sim_ws/src/takeover_sim/src/takeover_controller_node.cpp
+@@ -59,6 +59,9 @@ public:
+     declare_parameter<bool>("adaptive_offset", false);
+     declare_parameter<bool>("progressive_pass_speed", false);
+     declare_parameter<bool>("predictive_speed_profile", false);
++    declare_parameter<bool>("fast_pass_geometry", false);
++    declare_parameter<bool>("fast_pass_response", false);
++    declare_parameter<bool>("verified_exit_recovery", false);
+     declare_parameter<bool>("early_verified_return", false);
+     declare_parameter<std::string>("planning_backend", "frenet_candidates");
+     declare_parameter<std::string>("sqp_worker_script", "");
+@@ -97,6 +100,9 @@ public:
+     dynamic_planner_->adaptive_offset = get_parameter("adaptive_offset").as_bool();
+     dynamic_planner_->progressive_pass_speed = get_parameter("progressive_pass_speed").as_bool();
+     dynamic_planner_->predictive_speed_profile = get_parameter("predictive_speed_profile").as_bool();
++    dynamic_planner_->fast_pass_geometry = get_parameter("fast_pass_geometry").as_bool();
++    dynamic_planner_->fast_pass_response = get_parameter("fast_pass_response").as_bool();
++    dynamic_planner_->verified_exit_recovery = get_parameter("verified_exit_recovery").as_bool();
+     dynamic_planner_->early_verified_return = get_parameter("early_verified_return").as_bool();
+     planning_backend_=get_parameter("planning_backend").as_string();
+     if(planning_backend_!="frenet_candidates" && planning_backend_!="upstream_sqp")
+@@ -532,6 +538,9 @@ private:
+     value["timed_control"] = dynamic_planner_->timed_control;
+     value["progressive_pass_speed"] = dynamic_planner_->progressive_pass_speed;
+     value["predictive_speed_profile"] = dynamic_planner_->predictive_speed_profile;
++    value["fast_pass_geometry"] = dynamic_planner_->fast_pass_geometry;
++    value["fast_pass_response"] = dynamic_planner_->fast_pass_response;
++    value["verified_exit_recovery"] = dynamic_planner_->verified_exit_recovery;
+     value["early_verified_return"] = dynamic_planner_->early_verified_return;
+     value["transition_length_m"] = decision_.candidate.transition_length;
+     value["adaptive_offset"] = dynamic_planner_->adaptive_offset;
+diff --git a/Code/sim_ws/tools/audit_speed_comparison.py b/Code/sim_ws/tools/audit_speed_comparison.py
+index ed85d9f..f52b7f3 100644
+--- a/Code/sim_ws/tools/audit_speed_comparison.py
++++ b/Code/sim_ws/tools/audit_speed_comparison.py
+@@ -47,7 +47,8 @@ def main():
+         graph = json.loads((directory/'graph_audit.json').read_text())
+         runtime = summary['runtime']
+         entry = {k: run.get(k,config.get(k)) for k in ('scenario', 'run_id', 'seed',
+-                 'predictive_speed_profile', 'results_dir')}
++                 'predictive_speed_profile', 'fast_pass_geometry', 'fast_pass_response',
++                 'verified_exit_recovery', 'results_dir')}
+         entry.update(passed=summary['passed'], clean=bool(summary['passed'] and
+                      not invalid and not runtime['controller_failures'] and
+                      not runtime['solver_timeouts'] and not runtime['sqp_timeouts']),
+@@ -61,6 +62,13 @@ def main():
+             maximum_abs_mpc_acceleration_command_mps2=max(
+                 (abs(v) for v in finite(rows,'mpc_acceleration_command_mps2')), default=None),
+             graph_audit=graph, runtime_source_sha256=config['runtime_source_sha256'])
++        completion=entry['truth_completion_time_s']
++        encounter=[r for r in rows if completion is not None and float(r['time_s'])<=completion]
++        entry['mean_encounter_speed_mps']=(statistics.mean(finite(encounter,'ego_speed_mps'))
++                                          if encounter else None)
++        entry['first_overtake_time_s']=(float(passing[0]['time_s']) if passing else None)
++        entry['entry_to_completion_s']=(completion-float(passing[0]['time_s'])
++                                        if completion is not None and passing else None)
+         output['runs'].append(entry)
+     rendered=json.dumps(output, indent=2)+'\n'
+     if args.output:
+diff --git a/Code/sim_ws/tools/run_position_overtake_batch.py b/Code/sim_ws/tools/run_position_overtake_batch.py
+index 4a4ad6d..6cd5128 100644
+--- a/Code/sim_ws/tools/run_position_overtake_batch.py
++++ b/Code/sim_ws/tools/run_position_overtake_batch.py
+@@ -18,6 +18,8 @@ def main():
+     p = argparse.ArgumentParser(description=__doc__)
+     p.add_argument('--repeats', type=int, default=1)
+     p.add_argument('--schedule-seed', type=int, default=20261024)
++    p.add_argument('--runner', choices=('run_takeover_trial.sh','run_fast_overtake_trial.sh'),
++                   default='run_takeover_trial.sh')
+     p.add_argument('--prefix', default='positions_' + datetime.datetime.now(datetime.timezone.utc).strftime('%Y%m%dT%H%M%SZ'))
+     args = p.parse_args()
+     if args.repeats < 1 or not re.fullmatch(r'[A-Za-z0-9_-]+', args.prefix):
+@@ -30,7 +32,7 @@ def main():
+         order = SCENARIOS.copy()
+         rng.shuffle(order)
+         schedule.extend(dict(scenario=s, repeat=repeat, run_id=f'{args.prefix}_repeat{repeat}') for s in order)
+-    design = dict(schedule_seed=args.schedule_seed, schedule=schedule,
++    design = dict(schedule_seed=args.schedule_seed, schedule=schedule, runner=args.runner,
+                   expected='single_pass_and_rejoin', ego_start_delay_s=0.,
+                   note='Exploratory location screen. Each fresh process is one run; CSV samples are not replicates. '
+                        'Same route gap, speed caps and duration. Entry is decided online, not forced at spawn.')
+@@ -39,7 +41,7 @@ def main():
+     reports = []
+     for trial in schedule:
+         print(f"Running {trial['scenario']} repeat {trial['repeat']}", flush=True)
+-        result = subprocess.run(['bash', 'run_takeover_trial.sh', trial['scenario'], '',
++        result = subprocess.run(['bash', args.runner, trial['scenario'], '',
+                                  str(trial['repeat']), trial['run_id'], 'false'], cwd=ROOT, env=env)
+         directory = ROOT/'results/takeover'/trial['scenario']/trial['run_id']
+         report = dict(trial, exit_code=result.returncode, results_dir=str(directory))
+diff --git a/Code/sim_ws/tools/run_stability_comparison.py b/Code/sim_ws/tools/run_stability_comparison.py
+index 85987dc..eda8341 100644
+--- a/Code/sim_ws/tools/run_stability_comparison.py
++++ b/Code/sim_ws/tools/run_stability_comparison.py
+@@ -23,7 +23,15 @@ def main():
+     parser.add_argument('--plan-only', action='store_true')
+     parser.add_argument('--profile-comparison', action='store_true',
+                         help='Compare legacy timing with per-stage passing and reachable braking')
++    parser.add_argument('--fast-geometry-comparison', action='store_true',
++                        help='Compare current predictive speed profile with curvature-aware passing')
++    parser.add_argument('--fast-response-comparison', action='store_true',
++                        help='Compare curvature-aware passing with/without faster reference response')
++    parser.add_argument('--verified-exit-comparison', action='store_true',
++                        help='Compare geometry-only against checked ahead-of-target exit recovery')
+     args = parser.parse_args()
++    if sum((args.profile_comparison,args.fast_geometry_comparison,args.fast_response_comparison,args.verified_exit_comparison))>1:
++        parser.error('Select only one comparison')
+     if args.repeats < 1 or not re.fullmatch(r'[A-Za-z0-9_-]+', args.prefix):
+         parser.error('Require positive repeats and a safe, unique prefix')
+     rng = random.Random(args.schedule_seed)
+@@ -36,13 +44,25 @@ def main():
+             rng.shuffle(policies)
+             for progressive in policies:
+                 arm = ('predictive_profile' if args.profile_comparison else 'progressive') if progressive else 'legacy_speed'
++                if args.fast_geometry_comparison:
++                    arm = 'fast_geometry' if progressive else 'predictive_profile'
++                if args.fast_response_comparison:
++                    arm = 'fast_response' if progressive else 'fast_geometry'
++                if args.verified_exit_comparison:
++                    arm = 'verified_exit' if progressive else 'fast_geometry'
+                 schedule.append(dict(scenario=f'fitzpatrick_position_{position}',
+                     repeat=repeat, seed=repeat,
+-                    progressive_pass_speed=progressive and not args.profile_comparison,
+-                    predictive_speed_profile=progressive and args.profile_comparison,
++                    progressive_pass_speed=progressive and not (args.profile_comparison or args.fast_geometry_comparison or args.fast_response_comparison or args.verified_exit_comparison),
++                    predictive_speed_profile=args.fast_geometry_comparison or args.fast_response_comparison or args.verified_exit_comparison or (progressive and args.profile_comparison),
++                    fast_pass_geometry=args.fast_response_comparison or args.verified_exit_comparison or (progressive and args.fast_geometry_comparison),
++                    fast_pass_response=progressive and args.fast_response_comparison,
++                    verified_exit_recovery=progressive and args.verified_exit_comparison,
+                     run_id=f'{args.prefix}_{arm}_r{repeat}'))
+     design = dict(schedule_seed=args.schedule_seed, schedule=schedule,
+         early_verified_return=False, profile_comparison=args.profile_comparison,
++        fast_geometry_comparison=args.fast_geometry_comparison,
++        fast_response_comparison=args.fast_response_comparison,
++        verified_exit_comparison=args.verified_exit_comparison,
+         unit='One fresh ROS/Gym process; not individual CSV samples',
+         blocking='Matched position and seed; randomized arm order inside each block',
+         scope='Small engineering screen, not a statistical success-rate estimate',
+@@ -59,6 +79,9 @@ def main():
+         env = dict(os.environ, TAKEOVER_PLANNING_BACKEND='upstream_sqp',
+                    TAKEOVER_EGO_START_DELAY_S='0',
+                    TAKEOVER_EARLY_VERIFIED_RETURN='false',
++                   TAKEOVER_FAST_PASS_GEOMETRY=str(trial['fast_pass_geometry']).lower(),
++                   TAKEOVER_FAST_PASS_RESPONSE=str(trial['fast_pass_response']).lower(),
++                   TAKEOVER_VERIFIED_EXIT_RECOVERY=str(trial['verified_exit_recovery']).lower(),
+                    TAKEOVER_PREDICTIVE_SPEED_PROFILE=str(trial['predictive_speed_profile']).lower(),
+                    TAKEOVER_PROGRESSIVE_PASS_SPEED=str(trial['progressive_pass_speed']).lower())
+         # The existing runner supervises simulated duration, tears down its
+diff --git a/Code/sim_ws/tools/test_stability_schedule.py b/Code/sim_ws/tools/test_stability_schedule.py
+index fcf2b53..9c7bcc4 100644
+--- a/Code/sim_ws/tools/test_stability_schedule.py
++++ b/Code/sim_ws/tools/test_stability_schedule.py
+@@ -34,6 +34,41 @@ class Schedule(unittest.TestCase):
+     def test_invalid_repeats(self):
+         self.assertNotEqual(self.plan('--repeats', '0').returncode, 0)
+ 
++    def test_fast_geometry_pairs_current_profile(self):
++        result=self.plan('--fast-geometry-comparison')
++        self.assertEqual(result.returncode,0,result.stderr)
++        schedule=json.loads(result.stdout)['schedule']
++        self.assertEqual(len(schedule),8)
++        for i in range(0,8,2):
++            pair=schedule[i:i+2]
++            self.assertEqual(pair[0]['scenario'],pair[1]['scenario'])
++            self.assertEqual(sorted(r['fast_pass_geometry'] for r in pair),[False,True])
++            self.assertTrue(all(r['predictive_speed_profile'] and not r['progressive_pass_speed'] for r in pair))
++
++    def test_fast_response_pairs_geometry_only(self):
++        result=self.plan('--fast-response-comparison')
++        self.assertEqual(result.returncode,0,result.stderr)
++        schedule=json.loads(result.stdout)['schedule']
++        for i in range(0,8,2):
++            pair=schedule[i:i+2]
++            self.assertEqual(pair[0]['scenario'],pair[1]['scenario'])
++            self.assertEqual(sorted(r['fast_pass_response'] for r in pair),[False,True])
++            self.assertTrue(all(r['predictive_speed_profile'] and r['fast_pass_geometry'] and
++                                not r['progressive_pass_speed'] for r in pair))
++        self.assertNotEqual(self.plan('--fast-response-comparison','--profile-comparison').returncode,0)
++
++    def test_verified_exit_pairs_geometry_only_without_fast_response(self):
++        result=self.plan('--verified-exit-comparison')
++        self.assertEqual(result.returncode,0,result.stderr)
++        schedule=json.loads(result.stdout)['schedule']
++        self.assertEqual(len(schedule),8)
++        for i in range(0,8,2):
++            pair=schedule[i:i+2]
++            self.assertEqual(pair[0]['scenario'],pair[1]['scenario'])
++            self.assertEqual(sorted(r['verified_exit_recovery'] for r in pair),[False,True])
++            self.assertTrue(all(r['predictive_speed_profile'] and r['fast_pass_geometry'] and
++                               not r['fast_pass_response'] and not r['progressive_pass_speed'] for r in pair))
++
+     def test_unsafe_prefix_rejected(self):
+         self.assertNotEqual(self.plan('--prefix', '../unsafe').returncode, 0)
+ 
+diff --git a/Code/sim_ws/tools/test_takeover_prediction.cpp b/Code/sim_ws/tools/test_takeover_prediction.cpp
+index db44581..ec83f1b 100644
+--- a/Code/sim_ws/tools/test_takeover_prediction.cpp
++++ b/Code/sim_ws/tools/test_takeover_prediction.cpp
+@@ -91,6 +91,12 @@ int main(int argc, char **argv) {
+   assert(speed_release.braking_speed_cap(0.,1.2,3.,0.,0.)==1.2);
+   assert(speed_release.braking_speed_cap(1.,1.2,3.,0.,0.)<
+          speed_release.braking_speed_cap(2.,1.2,3.,0.,0.));
++  speed_release.fast_pass_response=true;
++  const double faster_stopping=speed_release.braking_distance(3.,1.2,0.,0.);
++  assert(faster_stopping<stopping && faster_stopping>(9.-1.44)/6.);
++  assert(speed_release.braking_distance(3.,1.2,.2,1.5)>faster_stopping);
++  assert(speed_release.braking_speed_cap(0.,1.2,3.,0.,0.)==1.2);
++  speed_release.fast_pass_response=false;
+   // The same future geometry can release speed later in the forecast without
+   // granting cruise speed at the measured still-aligned entry position.
+   takeover::Track moving;
+@@ -232,6 +238,54 @@ int main(int argc, char **argv) {
+   auto narrow=adaptive.build_candidate({10,0,0},.85,target,1,takeover::Behavior::OVERTAKE,.85);
+   assert(!narrow.valid && narrow.reason=="mpc_center_map_clearance");
+   assets.grid.assign(3900,5.);
++  // A failed passing corridor while already ahead may have a safe return.
++  // Only a NEW full body/map/preview-checked trajectory may rescue it.
++  const auto exit_fixture=[&]() {
++    takeover::DynamicOvertakingPlanner p(assets);
++    p.adaptive_offset=true;p.predictive_speed_profile=true;p.cruise_speed=3.;
++    p.initial_command=2.;p.initial_curvature=0.;
++    p.behavior_=takeover::Behavior::OVERTAKE;p.committed_side_=1;
++    p.committed_offset_=.82;p.maneuver_start_s_=10.;p.maneuver_start_d_=.82;
++    p.sqp_optimizer=[](const Json::Value &) {
++      Json::Value out;out["ok"]=false;out["message"]="injected_optimizer_failure";return out;
++    };
++    return p;
++  };
++  auto exit_target=target;
++  exit_target.valid=true;exit_target.position={8.95,0};exit_target.velocity={1.2,0};
++  exit_target.observation_stamp=2.;exit_target.stamp=2.;
++  exit_target.position_variance=.001;exit_target.velocity_variance=.001;
++  auto exit_off=exit_fixture();
++  exit_off.return_feasibility=[](const takeover::Candidate &) {return true;};
++  assert(exit_off.plan({10,.82,0},2.,exit_target,2.).behavior==takeover::Behavior::CANCEL);
++  auto exit_on=exit_fixture();exit_on.verified_exit_recovery=true;
++  int checked_exits=0;
++  exit_on.return_feasibility=[&](const takeover::Candidate &) {++checked_exits;return true;};
++  const auto recovered_exit=exit_on.plan({10,.82,0},2.,exit_target,2.);
++  assert(checked_exits>0 && recovered_exit.behavior==takeover::Behavior::REJOIN && !recovered_exit.stop);
++  assert(recovered_exit.candidate.valid && recovered_exit.committed_side==1);
++  assert(recovered_exit.transition.find("passing_failed_verified_exit:")==0);
++  assert(takeover::return_clearance_reserved(recovered_exit.candidate.minimum_body_clearance));
++  assert(recovered_exit.overtakes_completed==0 && !exit_on.aborting_);
++  auto veto_exit=exit_fixture();veto_exit.verified_exit_recovery=true;
++  veto_exit.return_feasibility=[](const takeover::Candidate &) {return false;};
++  assert(veto_exit.plan({10,.82,0},2.,exit_target,2.).behavior==takeover::Behavior::CANCEL);
++  auto missing_preview=exit_fixture();missing_preview.verified_exit_recovery=true;
++  assert(missing_preview.plan({10,.82,0},2.,exit_target,2.).behavior==takeover::Behavior::CANCEL);
++  auto adjacent_exit=exit_fixture();adjacent_exit.verified_exit_recovery=true;
++  adjacent_exit.return_feasibility=[](const takeover::Candidate &) {return true;};
++  auto adjacent_target=exit_target;adjacent_target.position={9.6,0};
++  assert(adjacent_exit.plan({10,.82,0},2.,adjacent_target,2.).behavior==takeover::Behavior::CANCEL);
++  auto stale_exit=exit_fixture();stale_exit.verified_exit_recovery=true;
++  stale_exit.return_feasibility=[](const takeover::Candidate &) {return true;};
++  auto stale_target=exit_target;stale_target.observation_stamp=-10.;
++  assert(stale_exit.plan({10,.82,0},2.,stale_target,2.).behavior==takeover::Behavior::WAIT);
++  auto wall_exit=exit_fixture();wall_exit.verified_exit_recovery=true;
++  wall_exit.return_feasibility=[](const takeover::Candidate &) {return true;};
++  assets.grid.assign(3900,.20);
++  const auto blocked_exit=wall_exit.plan({10,.82,0},2.,exit_target,2.);
++  assert(blocked_exit.stop && blocked_exit.behavior==takeover::Behavior::CANCEL);
++  assets.grid.assign(3900,5.);
+   // A downstream wall beyond the slow-entry horizon must prevent commitment
+   // on that side, without suppressing an otherwise open opposite corridor.
+   for(int row=0;row<assets.height;++row) for(int col=0;col<assets.width;++col) {
+diff --git a/Code/sim_ws/tools/test_upstream_sqp.py b/Code/sim_ws/tools/test_upstream_sqp.py
+index df74f2d..7c5de39 100644
+--- a/Code/sim_ws/tools/test_upstream_sqp.py
++++ b/Code/sim_ws/tools/test_upstream_sqp.py
+@@ -95,6 +95,29 @@ class SqpChecks(unittest.TestCase):
+         solver.dense_bias=np.linspace(-.01,.01,19)
+         adapted=np.array([(worker.adapter_cost(solver,d+e)-worker.adapter_cost(solver,d-e))/2e-6 for e in delta])
+         np.testing.assert_allclose(worker.adapter_cost_jac(solver,d),adapted,atol=1e-6)
++        solver.actual_curvature_cost=True
++        solver.curvature_weight=250.
++        solver.dense_route_curvature=np.linspace(-.1,.4,19)
++        adapted=np.array([(worker.adapter_cost(solver,d+e)-worker.adapter_cost(solver,d-e))/2e-6 for e in delta])
++        np.testing.assert_allclose(worker.adapter_cost_jac(solver,d),adapted,atol=1e-6)
++
++    def test_fast_cost_retains_corridor_and_curvature_constraints(self):
++        request=self.fixture()
++        request.update(lateral_reference=request['initial'],
++                       actual_curvature_cost=True,curvature_weight=250.)
++        result=worker.solve(self.core,request)
++        self.assertTrue(result['ok'],result)
++        self.assertGreaterEqual(min(result['d'][12:]),.80-1e-6)
++        self.assertGreaterEqual(result['inequality_min'],-1e-4)
++        request['bounds'][0]=[.4,.5]
++        self.assertFalse(worker.solve(self.core,request)['ok'])
++
++    def test_bad_curvature_weight_rejected(self):
++        for weight in (-1.,float('nan'),float('inf'),10001.):
++            request=self.fixture()
++            request['curvature_weight']=weight
++            with self.assertRaisesRegex(ValueError,'bad_curvature_weight'):
++                worker.solve(self.core,request)
+ 
+ 
+ if __name__ == '__main__':
+diff --git a/Code/sim_ws/tools/upstream_sqp_worker.py b/Code/sim_ws/tools/upstream_sqp_worker.py
+index f9f6a44..dbdafa7 100644
+--- a/Code/sim_ws/tools/upstream_sqp_worker.py
++++ b/Code/sim_ws/tools/upstream_sqp_worker.py
+@@ -64,14 +64,20 @@ def inequality_jac(solver, d):
+ 
+ def adapter_cost(solver, d):
+     second = solver.dense_second @ d + solver.dense_bias
++    if getattr(solver, 'actual_curvature_cost', False):
++        second = second-solver.dense_route_curvature
++    weight = getattr(solver, 'curvature_weight', 5.)
+     return (solver.objective_function(d) + 1000*np.sum((d-solver.lateral_reference)**2)
+-            + 5*solver.spatial_length*np.mean(second**2))/1000
++            + weight*solver.spatial_length*np.mean(second**2))/1000
+ 
+ 
+ def adapter_cost_jac(solver, d):
+     second = solver.dense_second @ d + solver.dense_bias
++    if getattr(solver, 'actual_curvature_cost', False):
++        second = second-solver.dense_route_curvature
++    weight = getattr(solver, 'curvature_weight', 5.)
+     return (objective_jac(d) + 2000*(d-solver.lateral_reference)
+-            + 10*solver.spatial_length/len(second)*solver.dense_second.T @ second)/1000
++            + 2*weight*solver.spatial_length/len(second)*solver.dense_second.T @ second)/1000
+ 
+ 
+ def corridor_feasibility(solver, bounds):
+@@ -177,6 +183,10 @@ def solve(core, request):
+             raise ValueError('bad_lateral_reference')
+     solver.down_sampled_delta_s = ds
+     solver.spatial_length = x[-1]-x[0]
++    solver.actual_curvature_cost = bool(request.get('actual_curvature_cost', False))
++    solver.curvature_weight = float(request.get('curvature_weight', 5.))
++    if not np.isfinite(solver.curvature_weight) or not 0 <= solver.curvature_weight <= 10000:
++        raise ValueError('bad_curvature_weight')
+     solver.global_traj_kappas = np.asarray(request["curvature"], dtype=float)
+     solver.max_kappa = float(request["max_curvature"])
+     solver.obs_downsampled_indices = np.asarray(request["obstacle_indices"], dtype=int)

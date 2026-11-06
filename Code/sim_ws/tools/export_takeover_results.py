@@ -25,7 +25,12 @@ def main():
     for run in runs:
         dest = args.destination / run.parent.name / run.name
         dest.mkdir(parents=True)
-        for source in sorted(run.iterdir()):
+        sources=list(run.iterdir())
+        # Dirty source.patch cannot contain newly added/untracked adapter files.
+        # Keep the runner's explicit source snapshot, not ROS/cache directories.
+        if (run/'adapter_sources').is_dir():
+            sources.extend((run/'adapter_sources').iterdir())
+        for source in sorted(sources):
             if not source.is_file():
                 continue
             if source.suffix == '.csv':
@@ -33,8 +38,9 @@ def main():
                 with source.open('rb') as src, target.open('wb') as out:
                     with gzip.GzipFile(filename='', mode='wb', fileobj=out, mtime=0) as zipped:
                         shutil.copyfileobj(src, zipped)
-            elif source.suffix in ('.json', '.jsonl', '.png', '.patch', '.log'):
-                target = dest / source.name
+            elif source.suffix in ('.json', '.jsonl', '.png', '.patch', '.log', '.hpp', '.py', '.sh'):
+                target = dest / source.relative_to(run)
+                target.parent.mkdir(parents=True,exist_ok=True)
                 shutil.copyfile(source, target)
             else:
                 continue

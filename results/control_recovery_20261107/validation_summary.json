@@ -1,0 +1,93 @@
+{
+  "screen": {
+    "complete_runs": 8,
+    "on": {
+      "runs": 4,
+      "configured_passes": 4,
+      "clean_passes": 4,
+      "minimum_body_gap_m": 0.47845166751115314,
+      "completion_s": {
+        "fitzpatrick_position_25": 8.200000000000001,
+        "fitzpatrick_position_50": 12.950000000000001,
+        "fitzpatrick_position_75": 17.400000000000002,
+        "fitzpatrick_position_00": 6.95
+      }
+    },
+    "off": {
+      "runs": 4,
+      "configured_passes": 4,
+      "clean_passes": 3,
+      "minimum_body_gap_m": 0.4657628462096555,
+      "completion_s": {
+        "fitzpatrick_position_25": 8.200000000000001,
+        "fitzpatrick_position_50": 26.400000000000002,
+        "fitzpatrick_position_75": 16.900000000000002,
+        "fitzpatrick_position_00": 7.2
+      }
+    }
+  },
+  "static_regressions": [
+    {
+      "scenario": "v8_clear",
+      "raw_evaluator_passed": true,
+      "duration_s": 12.153049359,
+      "stop_samples_after_2s": 0,
+      "strict_clean_pass": true,
+      "last_planner_reason": "ok"
+    },
+    {
+      "scenario": "v8_static",
+      "raw_evaluator_passed": true,
+      "duration_s": 14.092727809000001,
+      "stop_samples_after_2s": 172,
+      "strict_clean_pass": false,
+      "last_planner_reason": "all_candidates_blocked"
+    }
+  ],
+  "gui": {
+    "run_id": "control_recovery_gui_20261107_a",
+    "duration_s": 35.2,
+    "completion_s": 13.450000000000001,
+    "safety": {
+      "boundary_violation_events": 0,
+      "collision_events": 0,
+      "lead_boundary_violation_events": 0,
+      "minimum_body_clearance_m": 0.5688045059181989
+    },
+    "runtime": {
+      "cold_control_recoveries": 0,
+      "control_recovery_attempts": 0,
+      "control_recovery_successes": 0,
+      "control_rejection_reasons": {},
+      "control_rejections": 0,
+      "controller_failures": 0,
+      "controller_rejection_reasons": {},
+      "freshness_triggered_replans": 1,
+      "infeasible_count": 0,
+      "mpc_mean_ms": 1.3013139335300985,
+      "mpc_p95_ms": 2.015684799994232,
+      "planner_failures": 6,
+      "planning_backend": "upstream_sqp",
+      "planning_mean_ms": 16.076776530584905,
+      "planning_p95_ms": 96.98194999998577,
+      "rejected_track_jumps": 0,
+      "return_preview_checks": 11,
+      "return_preview_rejections": {
+        "mpc_actual_dynamic_conflict": 2
+      },
+      "solver_recoveries": 0,
+      "solver_timeouts": 0,
+      "sqp_calls": 110,
+      "sqp_failures": 2,
+      "sqp_preview_checks": 51,
+      "sqp_preview_rejections": {},
+      "sqp_timeouts": 0
+    },
+    "stop_samples_after_2s": 0
+  },
+  "limits": [
+    "No live control rejection/recovery naturally triggered in ON nominal runs",
+    "Synchronous planning remains",
+    "Static obstacle trial is NOT a clean pass; raw evaluator only checks safety for this expectation"
+  ]
+}

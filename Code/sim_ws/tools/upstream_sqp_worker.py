@@ -64,14 +64,20 @@ def inequality_jac(solver, d):
 
 def adapter_cost(solver, d):
     second = solver.dense_second @ d + solver.dense_bias
+    if getattr(solver, 'actual_curvature_cost', False):
+        second = second-solver.dense_route_curvature
+    weight = getattr(solver, 'curvature_weight', 5.)
     return (solver.objective_function(d) + 1000*np.sum((d-solver.lateral_reference)**2)
-            + 5*solver.spatial_length*np.mean(second**2))/1000
+            + weight*solver.spatial_length*np.mean(second**2))/1000
 
 
 def adapter_cost_jac(solver, d):
     second = solver.dense_second @ d + solver.dense_bias
+    if getattr(solver, 'actual_curvature_cost', False):
+        second = second-solver.dense_route_curvature
+    weight = getattr(solver, 'curvature_weight', 5.)
     return (objective_jac(d) + 2000*(d-solver.lateral_reference)
-            + 10*solver.spatial_length/len(second)*solver.dense_second.T @ second)/1000
+            + 2*weight*solver.spatial_length/len(second)*solver.dense_second.T @ second)/1000
 
 
 def corridor_feasibility(solver, bounds):
@@ -177,6 +183,10 @@ def solve(core, request):
             raise ValueError('bad_lateral_reference')
     solver.down_sampled_delta_s = ds
     solver.spatial_length = x[-1]-x[0]
+    solver.actual_curvature_cost = bool(request.get('actual_curvature_cost', False))
+    solver.curvature_weight = float(request.get('curvature_weight', 5.))
+    if not np.isfinite(solver.curvature_weight) or not 0 <= solver.curvature_weight <= 10000:
+        raise ValueError('bad_curvature_weight')
     solver.global_traj_kappas = np.asarray(request["curvature"], dtype=float)
     solver.max_kappa = float(request["max_curvature"])
     solver.obs_downsampled_indices = np.asarray(request["obstacle_indices"], dtype=int)

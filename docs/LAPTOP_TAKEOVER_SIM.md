@@ -1,5 +1,25 @@
 # Laptop Dynamic-Overtaking Simulation
 
+## Latest explicit development entry point (2026-11-06)
+
+```bash
+cd /data/projects/F1-Tenth-Duke/f1tenth-takeover/Code/sim_ws
+# GUI: native Gym, Fitzpatrick, 3.0/1.5 m/s caps, 35 simulation seconds.
+bash run_fast_overtake_trial.sh fitzpatrick_position_50 35 1 \
+  "gui_$(date +%Y%m%d_%H%M%S)" true
+```
+
+Change 50 to 00/25/75 for other encounter positions; `false` runs headless.
+Use RViz Fixed Frame `map`. One trial at a time; Ctrl+C tears down its local
+ROS group. The runner uses localhost-only domain 73 and is not a real-car
+launcher. This wrapper enables predictive timing, curvature-aware geometry,
+verified exit and checked-control feedback, not the rejected faster gain.
+To reproduce the prior wrapper policy, prefix with
+`TAKEOVER_CHECKED_CONTROL_RECOVERY=false`. Generic runner defaults remain OFF.
+Read [implementation, test outcomes and remaining limitations](CONTROL_RECOVERY_20261106.md)
+before treating a completed pass as uninterrupted/stable motion. No P2
+asynchronous planning or P3 whole-maneuver admission is claimed.
+
 ## Stability follow-up (2026-11-04, development only)
 
 Bounded recovery-length search and checked same-side continuation were added.

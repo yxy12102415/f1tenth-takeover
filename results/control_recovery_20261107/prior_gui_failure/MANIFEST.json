@@ -1,0 +1,98 @@
+{
+  "run_prefix": "gui_20261106_015712",
+  "run_count": 1,
+  "source_root": "/data/projects/F1-Tenth-Duke/f1tenth-takeover/Code/sim_ws/results/takeover",
+  "note": "All matching runs included, irrespective of outcome. CSV gzip is lossless. ROS subdirectory logs remain at source.",
+  "files": [
+    {
+      "path": "fitzpatrick_position_50/gui_20261106_015712/adapter_sources/generate_gym_mpc.sh",
+      "sha256": "b44326050c502d4e93c94d1aea4688e9430a065964906d9981c5e65365c85589",
+      "bytes": 1103
+    },
+    {
+      "path": "fitzpatrick_position_50/gui_20261106_015712/adapter_sources/sqp_worker.hpp",
+      "sha256": "dc3a24b95336f93be01aeb85c98c5b98069182a06969a885610f49bab9c8b110",
+      "bytes": 4004
+    },
+    {
+      "path": "fitzpatrick_position_50/gui_20261106_015712/adapter_sources/upstream_sqp_worker.py",
+      "sha256": "d6f8ddf4b0962aa26263fce5cddad4b72f527d0f8ce190e717de8f593e97d471",
+      "bytes": 13354
+    },
+    {
+      "path": "fitzpatrick_position_50/gui_20261106_015712/build.log",
+      "sha256": "79e7b51161514cf5bdedd3bb2c04a8e5dd56a4162c0a7c949b2ce0c70ee22122",
+      "bytes": 605
+    },
+    {
+      "path": "fitzpatrick_position_50/gui_20261106_015712/codegen.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "fitzpatrick_position_50/gui_20261106_015712/config.json",
+      "sha256": "249d6b3dbd324bfb282b7c6145b5d10aeaf23a4de3f32bf17554ba30ecccd1ae",
+      "bytes": 4152
+    },
+    {
+      "path": "fitzpatrick_position_50/gui_20261106_015712/graph_audit.json",
+      "sha256": "a44d3f30a614ae9922a46becd363bb7f62bf139897ded168df9e77c5bb90f69b",
+      "bytes": 290
+    },
+    {
+      "path": "fitzpatrick_position_50/gui_20261106_015712/graph_audit.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "fitzpatrick_position_50/gui_20261106_015712/launch.log",
+      "sha256": "71f9dcb11673efdc063a94fc797f5d323c17c1d45b46f6a782d29dbad6888aab",
+      "bytes": 21368
+    },
+    {
+      "path": "fitzpatrick_position_50/gui_20261106_015712/metadata.json",
+      "sha256": "e4d91aa153b34ce221879dd59d6da6054caaa7626be41502b2bc9267ee7eed54",
+      "bytes": 303
+    },
+    {
+      "path": "fitzpatrick_position_50/gui_20261106_015712/prediction_en.png",
+      "sha256": "6fb04993b8ad51b53c7ae57fb0394520a500e24e6ac6109792ffcef13191f904",
+      "bytes": 66958
+    },
+    {
+      "path": "fitzpatrick_position_50/gui_20261106_015712/prediction_entry_2_en.png",
+      "sha256": "047a0fbe38b7f4071fad9ce227c147ea9b1e609cd966a764a5215162bec6f08e",
+      "bytes": 81529
+    },
+    {
+      "path": "fitzpatrick_position_50/gui_20261106_015712/predictions.csv.gz",
+      "sha256": "a93ce1fbf21278fdd75f0e149d0f1983561fdbe0ee91a0b23d42d472ec75ba7c",
+      "bytes": 1261872
+    },
+    {
+      "path": "fitzpatrick_position_50/gui_20261106_015712/source.patch",
+      "sha256": "5800973bd1c4fd9fb8c4fb6982aec52e672810f6f1bf55ada93e5e49f971c752",
+      "bytes": 33363
+    },
+    {
+      "path": "fitzpatrick_position_50/gui_20261106_015712/sqp_solver_failures.jsonl",
+      "sha256": "35e223ddf4d0825813d6b9d6c2ccc6b092a706b07229e7585df931cb8187be7d",
+      "bytes": 12663
+    },
+    {
+      "path": "fitzpatrick_position_50/gui_20261106_015712/summary.json",
+      "sha256": "fa16c35e761ad182f219c09cdaa9ae0aa315a77631073de58a8c09bbe9ae5303",
+      "bytes": 2848
+    },
+    {
+      "path": "fitzpatrick_position_50/gui_20261106_015712/trajectory.csv.gz",
+      "sha256": "4ed2fd74a6d973569e83c153bdea2f20496ce11ec3ee56c40ad7bcbc3aa11c17",
+      "bytes": 182945
+    },
+    {
+      "path": "fitzpatrick_position_50/gui_20261106_015712/trajectory_en.png",
+      "sha256": "3652e524f045e5eb2875f40f4ede6460f11f08a5923ef79a9e2a708f1f5e5129",
+      "bytes": 160442
+    }
+  ]
+}

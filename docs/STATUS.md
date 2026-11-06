@@ -1,5 +1,24 @@
 # Current status
 
+## Checked control feedback — 2026-11-06 (development, simulation only)
+
+P0/P1 implementation adds a shared timed-reference contract, transactional
+rollback of rejected MPC command/observer state, one fully checked cold solve,
+and a new checked same-side continuation after an ahead-of-target control veto.
+Clock/horizon, map/body, freshness, residual and deadline checks remain active.
+The user position-50 GUI failure is retained; a later clean diagnostic does not
+establish that the failure is fixed. Read the actual frozen-screen outcomes in
+[CONTROL_RECOVERY_20261106.md](CONTROL_RECOVERY_20261106.md).
+Planning remains synchronous; broader phase recovery, P2 and P3 are pending.
+Real-v8 source/model are unchanged. No physical dynamic-overtaking approval.
+
+2026-11-07 validation: ON nominal positions 00/25/50/75 were clean in the
+complete eight-run paired screen; separate visible GUI position 50 completed
+at 13.45 s without post-init stop. Live rejection-recovery was not naturally
+exercised, and position 75 was slower. `v8_static` stopped before the obstacle
+despite its old safety-only evaluator pass; static regression is NOT CLEAN.
+Read [the full report, including failures](../results/control_recovery_20261107/REPORT.md).
+
 ## Laptop speed experiment — 2026-11-05 (opt-in)
 
 Implemented checked speed-proposal search, physical-path braking distance and

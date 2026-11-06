@@ -13,6 +13,7 @@
 #include <sensor_msgs/msg/laser_scan.hpp>
 
 #include "joint_control.hpp"
+#include "takeover_sim/checked_execution.hpp"
 #include "takeover_sim/dynamic_overtaking.hpp"
 #include "takeover_sim/sqp_worker.hpp"
 
@@ -59,6 +60,10 @@ public:
     declare_parameter<bool>("adaptive_offset", false);
     declare_parameter<bool>("progressive_pass_speed", false);
     declare_parameter<bool>("predictive_speed_profile", false);
+    declare_parameter<bool>("fast_pass_geometry", false);
+    declare_parameter<bool>("fast_pass_response", false);
+    declare_parameter<bool>("verified_exit_recovery", false);
+    declare_parameter<bool>("checked_control_recovery", false);
     declare_parameter<bool>("early_verified_return", false);
     declare_parameter<std::string>("planning_backend", "frenet_candidates");
     declare_parameter<std::string>("sqp_worker_script", "");
@@ -97,6 +102,10 @@ public:
     dynamic_planner_->adaptive_offset = get_parameter("adaptive_offset").as_bool();
     dynamic_planner_->progressive_pass_speed = get_parameter("progressive_pass_speed").as_bool();
     dynamic_planner_->predictive_speed_profile = get_parameter("predictive_speed_profile").as_bool();
+    dynamic_planner_->fast_pass_geometry = get_parameter("fast_pass_geometry").as_bool();
+    dynamic_planner_->fast_pass_response = get_parameter("fast_pass_response").as_bool();
+    dynamic_planner_->verified_exit_recovery = get_parameter("verified_exit_recovery").as_bool();
+    checked_control_recovery_=get_parameter("checked_control_recovery").as_bool();
     dynamic_planner_->early_verified_return = get_parameter("early_verified_return").as_bool();
     planning_backend_=get_parameter("planning_backend").as_string();
     if(planning_backend_!="frenet_candidates" && planning_backend_!="upstream_sqp")
@@ -115,6 +124,8 @@ public:
     if(mode_=="static_v8" && simulation_limit>2.0)
       throw std::runtime_error("static_v8_speed_limit_is_2_mps");
     controller_ = std::make_unique<frenet::JointControl>(true,simulation_limit,mode_=="takeover");
+    if(checked_control_recovery_ && mode_=="takeover")
+      rollback_controller_=std::make_unique<frenet::JointControl>(true,simulation_limit,true);
     if(dynamic_planner_->adaptive_offset)
       preview_controller_ = std::make_unique<frenet::JointControl>(true,simulation_limit,mode_=="takeover");
     tracker_ = std::make_unique<frenet::Tracker>("dynamic_mpc");
@@ -153,6 +164,9 @@ public:
         [this](std_msgs::msg::String::SharedPtr msg) { update_tracker_status(msg->data); });
 
     const double control_rate = get_parameter("control_rate_hz").as_double();
+    if(checked_control_recovery_ && dynamic_planner_->timed_control &&
+       std::abs(control_rate-20.)>1e-6)
+      throw std::runtime_error("timed_execution_requires_20hz");
     planning_period_ = 1.0 / get_parameter("planning_rate_hz").as_double();
     timer_ = rclcpp::create_timer(this, get_clock(), rclcpp::Duration::from_seconds(1.0 / control_rate),
                                [this]() { control_tick(); });
@@ -191,6 +205,12 @@ private:
   int freshness_triggered_replans_ = 0;
   takeover::Decision decision_;
   std::unique_ptr<frenet::JointControl> preview_controller_;
+  std::unique_ptr<frenet::JointControl> rollback_controller_;
+  bool checked_control_recovery_=false;
+  int control_rejections_=0,cold_control_recoveries_=0;
+  int control_recovery_attempts_=0,control_recovery_successes_=0;
+  Json::Value control_rejection_reasons_{Json::objectValue};
+  Json::Value execution_diagnostic_;
   int return_preview_checks_=0;
   Json::Value return_preview_rejections_{Json::objectValue};
   int sqp_preview_checks_=0;
@@ -321,8 +341,7 @@ private:
     if(returning) ++return_preview_checks_; else ++sqp_preview_checks_;
     try {
       preview_controller_->copy_runtime_from(*controller_);
-      frenet::TimedReference timed;
-      for(const auto &p:candidate.timed) timed.points.push_back({p.t,p.pose,p.speed});
+      const auto timed=takeover::execution_reference(candidate,time,time);
       preview_controller_->compute(*assets_,candidate.path,ego_pose(),ego_speed(),
           ego_->twist.twist.linear.y,ego_->twist.twist.angular.z,100.,
           dynamic_planner_->cruise_speed,.05,*tracker_,{},&timed);
@@ -352,6 +371,7 @@ private:
 
   void control_tick() {
     const double time = now().seconds();
+    execution_diagnostic_=Json::Value(Json::objectValue);
     if (dynamic_planner_->require_target && ego_start_delay_ > 0. &&
         (!std::isfinite(lead_started_time_) || time < lead_started_time_ + ego_start_delay_)) {
       publish_stop("waiting_for_lead_head_start");
@@ -390,12 +410,57 @@ private:
       const double remaining = 100.0;
       frenet::TimedReference timed;
       const bool use_timed = dynamic_planner_->timed_control && !decision_.candidate.timed.empty();
-      if(use_timed) {
-        timed.age=std::max(0.,time-last_plan_time_);
-        for(const auto &p:decision_.candidate.timed) timed.points.push_back({p.t,p.pose,p.speed});
-      }
+      if(use_timed) timed=takeover::execution_reference(decision_.candidate,last_plan_time_,time);
       const double command_cap=use_timed?dynamic_planner_->cruise_speed:decision_.candidate.speed_cap;
       frenet::Control command;
+      if(checked_control_recovery_ && use_timed && rollback_controller_) {
+        // Fixed shooting/control period in both previews and actual execution.
+        // No command is published until this exact solved prediction passes.
+        auto compute=[&](frenet::JointControl &model) {
+          return model.compute(*assets_,reference_path_,ego_pose(),speed,lateral,twist.angular.z,
+              remaining,dynamic_planner_->cruise_speed,.05,*tracker_,{},&timed);
+        };
+        auto validate=[&](frenet::JointControl &model) {validate_mpc_motion(time,model);};
+        takeover::ExecutionAttempt attempt;
+        const double execution_begin=frenet::mono();
+        try {
+          command=takeover::checked_execution(*controller_,*rollback_controller_,compute,validate,attempt);
+        } catch(const std::exception &error) {
+          record_execution_attempt(attempt);
+          if(!takeover::retryable_control_rejection(error.what()) ||
+             frenet::mono()-execution_begin>.030) throw;
+          ++control_recovery_attempts_;
+          // checked_execution rolled back the rejected command/observer state.
+          // Generate a new trajectory from that accepted physical runtime.
+          dynamic_planner_->initial_command=controller_->command_speed();
+          dynamic_planner_->initial_acceleration=controller_->command_acceleration();
+          dynamic_planner_->initial_curvature=speed>.2?twist.angular.z/speed:
+              std::numeric_limits<double>::quiet_NaN();
+          dynamic_planner_->overtake_feasibility=[this,time](const takeover::Candidate &c) {
+            return preview_candidate(c,time,false);
+          };
+          const auto recovery=dynamic_planner_->recover_control_rejection(
+              ego_pose(),speed,prediction_track(time),time,error.what());
+          execution_diagnostic_["recovery_reason"]=recovery.candidate.reason;
+          if(recovery.stop || !recovery.candidate.valid ||
+             frenet::mono()-execution_begin>.035) throw;
+          decision_=recovery;reference_path_=recovery.candidate.path;last_plan_time_=time;
+          publish_path(reference_pub_,reference_path_);
+          timed=takeover::execution_reference(recovery.candidate,time,time);
+          takeover::ExecutionAttempt retry;
+          try {
+            command=takeover::checked_execution(*controller_,*rollback_controller_,compute,validate,retry,false);
+          } catch(...) {record_execution_attempt(retry);throw;}
+          record_execution_attempt(retry);
+          execution_diagnostic_["same_side_recovered"]=true;
+        }
+        if(attempt.final_rejection.empty()) record_execution_attempt(attempt);
+        if(frenet::mono()-execution_begin>.045)
+          throw std::runtime_error("checked_execution_deadline");
+        if(execution_diagnostic_.get("same_side_recovered",false).asBool())
+          ++control_recovery_successes_;
+        execution_diagnostic_["execution_ms"]=(frenet::mono()-execution_begin)*1000.;
+      } else {
       try {
         command = controller_->compute(
             *assets_, reference_path_, ego_pose(), speed, lateral, twist.angular.z,
@@ -414,6 +479,7 @@ private:
         controller_->diag["cold_retry_recovered"] = true;
       }
       if(use_timed) validate_mpc_motion(time,*controller_);
+      }
       publish_drive(command.speed, command.angle);
       diagnostic = controller_->diag;
       stopped_ = false;
@@ -428,6 +494,22 @@ private:
       publish_stop(message);
     }
     publish_status(time, diagnostic);
+  }
+
+  void record_execution_attempt(const takeover::ExecutionAttempt &a) {
+    if(a.first_rejection.empty()) return;
+    ++control_rejections_;
+    control_rejection_reasons_[a.first_rejection]=control_rejection_reasons_[a.first_rejection].asInt()+1;
+    execution_diagnostic_["first_rejection"]=a.first_rejection;
+    execution_diagnostic_["final_rejection"]=a.final_rejection;
+    execution_diagnostic_["cold_retry"]=a.cold_retry;
+    execution_diagnostic_["cold_recovered"]=a.cold_recovered;
+    execution_diagnostic_["rejected_controller"]=a.rejected_diagnostic;
+    Json::Value row;
+    row["first_rejection"]=a.first_rejection;row["final_rejection"]=a.final_rejection;
+    row["cold_recovered"]=a.cold_recovered;row["rejected_controller"]=a.rejected_diagnostic;
+    execution_diagnostic_["attempts"].append(row);
+    if(a.cold_recovered) ++cold_control_recoveries_;
   }
 
   void publish_drive(double speed, double steering) {
@@ -465,8 +547,12 @@ private:
           .5*(ego_speed()+target.velocity.norm())*.05;
       const auto other=takeover::rectangle(lead[i].pose,target.length+2*inflation,target.width+2*inflation);
       minimum=std::min(minimum,takeover::polygon_distance(body,other));
-      if(takeover::polygons_overlap(body,other))
+      if(takeover::polygons_overlap(body,other)) {
+        model.diag["mpc_conflict_step"]=int(i);
+        model.diag["mpc_conflict_time_s"]=i*.05;
+        model.diag["mpc_conflict_target_age_s"]=age;
         throw std::runtime_error("mpc_actual_dynamic_conflict");
+      }
     }
     model.diag["mpc_dynamic_check_passed"]=true;
     model.diag["mpc_minimum_predicted_body_clearance_m"]=std::isfinite(minimum)?Json::Value(minimum):Json::Value();
@@ -532,6 +618,16 @@ private:
     value["timed_control"] = dynamic_planner_->timed_control;
     value["progressive_pass_speed"] = dynamic_planner_->progressive_pass_speed;
     value["predictive_speed_profile"] = dynamic_planner_->predictive_speed_profile;
+    value["fast_pass_geometry"] = dynamic_planner_->fast_pass_geometry;
+    value["fast_pass_response"] = dynamic_planner_->fast_pass_response;
+    value["verified_exit_recovery"] = dynamic_planner_->verified_exit_recovery;
+    value["checked_control_recovery"]=checked_control_recovery_;
+    value["control_rejections"]=control_rejections_;
+    value["control_rejection_reasons"]=control_rejection_reasons_;
+    value["cold_control_recoveries"]=cold_control_recoveries_;
+    value["control_recovery_attempts"]=control_recovery_attempts_;
+    value["control_recovery_successes"]=control_recovery_successes_;
+    value["execution"]=execution_diagnostic_;
     value["early_verified_return"] = dynamic_planner_->early_verified_return;
     value["transition_length_m"] = decision_.candidate.transition_length;
     value["adaptive_offset"] = dynamic_planner_->adaptive_offset;

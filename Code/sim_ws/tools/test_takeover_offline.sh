@@ -21,7 +21,7 @@ g++ -O1 -std=c++14 -I/usr/include/eigen3 -I/usr/include/jsoncpp \
   -o build/takeover_offline_tests/test_prediction
 build/takeover_offline_tests/test_prediction takeover_assets/Fitzpatrick_sim.json
 g++ -O1 -std=c++14 -I/usr/include/eigen3 -I/usr/include/jsoncpp \
-  -I"$V8_ROOT/src/cpp_frenet" -I"$V8_ROOT/generated_joint" \
+  -Isrc/takeover_sim/include -I"$V8_ROOT/src/cpp_frenet" -I"$V8_ROOT/generated_joint" \
   -I"$ACADOS_PREFIX/include" -I"$ACADOS_PREFIX/include/blasfeo/include" \
   -I"$ACADOS_PREFIX/include/hpipm/include" tools/test_takeover_preview.cpp \
   "$V8_ROOT/src/dynamic_mpc.cpp" "$V8_ROOT/src/mpc_iteration.cpp" \
@@ -32,7 +32,7 @@ LD_LIBRARY_PATH="build/takeover_sim:$ACADOS_PREFIX/lib:${LD_LIBRARY_PATH:-}" \
   build/takeover_offline_tests/test_preview takeover_assets/Fitzpatrick_sim.json
 if [ -f build/takeover_sim/libtakeover_gym_joint_solver.so ]; then
   g++ -O1 -std=c++14 -DTAKEOVER_OFFICIAL_GYM_MODEL=1 \
-    -I/usr/include/eigen3 -I/usr/include/jsoncpp -I"$V8_ROOT/src/cpp_frenet" \
+    -Isrc/takeover_sim/include -I/usr/include/eigen3 -I/usr/include/jsoncpp -I"$V8_ROOT/src/cpp_frenet" \
     -Ibuild/takeover_sim/gym_model/generated_joint -I"$ACADOS_PREFIX/include" \
     -I"$ACADOS_PREFIX/include/blasfeo/include" -I"$ACADOS_PREFIX/include/hpipm/include" \
     tools/test_takeover_preview.cpp "$V8_ROOT/src/dynamic_mpc.cpp" "$V8_ROOT/src/mpc_iteration.cpp" \

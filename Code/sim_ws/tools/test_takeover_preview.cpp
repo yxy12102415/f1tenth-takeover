@@ -1,5 +1,6 @@
 // Separate solver instances only: no ROS, publishers, devices or actuation.
 #include "joint_control.hpp"
+#include "takeover_sim/checked_execution.hpp"
 #include <cassert>
 #include <iostream>
 
@@ -71,5 +72,46 @@ int main(int argc,char **argv) {
   measured_yaw.compute(assets,assets.route,{0,0,0},2.8,0,.1,100,3.,.05,tracker,{},&fast_ref);
   assert(measured_yaw.diag["model_yaw_rate_rad_s"].asDouble()==.1);
   assert(measured_yaw.diag["yaw_rate_source"].asString()=="measured_simulation_odom");
+  takeover::Candidate candidate;
+  for(const auto &p:fast_ref.points) candidate.timed.push_back({p.t,p.pose.x,0,p.speed,p.pose});
+  const auto aged=takeover::execution_reference(candidate,2.,2.2);
+  assert(std::abs(aged.age-.2)<1e-9);
+  assert(std::abs(aged.at(0).pose.x-.56)<1e-8);
+  for(double now:{1.9,5.0}) {
+    bool rejected=false;
+    try {takeover::execution_reference(candidate,2.,now);}
+    catch(const std::runtime_error &) {rejected=true;}
+    assert(rejected); // backward clock or insufficient remaining horizon
+  }
+  frenet::JointControl transactional(true,3.,true),snapshot(true,3.,true);
+  takeover::ExecutionAttempt attempt;
+  auto solve=[&](frenet::JointControl &model) {
+    return model.compute(assets,assets.route,{0,0,0},0,0,0,100,3.,.05,tracker,{},&timed);
+  };
+  int checks=0;
+  const auto recovered=takeover::checked_execution(transactional,snapshot,solve,
+      [&](frenet::JointControl &) {
+        if(++checks==1) throw std::runtime_error("mpc_actual_dynamic_conflict");
+      },attempt);
+  assert(checks==2 && attempt.cold_recovered && recovered.speed>0.);
+  const double before_speed=transactional.command_speed();
+  const double before_accel=transactional.command_acceleration();
+  checks=0;bool vetoed=false;
+  try {
+    takeover::checked_execution(transactional,snapshot,solve,
+        [&](frenet::JointControl &) {++checks;throw std::runtime_error("mpc_actual_map_conflict");},attempt);
+  } catch(const std::runtime_error &) {vetoed=true;}
+  assert(vetoed && checks==1 && !attempt.cold_retry);
+  assert(transactional.command_speed()==before_speed && transactional.command_acceleration()==before_accel);
+  checks=0;vetoed=false;
+  try {
+    takeover::checked_execution(transactional,snapshot,solve,
+        [&](frenet::JointControl &) {++checks;throw std::runtime_error("mpc_actual_dynamic_conflict");},attempt);
+  } catch(const std::runtime_error &) {vetoed=true;}
+  assert(vetoed && checks==2 && attempt.cold_retry && !attempt.cold_recovered);
+  assert(transactional.command_speed()==before_speed && transactional.command_acceleration()==before_accel);
+  assert(!takeover::retryable_control_rejection("mpc_target_expired"));
+  assert(!takeover::retryable_control_rejection("joint_control_deadline"));
+  std::cout<<"Checked execution rolls back rejected state; cold retry cannot bypass map/body/expiry checks\n";
   std::cout<<"Non-actuating MPC preview preserves the live controller state\n";
 }

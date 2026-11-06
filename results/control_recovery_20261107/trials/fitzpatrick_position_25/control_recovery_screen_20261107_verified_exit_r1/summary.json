@@ -1,0 +1,94 @@
+{
+  "acceptance": {
+    "boundary_safe": true,
+    "collision_free": true,
+    "expected_behavior_satisfied": true,
+    "expected_outcome": "single_pass_and_rejoin"
+  },
+  "control": {
+    "maximum_abs_acceleration_command_mps2": 1.8725264072418197,
+    "maximum_abs_steering_rate_radps": 1.9999998807907176,
+    "mpc_dynamic_check_pass_samples": 683,
+    "post_rejoin_route_max_error_m": 0.0900380056003334,
+    "post_rejoin_route_rmse_m": 0.037630789312267494,
+    "route_lateral_rmse_m": 0.3549396121041525,
+    "timed_horizon_position_error_p95_m": 0.10046462399763144,
+    "timed_horizon_speed_rmse_p95_mps": 0.07799873345718447,
+    "timed_position_rmse_m": 0.019658371435612818,
+    "timed_speed_rmse_mps": 0.022792061327537808
+  },
+  "duration_s": 35.13,
+  "ground_truth_policy": "Opponent ground truth is used only by its own controller and the independent evaluator, never by ego tracking/planning/MPC.",
+  "overtaking": {
+    "behavior_sample_counts": {
+      "CRUISE": 549,
+      "OVERTAKE": 89,
+      "PREPARE_OVERTAKE": 14,
+      "REJOIN": 45,
+      "UNAVAILABLE": 1,
+      "WAIT": 4
+    },
+    "completed": 1,
+    "first_completion_time_s": 7.65,
+    "truth_completed": 1,
+    "truth_events": [
+      {
+        "completion_time_s": 8.200000000000001,
+        "encounter_lap": 0,
+        "lead_distance_m": 2.1474140858585855,
+        "start_time_s": 0.05
+      }
+    ],
+    "truth_verified_pass_and_rejoin": true
+  },
+  "passed": true,
+  "run_id": "control_recovery_screen_20261107_verified_exit_r1",
+  "runtime": {
+    "cold_control_recoveries": 0,
+    "control_recovery_attempts": 0,
+    "control_recovery_successes": 0,
+    "control_rejection_reasons": {},
+    "control_rejections": 0,
+    "controller_failures": 0,
+    "controller_rejection_reasons": {},
+    "freshness_triggered_replans": 1,
+    "infeasible_count": 0,
+    "mpc_mean_ms": 1.2811131786231365,
+    "mpc_p95_ms": 2.05818159999751,
+    "planner_failures": 4,
+    "planning_backend": "upstream_sqp",
+    "planning_mean_ms": 5.782925064192723,
+    "planning_p95_ms": 23.75112500001819,
+    "rejected_track_jumps": 0,
+    "return_preview_checks": 10,
+    "return_preview_rejections": {},
+    "solver_recoveries": 0,
+    "solver_timeouts": 0,
+    "sqp_calls": 38,
+    "sqp_failures": 5,
+    "sqp_preview_checks": 21,
+    "sqp_preview_rejections": {},
+    "sqp_timeouts": 0
+  },
+  "safety": {
+    "boundary_violation_events": 0,
+    "collision_events": 0,
+    "lead_boundary_violation_events": 0,
+    "minimum_body_clearance_m": 0.9139869505109867
+  },
+  "samples": 702,
+  "scenario": "fitzpatrick_position_25",
+  "seed": 1,
+  "tracking": {
+    "loss_count": 1,
+    "position_rmse_m": 9.616146361383569,
+    "reacquisition_times_s": [],
+    "tracked_only_position_rmse_m": 0.13568618946748204,
+    "tracker_mode_sample_counts": {
+      "COASTING": 22,
+      "LOST": 555,
+      "TRACKED": 125
+    },
+    "velocity_rmse_mps": 1.725378486966167
+  }
+}

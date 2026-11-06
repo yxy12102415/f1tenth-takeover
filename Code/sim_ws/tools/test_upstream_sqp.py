@@ -95,6 +95,29 @@ class SqpChecks(unittest.TestCase):
         solver.dense_bias=np.linspace(-.01,.01,19)
         adapted=np.array([(worker.adapter_cost(solver,d+e)-worker.adapter_cost(solver,d-e))/2e-6 for e in delta])
         np.testing.assert_allclose(worker.adapter_cost_jac(solver,d),adapted,atol=1e-6)
+        solver.actual_curvature_cost=True
+        solver.curvature_weight=250.
+        solver.dense_route_curvature=np.linspace(-.1,.4,19)
+        adapted=np.array([(worker.adapter_cost(solver,d+e)-worker.adapter_cost(solver,d-e))/2e-6 for e in delta])
+        np.testing.assert_allclose(worker.adapter_cost_jac(solver,d),adapted,atol=1e-6)
+
+    def test_fast_cost_retains_corridor_and_curvature_constraints(self):
+        request=self.fixture()
+        request.update(lateral_reference=request['initial'],
+                       actual_curvature_cost=True,curvature_weight=250.)
+        result=worker.solve(self.core,request)
+        self.assertTrue(result['ok'],result)
+        self.assertGreaterEqual(min(result['d'][12:]),.80-1e-6)
+        self.assertGreaterEqual(result['inequality_min'],-1e-4)
+        request['bounds'][0]=[.4,.5]
+        self.assertFalse(worker.solve(self.core,request)['ok'])
+
+    def test_bad_curvature_weight_rejected(self):
+        for weight in (-1.,float('nan'),float('inf'),10001.):
+            request=self.fixture()
+            request['curvature_weight']=weight
+            with self.assertRaisesRegex(ValueError,'bad_curvature_weight'):
+                worker.solve(self.core,request)
 
 
 if __name__ == '__main__':
