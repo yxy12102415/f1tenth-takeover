@@ -1,0 +1,9 @@
+.DS_Store
+.vscode/
+**/.pio/
+**/build/
+**/sdkconfig.*dev
+ps4_control/components/
+ps4_control/.components.*/
+.env
+.env.*
