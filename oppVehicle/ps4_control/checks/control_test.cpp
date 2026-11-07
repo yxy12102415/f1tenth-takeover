@@ -15,9 +15,9 @@ int main() {
     assert(c.motorUs == 1000 && !c.ready); // Held at boot cannot start.
     c.packet(5010, 5010, idle);
     c.packet(5020, 5020, drive);
-    assert(c.motorUs == 1200 && c.steeringUs == 1400);
+    assert(c.motorUs == 1180 && c.steeringUs == 1400);
     c.tick(5269);
-    assert(c.motorUs == 1200);
+    assert(c.motorUs == 1180);
     c.tick(5270);
     assert(c.motorUs == 1000 && c.steeringUs == 1600 && !c.ready);
     c.packet(5280, 5280, drive);
@@ -33,7 +33,7 @@ int main() {
     c.packet(5630, 5630, released);
     assert(c.motorUs == 1000 && c.ready);
     c.packet(5640, 5640, drive);
-    assert(c.motorUs == 1200); // Right stick still up: L1 toggle resumes throttle.
+    assert(c.motorUs == 1180); // Right stick still up: L1 toggle resumes throttle.
     c.packet(5650, 5650, idle);
     c.packet(5660, 5660, drive);
     drive.stop = true;
@@ -57,7 +57,7 @@ int main() {
             in.x = x;
             in.driveY = y;
             c.packet(now++, 6000, in);
-            assert(c.motorUs >= 1000 && c.motorUs <= 1200);
+            assert(c.motorUs >= 1000 && c.motorUs <= 1180);
             assert(c.steeringUs >= 1400 && c.steeringUs <= 1800);
             if (y >= -40) assert(c.motorUs == 1000);
             if (x >= -40 && x <= 40) assert(c.steeringUs == 1600);
@@ -96,7 +96,7 @@ int main() {
     Input half = drive;
     half.driveY = -276;
     c.packet(now++, 6000, half);
-    assert(c.motorUs == 1100);
+    assert(c.motorUs == 1090);
     c.packet(now++, 6000, down);
     assert(c.motorUs == 1000);
     half.driveY = -513;
@@ -110,7 +110,7 @@ int main() {
     drive.x = 0;
     c.packet(UINT32_MAX - 90, 6000, drive);
     c.tick(158);
-    assert(c.motorUs == 1200);
+    assert(c.motorUs == 1180);
     c.tick(159);
     assert(c.motorUs == 1000);
     puts("PASS: boot interlock, release/stop/disconnect, packet timeout/recovery, wraparound, 1,050,625 input combinations");

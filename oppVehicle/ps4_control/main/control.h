@@ -4,7 +4,7 @@
 // Percentages are PWM commands, not measured vehicle speed or wheel angle.
 namespace hosim {
 constexpr int kStop = 1000;
-constexpr int kMaxThrottle = 1200;
+constexpr int kMaxThrottle = 1180;  // Reduced command cap; actual speed is unmeasured.
 constexpr int kCenter = 1600;  // User confirmed wheels approximately straight.
 constexpr int kSteerMin = 1400;
 constexpr int kSteerMax = 1800;
