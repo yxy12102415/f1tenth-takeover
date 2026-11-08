@@ -1,6 +1,6 @@
 # F1TENTH Takeover
 
-Fixed-route navigation and static-obstacle avoidance on a real F1TENTH vehicle.
+Fixed-route navigation and static-obstacle avoidance on a real F1TENTH vehicle, plus a separate two-vehicle overtaking simulation demo.
 
 **Latest validated result: Dynamic MPC v8, Fitzpatrick, 2026-09-27.** One complete lap with two static obstacles; the operator reported no contact, minimal oscillation, and a natural stop. This is one successful run, not a repeated-trial reliability claim.
 
@@ -9,6 +9,14 @@ Fixed-route navigation and static-obstacle avoidance on a real F1TENTH vehicle.
 [![Onboard MPC obstacle-avoidance demo](media/MPC_Avoidance_preview.gif)](media/MPC_Avoidance.mp4)
 
 [Watch or download the full video](media/MPC_Avoidance.mp4) — 32.4 s, with original audio. The silent looping preview shows a 12-second excerpt; the MP4 preserves the complete recording.
+
+## Simulation overtaking demo
+
+[![Two-vehicle overtaking in simulation](media/Simulation_Overtaking_preview.gif)](media/Simulation_Overtaking.mp4)
+
+[Watch or download the edited demo](media/Simulation_Overtaking.mp4) - approximately 18 s, original speed, no audio. The continuous RViz excerpt shows the two vehicles and the evolving path during an overtaking maneuver. Desktop/terminal footage, the battery notification, and RViz tool panels have been removed. The looping preview shows a 12-second excerpt at original speed.
+
+This simulation recording is separate from the physical v8 result below; it does not establish real-vehicle overtaking performance. [Editing details](media/README.md#simulation-overtaking)
 
 ## Field result
 
@@ -33,7 +41,7 @@ Fixed-route navigation and static-obstacle avoidance on a real F1TENTH vehicle.
 4. **Control:** 20 Hz dynamic MPC jointly optimizes acceleration and steering over 24 steps / 1.2 s, including lateral vehicle dynamics and actuator lag.
 5. **Execute:** independent command supervision, freshness checks and the L1 deadman gate vehicle motion.
 
-v8 carries lateral velocity/yaw-rate estimates continuously through the dynamic model. The predicted lateral-acceleration bound is 1.65 m/s²; curvature speed planning still uses 1.20 m/s². These lateral states are model estimates, not independent IMU measurements. Dynamic-obstacle prediction and overtaking are not implemented here.
+v8 carries lateral velocity/yaw-rate estimates continuously through the dynamic model. The predicted lateral-acceleration bound is 1.65 m/s²; curvature speed planning still uses 1.20 m/s². These lateral states are model estimates, not independent IMU measurements. Dynamic-obstacle prediction and overtaking are not part of this exported v8 real-vehicle release; the simulation video above is a separate demonstration.
 
 ## Where to start
 
@@ -63,7 +71,7 @@ These commands build a non-actuating probe and run model tests. They do not laun
 |---|---|
 | `real_vehicle/` | Latest exported physical-vehicle source, configurations, Fitzpatrick map and route |
 | `results/` | Selected successful v8 field evidence and English trajectory figures |
-| `media/` | Onboard obstacle-avoidance video and animated README preview |
+| `media/` | Onboard obstacle-avoidance and simulation-overtaking videos with animated README previews |
 | `tools/` | Non-actuating native build and model tests |
 | `docs/` | Status, operation, build, provenance and cleanup records |
 | `Code/sim_ws/` | Independent risk-aware following simulation and shadow-mode reference |
