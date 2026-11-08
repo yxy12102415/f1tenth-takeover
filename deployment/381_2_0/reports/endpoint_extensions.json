@@ -1,0 +1,56 @@
+{
+  "map": "381_2_0",
+  "original_length_m": 5.845164147568345,
+  "candidate_length_m": 6.945164078703913,
+  "extensions": {
+    "start": {
+      "sampled_extension_limit_m": 0.41000000000000003,
+      "proposed_extension_m": 0.21,
+      "old_pose": [
+        -0.004767532556239378,
+        0.009828210671599464,
+        0.018850232249305154
+      ],
+      "proposed_pose": [
+        -0.21462326955523914,
+        0.002300469129256232,
+        0.05112384502178629
+      ],
+      "minimum_center_clearance_lower_bound_m": 0.6791497097243596,
+      "minimum_sampled_body_clearance_lower_bound_m": 0.3614628048357134,
+      "join_curvature_estimate_1pm": -0.17096168570690204
+    },
+    "end": {
+      "sampled_extension_limit_m": 1.09,
+      "proposed_extension_m": 0.89,
+      "old_pose": [
+        5.451442218213602,
+        0.9832012134279002,
+        0.837751531013883
+      ],
+      "proposed_pose": [
+        6.010007837170822,
+        1.675878395342191,
+        0.9059682013792624
+      ],
+      "minimum_center_clearance_lower_bound_m": 0.686573955406259,
+      "minimum_sampled_body_clearance_lower_bound_m": 0.3580773538899423,
+      "join_curvature_estimate_1pm": 0.2273889081946044
+    }
+  },
+  "map_resolution_m": 0.05,
+  "assumed_vehicle_length_width_m": [
+    0.58,
+    0.31
+  ],
+  "dimensions_confirmed": false,
+  "extension_center_clearance_gate_m": 0.35,
+  "extension_sampled_body_clearance_gate_m": 0.15,
+  "whole_route_minimum_center_clearance_lower_bound_m": 0.6791497097243596,
+  "whole_route_minimum_sampled_body_clearance_lower_bound_m": 0.3580773538899423,
+  "maximum_sampled_curvature_1pm": 0.7233475084917682,
+  "physical_motion_ready": false,
+  "active_route_changed": false,
+  "scope": "Dense static map/footprint screen with unknown space blocked; no dynamic opponent, swept continuous-body certificate, speed profile, MPC preview or terminal stop acceptance.",
+  "method": "Retain original route. Integrate outward from both endpoint poses, fading estimated endpoint curvature to zero over 0.6 m. Sample extensions at 1 cm and body interior at <=2.5 cm; keep extra 0.20 m from sampled extension limit."
+}

@@ -1,0 +1,206 @@
+[
+  {
+    "name": "launch_admitted",
+    "passed": true,
+    "detail": {
+      "command_cap_mps": 1.85,
+      "compact_association": {
+        "bounded_association_v3": true,
+        "candidates": [
+          {
+            "accepted": true,
+            "id": 1,
+            "intersection": {
+              "bounded_association": true,
+              "half_length": 0.18,
+              "half_width": 0.13,
+              "passed": false,
+              "stamp": 101.2,
+              "vmax": 0.55,
+              "xmax": 1.6499999999999997,
+              "xmin": 1.55,
+              "ymax": 0.06000000000000001,
+              "ymin": -0.06000000000000004
+            },
+            "observed_xmax": 1.45,
+            "observed_xmin": 1.4499999999999997,
+            "observed_ymax": 0.08999999999999997,
+            "observed_ymin": -0.09
+          }
+        ],
+        "previous_lead": {
+          "bounded_association": true,
+          "half_length": 0.18,
+          "half_width": 0.13,
+          "passed": false,
+          "stamp": 101,
+          "vmax": 0.55,
+          "xmax": 1.6499999999999997,
+          "xmin": 1.55,
+          "ymax": 0.06000000000000001,
+          "ymin": -0.06000000000000004
+        },
+        "source_stamp": 101.2
+      },
+      "compact_overtake": true,
+      "lead_bounds": {
+        "bounded_association": true,
+        "half_length": 0.18,
+        "half_width": 0.13,
+        "passed": false,
+        "stamp": 101.2,
+        "vmax": 0.55,
+        "xmax": 1.6499999999999997,
+        "xmin": 1.55,
+        "ymax": 0.06000000000000001,
+        "ymin": -0.06000000000000004
+      },
+      "lead_confirmed_hits": 7,
+      "ok": true,
+      "state": "COMPACT_ENTRY"
+    }
+  },
+  {
+    "name": "body_collision",
+    "passed": true,
+    "detail": {
+      "error": "compact_dynamic_body_conflict",
+      "ok": false
+    }
+  },
+  {
+    "name": "stale_measurement",
+    "passed": true,
+    "detail": {
+      "error": "compact_target_stale",
+      "ok": false
+    }
+  },
+  {
+    "name": "clear_offset",
+    "passed": true,
+    "detail": {
+      "ok": true
+    }
+  },
+  {
+    "name": "turning_body_fully_ahead_enters_rear_blind_mode",
+    "passed": true,
+    "detail": {
+      "command_cap_mps": 1.85,
+      "compact_association": {
+        "bounded_association_v3": true,
+        "candidates": [],
+        "previous_lead": {
+          "bounded_association": true,
+          "half_length": 0.18,
+          "half_width": 0.13,
+          "passed": false,
+          "stamp": 101.4,
+          "vmax": 0.55,
+          "xmax": 1.6499999999999997,
+          "xmin": 1.55,
+          "ymax": 0.06000000000000001,
+          "ymin": -0.06000000000000004
+        },
+        "rear_visibility_hold": true,
+        "source_stamp": 101.8
+      },
+      "compact_overtake": true,
+      "lead_bounds": {
+        "bounded_association": true,
+        "half_length": 0.18,
+        "half_width": 0.13,
+        "passed": true,
+        "stamp": 101.4,
+        "vmax": 0.55,
+        "xmax": 1.6499999999999997,
+        "xmin": 1.55,
+        "ymax": 0.06000000000000001,
+        "ymin": -0.06000000000000004
+      },
+      "lead_confirmed_hits": 8,
+      "ok": true,
+      "state": "COMPACT_PASS"
+    }
+  },
+  {
+    "name": "rear_reachable_region_still_checked",
+    "passed": true,
+    "detail": {
+      "error": "compact_dynamic_body_conflict",
+      "ok": false
+    }
+  },
+  {
+    "name": "not_fully_ahead_still_stops_on_loss",
+    "passed": true,
+    "detail": {
+      "error": "compact_target_lost",
+      "ok": false
+    }
+  },
+  {
+    "name": "loss_remains_latched",
+    "passed": true,
+    "detail": {
+      "error": "compact_latched_failure",
+      "ok": false
+    }
+  },
+  {
+    "name": "completed_merge_checks_current_rear_body",
+    "passed": true,
+    "detail": {
+      "ok": true
+    }
+  },
+  {
+    "name": "incomplete_merge_keeps_future_body_guard",
+    "passed": true,
+    "detail": {
+      "error": "compact_dynamic_body_conflict",
+      "ok": false
+    }
+  },
+  {
+    "name": "completed_merge_still_checks_map",
+    "passed": true,
+    "detail": {
+      "error": "compact_full_body_map",
+      "ok": false
+    }
+  },
+  {
+    "name": "moving_endpoint_keeps_body_guard",
+    "passed": true,
+    "detail": {
+      "error": "compact_dynamic_body_conflict",
+      "ok": false
+    }
+  },
+  {
+    "name": "stopped_arrival_recognized",
+    "passed": true,
+    "detail": {
+      "command_cap_mps": 1.85,
+      "compact_overtake": true,
+      "lead_bounds": {
+        "bounded_association": true,
+        "half_length": 0.18,
+        "half_width": 0.13,
+        "passed": true,
+        "stamp": 101.4,
+        "vmax": 0.55,
+        "xmax": 1.6499999999999997,
+        "xmin": 1.55,
+        "ymax": 0.06000000000000001,
+        "ymin": -0.06000000000000004
+      },
+      "lead_confirmed_hits": 8,
+      "observed_endpoint_stationary": true,
+      "ok": true,
+      "state": "COMPACT_FINISH"
+    }
+  }
+]

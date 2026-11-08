@@ -1,0 +1,14 @@
+{
+  "run_log": "/home/f1tenth/f1tenth_real_migration_ws_20260829/candidate_cpp_gpu_20260909/ground_381_2_0_compact_overtake_20261107_v2/run_logs/20261108_002057-closed-frenet-ground-attempt",
+  "operator_observation": {
+    "f1": "reported successful",
+    "lead": "did not move"
+  },
+  "classification": "static_lead_pass_attempt_not_dynamic_overtake",
+  "route_completed": false,
+  "stop_reason": "predicted_obstacle_footprint -> planner_invalid",
+  "endpoint_distance_at_trigger_m": 0.2788268784687347,
+  "stationary_confirmed": true,
+  "collision_observation": "not explicitly reported",
+  "next_action": "operator requested same-parameter retry after resetting both vehicles"
+}

@@ -1,0 +1,54 @@
+{
+  "release": "/home/f1tenth/f1tenth_real_migration_ws_20260829/candidate_cpp_gpu_20260909/ground_381_2_0_compact_overtake_20261108_v5",
+  "gate_tests_passed": 7,
+  "cpp_and_assets_identical_to_v4": true,
+  "physical_test_passed": false,
+  "raw_and_ros_observation": {
+    "raw": [
+      {
+        "t": 16.413,
+        "pressed": true
+      },
+      {
+        "t": 16.551,
+        "pressed": false
+      },
+      {
+        "t": 16.793,
+        "pressed": true
+      },
+      {
+        "t": 22.734,
+        "pressed": false
+      }
+    ],
+    "ros": [
+      {
+        "t": 1.305,
+        "pressed": false
+      },
+      {
+        "t": 16.412,
+        "pressed": true
+      },
+      {
+        "t": 16.548,
+        "pressed": false
+      },
+      {
+        "t": 16.803,
+        "pressed": true
+      },
+      {
+        "t": 22.734,
+        "pressed": false
+      }
+    ],
+    "ros_samples": 1169,
+    "elapsed_sec": 25.614518774000317,
+    "physical_motion": false
+  },
+  "physical_gate_confirmed": true,
+  "latest_physical_failure": "joint_mpc_solver_4",
+  "latest_physical_report": "compact_v5_physical_20261108_121040.json"
+}

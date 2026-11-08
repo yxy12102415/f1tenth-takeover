@@ -1,0 +1,51 @@
+{
+  "scope": "Check candidate native sweeps with the actual compact occupied-body guard.\n\nSynthetic opponent returns, not physical raw-scan replay. No ROS or devices.\n",
+  "candidates": [
+    {
+      "candidate": "right55_595_e190",
+      "initial_center_gap_m": 1.8,
+      "passed": false,
+      "cases": [
+        {
+          "center_y": 0.0,
+          "lead_speed": 0.5,
+          "lead_stop_after": 3.0,
+          "passed": true,
+          "checked": 132,
+          "failure": null
+        },
+        {
+          "center_y": -0.04,
+          "lead_speed": 0.5,
+          "lead_stop_after": 3.0,
+          "passed": true,
+          "checked": 132,
+          "failure": null
+        },
+        {
+          "center_y": 0.0,
+          "lead_speed": 0.0,
+          "lead_stop_after": 3.0,
+          "passed": true,
+          "checked": 132,
+          "failure": null
+        },
+        {
+          "center_y": 0.0,
+          "lead_speed": 0.5,
+          "lead_stop_after": 100.0,
+          "passed": false,
+          "checked": 116,
+          "failure": {
+            "phase": "prediction",
+            "time": 5.800000000000001,
+            "answer": {
+              "error": "compact_dynamic_body_conflict",
+              "ok": false
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

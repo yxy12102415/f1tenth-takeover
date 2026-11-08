@@ -1,0 +1,27 @@
+{
+  "release": "ground_381_2_0_straight_dmpc_20261107_v7",
+  "parent_release": "ground_381_2_0_speed2_dmpc_20261107_v6",
+  "route": "/home/f1tenth/f1tenth_real_migration_ws_20260829/routes/381_2_0_compact_overtake_585m_20261107_v2.csv",
+  "route_length_m": 5.6,
+  "route_geometry": "single_straight",
+  "start_pose": [
+    -0.004767532556239378,
+    0.009828210671599464,
+    0.018850232249305154
+  ],
+  "end_pose": [
+    5.594237569387761,
+    0.11538325984052401,
+    0.018850232249305154
+  ],
+  "start_position_and_heading_unchanged": true,
+  "control_source_unchanged": true,
+  "effective_mpc_command_cap_mps": 1.85,
+  "acceleration_upper_mps2": 2.0,
+  "geometry_screen_passed": true,
+  "native_quick_rollout_passed": true,
+  "physical_zero_passed": false,
+  "ground_test_passed": false,
+  "overtaking_feasibility_validated": false,
+  "pending": "ROS route validation and launch wiring; no motion launched."
+}

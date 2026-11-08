@@ -1,0 +1,5 @@
+private/
+firmware/.pio/
+firmware/include/link_private.h
+__pycache__/
+reports/

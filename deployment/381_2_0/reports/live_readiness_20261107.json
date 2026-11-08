@@ -1,0 +1,98 @@
+{
+  "updated_utc": "2026-11-08T04:17:34.165610+00:00",
+  "physical_motion_started": false,
+  "physical_motion_ready": false,
+  "mode": "experimental_fixed_compact_straight_pass",
+  "route_length_m": 5.6,
+  "side_offset_m": -0.6,
+  "maximum_speed_command_mps": 1.25,
+  "lead_operator_reported_size_m": [
+    0.3,
+    0.18
+  ],
+  "lead_initial_center_distance_m": 1.6,
+  "lead_initial_center_tolerance_m": 0.05,
+  "lead_speed_model_bound_mps": [
+    0,
+    0.35
+  ],
+  "lead_speed_measured_and_confirmed": true,
+  "lead_pwm_user_tested_us": 1150,
+  "native_terminal_controller_reused": true,
+  "full_maneuver_model_passed": true,
+  "native_contract_cases_passed": 15,
+  "prediction_replay_cases_passed": 15,
+  "physical_ros_domain_explicitly_disabled": true,
+  "runtime_frozen": false,
+  "blocking_items": [
+    "Existing compact path at cap 1.25, 1.5 and 1.85 m/s violates buffered vehicle clearance with the measured ~0.48 m/s lead",
+    "At constant lead 0.50 m/s and F1 cap 1.25, replay has physical rectangular body overlap beginning at 4.345 s",
+    "Every evaluated cap fails map clearance during modeled zero-current, centered-steering emergency coast",
+    "v1 physical admission remains disabled; no revised maneuver commissioned"
+  ],
+  "next_work": "Redesign entry/return geometry and emergency-stop behavior for 1150 lead; consider longer usable straight if no feasible maneuver exists. Retain original start and physical disable until verified.",
+  "cpp_ros_nominal_completed": true,
+  "cpp_ros_release_zero_and_model_stop_passed": true,
+  "real_lidar_replay_grouped_target_passed": true,
+  "real_sensor_pose_m_rad": [
+    0.0266,
+    -0.0149,
+    -0.0092
+  ],
+  "lead_initial_position_user_moved_forward_m": 0.15,
+  "release_status": "v1 withdrawn before motion; original manifest intentionally invalid after disabling admission",
+  "lead_measured_peak_05s_forward_speed_mps": 0.4825336763206345,
+  "lead_observed_displacement_xy_m": [
+    1.4324808647714842,
+    -0.01600401946828832
+  ],
+  "lead_speed_is_closed_loop": false,
+  "lead_pwm_active_us": 1150,
+  "previous_1160_measurement_retained": true,
+  "latest_lead_trial": {
+    "pwm_us": 1150,
+    "report": "reports/lead_speed_1150_20261107_v1/speed_summary.json",
+    "peak_05s_forward_mps": 0.4825336763206345,
+    "displacement_xy_m": [
+      1.4324808647714842,
+      -0.01600401946828832
+    ],
+    "operator_hold_approx_s": 3,
+    "old_lead_035mps_assumption_satisfied": false,
+    "physical_overtaking_ready": false
+  },
+  "lead_speed_measurement_scope": "One relative LiDAR trial; not a guaranteed speed bound.",
+  "latest_feasibility_report": "reports/lead_1150_overtake_feasibility/assessment.json",
+  "operator_trial_constraints": {
+    "ego_with_foam_size_limit_m": [
+      0.58,
+      0.31
+    ],
+    "lead_with_foam_size_limit_m": [
+      0.3,
+      0.18
+    ],
+    "emergency_coast_screen_required": false,
+    "source": "Explicit operator instruction: foam protected, low speed; skip coast detection. External foam dimensions confirmed unchanged.",
+    "retained_checks": [
+      "L1 release stop",
+      "communication timeout",
+      "normal full body collision check",
+      "mapped obstacle clearance"
+    ]
+  },
+  "v2_preparation": {
+    "state": "final 5.85m geometry native rollout passed; compiling endpoint metadata update; real-node integration pending",
+    "route_length_m": 5.85,
+    "initial_center_gap_m": 1.6,
+    "initial_gap_tolerance_m": 0.05,
+    "command_cap_mps": 1.85,
+    "lead_speed_upper_bound_mps": 0.55,
+    "lead_pwm_us": 1150,
+    "physical_commissioning_enabled": false,
+    "initial_full_maneuver_tube_required": false,
+    "online_predicted_body_check_required": true,
+    "latest_native_contract": "reports/compact_v2_design/latest_native_contract.json",
+    "nominal_model_report": "reports/compact_v2_design/final_length585.json"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "domain": 187,
+  "no_hardware_inputs": true,
+  "proposal_count": 222,
+  "all_proposals_zero": true,
+  "forbidden_topic_publishers": {
+    "/drive": 0,
+    "/drive_nominal": 0,
+    "/baseline/final": 0,
+    "/stand_pf/motor_speed": 0,
+    "/commands/motor/speed": 0
+  },
+  "process_alive": true,
+  "physical_motion_tested": false,
+  "scope": "Startup/zero-output/topic isolation only; not sensor, trajectory, timing or ground acceptance.",
+  "passed": true
+}

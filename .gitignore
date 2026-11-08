@@ -36,3 +36,11 @@ __pycache__/
 **/bin/
 **/lib/
 **/runtime_assets.json
+
+# ESP32 dependencies, credentials, firmware outputs and caches
+.pio/
+**/opp_link/private/
+**/opp_link/firmware/include/link_private.h
+*.bin
+*.elf
+*.map

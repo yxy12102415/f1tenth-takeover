@@ -1,0 +1,30 @@
+[
+  {
+    "case": "recorded_adjustment_then_hold",
+    "passed": true
+  },
+  {
+    "case": "release_after_arm_latches",
+    "passed": true
+  },
+  {
+    "case": "held_at_boot_needs_release",
+    "passed": true
+  },
+  {
+    "case": "prearm_timeout_requalifies",
+    "passed": true
+  },
+  {
+    "case": "MPC_must_be_stable",
+    "passed": true
+  },
+  {
+    "case": "short_060_press_retries",
+    "passed": true
+  },
+  {
+    "case": "postarm_timeout_latches",
+    "passed": true
+  }
+]

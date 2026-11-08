@@ -1,0 +1,13 @@
+{
+  "length_m": 5.95,
+  "start_unchanged": true,
+  "endpoint_extension_m": 0.1,
+  "compact_pass_geometry": {
+    "entry_m": 1.9,
+    "hold_m": 2.15,
+    "exit_m": 1.7,
+    "offset_m": -0.55
+  },
+  "initial_lead_center_m": 1.8,
+  "source": "compact_v4_design/right55_595_e190.json"
+}

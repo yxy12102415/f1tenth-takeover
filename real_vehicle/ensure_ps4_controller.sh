@@ -6,6 +6,7 @@ joy_probe="/opt/ros/foxy/lib/joy/joy_enumerate_devices"
 
 controller_ready() {
   [[ -e /dev/input/js0 ]] &&
+    [[ "$(tr '[:upper:]' '[:lower:]' </sys/class/input/js0/device/uniq)" == "${controller_mac,,}" ]] &&
     timeout 3 "$joy_probe" 2>/dev/null |
       grep -Eq '^[[:space:]]*0[[:space:]]*:[[:space:]]*Wireless Controller[[:space:]]*$'
 }

@@ -1,0 +1,28 @@
+{
+  "ego_assumed_stationary": true,
+  "scope": "LiDAR relative-cluster displacement; no encoders, current PWM configured 1160 us, no independent button timestamp.",
+  "valid_motion_observation": true,
+  "tracked_samples": 10448,
+  "initial_laser_xy_m": [
+    2.502791901600047,
+    0.13073515862604257
+  ],
+  "final_laser_xy_m": [
+    3.893849277629587,
+    0.39048287703955065
+  ],
+  "displacement_xy_m": [
+    1.3910573760295404,
+    0.2597477184135081
+  ],
+  "moving_window_centers_s": [
+    87.29999999999998,
+    90.49999999999999
+  ],
+  "max_05s_forward_speed_mps": 0.6402436856071632,
+  "p95_moving_forward_speed_mps": 0.6347550549725745,
+  "proposed_025mps_bound_supported": false,
+  "proposed_005m_lateral_course_bound_supported": false,
+  "requires_lead_recalibration": true,
+  "physical_overtake_started": false
+}

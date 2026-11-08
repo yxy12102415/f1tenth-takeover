@@ -1,0 +1,33 @@
+{
+  "release": "/home/f1tenth/f1tenth_real_migration_ws_20260829/candidate_cpp_gpu_20260909/ground_381_2_0_compact_overtake_20261108_v4",
+  "selected_candidate": "right55_595_e190",
+  "physical_motion": false,
+  "physical_test_passed": false,
+  "geometry": {
+    "entry_m": 1.9,
+    "hold_m": 2.15,
+    "exit_m": 1.7,
+    "offset_m": -0.55
+  },
+  "lead_initial_center_m": 1.8,
+  "route_length_m": 5.95,
+  "recorded_launch_replay_passed": true,
+  "original_field_failure_reproduced_exactly": false,
+  "association_regressions": 19,
+  "body_regressions": 13,
+  "stop_mode": "zero_current_coast",
+  "continuous_lead_through_endpoint_accepted": false,
+  "scope": "bounded attended moving lead then release after 3 seconds",
+  "ros_nominal_passed": true,
+  "ros_target_loss_stop_passed": true,
+  "geometry_contract_tests": 5,
+  "observed_merge_contract_tests": 4,
+  "terminal_zero_contract_tests": 4,
+  "physical_commissioning_enabled": true,
+  "live_zero_pending": true,
+  "coast_stop_unchanged": true,
+  "offline_window_passed": true,
+  "offline_window_report": "/home/f1tenth/f1tenth_real_migration_ws_20260829/candidate_cpp_gpu_20260909/ground_381_2_0_compact_overtake_20261108_v4/run_logs/20261108_115244-closed-frenet-offline-window/result.json",
+  "fingerprint": "772bf9e02e14ce7f3d805b7ef5cf389d8b7e051ef04239b17bb4cd7de4cdda7c",
+  "software_ready_for_bounded_trial": true
+}

@@ -56,6 +56,8 @@ public:
     declare_parameter<bool>("track_assisted_prediction", true);
     declare_parameter<bool>("timed_control", true);
     declare_parameter<bool>("lead_enabled", true);
+    declare_parameter<bool>("measured_yaw_feedback", true);
+    declare_parameter<std::string>("command_frame", "ego_racecar/base_link");
     declare_parameter<double>("ego_start_delay_s", 0.0);
     declare_parameter<bool>("adaptive_offset", false);
     declare_parameter<bool>("progressive_pass_speed", false);
@@ -123,11 +125,12 @@ public:
     const double simulation_limit=std::max(2.0,dynamic_planner_->cruise_speed);
     if(mode_=="static_v8" && simulation_limit>2.0)
       throw std::runtime_error("static_v8_speed_limit_is_2_mps");
-    controller_ = std::make_unique<frenet::JointControl>(true,simulation_limit,mode_=="takeover");
+    const bool measured_yaw = mode_=="takeover" && get_parameter("measured_yaw_feedback").as_bool();
+    controller_ = std::make_unique<frenet::JointControl>(true,simulation_limit,measured_yaw);
     if(checked_control_recovery_ && mode_=="takeover")
-      rollback_controller_=std::make_unique<frenet::JointControl>(true,simulation_limit,true);
+      rollback_controller_=std::make_unique<frenet::JointControl>(true,simulation_limit,measured_yaw);
     if(dynamic_planner_->adaptive_offset)
-      preview_controller_ = std::make_unique<frenet::JointControl>(true,simulation_limit,mode_=="takeover");
+      preview_controller_ = std::make_unique<frenet::JointControl>(true,simulation_limit,measured_yaw);
     tracker_ = std::make_unique<frenet::Tracker>("dynamic_mpc");
 
     drive_pub_ = create_publisher<ackermann_msgs::msg::AckermannDriveStamped>(
@@ -515,7 +518,7 @@ private:
   void publish_drive(double speed, double steering) {
     ackermann_msgs::msg::AckermannDriveStamped command;
     command.header.stamp = now();
-    command.header.frame_id = "ego_racecar/base_link";
+    command.header.frame_id = get_parameter("command_frame").as_string();
     command.drive.speed = speed;
     command.drive.steering_angle = steering;
     drive_pub_->publish(command);

@@ -1,0 +1,978 @@
+{
+  "passed": true,
+  "offline": false,
+  "zero_only": true,
+  "motion_permission": false,
+  "pose_timeout_sec": 0.5,
+  "continuous_localization_passed": true,
+  "zero_joy": true,
+  "zero_rviz": true,
+  "initialization_mode": "operator_confirmed_route_start",
+  "route_seed": [
+    -0.004767532556239378,
+    0.009828210671599464,
+    0.018850232249305154
+  ],
+  "baseline_code_fingerprint": "e4e46894660db255fc26a21669c7f12e194e17b1a25b93687d6fef91ff8a527f",
+  "code_fingerprint": "fc3f32a89508482c60b6ecc4f42ba03ffa9bb558c3906c99637adf01fbbd26f2",
+  "candidate_zero_binary": true,
+  "integration_release": "ground_381_2_0_compact_overtake_20261108_v5",
+  "controller": "closed_loop_frenet_cpp_dynamic_mpc",
+  "tracker_config": {
+    "type": "dynamic_mpc",
+    "model": "joint_dynamic_bicycle_with_low_speed_blend_and_actuator_lag",
+    "horizon": 24,
+    "prediction_dt_s": 0.05,
+    "states": [
+      "x",
+      "y",
+      "yaw",
+      "vx",
+      "vy",
+      "yaw_rate",
+      "previous_acceleration",
+      "previous_steering",
+      "command_speed",
+      "servo_estimate"
+    ],
+    "controls": [
+      "command_acceleration",
+      "steering_angle"
+    ],
+    "iteration_backend": "acados_0.4.0_sqp_rti_hpipm",
+    "longitudinal_control": "joint_optimization",
+    "prediction_jerk_limit_mps3": 3.0,
+    "prediction_steering_rate_limit_rad_s": 0.8,
+    "speed_command_max_mps": 2.0,
+    "acceleration_min_mps2": -0.8,
+    "acceleration_max_mps2": 2.0,
+    "jerk_limit_mps3": 4.0,
+    "steering_rate_limit_rad_s": 1.0,
+    "stage_weights": [
+      3.0,
+      160.0,
+      140.0,
+      18.0,
+      1.0,
+      0.5,
+      0.3,
+      1.2,
+      2.0,
+      180.0
+    ],
+    "terminal_weights": [
+      5.0,
+      240.0,
+      210.0,
+      30.0,
+      1.0,
+      0.5
+    ],
+    "mass_kg": 3.74,
+    "yaw_inertia_kg_m2": 0.04712,
+    "front_length_m": 0.12,
+    "rear_length_m": 0.13,
+    "front_cornering_stiffness_n_rad": 90.0,
+    "rear_cornering_stiffness_n_rad": 96.0,
+    "motor_response_time_s": 0.15,
+    "servo_response_time_s": 0.2,
+    "state_source": "vesc_odometry_vy_zero_yaw_estimated_from_speed_and_servo",
+    "minimum_drivable_speed_mps": 0.5,
+    "continuous_path_projection": true,
+    "terminal_deceleration_mps2": 0.55,
+    "terminal_response_allowance_s": 0.3,
+    "terminal_floor_settle_distance_m": 0.25,
+    "terminal_coast_deceleration_estimate_mps2": 0.6,
+    "terminal_coast_transport_allowance_s": 0.05,
+    "terminal_cut_is_latched": true,
+    "terminal_completion_requires_standstill": true,
+    "stop_stationary_observation_max_s": 3.0,
+    "stop_stationary_dwell_s": 0.2,
+    "minimum_speed_implementation": "optimizer_future_command_bounds_after_launch",
+    "terminal_coast_command_band_max_mps": 0.6,
+    "planning_preferred_tracking_reserve_m": 0.03,
+    "planning_reserve_policy": "prefer_buffered_candidate_before_hysteresis_hard_collision_guard_unchanged",
+    "predicted_speed_bound_mps": 2.1,
+    "input_speed_bound_mps": 2.2,
+    "soft_start_acceleration_mps2": 2.0,
+    "compute_soft_budget_ms": 45.0,
+    "compute_hard_deadline_ms": 75.0,
+    "compute_max_consecutive_soft_misses": 3,
+    "compute_timeout_policy": "validated_current_solution_only_bounded_jitter_no_command_replay",
+    "command_headroom_mps": 0.15,
+    "effective_command_cap_mps": 1.85,
+    "startup_state_policy": "preview_from_rest_until_actual_window_initial_hold_completed",
+    "warm_start_policy": "shift_controls_rollout_exact_generated_dynamics_from_measurement",
+    "maximum_rti_iterations": 8,
+    "refinement_budget_ms": 45.0,
+    "equality_residual_limit": 0.001,
+    "independent_dynamics_defect_check": true,
+    "implementation": "cpp",
+    "selected_tracker": "dynamic_mpc"
+  },
+  "initialization_snapshot_timeout_sec": 0.5,
+  "health_source_timeout_sec": 0.5,
+  "health_receipt_timeout_sec": 0.5,
+  "window_command_timeout_sec": 0.5,
+  "window_duration_sec": 25.0,
+  "min_curve_speed_mps": 0.6,
+  "max_command_speed_mps": 2.0,
+  "avoidance_speed_max_mps": 2.0,
+  "longitudinal_control": "joint_dynamic_mpc",
+  "longitudinal_command_acceleration_bounds_mps2": [
+    -0.8,
+    2.0
+  ],
+  "longitudinal_command_jerk_limit_mps3": 4.0,
+  "driver_speed_cap_erpm": 15000.0,
+  "driver_speed_cap_mps": 2.0,
+  "endpoint_position_tolerance_m": 0.1,
+  "endpoint_heading_tolerance_rad": 0.2,
+  "return_path_policy": "fixed_spatial_center_recovery_with_fresh_collision_checks",
+  "curvature_preview_m": 1.0,
+  "speed_profile_lookahead_m": 0.2,
+  "actuator_start_acceleration_mps2": 2.0,
+  "effective_mpc_command_cap_mps": 1.85,
+  "motion_window_launch_sync": true,
+  "static_center_clearance_m": 0.25,
+  "dynamic_center_clearance_m": 0.15,
+  "proactive_avoidance_clearance_m": 0.22,
+  "physical_zero_required_sec": 5.0,
+  "offline_zero_required_sec": 5.0,
+  "offline_observation_seconds": 5.0,
+  "operator_start_wait_seconds": 120.0,
+  "power_mode_record": "pmode:0008",
+  "physical_mode": "ground",
+  "motor_temperature_used_for_protection": false,
+  "pf_cpu_affinity": "4-5",
+  "planner_cpu_affinity": "1-2",
+  "controller_cpu_affinity": "3",
+  "safety_cpu_affinity": "0",
+  "numeric_library_threads": 1,
+  "physical_motion_authorized_by_cli": false,
+  "health": {
+    "erpm": 0.0,
+    "fault": 0,
+    "motor_current": 0.0,
+    "input_current": 0.0,
+    "duty_cycle": 0.0,
+    "voltage": 11.4,
+    "fet_temp": 27.5,
+    "motor_temp": -83.6,
+    "motor_temperature_used": false,
+    "stamp": 1794157830.8580449,
+    "bridge_ros": 1794157830.859358,
+    "bridge_mono": 5954.419325952
+  },
+  "pf": {
+    "valid": true,
+    "reason": "",
+    "pose_count": 161,
+    "compute_ms": 16.63694599938026,
+    "pose_frame": "map/base_link",
+    "scan_stamp": 1794157830.832937,
+    "odom_stamp": 1794157830.8203714,
+    "pipeline_timing": {
+      "source_stamp": 1794157830.832937,
+      "pf_receive_ros": 1794157830.834266,
+      "pf_input_age_s": 0.0013289451599121094,
+      "pf_output_check_ros": 1794157830.851923,
+      "pf_output_age_s": 0.018985986709594727,
+      "compute_ms": 16.63694599938026
+    }
+  },
+  "zero_current_samples": 690,
+  "localization_seconds": 5.0309732119994806,
+  "last_statuses": {
+    "pp": {
+      "blocked_confirmation_scans": 0,
+      "candidate_reason_counts": {},
+      "candidate_score": null,
+      "candidate_score_terms": null,
+      "candidate_switch_count": 0,
+      "center_path_reused": false,
+      "command_cap_mps": 1.85,
+      "commit_age_scans": 0,
+      "compact_association": {
+        "bounded_association_v3": true,
+        "candidates": [
+          {
+            "accepted": true,
+            "id": 3,
+            "intersection": {
+              "bounded_association": true,
+              "half_length": 0.18,
+              "half_width": 0.13,
+              "passed": false,
+              "stamp": 1794157830.713855,
+              "vmax": 0.55,
+              "xmax": 1.8168691886042092,
+              "xmin": 1.75,
+              "ymax": 0.07746181611499055,
+              "ymin": -0.016356162428146703
+            },
+            "observed_xmax": 1.8556727424970816,
+            "observed_xmin": 1.6168691886042093,
+            "observed_ymax": 0.09458725920382774,
+            "observed_ymin": -0.07253818388500946
+          },
+          {
+            "accepted": true,
+            "id": 4,
+            "intersection": {
+              "bounded_association": true,
+              "half_length": 0.18,
+              "half_width": 0.13,
+              "passed": false,
+              "stamp": 1794157830.713855,
+              "vmax": 0.55,
+              "xmax": 1.7755547497852735,
+              "xmin": 1.75,
+              "ymax": 0.1,
+              "ymin": 0.030285177095762884
+            },
+            "observed_xmax": 1.837075527819602,
+            "observed_xmin": 1.5755547497852735,
+            "observed_ymax": 0.1802851770957629,
+            "observed_ymin": 0.1278494912666583
+          }
+        ],
+        "previous_lead": {
+          "bounded_association": true,
+          "half_length": 0.18,
+          "half_width": 0.13,
+          "passed": false,
+          "stamp": 1794157830.4827874,
+          "vmax": 0.55,
+          "xmax": 1.773430916399406,
+          "xmin": 1.75,
+          "ymax": 0.06897762793425403,
+          "ymin": 0.02675060331892361
+        },
+        "rear_visibility_limit_s": 0.9,
+        "source_stamp": 1794157830.713855
+      },
+      "compact_overtake": true,
+      "complete": false,
+      "confirmed_cluster_count": 5,
+      "confirmed_dynamic_point_count": 114,
+      "confirmed_obstacle_tracks": [
+        {
+          "extent_m": 0.40340033354575916,
+          "hits": 36,
+          "id": 1,
+          "misses": 0,
+          "x": 0.6246481233465784,
+          "y": -1.6444208467375094
+        },
+        {
+          "extent_m": 0.554307698752176,
+          "hits": 36,
+          "id": 2,
+          "misses": 0,
+          "x": 4.602242803740539,
+          "y": -1.119738866634428
+        },
+        {
+          "extent_m": 0.2914074991533988,
+          "hits": 36,
+          "id": 3,
+          "misses": 0,
+          "x": 1.7035264084604376,
+          "y": 0.05203407142811113
+        },
+        {
+          "extent_m": 0.26607397529396387,
+          "hits": 36,
+          "id": 4,
+          "misses": 0,
+          "x": 1.682707239383337,
+          "y": 0.19358908730263588
+        },
+        {
+          "extent_m": 0.7089615055267796,
+          "hits": 36,
+          "id": 5,
+          "misses": 0,
+          "x": 3.155865751194296,
+          "y": 2.853173476483908
+        }
+      ],
+      "control_period_s": 0.05,
+      "controller": "closed_loop_frenet_cpp_dynamic_mpc",
+      "detected_cluster_count": 5,
+      "dynamic_scan_point_count": 164,
+      "endpoint_distance_m": 5.928828066409544,
+      "endpoint_heading_error_rad": -0.07809907810136278,
+      "footprint_collision": false,
+      "frame_id": "map",
+      "generated_mono": 5954.30582908,
+      "implementation": "cpp_separate_planner_controller",
+      "input_age": {
+        "odom": {
+          "receipt_age_s": 0.018209277000096336,
+          "source_age_s": 0.021370887756347656,
+          "timeout_s": 0.5
+        },
+        "pose": {
+          "receipt_age_s": 0.01155230299991672,
+          "source_age_s": 0.03611302375793457,
+          "timeout_s": 0.5
+        },
+        "scan": {
+          "receipt_age_s": 0.0352067049998368,
+          "source_age_s": 0.03611302375793457,
+          "timeout_s": 0.5
+        }
+      },
+      "input_pose_stamp": 1794157830.713855,
+      "input_scan_stamp": 1794157830.713855,
+      "lap_length_m": 5.9500000000000135,
+      "lap_progress_m": 0,
+      "last_plan_duration_s": 0.0032057499993243255,
+      "last_plan_stages": {
+        "compute_wall_s": 0.003210805999515287,
+        "lattice_search_s": 0.0018704450003497186,
+        "scan_processing_s": 0.0006458279995058547,
+        "total_wall_s": 0.003212149999853864
+      },
+      "lateral_jerk_cost": 0,
+      "lead_bounds": {
+        "bounded_association": true,
+        "half_length": 0.18,
+        "half_width": 0.13,
+        "passed": false,
+        "stamp": 1794157830.713855,
+        "vmax": 0.55,
+        "xmax": 1.7755547497852735,
+        "xmin": 1.75,
+        "ymax": 0.07746181611499055,
+        "ymin": 0.030285177095762884
+      },
+      "lead_confirmed_hits": 35,
+      "local_path_endpoint_xy": [
+        5.94417538825926,
+        0.12198045041358178
+      ],
+      "minimum_footprint_point_distance_m": null,
+      "minimum_obstacle_clearance_m": 0,
+      "minimum_static_clearance_m": 0,
+      "nearest_dynamic_point_m": 1.560178745928741,
+      "obstacle_points": [
+        [
+          0.49179802727952904,
+          -1.5300195773984357
+        ],
+        [
+          0.4953855100445895,
+          -1.5083145389498995
+        ],
+        [
+          0.5015393307845046,
+          -1.5054068551364028
+        ],
+        [
+          0.511102121794758,
+          -1.525216383415159
+        ],
+        [
+          0.5191537812082461,
+          -1.5341003913260347
+        ],
+        [
+          0.522869703513906,
+          -1.515293065447536
+        ],
+        [
+          0.5272363783286051,
+          -1.5014161519041647
+        ],
+        [
+          0.5323184086326005,
+          -1.4924599366882159
+        ],
+        [
+          0.5376682619689328,
+          -1.4854581424338065
+        ],
+        [
+          0.5511857301853484,
+          -1.5247125413941467
+        ],
+        [
+          0.5577002248018839,
+          -1.5235401156088577
+        ],
+        [
+          0.5710014148396028,
+          -1.558710623550696
+        ],
+        [
+          0.5806696912082296,
+          -1.5731666038157015
+        ],
+        [
+          0.587779590474753,
+          -1.5738277808424268
+        ],
+        [
+          0.6119889996859723,
+          -1.659761555095821
+        ],
+        [
+          0.6337426634477651,
+          -1.7298372697866875
+        ],
+        [
+          0.6442258572458013,
+          -1.742984197493364
+        ],
+        [
+          0.650645688517888,
+          -1.7365144067474174
+        ],
+        [
+          0.656161925020148,
+          -1.7261135533115632
+        ],
+        [
+          0.6624654038044282,
+          -1.7196011579682873
+        ],
+        [
+          0.6729373951922504,
+          -1.7315918752724844
+        ],
+        [
+          0.6805796872302199,
+          -1.7308603507400189
+        ],
+        [
+          0.6900670616508895,
+          -1.7378789402422838
+        ],
+        [
+          0.6965713215311315,
+          -1.7322103386320582
+        ],
+        [
+          0.7023168301148086,
+          -1.7236044646412256
+        ],
+        [
+          0.7133461992434672,
+          -1.736320219630435
+        ],
+        [
+          0.7207824599492556,
+          -1.7344382232178142
+        ],
+        [
+          0.7324891213991598,
+          -1.7489765031934392
+        ],
+        [
+          0.7427954239270036,
+          -1.7576446074551042
+        ],
+        [
+          0.7544864396342588,
+          -1.771083147334621
+        ],
+        [
+          0.7636599767142884,
+          -1.774807824276574
+        ],
+        [
+          0.7720693177162865,
+          -1.775595752649622
+        ],
+        [
+          4.6061424271262315,
+          -1.3250456380146536
+        ],
+        [
+          4.587766956760352,
+          -1.299114065190051
+        ],
+        [
+          4.560604227216784,
+          -1.2708608813205222
+        ],
+        [
+          4.5361621595374135,
+          -1.2436920127611828
+        ],
+        [
+          4.512527705567039,
+          -1.2170303259145165
+        ],
+        [
+          4.510914073356372,
+          -1.1967147238466291
+        ],
+        [
+          4.507273611248246,
+          -1.1759123998936014
+        ],
+        [
+          4.503531760971976,
+          -1.1551639582275064
+        ],
+        [
+          4.50936395757121,
+          -1.1370031398450964
+        ],
+        [
+          4.528676223521146,
+          -1.122299691570386
+        ],
+        [
+          4.535335988242347,
+          -1.1042657269969436
+        ],
+        [
+          4.549684456306736,
+          -1.0881193860779073
+        ],
+        [
+          4.564943871306413,
+          -1.0721044604116636
+        ],
+        [
+          4.583063275415355,
+          -1.0566730110235882
+        ],
+        [
+          4.5943129748288385,
+          -1.0395079004628114
+        ],
+        [
+          4.614266452807512,
+          -1.024276783007888
+        ],
+        [
+          4.621485420550543,
+          -1.0060387339628256
+        ],
+        [
+          4.65792588188796,
+          -0.9942103416749477
+        ],
+        [
+          4.765703275943186,
+          -0.9974748347881305
+        ],
+        [
+          4.849129641602505,
+          -0.9946519381354526
+        ],
+        [
+          4.9482845367831585,
+          -0.994356246196684
+        ],
+        [
+          1.7787418723756907,
+          -0.029099313568296054
+        ],
+        [
+          1.7517192297282338,
+          -0.022739206701764908
+        ],
+        [
+          1.7586684552125804,
+          -0.016272235811452745
+        ],
+        [
+          1.813583876608418,
+          -0.009051318607134186
+        ],
+        [
+          1.8274706384720028,
+          -0.0021218403195022474
+        ],
+        [
+          1.851322938506616,
+          0.00516089091009949
+        ],
+        [
+          1.8151633748860865,
+          0.011000661756782819
+        ],
+        [
+          1.8219614551454408,
+          0.017896815678804488
+        ],
+        [
+          1.817735651629978,
+          0.024454347336421378
+        ],
+        [
+          1.8024909834728273,
+          0.030529228260298344
+        ],
+        [
+          1.7822278173016692,
+          0.036247298805179684
+        ],
+        [
+          1.7359756369779877,
+          0.040507211886479544
+        ],
+        [
+          1.6977041271241884,
+          0.04479430761834141
+        ],
+        [
+          1.6704049120824565,
+          0.0493872783952569
+        ],
+        [
+          1.6520755362788817,
+          0.05430507184800461
+        ],
+        [
+          1.6127768775242552,
+          0.05766269532645257
+        ],
+        [
+          1.6113793585454927,
+          0.06338100097907952
+        ],
+        [
+          1.6209258996024976,
+          0.06991881921251801
+        ],
+        [
+          1.6184787461267576,
+          0.07558406258402751
+        ],
+        [
+          1.6150111128665028,
+          0.08114571866874123
+        ],
+        [
+          1.6145086244304456,
+          0.08694465697467352
+        ],
+        [
+          1.6139808382165601,
+          0.09274134756645193
+        ],
+        [
+          1.6174088948366316,
+          0.09892444881674184
+        ],
+        [
+          1.616828809477694,
+          0.1047336801462315
+        ],
+        [
+          1.6162233821679497,
+          0.11054032508421369
+        ],
+        [
+          1.639446354491062,
+          0.1189893014191504
+        ],
+        [
+          1.6407653206161623,
+          0.1251235860848765
+        ],
+        [
+          1.6837587121871882,
+          0.136265159636435
+        ],
+        [
+          1.812295276037919,
+          0.17195653323417212
+        ],
+        [
+          1.8272456308041223,
+          0.180794456262415
+        ],
+        [
+          1.829276581949878,
+          0.18794002652198813
+        ],
+        [
+          1.8184115205889932,
+          0.19322456008822314
+        ],
+        [
+          1.8114851282511892,
+          0.1990150509358735
+        ],
+        [
+          1.7304259372701898,
+          0.19324000078419
+        ],
+        [
+          1.6040238112094716,
+          0.17950483150172827
+        ],
+        [
+          1.581383060407583,
+          0.18168920971347494
+        ],
+        [
+          1.5745258956723813,
+          0.18634219406699287
+        ],
+        [
+          1.5676527884103346,
+          0.19093938873251812
+        ],
+        [
+          1.5981779451944658,
+          0.2021299480963051
+        ],
+        [
+          1.6030505629600968,
+          0.20892993140490607
+        ],
+        [
+          1.599041582338795,
+          0.21412477038522107
+        ],
+        [
+          1.6009056302713025,
+          0.22041632050889406
+        ],
+        [
+          3.0448118209727943,
+          2.52626204396205
+        ],
+        [
+          3.0672267793017784,
+          2.5696937213876203
+        ],
+        [
+          3.076220521247734,
+          2.601018013634634
+        ],
+        [
+          3.0900647320797248,
+          2.637295421991466
+        ],
+        [
+          3.105087761177902,
+          2.6751281726241656
+        ],
+        [
+          3.106902390399204,
+          2.7006210833905917
+        ],
+        [
+          3.109978582428981,
+          2.727578515027044
+        ],
+        [
+          3.124269820060229,
+          2.765844499770681
+        ],
+        [
+          3.1396990951091843,
+          2.8056974070271776
+        ],
+        [
+          3.159070533069506,
+          2.849985578598035
+        ],
+        [
+          3.1717821828593924,
+          2.8880964402135847
+        ],
+        [
+          3.1786156544880764,
+          2.920658754868909
+        ],
+        [
+          3.1852195401156105,
+          2.9533358995075876
+        ],
+        [
+          3.2075479105797493,
+          3.0026930488653885
+        ],
+        [
+          3.214308399757061,
+          3.036388741195558
+        ],
+        [
+          3.2277036537621764,
+          3.0774636470182997
+        ],
+        [
+          3.2366904896734185,
+          3.114337502819179
+        ],
+        [
+          3.251540089365914,
+          3.1579388497623486
+        ],
+        [
+          3.2647093162431817,
+          3.2002587115299304
+        ]
+      ],
+      "offset_m": -0.55,
+      "plan_id": 74,
+      "plan_interval_s": 0.2,
+      "planning_active": false,
+      "preferred_tracking_reserve_m": 0.03,
+      "progress_index": 0,
+      "raw_scan_point_count": 1037,
+      "reason": "waiting_for_operator",
+      "return_m": 1.7000000000000002,
+      "route_mode": "open_stop_at_end",
+      "runtime_timing": {
+        "publish_mono": 5954.379719537,
+        "sequence": 684,
+        "tick_start_mono": 5954.379166125
+      },
+      "scan_pose_alignment_span_s": 0.05315399169921875,
+      "side": "right",
+      "speed_command": 0,
+      "state": "COMPACT_ENTRY",
+      "steering_command": 0,
+      "switch_reason": "initialized",
+      "tracker_config": {
+        "state_dimension": 10,
+        "state_source": "vesc_odometry_vy_zero_yaw_estimated_from_speed_and_servo",
+        "type": "dynamic_mpc"
+      },
+      "tracker_diagnostics": null,
+      "tracking_reserve_satisfied": true,
+      "transition_m": 1.9,
+      "valid": true
+    },
+    "actuator": {
+      "current": 0.0,
+      "input_age_sec": 1.714224,
+      "motor_mode": "coast",
+      "rpm": 0.0,
+      "servo": 0.4304,
+      "stop_reason": "final_command_timeout"
+    },
+    "relay": {
+      "source_stamp": 1794157832.5087492,
+      "relay_receive_ros": 1794157832.5076704,
+      "input_source_age_s": -0.0010788440704345703,
+      "callback_publish_s": 0.00021971299975120928,
+      "count": 243
+    },
+    "final": {
+      "arm_state": "DISARMED",
+      "armed": false,
+      "input_age_sec": {
+        "belief": 1000000000.0,
+        "deadman": 1000000000.0,
+        "nominal": 0.414667,
+        "odom": 0.010864,
+        "planner": 0.41433,
+        "scan": 0.053025
+      },
+      "latched": false,
+      "real_vehicle_profile": true,
+      "stop_reason": "disarmed",
+      "straight_line_fallback_allowed": false
+    },
+    "window": {
+      "published_mono": 5955.279413624,
+      "reason": "no_fresh_permit",
+      "latched": false,
+      "started": null,
+      "speed": 0.0,
+      "steering": 0.0,
+      "diagnostic": {},
+      "source_age_s": 0.428635835647583,
+      "health_ready": true,
+      "ready_for_permission": true
+    },
+    "pf": {
+      "valid": false,
+      "reason": "scan_stale",
+      "pose_count": 194,
+      "compute_ms": 18.97036999980628,
+      "pose_frame": "map/base_link",
+      "scan_stamp": 1794157832.5087492,
+      "odom_stamp": 1794157833.0382442,
+      "pipeline_timing": {
+        "source_stamp": 1794157832.5087492,
+        "pf_receive_ros": 1794157832.509102,
+        "pf_input_age_s": 0.0003528594970703125,
+        "pf_output_check_ros": 1794157832.5290623,
+        "pf_output_age_s": 0.020313024520874023,
+        "compute_ms": 18.97036999980628
+      }
+    },
+    "health": {
+      "erpm": 0.0,
+      "fault": 0,
+      "motor_current": 0.0,
+      "input_current": 0.0,
+      "duty_cycle": 0.0,
+      "voltage": 11.4,
+      "fet_temp": 28.0,
+      "motor_temp": -83.5,
+      "motor_temperature_used": false,
+      "stamp": 1794157833.197829,
+      "bridge_ros": 1794157833.1992297,
+      "bridge_mono": 5956.759200862
+    },
+    "health_guard": {
+      "healthy": true,
+      "motor_temperature_used": false,
+      "qualified": true,
+      "reason": "healthy",
+      "receipt_age_s": 0.011224492999645008,
+      "samples": 423,
+      "source_age_s": 0.01368093490600586,
+      "startup_rejected_samples": 0
+    }
+  },
+  "timing": {
+    "health_samples": 522,
+    "max_source_age_s": 0.031601905822753906,
+    "max_bridge_age_s": 0.01647210121154785,
+    "max_bridge_to_supervisor_s": 0.024729706000471197,
+    "max_spin_gap_s": 0.32505019000018365,
+    "max_abs_erpm": 0.0,
+    "last_health": {
+      "source_age_s": 0.0031502246856689453,
+      "bridge_age_s": 0.0014007091522216797,
+      "bridge_to_supervisor_s": 0.001650571000027412,
+      "ros_now": 1794157833.2009792,
+      "source_stamp": 1794157833.197829
+    },
+    "strict_health_started_mono": 5947.687210581
+  },
+  "pp_delivery": {
+    "samples": 559,
+    "max_tick_gap_s": 0.0,
+    "max_delivery_s": 0.13076889400053915,
+    "max_receipt_gap_s": 0.16284380100023554,
+    "last": {
+      "publish_mono": 5954.379719537,
+      "sequence": 684,
+      "tick_start_mono": 5954.379166125,
+      "delivery_s": 0.017603352000151062
+    }
+  },
+  "localization_monitor": {
+    "active": false,
+    "pp_samples": 100,
+    "max_pose_source_age_s": 0.09164857864379883
+  },
+  "supervisor_lease_expired": false,
+  "supervisor_lease_diagnostics": {
+    "timeout_s": 0.5,
+    "expired": false,
+    "max_active_age_s": 0.0,
+    "failure": null,
+    "time_sampled_under_lock": true
+  },
+  "completed_unix": 1794157834.2811756,
+  "route_completed": false
+}

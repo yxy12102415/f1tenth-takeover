@@ -1,0 +1,90 @@
+{
+  "map": "381_2_0",
+  "route_mode": "open_stop_at_end",
+  "source_assets": "/home/f1tenth/f1tenth_real_migration_ws_20260829/candidate_cpp_gpu_20260909/ground_381_2_0_joint_dmpc_20260927_v2/runtime_assets.json",
+  "assets_sha256": "4f7892d91ef8eaa6f8a9603f23dce628590ba4f4c6a1308058eb9d2d2c501c8f",
+  "route_length_m": 5.845164147568345,
+  "start_pose": [
+    -0.004767532556239378,
+    0.009828210671599464,
+    0.018850232249305154
+  ],
+  "end_pose": [
+    5.451442218213602,
+    0.9832012134279002,
+    0.837751531013883
+  ],
+  "vehicle_dimensions_assumed_m": [
+    0.58,
+    0.31
+  ],
+  "dimensions_confirmed": false,
+  "offset_m": 0.82,
+  "offset_corridor_screen": {
+    "left": [
+      {
+        "from_s_m": 2.497947734750607,
+        "to_s_m": 5.845164147568345,
+        "length_m": 3.3472164128177377
+      },
+      {
+        "from_s_m": 0.0,
+        "to_s_m": 1.1990130858716832,
+        "length_m": 1.1990130858716832
+      },
+      {
+        "from_s_m": 1.8484803628641646,
+        "to_s_m": 1.8484803628641646,
+        "length_m": 0.0
+      },
+      {
+        "from_s_m": 2.3480708279842815,
+        "to_s_m": 2.3480708279842815,
+        "length_m": 0.0
+      }
+    ],
+    "right": [
+      {
+        "from_s_m": 3.397190542405911,
+        "to_s_m": 5.845164147568345,
+        "length_m": 2.4479736051624337
+      },
+      {
+        "from_s_m": 0.0,
+        "to_s_m": 1.7485623501758103,
+        "length_m": 1.7485623501758103
+      }
+    ]
+  },
+  "idealized_distance_screen": [
+    {
+      "ego_speed_mps": 1.5,
+      "lead_speed_mps": 0.7,
+      "initial_gap_m": 2.25,
+      "required_ahead_gap_m": 1.2,
+      "ideal_straight_pass_distance_m": 6.468750000000001
+    },
+    {
+      "ego_speed_mps": 1.5,
+      "lead_speed_mps": 0.8,
+      "initial_gap_m": 2.25,
+      "required_ahead_gap_m": 1.2,
+      "ideal_straight_pass_distance_m": 7.392857142857144
+    },
+    {
+      "ego_speed_mps": 1.5,
+      "lead_speed_mps": 1.0,
+      "initial_gap_m": 2.25,
+      "required_ahead_gap_m": 1.2,
+      "ideal_straight_pass_distance_m": 10.350000000000001
+    }
+  ],
+  "physical_motion_ready": false,
+  "blockers": [
+    "Existing open route is only 5.85 m; demonstrate complete pass/rejoin/stopping room or record a longer route.",
+    "Simulation node hardcodes remaining=100 m and has no commissioned open-route terminal stop.",
+    "Real command adapter, deadman/watchdog/fault validation and Jetson timing acceptance pending.",
+    "Opponent dimensions/speed and current localization/start pose not confirmed."
+  ],
+  "scope": "Static sampled geometry screen only; not swept or time-indexed trajectory acceptance."
+}

@@ -1,0 +1,34 @@
+{
+  "status": "preparation_only_not_motion_approved",
+  "active_route": "original_381_2_0",
+  "assets": "assets/381_2_0.json",
+  "route_length_m": 5.845164147568345,
+  "start_pose": [
+    -0.004767532556239378,
+    0.009828210671599464,
+    0.018850232249305154
+  ],
+  "ego_speed_cap_candidate_mps": 2.0,
+  "lead_speed_candidate_mps": 0.5,
+  "lead_speed_confirmed": false,
+  "lead_speed_basis": "User requested screening at 0.5 m/s; actual stable speed remains unknown.",
+  "initial_gap_candidate_m": 1.5,
+  "ego_acceleration_limit_mps2": 1.0,
+  "ego_deceleration_limit_mps2": 0.8,
+  "ego_dimensions_assumed_m": [
+    0.58,
+    0.31
+  ],
+  "opponent_dimensions_confirmed": false,
+  "yaw_feedback": "continuous_dynamic_model_observer",
+  "preserve_original_vehicle_launchers": true,
+  "long_route_candidate_selected": false,
+  "live_enabled": false,
+  "notes": [
+    "User prefers original route with faster ego/slower opponent; longer route is unselected backup.",
+    "Candidate speeds are proposed caps, not settings deployed to any actuator.",
+    "Initial gap is between model pose reference points, not bumper clearance.",
+    "Opponent must sustain its chosen speed without the previously observed low-speed stutter.",
+    "Existing planner has not admitted a complete pass on the short route; open-route terminal integration pending."
+  ]
+}

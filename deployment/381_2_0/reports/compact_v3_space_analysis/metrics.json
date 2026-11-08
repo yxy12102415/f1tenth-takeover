@@ -1,0 +1,27 @@
+{
+  "planned_body_map_clearance_lower_bound_m": 0.32257891073036443,
+  "actual_body_map_clearance_lower_bound_m": 0.2891817320087331,
+  "last_prediction_body_map_clearance_lower_bound_m": 0.32257891073036443,
+  "planned_body_to_static_snapshot_nonlead_points_min_m": 0.5379379108557867,
+  "last_prediction_to_nonlead_snapshot_points_min_m": 1.1024859134767973,
+  "nonlead_snapshot_points": 43,
+  "planned_max_lateral_m": 0.5999999999999999,
+  "planned_max_heading_rad": 0.5581865543066331,
+  "actual_final_local_xy": [
+    1.493733309216328,
+    -0.7300013719449305
+  ],
+  "stop_command_local_pose": [
+    0.5250113196415047,
+    -0.16044600833925574,
+    -0.3400058760264044
+  ],
+  "final_local_pose": [
+    1.493733309216328,
+    -0.7300013719449305,
+    -0.597572933275559
+  ],
+  "lateral_motion_after_stop_command_m": -0.5695553636056748,
+  "forward_motion_after_stop_command_m": 0.9687219895748234,
+  "snapshot_scope": "Static map plus last valid pre-stop detected point snapshot; not proof of unobserved physical free space"
+}

@@ -1,0 +1,59 @@
+[
+  {
+    "latched": false,
+    "x": 5.95,
+    "heading": 0,
+    "passed": true,
+    "result": {
+      "error": "compact_dynamic_body_conflict",
+      "ok": false
+    }
+  },
+  {
+    "latched": true,
+    "x": 5.95,
+    "heading": 0,
+    "passed": true,
+    "result": {
+      "command_cap_mps": 1.85,
+      "compact_overtake": true,
+      "endpoint_zero_latched": true,
+      "lead_bounds": {
+        "bounded_association": true,
+        "half_length": 0.18,
+        "half_width": 0.13,
+        "passed": true,
+        "stamp": 101.4,
+        "vmax": 0.55,
+        "xmax": 1.8499999999999996,
+        "xmin": 1.75,
+        "ymax": 0.060000000000000026,
+        "ymin": -0.06000000000000004
+      },
+      "lead_confirmed_hits": 8,
+      "observed_endpoint_stationary": false,
+      "ok": true,
+      "state": "COMPACT_FINISH"
+    }
+  },
+  {
+    "latched": true,
+    "x": 5.6,
+    "heading": 0,
+    "passed": true,
+    "result": {
+      "error": "compact_dynamic_body_conflict",
+      "ok": false
+    }
+  },
+  {
+    "latched": true,
+    "x": 5.95,
+    "heading": 0.3,
+    "passed": true,
+    "result": {
+      "error": "compact_dynamic_body_conflict",
+      "ok": false
+    }
+  }
+]

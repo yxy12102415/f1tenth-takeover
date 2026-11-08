@@ -1,0 +1,95 @@
+[
+  {
+    "name": "configured_gap_accepted",
+    "passed": true,
+    "result": {
+      "command_cap_mps": 1.85,
+      "compact_association": {
+        "bounded_association_v3": true,
+        "candidates": [
+          {
+            "accepted": true,
+            "id": 1,
+            "intersection": {
+              "bounded_association": true,
+              "half_length": 0.18,
+              "half_width": 0.13,
+              "passed": false,
+              "stamp": 101.2,
+              "vmax": 0.55,
+              "xmax": 1.8499999999999999,
+              "xmin": 1.75,
+              "ymax": 0.060000000000000026,
+              "ymin": -0.06000000000000001
+            },
+            "observed_xmax": 1.6500000000000001,
+            "observed_xmin": 1.65,
+            "observed_ymax": 0.09,
+            "observed_ymin": -0.08999999999999998
+          }
+        ],
+        "previous_lead": {
+          "bounded_association": true,
+          "half_length": 0.18,
+          "half_width": 0.13,
+          "passed": false,
+          "stamp": 101,
+          "vmax": 0.55,
+          "xmax": 1.8499999999999999,
+          "xmin": 1.75,
+          "ymax": 0.060000000000000026,
+          "ymin": -0.06000000000000001
+        },
+        "rear_visibility_limit_s": 0.9,
+        "source_stamp": 101.2
+      },
+      "compact_overtake": true,
+      "lead_bounds": {
+        "bounded_association": true,
+        "half_length": 0.18,
+        "half_width": 0.13,
+        "passed": false,
+        "stamp": 101.2,
+        "vmax": 0.55,
+        "xmax": 1.8499999999999999,
+        "xmin": 1.75,
+        "ymax": 0.060000000000000026,
+        "ymin": -0.06000000000000001
+      },
+      "lead_confirmed_hits": 7,
+      "ok": true,
+      "state": "COMPACT_ENTRY"
+    }
+  },
+  {
+    "name": "old_gap_rejected",
+    "passed": true,
+    "result": {
+      "error": "compact_waiting_for_target_at_configured_gap",
+      "ok": false
+    }
+  },
+  {
+    "name": "rear_bridge_080",
+    "passed": true,
+    "result": {
+      "ok": true
+    }
+  },
+  {
+    "name": "rear_bridge_expires",
+    "passed": true,
+    "result": {
+      "error": "compact_target_stale",
+      "ok": false
+    }
+  },
+  {
+    "name": "forward_loss_not_extended",
+    "passed": true,
+    "result": {
+      "error": "compact_target_stale",
+      "ok": false
+    }
+  }
+]

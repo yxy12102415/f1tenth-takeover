@@ -235,12 +235,33 @@ def solve(core, request):
 
 
 def warm_up(core):
-    """Initialize HiGHS/SLSQP before ready, inside the existing startup bound."""
-    result=solve(core,dict(s=[0.,1.,2.,3.,4.], initial=[0.]*5,
+    """Warm representative LP/SQP sizes before ready (Jetson cold-start cost).
+
+    Only startup retries are allowed. Runtime 15 ms LP / 40 ms socket limits,
+    numerical constraints and final residual validation are unchanged.
+    """
+    tiny=dict(s=[0.,1.,2.,3.,4.], initial=[0.]*5,
         bounds=[[-1.,1.]]*5, initial_slope=0., max_curvature=.6,
-        curvature=[0.]*3, obstacle_indices=[], obstacle_d=[], obstacle_clearance=[]))
-    if not result['ok']:
-        raise RuntimeError('sqp_warmup_failed:'+result['message'])
+        curvature=[0.]*3, obstacle_indices=[], obstacle_d=[], obstacle_clearance=[])
+    requests=[tiny]
+    for side in (1.,-1.):
+        x=np.linspace(0.,4.5,21)
+        d=side*.82*(3*(x/4.5)**2-2*(x/4.5)**3)
+        bounds=[[-1.25,1.25] for _ in x]
+        for i in range(12,21):bounds[i]=[.8,1.25] if side>0 else [-1.25,-.8]
+        requests.append(dict(s=x.tolist(),initial=d.tolist(),bounds=bounds,
+            initial_slope=0.,max_curvature=.60,curvature=[0.]*19,
+            obstacle_indices=list(range(12,21)),obstacle_d=[0.]*9,
+            obstacle_clearance=[.8]*9))
+    start=time.monotonic()
+    for request in requests:
+        for attempt in range(3):
+            result=solve(core,request)
+            if result['ok']:break
+            if result['message']!='linear_corridor_check_failed:1' or time.monotonic()-start>2.:
+                break
+        if not result['ok']:
+            raise RuntimeError('sqp_warmup_failed:'+result['message'])
 
 
 def main():

@@ -1,0 +1,170 @@
+{
+  "scope": "Offline replay of the compact pass against the measured 1150 us lead speed.\n\nReads saved native-controller plant trajectories. No ROS, hardware, or command\npublishers. This tests the existing path, not every possible overtaking path.\nTracking rollouts use the old synthetic lead; only this replay substitutes the\nnew lead motion. Constant lead speed is an assumption, not a guaranteed bound.\n",
+  "physical_motion_started": false,
+  "physical_motion_ready": false,
+  "route_length_m": 5.6,
+  "measured_lead_peak_mps": 0.4825336763206345,
+  "lead_pwm_us": 1150,
+  "cases": [
+    {
+      "rollout": "/home/f1tenth/f1tenth-takeover-381-overtaking/deployment/381_2_0/reports/lead_1150_overtake_feasibility/tracking_1.25.json",
+      "cap_mps": 1.25,
+      "tracking_completed": true,
+      "tracking_failure": null,
+      "duration_s": 6.95,
+      "lead_initial_center_gap_assumed_m": 1.6,
+      "replay_cases": [
+        {
+          "assumed_constant_lead_speed_mps": 0.4825336763206345,
+          "first_physical_body_overlap_s": null,
+          "first_clearance_failure_s": 3.67,
+          "final_center_ahead_gap_m": 0.6366048803994744
+        },
+        {
+          "assumed_constant_lead_speed_mps": 0.5,
+          "first_physical_body_overlap_s": 4.345,
+          "first_clearance_failure_s": 3.605,
+          "final_center_ahead_gap_m": 0.5153012624462807
+        },
+        {
+          "assumed_constant_lead_speed_mps": 0.55,
+          "first_physical_body_overlap_s": 3.9650000000000003,
+          "first_clearance_failure_s": 3.565,
+          "final_center_ahead_gap_m": 0.16805126244628
+        }
+      ],
+      "coast_map": {
+        "deceleration_assumed_mps2": 0.4,
+        "minimum_map_clearance_m": -0.04097447986290936,
+        "failed_start_times_s": [
+          1.05,
+          1.1,
+          1.1500000000000001,
+          1.2000000000000002,
+          1.25,
+          1.3,
+          1.35,
+          1.4000000000000001,
+          1.4500000000000002,
+          1.5,
+          1.55,
+          1.6,
+          1.6500000000000001,
+          1.7000000000000002,
+          1.75,
+          1.8
+        ],
+        "passed": false,
+        "note": "Map-only coast check; passing would still require two-car coast checks."
+      }
+    },
+    {
+      "rollout": "/home/f1tenth/f1tenth-takeover-381-overtaking/deployment/381_2_0/reports/lead_1150_overtake_feasibility/tracking_1.5.json",
+      "cap_mps": 1.5,
+      "tracking_completed": true,
+      "tracking_failure": null,
+      "duration_s": 6.7,
+      "lead_initial_center_gap_assumed_m": 1.6,
+      "replay_cases": [
+        {
+          "assumed_constant_lead_speed_mps": 0.4825336763206345,
+          "first_physical_body_overlap_s": null,
+          "first_clearance_failure_s": 3.62,
+          "final_center_ahead_gap_m": 0.7467639493885843
+        },
+        {
+          "assumed_constant_lead_speed_mps": 0.5,
+          "first_physical_body_overlap_s": null,
+          "first_clearance_failure_s": 3.515,
+          "final_center_ahead_gap_m": 0.6298269123552327
+        },
+        {
+          "assumed_constant_lead_speed_mps": 0.55,
+          "first_physical_body_overlap_s": 3.97,
+          "first_clearance_failure_s": 3.355,
+          "final_center_ahead_gap_m": 0.29507691235523215
+        }
+      ],
+      "coast_map": {
+        "deceleration_assumed_mps2": 0.4,
+        "minimum_map_clearance_m": -0.04097447986290936,
+        "failed_start_times_s": [
+          1.05,
+          1.1,
+          1.1500000000000001,
+          1.2000000000000002,
+          1.25,
+          1.3,
+          1.35,
+          1.4000000000000001,
+          1.4500000000000002,
+          1.5,
+          1.55,
+          1.6,
+          1.6500000000000001,
+          1.7000000000000002,
+          1.75,
+          1.8
+        ],
+        "passed": false,
+        "note": "Map-only coast check; passing would still require two-car coast checks."
+      }
+    },
+    {
+      "rollout": "/home/f1tenth/f1tenth-takeover-381-overtaking/deployment/381_2_0/reports/lead_1150_overtake_feasibility/tracking_1.85.json",
+      "cap_mps": 1.85,
+      "tracking_completed": true,
+      "tracking_failure": null,
+      "duration_s": 6.65,
+      "lead_initial_center_gap_assumed_m": 1.6,
+      "replay_cases": [
+        {
+          "assumed_constant_lead_speed_mps": 0.4825336763206345,
+          "first_physical_body_overlap_s": null,
+          "first_clearance_failure_s": 3.625,
+          "final_center_ahead_gap_m": 0.7817690695463959
+        },
+        {
+          "assumed_constant_lead_speed_mps": 0.5,
+          "first_physical_body_overlap_s": null,
+          "first_clearance_failure_s": 3.5,
+          "final_center_ahead_gap_m": 0.6657053486970126
+        },
+        {
+          "assumed_constant_lead_speed_mps": 0.55,
+          "first_physical_body_overlap_s": 3.9650000000000003,
+          "first_clearance_failure_s": 3.31,
+          "final_center_ahead_gap_m": 0.33345534869701243
+        }
+      ],
+      "coast_map": {
+        "deceleration_assumed_mps2": 0.4,
+        "minimum_map_clearance_m": -0.04097447986290936,
+        "failed_start_times_s": [
+          1.05,
+          1.1,
+          1.1500000000000001,
+          1.2000000000000002,
+          1.25,
+          1.3,
+          1.35,
+          1.4000000000000001,
+          1.4500000000000002,
+          1.5,
+          1.55,
+          1.6,
+          1.6500000000000001,
+          1.7000000000000002,
+          1.75,
+          1.8,
+          2.5500000000000003,
+          2.6,
+          2.6500000000000004
+        ],
+        "passed": false,
+        "note": "Map-only coast check; passing would still require two-car coast checks."
+      }
+    }
+  ],
+  "conclusion": "Current compact maneuver is not commissioned. No safety settings changed."
+}

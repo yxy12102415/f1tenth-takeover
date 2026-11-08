@@ -1,0 +1,12 @@
+build/
+install/
+log/
+assets/*.json
+reports/*.log
+reports/*.png
+reports/shadow_*/
+reports/*.lock
+__pycache__/
+
+# Raw scans and exploratory records stay on the Jetson. Selected summaries are force-added.
+reports/

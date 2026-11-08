@@ -1,0 +1,73 @@
+{
+  "physical_acceptance": false,
+  "attempts": [
+    {
+      "run": "20261108_105709-closed-frenet-ground-attempt",
+      "passed": false,
+      "route_completed": false,
+      "error": "VESC telemetry stale",
+      "max_abs_erpm": 0.0,
+      "last_operator": {
+        "active": false,
+        "arm": false,
+        "deadman": false,
+        "enable": false,
+        "joy_age_sec": 0.002413,
+        "mpc_ready": true,
+        "mpc_stable_for_sec": 0.0,
+        "nominal_age_sec": 0.012772,
+        "planner_age_sec": 0.011446,
+        "reason": "waiting_for_L1",
+        "release_latched": false
+      }
+    },
+    {
+      "run": "20261108_105957-closed-frenet-ground-attempt",
+      "passed": false,
+      "route_completed": false,
+      "error": null,
+      "max_abs_erpm": 0.0,
+      "last_operator": {
+        "active": false,
+        "arm": false,
+        "deadman": false,
+        "enable": false,
+        "joy_age_sec": 0.015568,
+        "mpc_ready": true,
+        "mpc_stable_for_sec": 0.0,
+        "nominal_age_sec": 0.01237,
+        "planner_age_sec": 0.010027,
+        "reason": "waiting_for_L1",
+        "release_latched": false
+      }
+    },
+    {
+      "run": "20261108_110153-closed-frenet-ground-attempt",
+      "passed": false,
+      "route_completed": false,
+      "error": null,
+      "max_abs_erpm": 0.0,
+      "last_operator": {
+        "active": false,
+        "arm": false,
+        "deadman": false,
+        "enable": false,
+        "joy_age_sec": 0.002938,
+        "mpc_ready": true,
+        "mpc_stable_for_sec": 0.0,
+        "nominal_age_sec": 0.010249,
+        "planner_age_sec": 0.00999,
+        "reason": "waiting_for_L1",
+        "release_latched": false
+      }
+    }
+  ],
+  "operator_observation": "F1 did not move; latest readonly /dev/input/js0 B4 test saw no button events from either handset trial",
+  "input_probe": {
+    "device": "/dev/input/js0",
+    "address": "88:03:4c:1e:3a:b4",
+    "l1_press": false,
+    "l1_release": false,
+    "events": []
+  }
+}

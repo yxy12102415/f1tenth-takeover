@@ -1,0 +1,33 @@
+[
+  {
+    "name": "observed_aligned_merge_before_nominal_station",
+    "passed": true,
+    "result": {
+      "ok": true
+    }
+  },
+  {
+    "name": "not_aligned_laterally_keeps_future_guard",
+    "passed": true,
+    "result": {
+      "error": "compact_dynamic_body_conflict",
+      "ok": false
+    }
+  },
+  {
+    "name": "not_aligned_heading_keeps_future_guard",
+    "passed": true,
+    "result": {
+      "error": "compact_dynamic_body_conflict",
+      "ok": false
+    }
+  },
+  {
+    "name": "current_rear_body_still_checked",
+    "passed": true,
+    "result": {
+      "error": "compact_dynamic_body_conflict",
+      "ok": false
+    }
+  }
+]

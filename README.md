@@ -3,7 +3,9 @@
 Fixed-route navigation and static-obstacle avoidance on a real F1TENTH vehicle,
 plus a laptop-tested dynamic-obstacle overtaking simulation.
 
-**Latest recorded physical result: Dynamic MPC v8, Fitzpatrick, 2026-09-27.** One complete lap with two static obstacles; the operator reported no contact, minimal oscillation, and a natural stop. This is one successful run, not a repeated-trial reliability claim.
+**Latest physical checkpoint — 2026-11-08, 381 2.0:** both cars moved without reported contact; v5 startup gating worked, but MPC status 4 stopped the run before route completion. Physical dynamic overtaking is not yet accepted. [Current source, settings and evidence](docs/VEHICLE_PROGRESS_20261108.md).
+
+**Historical completed physical result: Dynamic MPC v8, Fitzpatrick, 2026-09-27.** One complete lap with two static obstacles; the operator reported no contact, minimal oscillation, and a natural stop. This is one successful run, not a repeated-trial reliability claim.
 
 **Laptop update, 2026-11-06:** checked MPC rollback/re-solve and ahead-only
 same-side control-feedback recovery are implemented in the simulation adapter.
@@ -68,7 +70,9 @@ These commands build a non-actuating probe and run model tests. They do not laun
 
 | Directory | Purpose |
 |---|---|
-| `real_vehicle/` | Latest exported physical-vehicle source, configurations, Fitzpatrick map and route |
+| `real_vehicle/` | Historical v8 and current 381 v5 source snapshots, maps and routes |
+| `deployment/381_2_0/` | Current compact overtaking sources, diagnostics and selected field evidence |
+| `oppVehicle/` | ESP32 lead-car control; two independent PS4 controllers |
 | `results/` | Selected successful v8 field evidence and English trajectory figures |
 | `tools/` | Non-actuating native build and model tests |
 | `docs/` | Status, operation, build, provenance and cleanup records |

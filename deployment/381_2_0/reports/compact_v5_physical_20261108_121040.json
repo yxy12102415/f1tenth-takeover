@@ -1,0 +1,56 @@
+{
+  "run_log": "/home/f1tenth/f1tenth_real_migration_ws_20260829/candidate_cpp_gpu_20260909/ground_381_2_0_compact_overtake_20261108_v5/run_logs/20261108_121040-closed-frenet-ground-attempt",
+  "passed": false,
+  "route_completed": false,
+  "operator_observation": {
+    "both_moved": true,
+    "observed_pass_and_rejoin": true,
+    "contact": false,
+    "stopped": true
+  },
+  "first_failure": "joint_mpc_solver_4",
+  "distance_to_endpoint_at_failure_m": 4.782179660111813,
+  "after_arm_seconds": 2.9806792750005116,
+  "post_stop_observation": {
+    "limit_sec": 3.0,
+    "stationary_dwell_sec": 0.2,
+    "window_reason": "upstream_stop",
+    "final_reason": "planner_invalid",
+    "stationary_confirmed": true,
+    "elapsed_sec": 1.8116226129995994
+  },
+  "final_erpm": 0.0,
+  "max_abs_erpm": 10602.0,
+  "control_input": {
+    "cap": 2,
+    "dt": 0.04599868300010712,
+    "lateral": 0,
+    "odom_stamp": 1794157973.0442193,
+    "plan_id": 605,
+    "pose": [
+      1.2073194774559903,
+      -0.534859242262846,
+      -0.3643151175345255
+    ],
+    "pose_stamp": 1794157972.9769852,
+    "remaining": 4.825228328480579,
+    "speed": 1.2532,
+    "yaw_rate": 1.3819378857181501
+  },
+  "rejected_control": {
+    "diagnostics": {
+      "coast_cut_distance_m": 1.3714185333333335,
+      "command_headroom_mps": 0.15,
+      "control_remaining_m": 4.825228328480579,
+      "effective_command_cap_mps": 1.85,
+      "minimum_drivable_speed_mps": 0.5,
+      "mpc_iterations": 1,
+      "mpc_solve_ms": 6.737677999808511,
+      "mpc_solver_status": 4,
+      "speed_target_mps": 1.213112407425709,
+      "terminal_coasting": false,
+      "warm_start_policy": "shift_controls_rollout_exact_generated_dynamics_from_measurement"
+    },
+    "reason": "joint_mpc_solver_4"
+  }
+}

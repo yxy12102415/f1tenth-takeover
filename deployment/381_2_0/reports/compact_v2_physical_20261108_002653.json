@@ -1,0 +1,15 @@
+{
+  "run_log": "/home/f1tenth/f1tenth_real_migration_ws_20260829/candidate_cpp_gpu_20260909/ground_381_2_0_compact_overtake_20261107_v2/run_logs/20261108_002653-closed-frenet-ground-attempt",
+  "operator_observation": {
+    "both_vehicles_moved": true,
+    "both_stopped": true,
+    "contact": false
+  },
+  "route_completed": false,
+  "passed": false,
+  "first_controller_failure": "joint_mpc_solver_4",
+  "stationary_confirmed": true,
+  "final_erpm": 0,
+  "max_abs_erpm": 10098.0,
+  "classification": "moving_lead_trial_incomplete_controller_solver_stop"
+}

@@ -1,0 +1,84 @@
+--- a/src/cpp_frenet/joint_control.hpp
++++ b/src/cpp_frenet/joint_control.hpp
+@@ -4,6 +4,7 @@
+ #include <ctime>
+ extern "C" {
+ #include "acados_solver_joint_vehicle.h"
++#include "joint_vehicle_model/joint_vehicle_model.h"
+ }
+ namespace frenet {
+ struct Control { double speed=0, angle=0; };
+@@ -230,6 +231,33 @@
+         s=std::min(g.arc.back(),s+.05*std::max(.1,forward));
+         guess_v=std::min(target,guess_v+2.0*.05);
+       }
++      if(initialized) {
++        // Advance the previous control sequence by one tick and re-integrate
++        // from the CURRENT measured state using the exact generated discrete
++        // model. Reusing the old unshifted state trajectory leaves an x0/model
++        // defect after each real pose/velocity update, especially during launch.
++        std::array<std::array<double,2>,24> shifted{};
++        for(int i=0;i<24;++i)
++          ocp_nlp_out_get(config,dims,out,std::min(i+1,23),"u",shifted[i].data());
++        std::array<double,10> seed{};std::copy(x,x+10,seed.begin());
++        double unused_parameters[5]={0,0,0,0,.2};
++        for(int i=0;i<=24;++i) {
++          ocp_nlp_out_set(config,dims,out,i,"x",seed.data());
++          if(i==24)break;
++          const double da=i?.15:4*dt,dd=i?.04:dt;
++          shifted[i][0]=clip(shifted[i][0],std::max(-.8,seed[6]-da),std::min(2.,seed[6]+da));
++          shifted[i][1]=clip(shifted[i][1],std::max(-.269,seed[7]-dd),std::min(.269,seed[7]+dd));
++          ocp_nlp_out_set(config,dims,out,i,"u",shifted[i].data());
++          std::array<double,10> next{};
++          const double* input[3]={seed.data(),shifted[i].data(),unused_parameters};
++          double* output[1]={next.data()};
++          if(joint_vehicle_dyn_disc_phi_fun(input,output,nullptr,nullptr,nullptr))
++            throw std::runtime_error("joint_warm_start_dynamics");
++          for(double value:next)if(!std::isfinite(value))throw std::runtime_error("joint_warm_start_nonfinite");
++          seed=next;
++        }
++        diag["warm_start_policy"]="shift_controls_rollout_exact_generated_dynamics_from_measurement";
++      } else diag["warm_start_policy"]="cold_reference_seed";
+       // Current localization can lie outside a newly switched narrow corridor;
+       // constrain predicted future states, not an impossible change of x0.
+       double lh0[5]={-1e3,-.7,-10.,-4*dt,-dt},uh0[5]={1e3,.7,10.,4*dt,dt};
+@@ -238,15 +266,37 @@
+       int status=0, iterations=0;
+       double equality=INF, inequality=INF;
+       auto solver=joint_vehicle_acados_get_nlp_solver(capsule);
+-      for(int iteration=0;iteration<4;++iteration) {
++      for(int iteration=0;iteration<8;++iteration) {
+         status=joint_vehicle_acados_solve(capsule);++iterations;
++        diag["mpc_solver_status"]=status;diag["mpc_iterations"]=iterations;
++        diag["mpc_solve_ms"]=(mono()-begin)*1000;
+         if(status!=0)throw std::runtime_error("joint_mpc_solver_"+std::to_string(status));
+         ocp_nlp_eval_residuals(solver,in,out);
+         ocp_nlp_get(config,solver,"res_eq",&equality);
+         ocp_nlp_get(config,solver,"res_ineq",&inequality);
++        // Independently evaluate solved-state defects. Do not accept a seed
++        // merely because the SQP implementation reports a small cached norm.
++        double dynamics_defect=0.;
++        double parameters[5]={0,0,0,0,.2};
++        for(int k=0;k<24;++k) {
++          double state[10],next_state[10],control[2],integrated[10];
++          ocp_nlp_out_get(config,dims,out,k,"x",state);
++          ocp_nlp_out_get(config,dims,out,k+1,"x",next_state);
++          ocp_nlp_out_get(config,dims,out,k,"u",control);
++          const double* input[3]={state,control,parameters};double* output[1]={integrated};
++          if(joint_vehicle_dyn_disc_phi_fun(input,output,nullptr,nullptr,nullptr))
++            throw std::runtime_error("joint_residual_dynamics");
++          for(int kx=0;kx<10;++kx) {
++            if(!std::isfinite(integrated[kx]+next_state[kx]))throw std::runtime_error("joint_nonfinite_residual");
++            dynamics_defect=std::max(dynamics_defect,std::abs(integrated[kx]-next_state[kx]));
++          }
++        }
++        equality=std::max(equality,dynamics_defect);
++        diag["independent_dynamics_defect"]=dynamics_defect;
++        diag["equality_residual"]=equality;diag["inequality_residual"]=inequality;
+         if(!std::isfinite(equality+inequality))throw std::runtime_error("joint_nonfinite_residual");
+         if(equality<.001 && inequality<.001)break;
+-        if(mono()-begin>.035)break;
++        if(mono()-begin>.045)break;
+       }
+       if(equality>=.001 || inequality>=.001)throw std::runtime_error("joint_mpc_nonlinear_infeasible eq="+std::to_string(equality)+" ineq="+std::to_string(inequality));
+       double u[2];ocp_nlp_out_get(config,dims,out,0,"u",u);

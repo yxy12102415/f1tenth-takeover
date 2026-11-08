@@ -1,0 +1,177 @@
+[
+  {
+    "name": "full_maneuver_admission",
+    "passed": true,
+    "detail": {
+      "command_cap_mps": 1.25,
+      "compact_overtake": true,
+      "lead_bounds": {
+        "half_length": 0.18,
+        "half_width": 0.13,
+        "passed": false,
+        "stamp": 101.2,
+        "vmax": 0.35,
+        "xmax": 1.65,
+        "xmin": 1.55,
+        "ymax": 0.05,
+        "ymin": -0.05
+      },
+      "lead_confirmed_hits": 7,
+      "ok": true,
+      "state": "COMPACT_ENTRY"
+    }
+  },
+  {
+    "name": "enable_after_admission",
+    "passed": true,
+    "detail": {
+      "command_cap_mps": 1.25,
+      "compact_overtake": true,
+      "lead_bounds": {
+        "half_length": 0.18,
+        "half_width": 0.13,
+        "passed": false,
+        "stamp": 101.4,
+        "vmax": 0.35,
+        "xmax": 1.65,
+        "xmin": 1.55,
+        "ymax": 0.05,
+        "ymin": -0.05
+      },
+      "lead_confirmed_hits": 8,
+      "ok": true,
+      "state": "COMPACT_ENTRY"
+    }
+  },
+  {
+    "name": "target_loss_stops",
+    "passed": true,
+    "detail": {
+      "error": "compact_target_lost",
+      "ok": false
+    }
+  },
+  {
+    "name": "loss_cannot_auto_resume",
+    "passed": true,
+    "detail": {
+      "error": "compact_latched_failure",
+      "ok": false
+    }
+  },
+  {
+    "name": "original_short_gap_refused",
+    "passed": true,
+    "detail": {
+      "error": "compact_waiting_for_target_at_1_6m",
+      "ok": false
+    }
+  },
+  {
+    "name": "no_enable_before_admission",
+    "passed": true,
+    "detail": {
+      "error": "compact_not_admitted",
+      "ok": false
+    }
+  },
+  {
+    "name": "ambiguous_target_refused",
+    "passed": true,
+    "detail": {
+      "error": "compact_target_ambiguous",
+      "ok": false
+    }
+  },
+  {
+    "name": "compatible_body_fragments_grouped",
+    "passed": true,
+    "detail": {
+      "command_cap_mps": 1.25,
+      "compact_overtake": true,
+      "lead_bounds": {
+        "half_length": 0.18,
+        "half_width": 0.13,
+        "passed": false,
+        "stamp": 101.4,
+        "vmax": 0.35,
+        "xmax": 1.65,
+        "xmin": 1.55,
+        "ymax": 0.05,
+        "ymin": -0.05
+      },
+      "lead_confirmed_hits": 8,
+      "ok": true,
+      "state": "COMPACT_ENTRY"
+    }
+  },
+  {
+    "name": "rear_blind_sector_keeps_old_source",
+    "passed": true,
+    "detail": {
+      "command_cap_mps": 1.25,
+      "compact_overtake": true,
+      "lead_bounds": {
+        "half_length": 0.18,
+        "half_width": 0.13,
+        "passed": true,
+        "stamp": 101.4,
+        "vmax": 0.35,
+        "xmax": 1.65,
+        "xmin": 1.55,
+        "ymax": 0.05,
+        "ymin": -0.05
+      },
+      "lead_confirmed_hits": 8,
+      "ok": true,
+      "state": "COMPACT_REJOIN"
+    }
+  },
+  {
+    "name": "rear_prediction_still_rejects_reachable_collision",
+    "passed": true,
+    "detail": {
+      "error": "compact_dynamic_body_conflict",
+      "ok": false
+    }
+  },
+  {
+    "name": "near_body_collision",
+    "passed": true,
+    "detail": {
+      "error": "compact_dynamic_body_conflict",
+      "ok": false
+    }
+  },
+  {
+    "name": "source_stale",
+    "passed": true,
+    "detail": {
+      "error": "compact_target_stale",
+      "ok": false
+    }
+  },
+  {
+    "name": "future_stamp",
+    "passed": true,
+    "detail": {
+      "error": "compact_target_stale",
+      "ok": false
+    }
+  },
+  {
+    "name": "clear_lateral",
+    "passed": true,
+    "detail": {
+      "ok": true
+    }
+  },
+  {
+    "name": "between_samples_collision",
+    "passed": true,
+    "detail": {
+      "error": "compact_dynamic_body_conflict",
+      "ok": false
+    }
+  }
+]

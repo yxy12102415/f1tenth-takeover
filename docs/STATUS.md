@@ -1,5 +1,17 @@
 # Current status
 
+## Vehicle checkpoint — 2026-11-08
+
+Current 381 2.0 compact v5 uses a fixed right passing path and C++ dynamic MPC.
+Both cars moved, with no operator-reported contact; the latest logged run
+stopped with `joint_mpc_solver_4` after about 2.98 s, 4.78 m before the endpoint.
+Input-gate repair and zero/localization checks passed; full physical overtaking
+remains incomplete. [Latest settings, source and evidence](VEHICLE_PROGRESS_20261108.md).
+
+The sections below preserve earlier version-specific results. Statements such
+as “no physical test” and “latest” in dated historical sections apply to those
+checkpoints, not the current v5 experiment.
+
 ## Checked control feedback — 2026-11-06 (development, simulation only)
 
 P0/P1 implementation adds a shared timed-reference contract, transactional

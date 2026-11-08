@@ -1,0 +1,21 @@
+{
+  "passed": true,
+  "failure": null,
+  "physical_motion": false,
+  "scope": "Actual C++ planner/controller with synthetic LiDAR and a dynamic plant.\n\nROS domain 83, localhost, no hardware drivers or actuator command topics.\nThis is a software integration test, not a physical clearance acceptance.\n",
+  "max_command_mps": 1.7331033945083618,
+  "final_speed_mps": 0.003602257373327977,
+  "final_pose": [
+    5.949542239823397,
+    0.10888740579811718,
+    0.023177635996242445
+  ],
+  "controller_messages": 330,
+  "planner_messages": 48,
+  "fault": "none",
+  "release": "/home/f1tenth/f1tenth_real_migration_ws_20260829/candidate_cpp_gpu_20260909/ground_381_2_0_compact_overtake_20261108_v4",
+  "lead_speed_mps": 0.5,
+  "lead_stop_after_s": 3.0,
+  "lead_lateral_center_m": -0.04,
+  "lead_lateral_jitter_m": 0.008
+}

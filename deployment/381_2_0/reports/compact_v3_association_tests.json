@@ -1,0 +1,306 @@
+[
+  {
+    "name": "v2_reproduces_false_loss",
+    "passed": true,
+    "detail": {
+      "prior_lateral_width_m": 0.00010000000000001674,
+      "result": {
+        "error": "compact_target_lost",
+        "ok": false
+      }
+    }
+  },
+  {
+    "name": "v3_accepts_visible_jittered_lead",
+    "passed": true,
+    "detail": {
+      "prior_lateral_width_m": 0.05010000000000002,
+      "result": {
+        "command_cap_mps": 1.85,
+        "compact_association": {
+          "bounded_association_v3": true,
+          "candidates": [
+            {
+              "accepted": true,
+              "id": 5,
+              "intersection": {
+                "bounded_association": true,
+                "half_length": 0.18,
+                "half_width": 0.13,
+                "passed": false,
+                "stamp": 101.8,
+                "vmax": 0.55,
+                "xmax": 1.8499999999999999,
+                "xmin": 1.55,
+                "ymax": -0.05500000000000001,
+                "ymin": -0.1
+              },
+              "observed_xmax": 1.65,
+              "observed_xmin": 1.65,
+              "observed_ymax": -0.025000000000000005,
+              "observed_ymin": -0.20500000000000002
+            }
+          ],
+          "previous_lead": {
+            "bounded_association": true,
+            "half_length": 0.18,
+            "half_width": 0.13,
+            "passed": false,
+            "stamp": 101.6,
+            "vmax": 0.55,
+            "xmax": 1.7499999999999996,
+            "xmin": 1.55,
+            "ymax": -0.05500000000000001,
+            "ymin": -0.1
+          },
+          "source_stamp": 101.8
+        },
+        "compact_overtake": true,
+        "lead_bounds": {
+          "bounded_association": true,
+          "half_length": 0.18,
+          "half_width": 0.13,
+          "passed": false,
+          "stamp": 101.8,
+          "vmax": 0.55,
+          "xmax": 1.8499999999999999,
+          "xmin": 1.55,
+          "ymax": -0.05500000000000001,
+          "ymin": -0.1
+        },
+        "lead_confirmed_hits": 10,
+        "ok": true,
+        "state": "COMPACT_ENTRY"
+      }
+    }
+  },
+  {
+    "name": "true_loss",
+    "passed": true,
+    "detail": {
+      "error": "compact_target_lost",
+      "ok": false
+    }
+  },
+  {
+    "name": "true_loss_latched",
+    "passed": true,
+    "detail": {
+      "error": "compact_latched_failure",
+      "ok": false
+    }
+  },
+  {
+    "name": "wrong_lateral_object",
+    "passed": true,
+    "detail": {
+      "error": "compact_target_lost",
+      "ok": false
+    }
+  },
+  {
+    "name": "wrong_lateral_object_latched",
+    "passed": true,
+    "detail": {
+      "error": "compact_latched_failure",
+      "ok": false
+    }
+  },
+  {
+    "name": "implausible_forward_jump",
+    "passed": true,
+    "detail": {
+      "error": "compact_target_lost",
+      "ok": false
+    }
+  },
+  {
+    "name": "implausible_forward_jump_latched",
+    "passed": true,
+    "detail": {
+      "error": "compact_latched_failure",
+      "ok": false
+    }
+  },
+  {
+    "name": "moving_visible_target_with_alternating_jitter",
+    "passed": true,
+    "detail": {
+      "command_cap_mps": 1.85,
+      "compact_association": {
+        "bounded_association_v3": true,
+        "candidates": [
+          {
+            "accepted": true,
+            "id": 5,
+            "intersection": {
+              "bounded_association": true,
+              "half_length": 0.18,
+              "half_width": 0.13,
+              "passed": false,
+              "stamp": 103.4,
+              "vmax": 0.55,
+              "xmax": 2.65,
+              "xmin": 2.25,
+              "ymax": -0.05789999999999999,
+              "ymin": -0.1
+            },
+            "observed_xmax": 2.45,
+            "observed_xmin": 2.4499999999999997,
+            "observed_ymax": -0.02790000000000001,
+            "observed_ymin": -0.2079
+          }
+        ],
+        "previous_lead": {
+          "bounded_association": true,
+          "half_length": 0.18,
+          "half_width": 0.13,
+          "passed": false,
+          "stamp": 103.30000000000001,
+          "vmax": 0.55,
+          "xmax": 2.6,
+          "xmin": 2.2,
+          "ymax": -0.04189999999999998,
+          "ymin": -0.1
+        },
+        "source_stamp": 103.4
+      },
+      "compact_overtake": true,
+      "lead_bounds": {
+        "bounded_association": true,
+        "half_length": 0.18,
+        "half_width": 0.13,
+        "passed": false,
+        "stamp": 103.4,
+        "vmax": 0.55,
+        "xmax": 2.65,
+        "xmin": 2.25,
+        "ymax": -0.05789999999999999,
+        "ymin": -0.1
+      },
+      "lead_confirmed_hits": 28,
+      "ok": true,
+      "state": "COMPACT_ENTRY"
+    }
+  },
+  {
+    "name": "stationary_wait_does_not_invent_backward_motion",
+    "passed": true,
+    "detail": {
+      "bounded_association": true,
+      "half_length": 0.18,
+      "half_width": 0.13,
+      "passed": false,
+      "stamp": 101.2,
+      "vmax": 0.55,
+      "xmax": 1.65,
+      "xmin": 1.55,
+      "ymax": -0.049899999999999986,
+      "ymin": -0.1
+    }
+  },
+  {
+    "name": "current_body_collision",
+    "passed": true,
+    "detail": {
+      "error": "compact_dynamic_body_conflict",
+      "ok": false
+    }
+  },
+  {
+    "name": "uncertain_lateral_prediction",
+    "passed": true,
+    "detail": {
+      "error": "compact_dynamic_body_conflict",
+      "ok": false
+    }
+  },
+  {
+    "name": "stale_source_still_rejected",
+    "passed": true,
+    "detail": {
+      "error": "compact_target_stale",
+      "ok": false
+    }
+  },
+  {
+    "name": "map_guard_retained",
+    "passed": true,
+    "detail": {
+      "error": "compact_full_body_map",
+      "ok": false
+    }
+  },
+  {
+    "name": "brief_rear_visibility_gap_keeps_original_stamp",
+    "passed": true,
+    "detail": {
+      "command_cap_mps": 1.85,
+      "compact_association": {
+        "bounded_association_v3": true,
+        "candidates": [],
+        "previous_lead": {
+          "bounded_association": true,
+          "half_length": 0.18,
+          "half_width": 0.13,
+          "passed": false,
+          "stamp": 102,
+          "vmax": 0.55,
+          "xmax": 1.95,
+          "xmin": 1.5500000000000003,
+          "ymax": 0.06000000000000004,
+          "ymin": -0.06000000000000001
+        },
+        "rear_visibility_hold": true,
+        "source_stamp": 102.4
+      },
+      "compact_overtake": true,
+      "lead_bounds": {
+        "bounded_association": true,
+        "half_length": 0.18,
+        "half_width": 0.13,
+        "passed": false,
+        "stamp": 102,
+        "vmax": 0.55,
+        "xmax": 1.95,
+        "xmin": 1.5500000000000003,
+        "ymax": 0.06000000000000004,
+        "ymin": -0.06000000000000001
+      },
+      "lead_confirmed_hits": 11,
+      "ok": true,
+      "state": "COMPACT_PASS"
+    }
+  },
+  {
+    "name": "rear_visibility_gap_does_not_extend_indefinitely",
+    "passed": true,
+    "detail": {
+      "error": "compact_target_lost",
+      "ok": false
+    }
+  },
+  {
+    "name": "rear_visibility_prediction_bridge",
+    "passed": true,
+    "detail": {
+      "ok": true
+    }
+  },
+  {
+    "name": "rear_visibility_prediction_expires",
+    "passed": true,
+    "detail": {
+      "error": "compact_target_stale",
+      "ok": false
+    }
+  },
+  {
+    "name": "front_target_gets_no_rear_visibility_exception",
+    "passed": true,
+    "detail": {
+      "error": "compact_target_stale",
+      "ok": false
+    }
+  }
+]

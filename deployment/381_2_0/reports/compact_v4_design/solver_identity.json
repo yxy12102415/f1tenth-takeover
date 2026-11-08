@@ -1,0 +1,13 @@
+{
+  "base": "/home/f1tenth/f1tenth_real_migration_ws_20260829/candidate_cpp_gpu_20260909/ground_381_2_0_compact_overtake_20261108_v3/src/cpp_frenet/joint_control.hpp",
+  "base_sha256": "89d1df562269e46932850eb4ca017db4b4b2ff6a51bfbedb8ce28fbe50a6d386",
+  "candidate": "/home/f1tenth/f1tenth_real_migration_ws_20260829/candidate_cpp_gpu_20260909/ground_381_2_0_compact_overtake_20261108_v4/src/cpp_frenet/joint_control.hpp",
+  "candidate_sha256": "9ea2ebe3fda7564a754b3d08d6cc32e404a99972dc306f2e04e063d0f569ed80",
+  "equality_tolerance": 0.001,
+  "maximum_iterations": 8,
+  "hard_deadline_ms": 75,
+  "soft_budget_ms": 45,
+  "real_failure_exactly_reproduced_offline": false,
+  "recorded_state_replay_passed": true,
+  "coast_stop_unchanged": true
+}

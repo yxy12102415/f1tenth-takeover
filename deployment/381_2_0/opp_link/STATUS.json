@@ -1,0 +1,26 @@
+{
+  "updated": "2026-11-08",
+  "selected_operator_mode": "two_independent_ps4_controllers",
+  "wifi_joint_control_commissioned": false,
+  "active_firmware": "ps4_fixed_straight_v3_1150_calibration",
+  "active_firmware_sha256": "342b49a7f416e491e88a0719e7c8b91fdd3bfbc3cf3a6abb199a093de7c33cc4",
+  "lead_throttle_us": 1150,
+  "stop_throttle_us": 1000,
+  "steering_center_us": 1600,
+  "l1_command_sequence_verified": true,
+  "physical_two_vehicle_motion_tested": true,
+  "physical_overtaking_accepted": false,
+  "latest_f1_release": "ground_381_2_0_compact_overtake_20261108_v5",
+  "latest_physical_report": "../reports/compact_v5_physical_20261108_121040.json",
+  "latest_failure": "joint_mpc_solver_4",
+  "lead_speed_observation": {
+    "peak_05s_forward_mps": 0.4825336763206345,
+    "operator_hold_approx_s": 3,
+    "speed_regulated": false
+  },
+  "stop_behavior": "zero throttle / zero current coast, not calibrated active braking",
+  "note": "Wi-Fi common-L1 experiments are historical; the active trial uses independent Bluetooth handsets. Neither L1 stops both cars.",
+  "original_backup_sha256": "b076503fbe18b7c096b1e416bc5498832942f8a01dde6d6c7f789a8223c22f38",
+  "original_backup_bytes": 4194304,
+  "original_backup_verified": true
+}

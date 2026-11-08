@@ -1,0 +1,28 @@
+{
+  "pwm_us": 1150,
+  "operator_hold_approx_s": 3,
+  "operator_report": "moved and stopped",
+  "method": "Stationary F1 LiDAR; continuous association of frontal points, x median and lateral 5/95-percentile midpoint; velocity from 0.5-second linear fits. No button timestamps or encoder telemetry.",
+  "tracked_scans": 1614,
+  "first_xy_m": [
+    1.3708104693896632,
+    -0.05619743061644451
+  ],
+  "last_xy_m": [
+    2.8032913341611474,
+    -0.07220145008473283
+  ],
+  "displacement_xy_m": [
+    1.4324808647714842,
+    -0.01600401946828832
+  ],
+  "peak_05s_forward_mps": 0.4825336763206345,
+  "p95_moving_forward_mps": 0.479993308027598,
+  "moving_window_centers_s_since_cue": [
+    19.966420566000302,
+    23.966420566000302
+  ],
+  "stopped_last_3s_x_range_m": 0.038470443603472404,
+  "physical_two_vehicle_motion_tested": false,
+  "caveat": "Visible surface lateral position is not exact vehicle center; do not infer initial heading or servo trim solely from this run."
+}

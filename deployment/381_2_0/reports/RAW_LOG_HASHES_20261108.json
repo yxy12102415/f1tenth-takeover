@@ -1,0 +1,85 @@
+{
+  "note": "Full field logs retained only on the Jetson. Source paths are relative to f1tenth_real_migration_ws_20260829.",
+  "latest_motion_run": {
+    "candidate_cpp_gpu_20260909/ground_381_2_0_compact_overtake_20261108_v5/run_logs/20261108_121040-closed-frenet-ground-attempt/pf.log": {
+      "bytes": 480,
+      "sha256": "c6be90a5cd97a4bd2a531ca1f6934318637eccc8bdc297eced859d094b3058bd"
+    },
+    "candidate_cpp_gpu_20260909/ground_381_2_0_compact_overtake_20261108_v5/run_logs/20261108_121040-closed-frenet-ground-attempt/status_events.json": {
+      "bytes": 143525,
+      "sha256": "b2d43c4ddbb899ef8cf84a8070feb66db87fa91ab31187d3ff35c183c2ab8008"
+    },
+    "candidate_cpp_gpu_20260909/ground_381_2_0_compact_overtake_20261108_v5/run_logs/20261108_121040-closed-frenet-ground-attempt/runtime.json": {
+      "bytes": 2782,
+      "sha256": "37501d1fe3f66c27fb2d57b7f13fff0e69a8760b3040aa81f18433cc6c4ec562"
+    },
+    "candidate_cpp_gpu_20260909/ground_381_2_0_compact_overtake_20261108_v5/run_logs/20261108_121040-closed-frenet-ground-attempt/final.log": {
+      "bytes": 279,
+      "sha256": "8912e102773fb32f7a4c37a06b09de187bc9b8548856e62398a3ac2e152f864e"
+    },
+    "candidate_cpp_gpu_20260909/ground_381_2_0_compact_overtake_20261108_v5/run_logs/20261108_121040-closed-frenet-ground-attempt/actuator.log": {
+      "bytes": 773,
+      "sha256": "ea3cecb40eb8aca40fc36c937a4a65c45d3c5a74267c168db0443f2c710f6639"
+    },
+    "candidate_cpp_gpu_20260909/ground_381_2_0_compact_overtake_20261108_v5/run_logs/20261108_121040-closed-frenet-ground-attempt/tracking_trace.json": {
+      "bytes": 63123058,
+      "sha256": "a4ff6b9e6574a46c589601c9d2347572e354814c9cc714a1b74bdc898b147c0b"
+    },
+    "candidate_cpp_gpu_20260909/ground_381_2_0_compact_overtake_20261108_v5/run_logs/20261108_121040-closed-frenet-ground-attempt/health_guard.log": {
+      "bytes": 71,
+      "sha256": "139b8aa51849a20bd6bc60d59800929aa9983315164af6aa3b49b860db020a17"
+    },
+    "candidate_cpp_gpu_20260909/ground_381_2_0_compact_overtake_20261108_v5/run_logs/20261108_121040-closed-frenet-ground-attempt/telemetry.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "candidate_cpp_gpu_20260909/ground_381_2_0_compact_overtake_20261108_v5/run_logs/20261108_121040-closed-frenet-ground-attempt/window.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "candidate_cpp_gpu_20260909/ground_381_2_0_compact_overtake_20261108_v5/run_logs/20261108_121040-closed-frenet-ground-attempt/map_io.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "candidate_cpp_gpu_20260909/ground_381_2_0_compact_overtake_20261108_v5/run_logs/20261108_121040-closed-frenet-ground-attempt/command_trace.json": {
+      "bytes": 1966151,
+      "sha256": "24004df3a48160b92c05a7ca6ca0c7bf004068a47da64f9704401b33ee6b2179"
+    },
+    "candidate_cpp_gpu_20260909/ground_381_2_0_compact_overtake_20261108_v5/run_logs/20261108_121040-closed-frenet-ground-attempt/planner.log": {
+      "bytes": 71,
+      "sha256": "e8434c7c9327576e6ce931466d083b1d5294a5c9bcf024063f1e339345449373"
+    },
+    "candidate_cpp_gpu_20260909/ground_381_2_0_compact_overtake_20261108_v5/run_logs/20261108_121040-closed-frenet-ground-attempt/relay.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "candidate_cpp_gpu_20260909/ground_381_2_0_compact_overtake_20261108_v5/run_logs/20261108_121040-closed-frenet-ground-attempt/result.json": {
+      "bytes": 24823,
+      "sha256": "84473be3609613a3c702c5c6018d5466a29a12cbbc750054230d390210274ce7"
+    },
+    "candidate_cpp_gpu_20260909/ground_381_2_0_compact_overtake_20261108_v5/run_logs/20261108_121040-closed-frenet-ground-attempt/joy.log": {
+      "bytes": 267,
+      "sha256": "503c57ba5258becc4815b939f93a6e12eeb4cd8e4f5936de3a4065c4d4acd268"
+    },
+    "candidate_cpp_gpu_20260909/ground_381_2_0_compact_overtake_20261108_v5/run_logs/20261108_121040-closed-frenet-ground-attempt/lidar.log": {
+      "bytes": 217,
+      "sha256": "ad215c1f8a9ed97aa64657df5d14691423c89c09abe9e40499190993a803d8e9"
+    },
+    "candidate_cpp_gpu_20260909/ground_381_2_0_compact_overtake_20261108_v5/run_logs/20261108_121040-closed-frenet-ground-attempt/vesc.log": {
+      "bytes": 445,
+      "sha256": "434256d1b8cb3f675828428c1817c412639fde07bf074417b63c2146dd8036f4"
+    },
+    "candidate_cpp_gpu_20260909/ground_381_2_0_compact_overtake_20261108_v5/run_logs/20261108_121040-closed-frenet-ground-attempt/operator.log": {
+      "bytes": 403,
+      "sha256": "d35ea1685d4cb0e937e5c78646fdf3951fd513244e6bea6b898e4cfe43877265"
+    },
+    "candidate_cpp_gpu_20260909/ground_381_2_0_compact_overtake_20261108_v5/run_logs/20261108_121040-closed-frenet-ground-attempt/odom.log": {
+      "bytes": 71,
+      "sha256": "aba2181a3c05abea048aeca1d7cf20096a5e550bd333a6bba0093fcb25b50470"
+    },
+    "candidate_cpp_gpu_20260909/ground_381_2_0_compact_overtake_20261108_v5/run_logs/20261108_121040-closed-frenet-ground-attempt/pp.log": {
+      "bytes": 192,
+      "sha256": "80aa27fd79057b0c85c5bfa18f83f1683e9305a8fbcca4548592f32ef8ab533d"
+    }
+  }
+}

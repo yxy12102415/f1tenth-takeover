@@ -1,0 +1,121 @@
+--- a/src/cpp_frenet/node.cpp
++++ b/src/cpp_frenet/node.cpp
+@@ -1,5 +1,6 @@
+ #include "perception.hpp"
+ #include "joint_control.hpp"
++#include "compact_overtake.hpp"
+ #include <ackermann_msgs/msg/ackermann_drive_stamped.hpp>
+ #include <atomic>
+ #include <cstdlib>
+@@ -45,6 +46,7 @@
+   std::unique_ptr<Perception> perception;
+   std::unique_ptr<Tracker> tracker;
+   std::unique_ptr<JointControl> joint;
++  std::unique_ptr<CompactOvertake> compact;
+   std::mutex input_mutex;
+   Input input;
+   std::thread worker;
+@@ -81,6 +83,9 @@
+            now - receipt >= 0 && now - receipt <= .50;
+   }
+   bool ready(const Input &i, double now) {
++    // Evaluate after the input snapshot, including calls whose C++ argument
++    // evaluation order could otherwise sample mono() before snapshot().
++    now=mono();
+     double ros = get_clock()->now().seconds();
+     return i.scan && fresh(i.ps, i.pr, now, ros) &&
+            fresh(i.ss, i.sr, now, ros) && fresh(i.os, i.orr, now, ros) &&
+@@ -232,6 +237,7 @@
+       }
+       double progress = plan_message["lap_progress_m"].asDouble(),
+              remaining = std::max(0., assets->arc.back() - progress);
++      if(compact && local_path.size()>1) { Geometry g(local_path,i.pose);remaining=std::max(0.,g.arc.back()-g.nearest_s); }
+       if (remaining <= .05) {
+         if (!endpoint_match(*assets, i.pose))
+           throw std::runtime_error("endpoint_pose_mismatch");
+@@ -251,7 +257,7 @@
+       double dt=std::isfinite(last_tick)?clip(now-last_tick,.001,.05):.05;
+       double speed=0, angle=0;
+       std::string state=plan_message.get("state","FOLLOWING").asString();
+-      double cap=(state=="CONFIRM_BLOCKAGE" || state=="WAIT_SCAN_POSE")?.6:2.0;
++      double cap=compact->cap;
+       if(joint) {
+         if(!plan_message["obstacle_points"].isArray())throw std::runtime_error("joint_obstacles_missing");
+         std::vector<Point> obstacles;
+@@ -266,7 +272,11 @@
+         control_input["remaining"] = remaining;
+         control_input["cap"] = cap;
+         control_input["plan_id"] = plan_message["plan_id"];
++        double full_control_begin=mono();
+         auto control=joint->compute(*assets,local_path,i.pose,i.speed,i.lateral,i.rate,remaining,cap,dt,*tracker,obstacles);
++        compact->check_prediction(path_read(joint->diag["predicted_path"]),LeadBounds::read(plan_message["lead_bounds"]),get_clock()->now().seconds());
++        joint->diag["controller_and_dynamic_guard_ms"]=(mono()-full_control_begin)*1000.;
++        if(mono()-full_control_begin>.075)throw std::runtime_error("compact_control_deadline");
+         speed=control.speed;angle=control.angle;
+         joint->diag["launch_preview_only"]=launch_preview;
+         joint->diag["motion_window_required"]=require_motion_window;
+@@ -361,8 +371,8 @@
+     double used_scan = -INF, blocked_since = -INF;
+     int blocked_count = 0;
+     while (rclcpp::ok() && !stopping) {
+-      double begin = mono();
+       auto i = snapshot();
++      double begin = mono();
+       Json::Value out;
+       bool waiting = false;
+       try {
+@@ -382,9 +392,17 @@
+         used_scan = i.ss;
+         double scan_time = mono() - scan_begin;
+         double plan_begin = mono();
+-        auto candidate =
+-            planner->plan(i.pose, points,
+-                          std::max(0., assets->arc.back() - progress.distance));
++        auto compact_status=compact->update(perception->tracks,i.ss,i.pose,permit(i,begin),std::abs(i.speed)<=.03);
++        Candidate candidate;
++        candidate.valid=true;candidate.reason="compact_validated";
++        candidate.path=compact->path;candidate.offset=-.6;
++        planner->progress=0;
++        double best=INF;
++        for(size_t index=0;index<assets->route.size();++index) {
++          double distance=(assets->route[index].xy()-i.pose.xy()).squaredNorm();
++          if(distance<best){best=distance;planner->progress=index;}
++        }
++        planner->mode=compact_status["state"].asString();
+         double plan_time = mono() - plan_begin;
+         progress.update(planner->progress, *assets);
+         double remaining = assets->arc.back() - progress.distance;
+@@ -421,6 +439,7 @@
+         if (!ready(snapshot(), mono()))
+           throw std::runtime_error("input_stale");
+         out = perception->diagnostic();
++        for(const auto& key:compact_status.getMemberNames())out[key]=compact_status[key];
+         out["valid"] = candidate.valid || finished;
+         out["reason"] = finished ? "route_complete" : candidate.reason;
+         out["path"] = path_json(candidate.path);
+@@ -487,6 +506,7 @@
+           out["state"] = "WAIT_SCAN_POSE";
+           out["waiting_for_scan_pose"] = true;
+         } else {
++          out=perception->diagnostic();
+           out["valid"] = false;
+           out["reason"] = e.what();
+           out["path"] = Json::Value(Json::arrayValue);
+@@ -525,6 +545,8 @@
+     tracker_type = declare_parameter<std::string>("tracker", "dynamic_mpc");
+     require_motion_window=declare_parameter<bool>("require_motion_window",false);
+     assets.reset(new Assets(file));
++    compact.reset(new CompactOvertake(*assets,file.substr(0,file.find_last_of('/')+1)+"compact_config.json"));
++    if(tracker_type!="dynamic_mpc")throw std::runtime_error("compact_requires_dynamic_mpc");
+     tracker.reset(new Tracker(tracker_type));
+       if(!planning && tracker_type!="pp")joint.reset(new JointControl(tracker_type=="dynamic_mpc"));
+     planner.reset(new Planner(*assets, (tracker_type=="pid" || tracker_type=="dynamic_mpc") ? .03 : 0.));
+@@ -534,6 +556,8 @@
+     if (!domain || !local || std::string(local) != "1" ||
+         (std::string(domain) != "83" && std::string(domain) != "85"))
+       throw std::runtime_error("runtime_domain_refused");
++    if(std::string(domain)=="85" && !json_read(file.substr(0,file.find_last_of('/')+1)+"compact_config.json").get("physical_commissioning_enabled",false).asBool())
++      throw std::runtime_error("compact_physical_not_commissioned");
+     if (std::string(domain) == "85" &&
+         (!std::getenv("F1TENTH_GROUND_AVOIDANCE_TEST") ||
+          std::string(std::getenv("F1TENTH_GROUND_AVOIDANCE_TEST")) !=

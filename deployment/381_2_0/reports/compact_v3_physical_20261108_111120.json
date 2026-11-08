@@ -1,0 +1,28 @@
+{
+  "run_log": "/home/f1tenth/f1tenth_real_migration_ws_20260829/candidate_cpp_gpu_20260909/ground_381_2_0_compact_overtake_20261108_v3/run_logs/20261108_111120-closed-frenet-ground-attempt",
+  "passed": false,
+  "route_completed": false,
+  "first_motion_failure": "joint_mpc_nonlinear_infeasible eq=0.004298 ineq=0.000000",
+  "failure_after_final_arm_s": 1.4148659439997573,
+  "endpoint_distance_at_failure_m": 5.4691713863261695,
+  "lead_bounds_at_failure": {
+    "bounded_association": true,
+    "half_length": 0.18,
+    "half_width": 0.13,
+    "passed": false,
+    "stamp": 1794154315.7700949,
+    "vmax": 0.55,
+    "xmax": 1.747452310896482,
+    "xmin": 1.6468137304968398,
+    "ymax": -0.027940314815280327,
+    "ymin": -0.1
+  },
+  "stationary_confirmed": true,
+  "final_erpm": 0.0,
+  "max_abs_erpm": 9554.0,
+  "operator_observation": {
+    "both_moved": true,
+    "stopped_midway": true,
+    "contact": "not_reported"
+  }
+}
