@@ -78,6 +78,10 @@ The most recent physical evidence in this workspace is dated **2026-09-27**, not
 
 Historical PP/PID/MPC tests on the 381 map are separate experiments. They do not establish Fitzpatrick dual-obstacle acceptance for those controllers.
 
+## Separate simulation demo
+
+The [edited overtaking video](../media/Simulation_Overtaking.mp4) is an approximately 18-second continuous excerpt from a user-provided two-vehicle RViz simulation recording. It is shown separately in the main README. It does not change the physical v8 acceptance scope or establish that the exported v8 code implements dynamic overtaking. See [media provenance and editing details](../media/README.md#simulation-overtaking).
+
 ## v8 change
 
 A previous run stopped on the return from obstacle B with solver status 4. Replacing lateral velocity with zero and yaw rate with a kinematic estimate every tick was inconsistent with the optimizer's dynamic prediction. v8 propagates those estimates continuously using the same backward-Euler model. The user also authorized the lateral prediction bound to change from 1.50 to 1.65 m/s². Collision clearances, steering limits, L1 behavior, 500 ms input age and 45 ms compute deadline were retained.
