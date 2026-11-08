@@ -1,0 +1,10 @@
+build/
+sdkconfig.old
+sdkconfig
+*.o
+
+.pio/
+sdkconfig.*dev
+
+components/
+.components.*/

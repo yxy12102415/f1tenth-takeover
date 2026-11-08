@@ -19,6 +19,14 @@ improves some passing trials but is not a uniformly faster, stable release.
 [Why Frenet + spline + MPC, and alternatives](docs/PLANNING_CONTROL_TRADEOFFS.md) ·
 [Earlier recovery evidence](docs/STABILITY_20261104.md).
 
+## Onboard obstacle-avoidance demo
+
+[![Onboard MPC obstacle-avoidance demo](media/MPC_Avoidance_preview.gif)](media/MPC_Avoidance.mp4)
+
+[Watch or download the full video](media/MPC_Avoidance.mp4) — 32.4 s, with original audio. The silent looping preview shows a 12-second excerpt; the MP4 preserves the complete recording.
+
+## Field result
+
 | Measure | Result |
 |---|---:|
 | Route length | 44.73 m |
@@ -74,6 +82,7 @@ These commands build a non-actuating probe and run model tests. They do not laun
 | `deployment/381_2_0/` | Current compact overtaking sources, diagnostics and selected field evidence |
 | `oppVehicle/` | ESP32 lead-car control; two independent PS4 controllers |
 | `results/` | Selected successful v8 field evidence and English trajectory figures |
+| `media/` | Onboard obstacle-avoidance video and animated README preview |
 | `tools/` | Non-actuating native build and model tests |
 | `docs/` | Status, operation, build, provenance and cleanup records |
 | `Code/sim_ws/` | Independent risk-aware following simulation and shadow-mode reference |

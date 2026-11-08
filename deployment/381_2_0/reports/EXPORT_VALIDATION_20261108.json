@@ -1,0 +1,13 @@
+{
+  "scope": "Non-actuating source checkpoint validation; not a new physical test",
+  "source_byte_identity_files": 138,
+  "numerical_map_route_assets_identical": true,
+  "native_probes_build_passed": true,
+  "gate_callback_tests_passed": 7,
+  "lead_fixed_straight_logic_passed": true,
+  "link_host_tests_passed": 7,
+  "python_syntax_files_checked": 106,
+  "shell_syntax_files_checked": 15,
+  "source_export_whitespace": "Original immutable source and generated model whitespace retained; curated CSV transport uses CRLF.",
+  "physical_overtaking_accepted": false
+}

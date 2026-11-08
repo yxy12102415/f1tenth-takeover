@@ -40,3 +40,5 @@ a passed software/zero/stop check is not physical overtaking acceptance.
 - [short_route_screen.json](short_route_screen.json)
 
 [Raw on-car log hashes](RAW_LOG_HASHES_20261108.json) identify the retained full latest-run files.
+
+[Source export checks](EXPORT_VALIDATION_20261108.json) were run without vehicle drivers.
