@@ -27,9 +27,9 @@ improves some passing trials but is not a uniformly faster, stable release.
 
 ## Simulation overtaking demo
 
-[![Two-vehicle overtaking in simulation](media/Simulation_Overtaking_preview.gif)](media/Simulation_Overtaking.mp4)
+[![Completed overtaking maneuver in simulation](media/Simulation_Overtaking_Success_preview.gif)](media/Simulation_Overtaking_Success.mp4)
 
-[Watch or download the edited demo](media/Simulation_Overtaking.mp4) - approximately 18 s, original speed, no audio. The continuous RViz excerpt shows the two vehicles and the evolving path during an overtaking maneuver. Desktop/terminal footage, the battery notification, and RViz tool panels have been removed. The looping preview shows a 12-second excerpt at original speed.
+[Watch or download the successful passing maneuver](media/Simulation_Overtaking_Success.mp4) - 19.5 s, original speed, no audio. In this continuous excerpt from the final recorded attempt, the blue ego vehicle passes the orange opponent, rejoins the yellow reference route, and remains ahead through the end of the clip. Desktop/terminal footage, the battery notification, and RViz tool panels have been removed. The looping preview shows the first 14 seconds at original speed.
 
 This simulation recording is separate from the physical v8 result below; it does not establish real-vehicle overtaking performance. [Editing details](media/README.md#simulation-overtaking)
 

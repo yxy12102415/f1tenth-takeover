@@ -80,7 +80,7 @@ Historical PP/PID/MPC tests on the 381 map are separate experiments. They do not
 
 ## Separate simulation demo
 
-The [edited overtaking video](../media/Simulation_Overtaking.mp4) is an approximately 18-second continuous excerpt from a user-provided two-vehicle RViz simulation recording. It is shown separately in the main README. It does not change the physical v8 acceptance scope or establish that the exported v8 code implements dynamic overtaking. See [media provenance and editing details](../media/README.md#simulation-overtaking).
+The [edited overtaking video](../media/Simulation_Overtaking_Success.mp4) is a 19.5-second continuous excerpt from the final attempt in a user-provided two-vehicle RViz simulation recording. The blue vehicle completes a pass, rejoins the reference route, and remains ahead to the end of the excerpt. This replaces the earlier excerpt from an unsuccessful attempt. It does not change the physical v8 acceptance scope or establish that the exported v8 code implements dynamic overtaking. See [media provenance and editing details](../media/README.md#simulation-overtaking).
 
 ## v8 change
 

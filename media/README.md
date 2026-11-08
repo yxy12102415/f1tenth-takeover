@@ -2,30 +2,32 @@
 
 ## Simulation overtaking
 
-- Video: [Simulation_Overtaking.mp4](Simulation_Overtaking.mp4)
-- README preview: [Simulation_Overtaking_preview.gif](Simulation_Overtaking_preview.gif)
+- Video: [Simulation_Overtaking_Success.mp4](Simulation_Overtaking_Success.mp4)
+- README preview: [Simulation_Overtaking_Success_preview.gif](Simulation_Overtaking_Success_preview.gif)
 - Source: user-provided simulation screen recording, `dcb4fa1b3221eadb6209f4f414a8720b_raw.mp4` (approximately 171.08 s).
 - Source SHA-256: `0a6ef7c3b034191acd12bfa2112c7e0b3d80f91cd5d203ba7b1266febd88304e`.
-- Selected source interval: `00:01:31.000` to `00:01:49.000`, a single continuous excerpt without internal cuts or speed changes.
+- Selected source interval: `00:02:29.000` to `00:02:48.500`, a single continuous excerpt from the final recorded attempt, without internal cuts or speed changes.
 - Crop: `1272 x 914`, top-left corner `(28, 110)` in the original `1562 x 1072` recording. This keeps the RViz scene while excluding toolbars, the side panel, the desktop, and the notification.
 - MP4: H.264, 24 fps, original-speed playback, no audio (the source has no audio track), fast-start enabled.
-- GIF: video seconds 3-15, original-speed playback, 6 fps, 640 px wide, looping.
+- GIF: video seconds 0-14, original-speed playback, 6 fps, 640 px wide, looping.
 
-This is visual evidence of a simulation demonstration, not a physical-vehicle test or a quantitative success-rate evaluation. The recording is not associated with a verified source-code commit; no algorithm or performance claims are inferred from the video alone. The original recording remains unchanged outside the repository.
+The selected interval shows the blue ego vehicle approaching and passing the orange opponent, rejoining the yellow reference route, and continuing ahead. It includes the post-pass motion rather than stopping at the moment the vehicles overlap longitudinally. The earlier published interval (`00:01:31`-`00:01:49`) showed an unsuccessful attempt and has been replaced.
+
+This is visual evidence of a completed passing maneuver in simulation, not a physical-vehicle test, a full-trial acceptance result, or a quantitative success-rate evaluation. The recording is not associated with a verified source-code commit; no specific algorithm or measured performance is inferred from the video alone. The original recording remains unchanged outside the repository.
 
 ### Reproduce the edit
 
 With FFmpeg installed and `SOURCE` set to the original recording path, run from the repository root:
 
 ```bash
-ffmpeg -ss 91 -i "$SOURCE" -t 18 \
+ffmpeg -ss 149 -i "$SOURCE" -t 19.5 \
   -vf 'crop=1272:914:28:110,setpts=PTS-STARTPTS,fps=24,setsar=1' \
   -an -c:v libx264 -preset slow -crf 21 -pix_fmt yuv420p \
-  -movflags +faststart -map_metadata -1 media/Simulation_Overtaking.mp4
+  -movflags +faststart -map_metadata -1 media/Simulation_Overtaking_Success.mp4
 
-ffmpeg -ss 3 -t 12 -i media/Simulation_Overtaking.mp4 \
+ffmpeg -t 14 -i media/Simulation_Overtaking_Success.mp4 \
   -filter_complex '[0:v]fps=6,scale=640:-1:flags=lanczos,split[a][b];[a]palettegen=max_colors=64:stats_mode=diff[p];[b][p]paletteuse=dither=bayer:bayer_scale=5' \
-  -loop 0 media/Simulation_Overtaking_preview.gif
+  -loop 0 media/Simulation_Overtaking_Success_preview.gif
 ```
 
 ## Onboard static-obstacle avoidance
