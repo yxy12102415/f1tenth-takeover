@@ -1,0 +1,55 @@
+{
+  "admission_ms": 0.3618259997892892,
+  "cached_query_mean_ms": 0.005465720305167425,
+  "mismatch_rejections": 7,
+  "passed": true,
+  "physical_motion": false,
+  "points": 115,
+  "preparation_ms": 104.52910999993037,
+  "target_parity_queries": 404,
+  "paired_cold_process_reference_queries": [
+    {
+      "before_ms": 83.72421000058239,
+      "after_ms": 0.2329299986740807
+    },
+    {
+      "before_ms": 74.32634399992821,
+      "after_ms": 0.21657800061802845
+    },
+    {
+      "before_ms": 63.25755299985758,
+      "after_ms": 0.22339399947668426
+    },
+    {
+      "before_ms": 67.44257799982734,
+      "after_ms": 0.1702739991742419
+    },
+    {
+      "before_ms": 63.08289499975217,
+      "after_ms": 0.2225619991804706
+    }
+  ],
+  "query_inputs": "Captured first moving rejection path, pose and speed; 25 fixed stations at measured speed, not full controller replay",
+  "before_median_ms": 67.44257799982734,
+  "after_median_ms": 0.2225619991804706,
+  "optimization": "Exact path/map/policy-bound precomputed limits produced by planner, admitted atomically with plan; no change to speed function or current-state guards",
+  "source_sha256": "f685f3f3e6b36735ee9d6d9a2f228e7eb4664ae86ddad12a0aa8218829c3fe98",
+  "current_closed_loop_planner_tables": {
+    "pid": {
+      "valid_plan_tables": 52,
+      "preparation_max_ms": 15.799210999830393,
+      "preparation_median_ms": 0.7292529990081675,
+      "reference_speed_table_in_mpc": false
+    },
+    "dynamic_mpc": {
+      "valid_plan_tables": 52,
+      "preparation_max_ms": 15.000227998825721,
+      "preparation_median_ms": 0.682660998791107,
+      "reference_speed_table_in_mpc": true
+    }
+  },
+  "validation_status": "native_exact_query_parity_and_both_production_node_closed_loops_passed",
+  "hard_deadline_ms": 200.0,
+  "full_callback_max_ms": 27.211253000132274,
+  "mpc_reference_setup_max_ms": 4.7626240011595655
+}

@@ -1,0 +1,29 @@
+{
+  "reason": "generic_emergency_coast_map_conflict",
+  "actual_pose": [
+    1.063413378667562,
+    -0.11507607421802943,
+    -0.25637484363336954
+  ],
+  "speed_mps": 1.154,
+  "command_mps": 0.79375,
+  "predicted_first_map_conflict": {
+    "t_s": 2.4000000000000004,
+    "pose": [
+      2.629846168645147,
+      -0.8005175746385396,
+      -0.4411365429185261
+    ],
+    "map_reserve_m": -0.030974479862909365
+  },
+  "predicted_coast_stop": [
+    2.691833637401041,
+    -0.8297862646884163,
+    -0.44113830631644974
+  ],
+  "worst_map_reserve_m": -0.030974479862909365,
+  "physical_contact_reported": false,
+  "route_completed": false,
+  "physical_contact": null,
+  "field_report": "Stopped near the previous location; contact not yet confirmed for this run"
+}

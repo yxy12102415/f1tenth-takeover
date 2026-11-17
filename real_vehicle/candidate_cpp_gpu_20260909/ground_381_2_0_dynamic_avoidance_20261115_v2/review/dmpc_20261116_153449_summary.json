@@ -1,0 +1,43 @@
+{
+  "run": "candidate_cpp_gpu_20260909/ground_381_2_0_dynamic_avoidance_20261115_v2/run_logs/20261116_153449-closed-frenet-ground-attempt",
+  "route_completed": false,
+  "field_report": "Stopped mid-route",
+  "contact": null,
+  "first_moving_rejection": "joint_control_deadline",
+  "seconds_after_first_wheel_motion": 1.7898929640014103,
+  "controller_compute_ms": 103.8072209994425,
+  "reference_setup_ms": 93.88432100058708,
+  "tube_setup_ms": 12.07465499828686,
+  "pure_solver_ms": 6.066271000236156,
+  "controller_cpu_ms": 78.92176,
+  "controller_wait_ms": 24.885108999527063,
+  "control_until_rejection_ms": 126.09252000038396,
+  "speed_preview_ms": {
+    "path_speed_preview_ms": 17.988571999012493,
+    "speed_policy_ms": 19.76064500013308,
+    "state_coast_cap_ms": 1.760649000061676
+  },
+  "last_erpm": 0.0,
+  "source_ages": {
+    "odom": {
+      "receipt_age_s": 0.14262159600002633,
+      "source_age_s": 0.1534874439239502,
+      "timeout_s": 0.5
+    },
+    "pose": {
+      "receipt_age_s": 0.14264812399960647,
+      "source_age_s": 0.21787142753601074,
+      "timeout_s": 0.5
+    },
+    "scan": {
+      "receipt_age_s": 0.13974778900046658,
+      "source_age_s": 0.3675723075866699,
+      "timeout_s": 0.5
+    }
+  },
+  "proposed_work": "Profile reference speed queries/static corridor/parameter updates, then consider versioned preparation cache; keep 100 ms; awaiting operator decision",
+  "changes_after_failure": false,
+  "field_contact": false,
+  "field_observation": "User confirmed no contact",
+  "operator_selected_followup": "Optimize reference preparation using exact path-versioned table; raise hard deadline to 200 ms; preserve 85 ms refinement, 45 ms sustained overload and 0.5 s input freshness"
+}

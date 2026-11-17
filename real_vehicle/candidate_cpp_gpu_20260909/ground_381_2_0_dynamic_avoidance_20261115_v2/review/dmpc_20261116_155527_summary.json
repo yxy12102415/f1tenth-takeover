@@ -1,0 +1,72 @@
+{
+  "run": "run_logs/20261116_155527-closed-frenet-ground-attempt",
+  "completed": false,
+  "first_moving_rejection": "generic_search_budget_exhausted",
+  "wheel_motion_to_rejection_s": 2.684798697999213,
+  "controller_hard_deadline_ms": 200.0,
+  "planner_search_budget_ms": 200.0,
+  "controller_compute_max_ms": 23.81396399869118,
+  "full_control_callback_max_ms": 81.0662060011964,
+  "reference_speed_queries_max_ms": 0.31597000270267017,
+  "collision_diagnostic": {
+    "clearance_m": 0.08,
+    "ego_pose": [
+      4.446054378238049,
+      0.06460019321256946,
+      0.7944832641796837
+    ],
+    "future_s": 0,
+    "mapped_static_surface_prior": false,
+    "now": 1794862633.4801474,
+    "occupancy": {
+      "clear_scans": 0,
+      "fixed_world": false,
+      "has_moved": false,
+      "hits": 1,
+      "id": 200,
+      "map_supported": false,
+      "memory_state": "predicted_hold",
+      "observation_age_s": 0.20079636573791504,
+      "sensor_x": 0.6765297243386726,
+      "sensor_y": -0.0771219346731293,
+      "stamp": 1794862632.979351,
+      "stationary_history": false,
+      "visibility_hazard": false,
+      "vx": 0,
+      "vy": 0,
+      "xmax": 6.217180495013072,
+      "xmin": 5.143529224877982,
+      "ymax": -0.014922164051215082,
+      "ymin": -1.324903793948605
+    },
+    "predicted_box": [
+      4.855280660542137,
+      -1.61315235828445,
+      6.505429059348916,
+      0.2733264002846299
+    ]
+  },
+  "raw_box_extent_m": [
+    1.0736512701350902,
+    1.3099816298973899
+  ],
+  "planning_pose": [
+    0.7194118043129416,
+    -0.1093859381910076,
+    -0.24635712482916386
+  ],
+  "rejected_future_path_pose": [
+    4.446054378238049,
+    0.06460019321256946,
+    0.7944832641796837
+  ],
+  "replan_candidates": {
+    "generic_predicted_occupancy_conflict": 1,
+    "obstacle_footprint": 1
+  },
+  "planning_uses_max_speed_stopping_horizon_m": 5.333333333333334,
+  "final_erpm": 0.0,
+  "field_contact": null,
+  "interpretation": "New one-hit large occupancy in route-end region invalidated held path; bounded search failed. This does not establish absence of any feasible path. Controller deadline not triggered. Raw return identity not yet established.",
+  "changes_after_failure": false
+}

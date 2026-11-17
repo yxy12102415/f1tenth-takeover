@@ -3,7 +3,7 @@
 Fixed-route navigation and static-obstacle avoidance on a real F1TENTH vehicle,
 plus a laptop-tested dynamic-obstacle overtaking simulation.
 
-**Latest physical checkpoint — 2026-11-08, 381 2.0:** both cars moved without reported contact; v5 startup gating worked, but MPC status 4 stopped the run before route completion. Physical dynamic overtaking is not yet accepted. [Current source, settings and evidence](docs/VEHICLE_PROGRESS_20261108.md).
+**Latest physical checkpoint — 2026-11-17, 381 2.0:** C++ dynamic MPC completed the route around a stationary opponent, with no operator-reported contact. Eight-view LiDAR template association is integrated; return oscillation remains. Full moving-opponent overtaking is not yet qualified. [Current source, settings, matching method and evidence](docs/VEHICLE_PROGRESS_20261117.md) · [Trajectory](results/381_20261117/trajectory_overview.png).
 
 **Historical completed physical result: Dynamic MPC v8, Fitzpatrick, 2026-09-27.** One complete lap with two static obstacles; the operator reported no contact, minimal oscillation, and a natural stop. This is one successful run, not a repeated-trial reliability claim.
 

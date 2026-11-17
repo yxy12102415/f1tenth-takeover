@@ -1,0 +1,102 @@
+{
+  "pf.log": {
+    "bytes": 480,
+    "sha256": "36c349b01f8355475be3eec07bee42c4a8e2ab32d6f6596161b4ed8b583ffcf9",
+    "retained_on_vehicle": true
+  },
+  "status_events.json": {
+    "bytes": 1106482,
+    "sha256": "ee80f900fbd3287f01c21edd734132778f123aa0688e03998eea41d56abc40fb",
+    "retained_on_vehicle": true
+  },
+  "runtime.json": {
+    "bytes": 2785,
+    "sha256": "69a957079445fb6b83df3780077a8f381ee9a9a6bd3db1687f75e392b501e464",
+    "retained_on_vehicle": true
+  },
+  "final.log": {
+    "bytes": 279,
+    "sha256": "5bfe3d4050d934e02ceee1b8903defb3646ff1db275797ff68358078fa3e10b6",
+    "retained_on_vehicle": true
+  },
+  "actuator.log": {
+    "bytes": 773,
+    "sha256": "50ef925f86dbbbdeb9f1a5a169cc2fa0e69f82852bf7b4b386880e36e2d9e2b9",
+    "retained_on_vehicle": true
+  },
+  "tracking_trace.json": {
+    "bytes": 65579603,
+    "sha256": "86ea88d01fe1ecd634dc9591ffd29121e287db995373ec2aa01704ce8ca3c2a6",
+    "retained_on_vehicle": true
+  },
+  "health_guard.log": {
+    "bytes": 71,
+    "sha256": "3f9a4084aaa32bc21cf89e8484e28480a03f5c3771c6c5311bad31c584f8f46c",
+    "retained_on_vehicle": true
+  },
+  "telemetry.log": {
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "retained_on_vehicle": true
+  },
+  "window.log": {
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "retained_on_vehicle": true
+  },
+  "map_io.log": {
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "retained_on_vehicle": true
+  },
+  "command_trace.json": {
+    "bytes": 2621283,
+    "sha256": "fc5ddb3c6f9e06bb3e5922a485ff56a244fdd174924d4fe6404ee66e1f9a671c",
+    "retained_on_vehicle": true
+  },
+  "planner.log": {
+    "bytes": 71,
+    "sha256": "e5e03ab20a8be8246cc88a54330f22d794d740c671a52f72618b77451edecd57",
+    "retained_on_vehicle": true
+  },
+  "relay.log": {
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "retained_on_vehicle": true
+  },
+  "result.json": {
+    "bytes": 144549,
+    "sha256": "761505025b186a4efa9e8574dcfe51d16dd1d0beec5e59c54eb058e6f5185a56",
+    "retained_on_vehicle": true
+  },
+  "joy.log": {
+    "bytes": 267,
+    "sha256": "0bbd4e985b1a3c1a9fe5555891fd2bf2973ef1332b580f57491d611e453bb59c",
+    "retained_on_vehicle": true
+  },
+  "lidar.log": {
+    "bytes": 217,
+    "sha256": "a19354ab5c78e14519998f8f0c9ac02e225a0906e77ac28078d6b6acfc254d0d",
+    "retained_on_vehicle": true
+  },
+  "vesc.log": {
+    "bytes": 375,
+    "sha256": "a8c65ddf6df2f6c0c18c55000ff73b705ec0babbd647c655b3b1cc73c7c69647",
+    "retained_on_vehicle": true
+  },
+  "operator.log": {
+    "bytes": 246,
+    "sha256": "e61181ee5a6cef748ca61f25cbe6901054ffa0dc0c0ef6d670bff451c52c06b0",
+    "retained_on_vehicle": true
+  },
+  "odom.log": {
+    "bytes": 71,
+    "sha256": "4b485ec0813e048d2fbd090e74e541c7c7b0540aa48473569fd85295e79bc2cb",
+    "retained_on_vehicle": true
+  },
+  "pp.log": {
+    "bytes": 71,
+    "sha256": "9d2dc7dc0eb27f9f30cc08f344636f4b952ff3846e4e412d66faa1e0d037ea00",
+    "retained_on_vehicle": true
+  }
+}

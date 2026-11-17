@@ -1,0 +1,14 @@
+{
+  "route": "/home/f1tenth/f1tenth_real_migration_ws_20260829/routes/manual_route_20260923_172359_controller_ready.csv",
+  "output": "/home/f1tenth/f1tenth_real_migration_ws_20260829/routes/manual_route_20260923_172359_controller_ready_speed_profile.csv",
+  "points": 118,
+  "length_m": 5.845164147568345,
+  "minimum_speed_mps": 0.7,
+  "maximum_speed_mps": 2.0,
+  "start_speed_mps": 0.0,
+  "end_speed_mps": 0.0,
+  "maximum_profile_speed_mps": 1.793823918054243,
+  "curvature_preview_m": 0.8,
+  "acceleration_mps2": 1.5,
+  "deceleration_mps2": 1.0
+}

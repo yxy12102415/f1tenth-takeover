@@ -1,0 +1,792 @@
+{
+  "scope": "Recorded failure state/path and saved solve observation, cold solver seed; previous solver internal trajectory and multipliers not restored; not live stopped-position continuation.",
+  "runs": [
+    {
+      "diagnostics": {
+        "absolute_command_cap_mps": 2,
+        "acceleration_command_mps2": 0.26264781068004445,
+        "coast_cut_distance_m": 0.8461940148148148,
+        "command_headroom_mps": 0.15,
+        "compute_consecutive_soft_misses": 0,
+        "compute_hard_deadline_ms": 200,
+        "compute_max_consecutive_soft_misses": 3,
+        "compute_soft_budget_missed": false,
+        "compute_soft_budget_ms": 45,
+        "control_remaining_m": 4.7755448287577265,
+        "controller_compute_ms": 27.584869999941475,
+        "controller_thread_cpu_ms": 27.33424,
+        "controller_wait_wall_ms": 0.24989399999426204,
+        "cross_track_error_m": -0.024424645085651207,
+        "dynamic_corridor_enabled": true,
+        "effective_command_cap_mps": 2,
+        "equality_residual": 0.00016705390883367532,
+        "geometry_setup_ms": 0.058751999972628255,
+        "heading_error_rad": -0.002055146262001706,
+        "independent_dynamics_defect": 1.219038053834609e-08,
+        "independent_lateral_violation": 0,
+        "inequality_residual": 0,
+        "initial_state": [
+          1.1073673897156415,
+          -0.21567536470067333,
+          -0.16593995389634714,
+          0.9781333333333333,
+          0,
+          0.3562404712654665,
+          0.06264781070031693,
+          0.08492338507067071,
+          0.9762680449775456,
+          0.04122400513685119
+        ],
+        "lateral_nominal_limit_mps2": 1.2,
+        "lateral_recovery_active": false,
+        "lateral_recovery_hard_cap_mps2": 2,
+        "lateral_stage_limits_mps2": [
+          1.2,
+          1.2,
+          1.2,
+          1.2,
+          1.2,
+          1.2,
+          1.2,
+          1.2,
+          1.2,
+          1.2,
+          1.2,
+          1.2,
+          1.2,
+          1.2,
+          1.2,
+          1.2,
+          1.2,
+          1.2,
+          1.2,
+          1.2,
+          1.2,
+          1.2,
+          1.2,
+          1.2
+        ],
+        "longitudinal_controller": "joint_dynamic_mpc",
+        "max_predicted_lateral_load_mps2": 0.21095606965640165,
+        "maximum_dynamic_reference_shift_m": 0,
+        "measured_speed_mps": 0.9781333333333333,
+        "minimum_drivable_speed_mps": 0.5,
+        "minimum_dynamic_corridor_radius_m": 0.06718750000000001,
+        "mpc_independent_residual_ms": 0.11503999996875791,
+        "mpc_iterations": 3,
+        "mpc_parameter_update_ms": 0.009472000442656281,
+        "mpc_pure_solver_ms": 17.02651200002947,
+        "mpc_reference_setup_ms": 4.43154799995682,
+        "mpc_reference_speed_ms": 0.21027200034495763,
+        "mpc_seed_rollout_ms": 0.03472000003057474,
+        "mpc_solve_ms": 22.193451000021014,
+        "mpc_solver_residual_ms": 0.16361599989522801,
+        "mpc_solver_status": 0,
+        "mpc_static_corridor_ms": 1.277919999893129,
+        "mpc_tube_setup_ms": 2.8331180000122913,
+        "predicted_path": [
+          [
+            1.1073673897156415,
+            -0.21567536470067333,
+            -0.16593995389634714
+          ],
+          [
+            1.1558238664267741,
+            -0.22283027815454487,
+            -0.15518731379023026
+          ],
+          [
+            1.204623554704997,
+            -0.22937601896351897,
+            -0.14631774978848036
+          ],
+          [
+            1.2539578450684121,
+            -0.2356356341990566,
+            -0.1387500311756201
+          ],
+          [
+            1.3040747151417311,
+            -0.24181568975686,
+            -0.13277085878097403
+          ],
+          [
+            1.3552550982932807,
+            -0.2480869442664125,
+            -0.12868832143704875
+          ],
+          [
+            1.407787462759646,
+            -0.25460133931341145,
+            -0.1266556521847851
+          ],
+          [
+            1.4618819447534608,
+            -0.26148421401941363,
+            -0.12664571949596676
+          ],
+          [
+            1.517611597113778,
+            -0.2688239451315006,
+            -0.1284519099434958
+          ],
+          [
+            1.5749379577554092,
+            -0.2766680202492127,
+            -0.13169310216819574
+          ],
+          [
+            1.6337409820342248,
+            -0.2850187592005697,
+            -0.13583874539862928
+          ],
+          [
+            1.6938420021015284,
+            -0.2938304689719008,
+            -0.1402581793516812
+          ],
+          [
+            1.7550208357083272,
+            -0.3030102573822776,
+            -0.14428792362338608
+          ],
+          [
+            1.8170277975543738,
+            -0.31242357138816546,
+            -0.14730580785532296
+          ],
+          [
+            1.8795926268221534,
+            -0.3219047356294384,
+            -0.14880058393200807
+          ],
+          [
+            1.9424415164269326,
+            -0.33127322306443613,
+            -0.14842736812624047
+          ],
+          [
+            2.005317061470605,
+            -0.3403529196920448,
+            -0.14604081628377064
+          ],
+          [
+            2.0679883306927174,
+            -0.34898959159221515,
+            -0.14170081007420343
+          ],
+          [
+            2.1302549204183503,
+            -0.3570644436011591,
+            -0.13565194818340043
+          ],
+          [
+            2.191948205850354,
+            -0.36450235561405303,
+            -0.12828203282532527
+          ],
+          [
+            2.252932057159658,
+            -0.37127414140794535,
+            -0.12006616200065813
+          ],
+          [
+            2.3131040920278605,
+            -0.3773927339531797,
+            -0.11150215699092447
+          ],
+          [
+            2.3723965444525583,
+            -0.3829034368465216,
+            -0.10304106150256614
+          ],
+          [
+            2.4307747393277834,
+            -0.3878688523571662,
+            -0.0950165199709487
+          ],
+          [
+            2.4882302613000826,
+            -0.3923503182737724,
+            -0.08758299766376329
+          ]
+        ],
+        "proposed_speed_mps": 0.9894004355115478,
+        "proposed_steering_rad": 0.05968106387354581,
+        "reference_speed_table_used": true,
+        "requested_braking_cap_mps": 1.78125,
+        "speed_bound_recovery_active": false,
+        "speed_bound_recovery_stages": 0,
+        "speed_command_mps": 0.9894004355115478,
+        "speed_phase": "driving",
+        "speed_target_mps": 1.2093750000000003,
+        "stage_command_upper_mps": [
+          1.78125,
+          1.78125,
+          1.78125,
+          1.78125,
+          1.78125,
+          1.78125,
+          1.78125,
+          1.78125,
+          1.78125,
+          1.78125,
+          1.78125,
+          1.78125,
+          1.78125,
+          1.78125,
+          1.78125,
+          1.78125,
+          1.78125,
+          1.78125,
+          1.78125,
+          1.78125,
+          1.78125,
+          1.78125,
+          1.78125,
+          1.78125
+        ],
+        "state_dimension": 10,
+        "sweep_initial_servo_rad": 0.04122400513685119,
+        "terminal_coasting": false,
+        "tracking_costs": {
+          "cross_track_weight": 160,
+          "heading_weight": 140,
+          "steering_change_weight": 180,
+          "yaw_rate_weight": 0.5
+        },
+        "warm_start_policy": "cold_controls_rollout_exact_generated_dynamics_from_measurement"
+      },
+      "nominal_coast_reserve_m": 0.46104084558261815,
+      "predicted_body_guard_passed": true,
+      "speed": 0.9894004355115478,
+      "steering": 0.05968106387354581,
+      "valid": true
+    },
+    {
+      "diagnostics": {
+        "absolute_command_cap_mps": 2,
+        "acceleration_command_mps2": 0.26264781068004445,
+        "coast_cut_distance_m": 0.8461940148148148,
+        "command_headroom_mps": 0.15,
+        "compute_consecutive_soft_misses": 0,
+        "compute_hard_deadline_ms": 200,
+        "compute_max_consecutive_soft_misses": 3,
+        "compute_soft_budget_missed": false,
+        "compute_soft_budget_ms": 45,
+        "control_remaining_m": 4.7755448287577265,
+        "controller_compute_ms": 28.33174899990354,
+        "controller_thread_cpu_ms": 27.233120000000003,
+        "controller_wait_wall_ms": 1.0979889999642687,
+        "cross_track_error_m": -0.024424645085651207,
+        "dynamic_corridor_enabled": true,
+        "effective_command_cap_mps": 2,
+        "equality_residual": 0.00016705390883367532,
+        "geometry_setup_ms": 0.05923200001234363,
+        "heading_error_rad": -0.002055146262001706,
+        "independent_dynamics_defect": 1.219038053834609e-08,
+        "independent_lateral_violation": 0,
+        "inequality_residual": 0,
+        "initial_state": [
+          1.1073673897156415,
+          -0.21567536470067333,
+          -0.16593995389634714,
+          0.9781333333333333,
+          0,
+          0.3562404712654665,
+          0.06264781070031693,
+          0.08492338507067071,
+          0.9762680449775456,
+          0.04122400513685119
+        ],
+        "lateral_nominal_limit_mps2": 1.2,
+        "lateral_recovery_active": false,
+        "lateral_recovery_hard_cap_mps2": 2,
+        "lateral_stage_limits_mps2": [
+          1.2,
+          1.2,
+          1.2,
+          1.2,
+          1.2,
+          1.2,
+          1.2,
+          1.2,
+          1.2,
+          1.2,
+          1.2,
+          1.2,
+          1.2,
+          1.2,
+          1.2,
+          1.2,
+          1.2,
+          1.2,
+          1.2,
+          1.2,
+          1.2,
+          1.2,
+          1.2,
+          1.2
+        ],
+        "longitudinal_controller": "joint_dynamic_mpc",
+        "max_predicted_lateral_load_mps2": 0.21095606965640165,
+        "maximum_dynamic_reference_shift_m": 0,
+        "measured_speed_mps": 0.9781333333333333,
+        "minimum_drivable_speed_mps": 0.5,
+        "minimum_dynamic_corridor_radius_m": 0.06718750000000001,
+        "mpc_independent_residual_ms": 0.17260799984342157,
+        "mpc_iterations": 3,
+        "mpc_parameter_update_ms": 0.011007000352947216,
+        "mpc_pure_solver_ms": 17.220911999970667,
+        "mpc_reference_setup_ms": 4.611514999965038,
+        "mpc_reference_speed_ms": 0.14694400022108312,
+        "mpc_seed_rollout_ms": 0.03974399999151501,
+        "mpc_solve_ms": 22.501065999904313,
+        "mpc_solver_residual_ms": 0.1147189999528564,
+        "mpc_solver_status": 0,
+        "mpc_static_corridor_ms": 1.3486380001950238,
+        "mpc_tube_setup_ms": 2.992317999996885,
+        "predicted_path": [
+          [
+            1.1073673897156415,
+            -0.21567536470067333,
+            -0.16593995389634714
+          ],
+          [
+            1.1558238664267741,
+            -0.22283027815454487,
+            -0.15518731379023026
+          ],
+          [
+            1.204623554704997,
+            -0.22937601896351897,
+            -0.14631774978848036
+          ],
+          [
+            1.2539578450684121,
+            -0.2356356341990566,
+            -0.1387500311756201
+          ],
+          [
+            1.3040747151417311,
+            -0.24181568975686,
+            -0.13277085878097403
+          ],
+          [
+            1.3552550982932807,
+            -0.2480869442664125,
+            -0.12868832143704875
+          ],
+          [
+            1.407787462759646,
+            -0.25460133931341145,
+            -0.1266556521847851
+          ],
+          [
+            1.4618819447534608,
+            -0.26148421401941363,
+            -0.12664571949596676
+          ],
+          [
+            1.517611597113778,
+            -0.2688239451315006,
+            -0.1284519099434958
+          ],
+          [
+            1.5749379577554092,
+            -0.2766680202492127,
+            -0.13169310216819574
+          ],
+          [
+            1.6337409820342248,
+            -0.2850187592005697,
+            -0.13583874539862928
+          ],
+          [
+            1.6938420021015284,
+            -0.2938304689719008,
+            -0.1402581793516812
+          ],
+          [
+            1.7550208357083272,
+            -0.3030102573822776,
+            -0.14428792362338608
+          ],
+          [
+            1.8170277975543738,
+            -0.31242357138816546,
+            -0.14730580785532296
+          ],
+          [
+            1.8795926268221534,
+            -0.3219047356294384,
+            -0.14880058393200807
+          ],
+          [
+            1.9424415164269326,
+            -0.33127322306443613,
+            -0.14842736812624047
+          ],
+          [
+            2.005317061470605,
+            -0.3403529196920448,
+            -0.14604081628377064
+          ],
+          [
+            2.0679883306927174,
+            -0.34898959159221515,
+            -0.14170081007420343
+          ],
+          [
+            2.1302549204183503,
+            -0.3570644436011591,
+            -0.13565194818340043
+          ],
+          [
+            2.191948205850354,
+            -0.36450235561405303,
+            -0.12828203282532527
+          ],
+          [
+            2.252932057159658,
+            -0.37127414140794535,
+            -0.12006616200065813
+          ],
+          [
+            2.3131040920278605,
+            -0.3773927339531797,
+            -0.11150215699092447
+          ],
+          [
+            2.3723965444525583,
+            -0.3829034368465216,
+            -0.10304106150256614
+          ],
+          [
+            2.4307747393277834,
+            -0.3878688523571662,
+            -0.0950165199709487
+          ],
+          [
+            2.4882302613000826,
+            -0.3923503182737724,
+            -0.08758299766376329
+          ]
+        ],
+        "proposed_speed_mps": 0.9894004355115478,
+        "proposed_steering_rad": 0.05968106387354581,
+        "reference_speed_table_used": true,
+        "requested_braking_cap_mps": 1.78125,
+        "speed_bound_recovery_active": false,
+        "speed_bound_recovery_stages": 0,
+        "speed_command_mps": 0.9894004355115478,
+        "speed_phase": "driving",
+        "speed_target_mps": 1.2093750000000003,
+        "stage_command_upper_mps": [
+          1.78125,
+          1.78125,
+          1.78125,
+          1.78125,
+          1.78125,
+          1.78125,
+          1.78125,
+          1.78125,
+          1.78125,
+          1.78125,
+          1.78125,
+          1.78125,
+          1.78125,
+          1.78125,
+          1.78125,
+          1.78125,
+          1.78125,
+          1.78125,
+          1.78125,
+          1.78125,
+          1.78125,
+          1.78125,
+          1.78125,
+          1.78125
+        ],
+        "state_dimension": 10,
+        "sweep_initial_servo_rad": 0.04122400513685119,
+        "terminal_coasting": false,
+        "tracking_costs": {
+          "cross_track_weight": 160,
+          "heading_weight": 140,
+          "steering_change_weight": 180,
+          "yaw_rate_weight": 0.5
+        },
+        "warm_start_policy": "cold_controls_rollout_exact_generated_dynamics_from_measurement"
+      },
+      "nominal_coast_reserve_m": 0.46104084558261815,
+      "predicted_body_guard_passed": true,
+      "speed": 0.9894004355115478,
+      "steering": 0.05968106387354581,
+      "valid": true
+    },
+    {
+      "diagnostics": {
+        "absolute_command_cap_mps": 2,
+        "acceleration_command_mps2": 0.26264781068004445,
+        "coast_cut_distance_m": 0.8461940148148148,
+        "command_headroom_mps": 0.15,
+        "compute_consecutive_soft_misses": 0,
+        "compute_hard_deadline_ms": 200,
+        "compute_max_consecutive_soft_misses": 3,
+        "compute_soft_budget_missed": false,
+        "compute_soft_budget_ms": 45,
+        "control_remaining_m": 4.7755448287577265,
+        "controller_compute_ms": 25.562599000068076,
+        "controller_thread_cpu_ms": 25.194656000000002,
+        "controller_wait_wall_ms": 0.3673670000204146,
+        "cross_track_error_m": -0.024424645085651207,
+        "dynamic_corridor_enabled": true,
+        "effective_command_cap_mps": 2,
+        "equality_residual": 0.00016705390883367532,
+        "geometry_setup_ms": 0.07913499996448081,
+        "heading_error_rad": -0.002055146262001706,
+        "independent_dynamics_defect": 1.219038053834609e-08,
+        "independent_lateral_violation": 0,
+        "inequality_residual": 0,
+        "initial_state": [
+          1.1073673897156415,
+          -0.21567536470067333,
+          -0.16593995389634714,
+          0.9781333333333333,
+          0,
+          0.3562404712654665,
+          0.06264781070031693,
+          0.08492338507067071,
+          0.9762680449775456,
+          0.04122400513685119
+        ],
+        "lateral_nominal_limit_mps2": 1.2,
+        "lateral_recovery_active": false,
+        "lateral_recovery_hard_cap_mps2": 2,
+        "lateral_stage_limits_mps2": [
+          1.2,
+          1.2,
+          1.2,
+          1.2,
+          1.2,
+          1.2,
+          1.2,
+          1.2,
+          1.2,
+          1.2,
+          1.2,
+          1.2,
+          1.2,
+          1.2,
+          1.2,
+          1.2,
+          1.2,
+          1.2,
+          1.2,
+          1.2,
+          1.2,
+          1.2,
+          1.2,
+          1.2
+        ],
+        "longitudinal_controller": "joint_dynamic_mpc",
+        "max_predicted_lateral_load_mps2": 0.21095606965640165,
+        "maximum_dynamic_reference_shift_m": 0,
+        "measured_speed_mps": 0.9781333333333333,
+        "minimum_drivable_speed_mps": 0.5,
+        "minimum_dynamic_corridor_radius_m": 0.06718750000000001,
+        "mpc_independent_residual_ms": 0.11494399996081484,
+        "mpc_iterations": 3,
+        "mpc_parameter_update_ms": 0.010687999974834383,
+        "mpc_pure_solver_ms": 15.426896999997552,
+        "mpc_reference_setup_ms": 4.641179999907763,
+        "mpc_reference_speed_ms": 0.18969599989304697,
+        "mpc_seed_rollout_ms": 0.037791999943692645,
+        "mpc_solve_ms": 20.679180000001907,
+        "mpc_solver_residual_ms": 0.10387199995420815,
+        "mpc_solver_status": 0,
+        "mpc_static_corridor_ms": 1.3275819998170846,
+        "mpc_tube_setup_ms": 3.0150069998171602,
+        "predicted_path": [
+          [
+            1.1073673897156415,
+            -0.21567536470067333,
+            -0.16593995389634714
+          ],
+          [
+            1.1558238664267741,
+            -0.22283027815454487,
+            -0.15518731379023026
+          ],
+          [
+            1.204623554704997,
+            -0.22937601896351897,
+            -0.14631774978848036
+          ],
+          [
+            1.2539578450684121,
+            -0.2356356341990566,
+            -0.1387500311756201
+          ],
+          [
+            1.3040747151417311,
+            -0.24181568975686,
+            -0.13277085878097403
+          ],
+          [
+            1.3552550982932807,
+            -0.2480869442664125,
+            -0.12868832143704875
+          ],
+          [
+            1.407787462759646,
+            -0.25460133931341145,
+            -0.1266556521847851
+          ],
+          [
+            1.4618819447534608,
+            -0.26148421401941363,
+            -0.12664571949596676
+          ],
+          [
+            1.517611597113778,
+            -0.2688239451315006,
+            -0.1284519099434958
+          ],
+          [
+            1.5749379577554092,
+            -0.2766680202492127,
+            -0.13169310216819574
+          ],
+          [
+            1.6337409820342248,
+            -0.2850187592005697,
+            -0.13583874539862928
+          ],
+          [
+            1.6938420021015284,
+            -0.2938304689719008,
+            -0.1402581793516812
+          ],
+          [
+            1.7550208357083272,
+            -0.3030102573822776,
+            -0.14428792362338608
+          ],
+          [
+            1.8170277975543738,
+            -0.31242357138816546,
+            -0.14730580785532296
+          ],
+          [
+            1.8795926268221534,
+            -0.3219047356294384,
+            -0.14880058393200807
+          ],
+          [
+            1.9424415164269326,
+            -0.33127322306443613,
+            -0.14842736812624047
+          ],
+          [
+            2.005317061470605,
+            -0.3403529196920448,
+            -0.14604081628377064
+          ],
+          [
+            2.0679883306927174,
+            -0.34898959159221515,
+            -0.14170081007420343
+          ],
+          [
+            2.1302549204183503,
+            -0.3570644436011591,
+            -0.13565194818340043
+          ],
+          [
+            2.191948205850354,
+            -0.36450235561405303,
+            -0.12828203282532527
+          ],
+          [
+            2.252932057159658,
+            -0.37127414140794535,
+            -0.12006616200065813
+          ],
+          [
+            2.3131040920278605,
+            -0.3773927339531797,
+            -0.11150215699092447
+          ],
+          [
+            2.3723965444525583,
+            -0.3829034368465216,
+            -0.10304106150256614
+          ],
+          [
+            2.4307747393277834,
+            -0.3878688523571662,
+            -0.0950165199709487
+          ],
+          [
+            2.4882302613000826,
+            -0.3923503182737724,
+            -0.08758299766376329
+          ]
+        ],
+        "proposed_speed_mps": 0.9894004355115478,
+        "proposed_steering_rad": 0.05968106387354581,
+        "reference_speed_table_used": true,
+        "requested_braking_cap_mps": 1.78125,
+        "speed_bound_recovery_active": false,
+        "speed_bound_recovery_stages": 0,
+        "speed_command_mps": 0.9894004355115478,
+        "speed_phase": "driving",
+        "speed_target_mps": 1.2093750000000003,
+        "stage_command_upper_mps": [
+          1.78125,
+          1.78125,
+          1.78125,
+          1.78125,
+          1.78125,
+          1.78125,
+          1.78125,
+          1.78125,
+          1.78125,
+          1.78125,
+          1.78125,
+          1.78125,
+          1.78125,
+          1.78125,
+          1.78125,
+          1.78125,
+          1.78125,
+          1.78125,
+          1.78125,
+          1.78125,
+          1.78125,
+          1.78125,
+          1.78125,
+          1.78125
+        ],
+        "state_dimension": 10,
+        "sweep_initial_servo_rad": 0.04122400513685119,
+        "terminal_coasting": false,
+        "tracking_costs": {
+          "cross_track_weight": 160,
+          "heading_weight": 140,
+          "steering_change_weight": 180,
+          "yaw_rate_weight": 0.5
+        },
+        "warm_start_policy": "cold_controls_rollout_exact_generated_dynamics_from_measurement"
+      },
+      "nominal_coast_reserve_m": 0.46104084558261815,
+      "predicted_body_guard_passed": true,
+      "speed": 0.9894004355115478,
+      "steering": 0.05968106387354581,
+      "valid": true
+    }
+  ],
+  "physical_motion": false
+}

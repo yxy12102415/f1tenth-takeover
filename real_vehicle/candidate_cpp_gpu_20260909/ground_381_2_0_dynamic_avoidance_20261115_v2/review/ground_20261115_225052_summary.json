@@ -1,0 +1,24 @@
+{
+  "time_to_stop_s": 2.731784732000051,
+  "estimated_stop_command_pose": [
+    0.9505596953756964,
+    -0.2648682070140082,
+    -0.3619346567532011
+  ],
+  "estimated_rest_pose": [
+    1.3123642465516299,
+    -0.4207636961413018,
+    -0.29463189763122016
+  ],
+  "max_cross_track_before_stop_m": 0.18107064092097208,
+  "rest_cross_track_m": -0.29294697952163407,
+  "estimated_coast_displacement_m": 0.3939618468606533,
+  "observed_obstacle_bbox": {
+    "xmin": 2.9051301479748486,
+    "xmax": 3.124330490740807,
+    "ymin": -0.09608618935647063,
+    "ymax": 0.21066898130405337
+  },
+  "local_path_snapshot_found": true,
+  "exact_collision_guard_observation_was_logged": false
+}

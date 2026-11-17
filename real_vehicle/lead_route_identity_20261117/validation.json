@@ -1,0 +1,70 @@
+{
+  "passed": true,
+  "mode": "shadow_only",
+  "physical_motion": false,
+  "production_runtime_changed": false,
+  "dimensions_source": "Operator corrected outer tyre dimensions: length 32 cm x width 26 cm",
+  "same_capture_holdouts": [
+    {
+      "view": "front_left",
+      "scan_holdouts": 10,
+      "shape_error_max_m": 0.0055690248757010894,
+      "identity_acquired": true
+    },
+    {
+      "view": "front_right",
+      "scan_holdouts": 10,
+      "shape_error_max_m": 0.015624999412256726,
+      "identity_acquired": true
+    },
+    {
+      "view": "front",
+      "scan_holdouts": 10,
+      "shape_error_max_m": 0.01342076245007431,
+      "identity_acquired": true
+    },
+    {
+      "view": "left_side",
+      "scan_holdouts": 10,
+      "shape_error_max_m": 0.0049155794646199135,
+      "identity_acquired": true
+    },
+    {
+      "view": "rear_left",
+      "scan_holdouts": 10,
+      "shape_error_max_m": 0.00528656981518178,
+      "identity_acquired": true
+    },
+    {
+      "view": "rear_right",
+      "scan_holdouts": 10,
+      "shape_error_max_m": 0.0065711568079207805,
+      "identity_acquired": true
+    },
+    {
+      "view": "rear",
+      "scan_holdouts": 10,
+      "shape_error_max_m": 0.006754923156591169,
+      "identity_acquired": true
+    },
+    {
+      "view": "right_side",
+      "scan_holdouts": 10,
+      "shape_error_max_m": 0.00544631559008911,
+      "identity_acquired": true
+    }
+  ],
+  "independent_recognition_accuracy_measured": false,
+  "changing_ids_preserved": true,
+  "route_speed_last_mps": 0.4999955574672982,
+  "lateral_offset_preserved": true,
+  "recorded_terminal_background_203_static": true,
+  "temporary_loss_does_not_change_identity_or_request_stop": true,
+  "ambiguous_acquisition_rejected": true,
+  "crossing_revokes_route_prior": true,
+  "sources": {
+    "lead_route_tracker.py": "205b660abba722c1e07e3079c456a901d8fd0766e36c1f58bb5292bb0c978b13",
+    "config.json": "613f29d77a1499bce542857ada603ad9831dbed2cf6b8ab724f87cce791188bb",
+    "test_lead_route_tracker.py": "4fa29c7a5724d0c7af45f1adee42c6d2225f02cd3ba42d0c38f7cc139be0d8c7"
+  }
+}

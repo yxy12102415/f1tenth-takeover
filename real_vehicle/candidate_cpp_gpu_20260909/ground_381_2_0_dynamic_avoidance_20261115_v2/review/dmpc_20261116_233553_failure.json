@@ -1,0 +1,43 @@
+{
+  "first_failure_mono": 384.697260892,
+  "reason": "joint_mpc_nonlinear_infeasible eq=0.009093 ineq=0.000000",
+  "pose": {
+    "received_mono": 384.706301959,
+    "stamp": 1794890195.2796488,
+    "frame": "map",
+    "x": 1.2615714183758033,
+    "y": -0.24078451813045643,
+    "yaw": -0.11949559712496374
+  },
+  "tracker_diagnostics": null,
+  "timing": {
+    "candidate_score_terms": {
+      "arrival_time_policy": "shared_controller_geometry_speed_limits",
+      "continuity": 0.15752352791811014,
+      "corridor_extra_reserve_m": 0.02,
+      "corridor_required_edge_m": -0.08234901861207342,
+      "curvature_jerk": 183.5010622830439,
+      "dense_maximum_curvature_1pm": 0.6920528902217143,
+      "departure_s": 0.04835826148662137,
+      "first_blocking_s": 1.9983582614866213,
+      "generic_held_path": true,
+      "generic_required_body_gap_m": 0.08,
+      "obstacle": 0.2020849342555394,
+      "planner_geometry": "obstacle_relative_envelope_seed",
+      "reference": 0.10234901861207342,
+      "return_start_s": 3.2474051548531877,
+      "search_budget_exhausted": false,
+      "wall": 0
+    },
+    "reference_speed_preparation_ms": 2.4525299999709205,
+    "runtime_timing": {
+      "drive_publish_ms": 2.5443700000096214,
+      "publish_mono": 384.616196336,
+      "sequence": 2023,
+      "tick_start_mono": 384.602878908
+    }
+  },
+  "source_log": "run_logs/20261116_233553-closed-frenet-ground-attempt",
+  "physical_completed": false,
+  "final_erpm": 0.0
+}

@@ -1,0 +1,291 @@
+{
+  "passed": true,
+  "physical_motion": false,
+  "unit": {
+    "passed": true,
+    "physical_motion": false,
+    "grid_cases": 96,
+    "recorded_drop_feasible": true,
+    "floor_viability_kept": true,
+    "absolute_max_kept": true,
+    "unrecoverable_states_rejected": true
+  },
+  "recorded_state_replay": {
+    "diagnostics": {
+      "absolute_command_cap_mps": 2,
+      "acceleration_command_mps2": -0.1575709710916706,
+      "coast_cut_distance_m": 1.1074752,
+      "command_headroom_mps": 0.15,
+      "compute_consecutive_soft_misses": 0,
+      "compute_hard_deadline_ms": 200,
+      "compute_max_consecutive_soft_misses": 3,
+      "compute_soft_budget_missed": false,
+      "compute_soft_budget_ms": 45,
+      "control_remaining_m": 4.994349242139891,
+      "controller_compute_ms": 24.069673999292718,
+      "controller_thread_cpu_ms": 23.784832,
+      "controller_wait_wall_ms": 0.2841700000329218,
+      "cross_track_error_m": -0.0033576853796226137,
+      "dynamic_corridor_enabled": true,
+      "effective_command_cap_mps": 2,
+      "equality_residual": 1.4589784001040051e-05,
+      "geometry_setup_ms": 0.06623999979638029,
+      "heading_error_rad": -0.09349526272473163,
+      "independent_dynamics_defect": 3.795232213221755e-08,
+      "independent_lateral_violation": 0,
+      "inequality_residual": 0,
+      "initial_state": [
+        0.9367574243390593,
+        -0.15551232367443257,
+        -0.29835348489601704,
+        1.1232,
+        0,
+        -0.33772513005688304,
+        0.04242902877010183,
+        -0.033162208363358744,
+        1.1065302685761107,
+        -0.06289811239137322
+      ],
+      "lateral_nominal_limit_mps2": 1.2,
+      "lateral_recovery_active": false,
+      "lateral_recovery_hard_cap_mps2": 2,
+      "lateral_stage_limits_mps2": [
+        1.2,
+        1.2,
+        1.2,
+        1.2,
+        1.2,
+        1.2,
+        1.2,
+        1.2,
+        1.2,
+        1.2,
+        1.2,
+        1.2,
+        1.2,
+        1.2,
+        1.2,
+        1.2,
+        1.2,
+        1.2,
+        1.2,
+        1.2,
+        1.2,
+        1.2,
+        1.2,
+        1.2
+      ],
+      "longitudinal_controller": "joint_dynamic_mpc",
+      "max_predicted_lateral_load_mps2": 0.42716368784198705,
+      "maximum_dynamic_reference_shift_m": 0,
+      "measured_speed_mps": 1.1232,
+      "minimum_drivable_speed_mps": 0.5,
+      "minimum_dynamic_corridor_radius_m": 0.2,
+      "mpc_independent_residual_ms": 0.18598499900690513,
+      "mpc_iterations": 4,
+      "mpc_parameter_update_ms": 0.006432002010114957,
+      "mpc_pure_solver_ms": 18.512890002057247,
+      "mpc_reference_setup_ms": 1.8481340002836077,
+      "mpc_reference_speed_ms": 0.16112100183818256,
+      "mpc_seed_rollout_ms": 0.033119999898190144,
+      "mpc_solve_ms": 21.19846499954292,
+      "mpc_solver_residual_ms": 0.2631679990372504,
+      "mpc_solver_status": 0,
+      "mpc_static_corridor_ms": 0.8004820010683034,
+      "mpc_tube_setup_ms": 0.8096350029518362,
+      "predicted_path": [
+        [
+          0.9367574243390593,
+          -0.15551232367443257,
+          -0.29835348489601704
+        ],
+        [
+          0.9899672374377463,
+          -0.17300534660909322,
+          -0.31032296093412276
+        ],
+        [
+          1.0426913079237021,
+          -0.19079876710112606,
+          -0.317744194668753
+        ],
+        [
+          1.094978343284391,
+          -0.20827321887927008,
+          -0.32002552974978543
+        ],
+        [
+          1.1467771570666592,
+          -0.22493776515284386,
+          -0.31654897948097116
+        ],
+        [
+          1.1979689893547152,
+          -0.24033660736106782,
+          -0.30687171606976166
+        ],
+        [
+          1.2483837117234935,
+          -0.2541184534430796,
+          -0.29132643057541896
+        ],
+        [
+          1.2978179846290148,
+          -0.2661451814974765,
+          -0.2714596260305664
+        ],
+        [
+          1.3460580105608737,
+          -0.2764782422805529,
+          -0.24942472339554989
+        ],
+        [
+          1.392929272342996,
+          -0.2853271339563683,
+          -0.22736391988282936
+        ],
+        [
+          1.4383505102494403,
+          -0.29298253563673143,
+          -0.20697121790276016
+        ],
+        [
+          1.4823404084898675,
+          -0.29976613887862674,
+          -0.1894379920333275
+        ],
+        [
+          1.5250019521849643,
+          -0.3059805687581171,
+          -0.17540928677418258
+        ],
+        [
+          1.5664950135294788,
+          -0.3118826918202144,
+          -0.16507442079589993
+        ],
+        [
+          1.6070084873404107,
+          -0.31767516038356514,
+          -0.158297053585292
+        ],
+        [
+          1.6467376692889126,
+          -0.3235091027061975,
+          -0.15473723851617907
+        ],
+        [
+          1.685868590333123,
+          -0.3294918716331102,
+          -0.15394704823643598
+        ],
+        [
+          1.7245687948421053,
+          -0.33569595357851245,
+          -0.1554378751133351
+        ],
+        [
+          1.762983116455371,
+          -0.34216713878519756,
+          -0.15872471204087021
+        ],
+        [
+          1.801232824682696,
+          -0.34893134454003155,
+          -0.1633541707502203
+        ],
+        [
+          1.8394167062912998,
+          -0.35600011727543046,
+          -0.16892183209118963
+        ],
+        [
+          1.8776129929456598,
+          -0.3633751176009968,
+          -0.17508317491500072
+        ],
+        [
+          1.9158814487021893,
+          -0.3710520728394238,
+          -0.18156184522908284
+        ],
+        [
+          1.9542653686624742,
+          -0.3790248448397835,
+          -0.18815898366982264
+        ],
+        [
+          1.9927937908967996,
+          -0.3872902360176026,
+          -0.1947657831811976
+        ]
+      ],
+      "proposed_speed_mps": 1.0986517200215271,
+      "proposed_steering_rad": 0.016837791629096467,
+      "reference_speed_table_used": true,
+      "requested_braking_cap_mps": 0.99375,
+      "speed_bound_recovery_active": true,
+      "speed_bound_recovery_stages": 4,
+      "speed_command_mps": 1.0986517200215271,
+      "speed_phase": "driving",
+      "speed_target_mps": 0.79375,
+      "stage_command_upper_mps": [
+        1.0986527200146157,
+        1.0832741714531207,
+        1.0603956228916258,
+        1.030017074330131,
+        0.99375,
+        0.99375,
+        0.99375,
+        0.99375,
+        0.99375,
+        0.99375,
+        0.99375,
+        0.99375,
+        0.99375,
+        0.99375,
+        0.99375,
+        0.99375,
+        0.99375,
+        0.99375,
+        0.99375,
+        0.99375,
+        0.99375,
+        0.99375,
+        0.99375,
+        0.99375
+      ],
+      "state_dimension": 10,
+      "sweep_initial_servo_rad": -0.06289811239137322,
+      "terminal_coasting": false,
+      "tracking_costs": {
+        "cross_track_weight": 160,
+        "heading_weight": 140,
+        "steering_change_weight": 180,
+        "yaw_rate_weight": 0.5
+      },
+      "warm_start_policy": "cold_controls_rollout_exact_generated_dynamics_from_measurement"
+    },
+    "nominal_coast_reserve_m": 0.03902552013709064,
+    "predicted_body_guard_passed": true,
+    "speed": 1.0986517200215271,
+    "steering": 0.016837791629096467,
+    "valid": true
+  },
+  "unsafe_coast_still_rejected": {
+    "minimum_map_reserve_m": null,
+    "reason": "generic_emergency_coast_map_conflict",
+    "valid": false
+  },
+  "scope": "Exact recorded state and local path; cold solver seed; available planner observation, not exact unrecorded latest observation at rejection. Not full identical-input field replay.",
+  "absolute_max_command_mps": 2.0,
+  "running_floor_mps": 0.6,
+  "residual_tolerance": 0.001,
+  "hard_deadline_ms": 200.0,
+  "source_sha256": {
+    "src/cpp_frenet/speed_transition.hpp": "357ab2cb56ce9c39e4fa115bbcf4aba5a129ced9f95f49bb355bba03cb0d8422",
+    "src/cpp_frenet/joint_control.hpp": "ea6005eb68b5f6feb4fcc8371aeff9cfa72cab33baa9d7acce9292e1cacfe9f1",
+    "src/cpp_frenet/node.cpp": "06c8254ae27d344948c224475bfc3b00d71c0c66155a7d2bc0866577d3edfc3c",
+    "src/cpp_frenet/generic_avoidance.hpp": "37c397aaa1e86d2ef28fb6517a7dcf7a99e522e6e229fb92e57f23f9c65afe6b"
+  }
+}

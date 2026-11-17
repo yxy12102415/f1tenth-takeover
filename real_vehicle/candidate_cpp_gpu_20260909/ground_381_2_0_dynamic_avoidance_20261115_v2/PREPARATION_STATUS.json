@@ -1,0 +1,84 @@
+{
+  "software_status": "fixed_world_static_pid_acceptance_passed",
+  "native_tests_passed": 69,
+  "ros_cases_passed": 8,
+  "controller_contracts_passed": [
+    "pid",
+    "dynamic_mpc"
+  ],
+  "physical_test_started": false,
+  "physical_commissioned": false,
+  "first_physical_scope": "stationary_obstacle_only",
+  "command_cap_mps": 0.8,
+  "acceleration_limit_mps2": 2.0,
+  "motion_floor_mps": 0.5,
+  "operator_reset_confirmed_after_reboot": true,
+  "qualification": "reports/fixed_world_pid_20261115/QUALIFICATION.json",
+  "build_provenance": "build_provenance.json",
+  "physical_result": null,
+  "live_preflight_started": true,
+  "physical_motion_attempted": true,
+  "software_qualification": "reports/adaptive_corridor_20261113/QUALIFICATION.json",
+  "pid_admission_check": "run_logs/20261111_153205-closed-frenet-offline-window/result.json",
+  "last_zero_passed": false,
+  "live_scan_replay_passed": true,
+  "live_scan_replay_max_occupancies": 22,
+  "physical_ready": false,
+  "tmux_session": "generic_pid_381_held_fix_20261111",
+  "last_motion_attempt": "20261112_170756-closed-frenet-ground-attempt",
+  "last_motion_route_completed": false,
+  "physical_zero_current_fingerprint": false,
+  "next_required": "Matching offline-window evidence, current live zero qualification and one static PID run",
+  "start_side_recheck": "80 fresh scans: 0 returns in original close-left region",
+  "operator_reports_no_close_left_object": true,
+  "fresh_scan_replay_note": "80 raw frames replayed with prior PF estimate: 17 valid, final frame valid, last20 not continuously valid; requires live localization and continuous readiness before admission",
+  "last_motion_max_erpm": 8454.0,
+  "isolated_vesc_diagnostic": "60 seconds, no actuation, raw max source gap 25.31ms, bridge max publication gap 28.37ms",
+  "verified_l1_hold_seconds": 1.942548746,
+  "compact_profile": {
+    "speed_cap_mps": 0.8,
+    "max_lateral_offset_m": 0.58,
+    "return_release_margin_m": 0.1,
+    "hard_body_gap_m": 0.08,
+    "emergency_map_coast_guard": true,
+    "tracker_caps_mps": {
+      "pid": 0.8,
+      "dynamic_mpc": 0.7
+    },
+    "seed_reserve_m": 0.07
+  },
+  "compact_qualified_trackers": [
+    "pid"
+  ],
+  "compact_mpc_status": "current adaptive-path static/release/scan-timeout software acceptance passed",
+  "observed_post_stop_wheel_distance_m": 1.017,
+  "tracker_caps_mps": {
+    "pid": 0.8,
+    "dynamic_mpc": 0.7
+  },
+  "operator_reset_confirmed_for_current_build": true,
+  "current_offline_window_cache": {
+    "pid": {
+      "result": "run_logs/20261113_131213-closed-frenet-offline-window/result.json",
+      "fingerprint": "47e34fa04b9a9b2474aba7ba4b312b041cf4a328b03de53999c61f7fe56178c5",
+      "passed": true,
+      "physical_motion": false
+    },
+    "dynamic_mpc": {
+      "result": "run_logs/20261113_131250-closed-frenet-offline-window/result.json",
+      "fingerprint": "c146a4e932f864e86abbbc4c56876f5b6939eeffd2e6e6c4a074e446f929affa",
+      "passed": true,
+      "physical_motion": false
+    }
+  },
+  "requested_max_speed_mps": 2.0,
+  "requested_running_floor_mps": 0.5,
+  "qualified_motion_trackers": [
+    "pid"
+  ],
+  "previous_static_qualification": "reports/speed2_overtake_20261113/previous_static_qualification.json",
+  "live_front_position_summary": "/home/f1tenth/f1tenth_real_migration_ws_20260829/candidate_cpp_gpu_20260909/ground_381_2_0_generic_avoidance_20261111_v1/reports/speed2_overtake_20261113/live_position/position_summary.json",
+  "continuous_nominal_candidate": "/home/f1tenth/f1tenth_real_migration_ws_20260829/candidate_cpp_gpu_20260909/ground_381_2_0_generic_avoidance_20261111_v1/reports/speed2_overtake_20261113/nominal_geometry_screen/candidate_nominal_only.csv",
+  "preparation_result": "reports/speed2_overtake_20261113/preparation_result.json",
+  "non_map_fixes_evidence": "reports/independent_fixes_20261115/summary.json"
+}

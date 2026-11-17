@@ -1,0 +1,26 @@
+[
+  {
+    "attempt": 1,
+    "valid": false,
+    "reason": "generic_search_budget_exhausted",
+    "elapsed_ms": 333.4640590001072
+  },
+  {
+    "attempt": 2,
+    "valid": true,
+    "reason": "generic_validated",
+    "elapsed_ms": 189.28026600042358
+  },
+  {
+    "attempt": 3,
+    "valid": true,
+    "reason": "generic_validated",
+    "elapsed_ms": 78.00370099903375
+  },
+  {
+    "attempt": 4,
+    "valid": true,
+    "reason": "generic_validated",
+    "elapsed_ms": 78.35692899971036
+  }
+]

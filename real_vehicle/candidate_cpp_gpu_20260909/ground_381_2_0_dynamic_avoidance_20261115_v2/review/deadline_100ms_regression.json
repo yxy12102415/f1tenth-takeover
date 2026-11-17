@@ -1,0 +1,11 @@
+{
+  "passed": true,
+  "physical_motion": false,
+  "hard_deadline_ms": 100.0,
+  "soft_budget_ms": 45.0,
+  "max_consecutive_soft_misses": 3,
+  "recorded_81ms_accepted": true,
+  "over_100ms_rejected": true,
+  "source_sha256": "480cdd1d4d5afa4df2205c8146105e73c8aad175d30a4c93717036bc418e5d96",
+  "test_output": "Recorded jitter accepted; sustained/hard overruns rejected; reset and boundaries passed"
+}

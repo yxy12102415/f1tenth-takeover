@@ -1,0 +1,17 @@
+{
+  "captured_views": [
+    "rear",
+    "rear_left",
+    "left_side",
+    "front_left",
+    "front",
+    "front_right",
+    "right_side",
+    "rear_right"
+  ],
+  "background": "background",
+  "source_data_retained": true,
+  "summary": "inspection/summary.json",
+  "reference_templates_production_approved": false,
+  "runtime_changed": false
+}

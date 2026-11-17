@@ -1,0 +1,312 @@
+{
+  "physical_motion": false,
+  "scope": "Same stationary-opponent synthetic plant; before/after runtime samples are not paired identical trajectories. The coast-preview microbenchmark uses paired fixed inputs.",
+  "preview": {
+    "passed": true,
+    "physical_motion": false,
+    "exact_cap_parity_cases": 60,
+    "map_boundary_cases": 3,
+    "old_median_ms": 16.292560500232867,
+    "new_median_ms": 2.6907505000508536,
+    "speedup": 6.055024611135424,
+    "timings": [
+      {
+        "old_ms": 20.046503000230587,
+        "new_ms": 5.580869999903371,
+        "response": {
+          "cap": 1.6937499999999999,
+          "valid": true
+        }
+      },
+      {
+        "old_ms": 17.195297999933246,
+        "new_ms": 3.7368050002442033,
+        "response": {
+          "cap": 1.51875,
+          "valid": true
+        }
+      },
+      {
+        "old_ms": 15.97752700035926,
+        "new_ms": 1.664187999722344,
+        "response": {
+          "cap": 1.4312500000000001,
+          "valid": true
+        }
+      },
+      {
+        "old_ms": 24.777648000053887,
+        "new_ms": 2.1686850000151026,
+        "response": {
+          "cap": 1.9125,
+          "valid": true
+        }
+      },
+      {
+        "old_ms": 15.550469000118028,
+        "new_ms": 5.307419000018854,
+        "response": {
+          "cap": 1.65,
+          "valid": true
+        }
+      },
+      {
+        "old_ms": 15.795661000083783,
+        "new_ms": 1.9665979998535477,
+        "response": {
+          "cap": 1.4312500000000001,
+          "valid": true
+        }
+      },
+      {
+        "old_ms": 18.07378900002732,
+        "new_ms": 1.6157049999492301,
+        "response": {
+          "cap": 1.51875,
+          "valid": true
+        }
+      },
+      {
+        "old_ms": 14.86369200029003,
+        "new_ms": 4.320311999890691,
+        "response": {
+          "cap": 1.25625,
+          "valid": true
+        }
+      },
+      {
+        "old_ms": 12.602301000242733,
+        "new_ms": 2.6030029998764803,
+        "response": {
+          "cap": 1.16875,
+          "valid": true
+        }
+      },
+      {
+        "old_ms": 17.32368300008602,
+        "new_ms": 3.776548999667284,
+        "response": {
+          "cap": 1.5625,
+          "valid": true
+        }
+      },
+      {
+        "old_ms": 13.812679000238859,
+        "new_ms": 2.778498000225227,
+        "response": {
+          "cap": 1.475,
+          "valid": true
+        }
+      },
+      {
+        "old_ms": 16.607594000106474,
+        "new_ms": 1.7897910001920536,
+        "response": {
+          "cap": 1.51875,
+          "valid": true
+        }
+      }
+    ],
+    "scope": "Exact speed-cap parity and paired captured-state microbenchmark; conservative EDT certificate then unchanged exact body checks; final emergency guard unchanged."
+  },
+  "baseline_measured_primary_guard": {
+    "n": 136,
+    "median": 25.4717420000361,
+    "p95": 48.55940000015835,
+    "maximum": 99.86888899993573
+  },
+  "controllers": {
+    "pid": {
+      "controller_compute_ms": {
+        "n": 139,
+        "median": 2.4821130000418634,
+        "p95": 3.151362000039626,
+        "maximum": 3.847745999905783
+      },
+      "controller_and_dynamic_guard_ms": {
+        "n": 139,
+        "median": 5.198210999992625,
+        "p95": 9.923525999965932,
+        "maximum": 13.14244000002418
+      },
+      "control_to_emit_ms": {
+        "n": 139,
+        "median": 6.128547999992406,
+        "p95": 11.15869400007341,
+        "maximum": 14.67988100000639
+      },
+      "path_speed_preview_ms": {
+        "n": 139,
+        "median": 0.02928000003521447,
+        "p95": 0.07577600001695828,
+        "maximum": 0.10883199990985304
+      },
+      "state_coast_cap_ms": {
+        "n": 139,
+        "median": 1.1839050000617135,
+        "p95": 5.599939000035192,
+        "maximum": 7.996515999934672
+      },
+      "speed_policy_ms": {
+        "n": 139,
+        "median": 1.2166719999413544,
+        "p95": 5.645475000051192,
+        "maximum": 8.084772999950474
+      },
+      "primary_prediction_guard_ms": {
+        "n": 139,
+        "median": 0.37401600002340274,
+        "p95": 0.5860489999349738,
+        "maximum": 1.1485769999808326
+      },
+      "emergency_coast_guard_ms": {
+        "n": 139,
+        "median": 0.8293449999428049,
+        "p95": 1.2865609999153094,
+        "maximum": 1.6490250000060769
+      },
+      "newest_prediction_guard_ms": {
+        "n": 139,
+        "median": 0.3359679999448417,
+        "p95": 0.5927359999304826,
+        "maximum": 1.0440649999736706
+      },
+      "control_to_drive_publish_ms": {
+        "n": 139,
+        "median": 6.22505999990608,
+        "p95": 11.376423000001523,
+        "maximum": 14.788969000051111
+      }
+    },
+    "dynamic_mpc": {
+      "controller_compute_ms": {
+        "n": 141,
+        "median": 6.129028000032122,
+        "p95": 11.298597999939375,
+        "maximum": 17.61380300001747
+      },
+      "controller_and_dynamic_guard_ms": {
+        "n": 141,
+        "median": 9.49021399992489,
+        "p95": 18.412554999940767,
+        "maximum": 26.513551999983065
+      },
+      "control_to_emit_ms": {
+        "n": 141,
+        "median": 10.881607000101212,
+        "p95": 20.116139999913685,
+        "maximum": 28.478800999891973
+      },
+      "mpc_pure_solver_ms": {
+        "n": 140,
+        "median": 3.4948180000355933,
+        "p95": 8.675717000073746,
+        "maximum": 14.306760999943435
+      },
+      "mpc_reference_setup_ms": {
+        "n": 140,
+        "median": 1.17433599996275,
+        "p95": 4.25424299999122,
+        "maximum": 5.554050999990068
+      },
+      "mpc_tube_setup_ms": {
+        "n": 140,
+        "median": 0.6314570002814435,
+        "p95": 3.4544019996474162,
+        "maximum": 4.422145999797067
+      },
+      "mpc_reference_speed_ms": {
+        "n": 140,
+        "median": 0.07020900022780552,
+        "p95": 0.15030499992008117,
+        "maximum": 1.274049000130617
+      },
+      "mpc_static_corridor_ms": {
+        "n": 140,
+        "median": 0.3846719998819026,
+        "p95": 0.647713000148542,
+        "maximum": 0.9051529999624108
+      },
+      "mpc_parameter_update_ms": {
+        "n": 140,
+        "median": 0.008223999884648947,
+        "p95": 0.03481600015220465,
+        "maximum": 0.056287999996129656
+      },
+      "mpc_seed_rollout_ms": {
+        "n": 140,
+        "median": 0.024384000084864965,
+        "p95": 0.049119999971480865,
+        "maximum": 0.30505600000196864
+      },
+      "mpc_solver_residual_ms": {
+        "n": 140,
+        "median": 0.028703999987556017,
+        "p95": 0.0995200000488694,
+        "maximum": 0.19536100001005252
+      },
+      "mpc_independent_residual_ms": {
+        "n": 140,
+        "median": 0.03494399993542174,
+        "p95": 0.09312000008776522,
+        "maximum": 0.1720320000231368
+      },
+      "observation_preparation_ms": {
+        "n": 141,
+        "median": 0.06352000002607383,
+        "p95": 0.10767999992822297,
+        "maximum": 0.2539519999800177
+      },
+      "path_speed_preview_ms": {
+        "n": 141,
+        "median": 0.034816000038517814,
+        "p95": 0.08985600004507432,
+        "maximum": 0.22220800008199149
+      },
+      "state_coast_cap_ms": {
+        "n": 141,
+        "median": 1.2540809999563862,
+        "p95": 6.212996000044768,
+        "maximum": 7.702148000021225
+      },
+      "speed_policy_ms": {
+        "n": 141,
+        "median": 1.2949450000405704,
+        "p95": 6.263459000024341,
+        "maximum": 7.752003999939916
+      },
+      "primary_prediction_guard_ms": {
+        "n": 141,
+        "median": 0.5831039999293353,
+        "p95": 0.9770240000079866,
+        "maximum": 4.555009999990034
+      },
+      "emergency_coast_guard_ms": {
+        "n": 141,
+        "median": 0.8712650000006761,
+        "p95": 1.5716809999730685,
+        "maximum": 2.0029769999609925
+      },
+      "newest_prediction_guard_ms": {
+        "n": 141,
+        "median": 0.5677120000200375,
+        "p95": 0.8344330000227274,
+        "maximum": 1.0677450000002864
+      },
+      "control_to_drive_publish_ms": {
+        "n": 141,
+        "median": 11.060519000011482,
+        "p95": 20.260235999899123,
+        "maximum": 28.623728999946252
+      }
+    }
+  },
+  "passed": true,
+  "binary_sha256": "7ddddc772c67cbc99d71287bc1379b6dd1375a489c66c5de0e2f5c4d0b6bf28a",
+  "measurement_notes": [
+    "mpc_tube_setup_ms is a subset of mpc_reference_setup_ms",
+    "path_speed_preview_ms and state_coast_cap_ms are subsets of speed_policy_ms",
+    "controller_and_dynamic_guard_ms keeps its legacy scope for before/after comparison",
+    "control_to_emit_ms includes newest-observation revalidation; actual DDS publish timing is separate"
+  ]
+}

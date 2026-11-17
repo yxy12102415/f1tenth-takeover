@@ -1,0 +1,32 @@
+{
+  "source_unchanged_during_build": true,
+  "source_sha256": {
+    "src/cpp_frenet/CMakeLists.txt": "95b8b3bc87185465beaf67bb4114851512f83090735bfee903700ce30dc3c472",
+    "src/cpp_frenet/compact_overtake.hpp": "c4bda3d5a58a64beb4955715ce6c13954c618fe170c44da7b0e601d7960b658b",
+    "src/cpp_frenet/control_timing.hpp": "1bdbe6809a0eed79647d26eefe92c9fc060b0f09534e5f647f44363f570ac17c",
+    "src/cpp_frenet/core.hpp": "37a630d9700e05f2abcd4e941ceca58539884cd9cd345124c8891f95b4aaaa3e",
+    "src/cpp_frenet/corridor.hpp": "d5bb62fe4b9203cc3198440907b216e3a8cadb538b4da78bc62f5314190afab1",
+    "src/cpp_frenet/generic_avoidance.hpp": "37c397aaa1e86d2ef28fb6517a7dcf7a99e522e6e229fb92e57f23f9c65afe6b",
+    "src/cpp_frenet/generic_probe.cpp": "2133134afa677505b99859c3e80f8b1e30744df03eeb3ae222d3f8c174796a65",
+    "src/cpp_frenet/joint_control.hpp": "ea6005eb68b5f6feb4fcc8371aeff9cfa72cab33baa9d7acce9292e1cacfe9f1",
+    "src/cpp_frenet/lead_identity.hpp": "3790588e041468f18106a8747f0fb5ae9ec85ed768b4af14aac0c19219dd0565",
+    "src/cpp_frenet/node.cpp": "06c8254ae27d344948c224475bfc3b00d71c0c66155a7d2bc0866577d3edfc3c",
+    "src/cpp_frenet/package.xml": "eba4800a34dde6012f0a8b3b3d085b78d9104a4ed5617f85cb4f26a947be2d4d",
+    "src/cpp_frenet/perception.hpp": "514bd49409bd88d4df6f9c51a8dc4ec68b6413a1393973c62f00d8a9175c32a9",
+    "src/cpp_frenet/prearm_path_refresh.hpp": "6b8aa6e730cb8bc6b6313e65a03fd4306aebd474478f550ba6b1f91209e715fe",
+    "src/cpp_frenet/probe.cpp": "938188c8ec7e67d5e916e0aa74d9e3fdde9db31142d9f6c04cb8a160708f2c10",
+    "src/cpp_frenet/speed_geometry.hpp": "f685f3f3e6b36735ee9d6d9a2f228e7eb4664ae86ddad12a0aa8218829c3fe98",
+    "src/cpp_frenet/speed_transition.hpp": "357ab2cb56ce9c39e4fa115bbcf4aba5a129ced9f95f49bb355bba03cb0d8422",
+    "src/cpp_frenet/test_control_timing.cpp": "f2f2864591072938768282d9027e70a19ded294ddb7a82511239a1b2e78ad7f8",
+    "src/cpp_frenet/test_delay_inject.c": "f0d224dd518d8d7005a14ab22a11700dc2b15f0c3b0db965ea6d8e5e47bc71cc",
+    "src/cpp_frenet/test_dynamic_memory.cpp": "e4f7e6c4d23827fac7d69bd25ceccc29a5c0c6d08cfcdcfa8fff7782549bc6f7",
+    "src/cpp_frenet/tracked_occupancy.hpp": "7d03141c454bd5db27ef0d95ea1c6799474024e842949c37787f9c8c5889b06b",
+    "src/cpp_frenet/tracker.hpp": "3765fd72f1771e3d48ef88a09d23b19dd713fcdfc37e01da8a5af6192050b4be"
+  },
+  "binaries": {
+    "cpp_frenet_planner": "7ddddc772c67cbc99d71287bc1379b6dd1375a489c66c5de0e2f5c4d0b6bf28a",
+    "cpp_frenet_controller": "7ddddc772c67cbc99d71287bc1379b6dd1375a489c66c5de0e2f5c4d0b6bf28a"
+  },
+  "build_log": "/home/f1tenth/f1tenth_real_migration_ws_20260829/candidate_cpp_gpu_20260909/ground_381_2_0_dynamic_avoidance_20261115_v2/reports/compact_fix/build.log",
+  "physical_motion": false
+}

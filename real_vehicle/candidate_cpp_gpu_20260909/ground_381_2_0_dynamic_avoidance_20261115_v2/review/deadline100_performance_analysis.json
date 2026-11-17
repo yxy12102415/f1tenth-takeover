@@ -1,0 +1,48 @@
+{
+  "physical_motion": false,
+  "measured_samples": 136,
+  "metrics": {
+    "controller_and_dynamic_guard_ms": {
+      "median": 25.4717420000361,
+      "p95": 48.55940000015835,
+      "maximum": 99.86888899993573
+    },
+    "controller_compute_ms": {
+      "median": 7.970683999928951,
+      "p95": 23.31329700018614,
+      "maximum": 61.740918000168676
+    },
+    "controller_thread_cpu_ms": {
+      "median": 7.895008,
+      "p95": 23.078624,
+      "maximum": 61.017728000000005
+    },
+    "controller_wait_wall_ms": {
+      "median": 0.10608600017337783,
+      "p95": 0.4080139998888822,
+      "maximum": 1.6913399999225684
+    }
+  },
+  "peak": {
+    "controller_and_dynamic_guard_ms": 99.86888899993573,
+    "controller_compute_ms": 61.740918000168676,
+    "controller_thread_cpu_ms": 61.017728000000005,
+    "controller_wait_wall_ms": 0.7227740000205624,
+    "mpc_iterations": 3,
+    "equality_residual": 2.5010699488070554e-05
+  },
+  "outside_joint_compute_ms": 38.12797099976706,
+  "measurement_limitation": "mpc_solve_ms includes setup/tube/reference construction, not pure solver time; controller_and_dynamic_guard_ms ends before newest-observation revalidation and publishing. Need finer and end-to-end timing before attributing individual guard costs.",
+  "primary_references": [
+    "https://github.com/ForzaETH/race_stack/blob/ros2-humble/controller/README.md",
+    "https://docs.acados.org/features/",
+    "https://arxiv.org/abs/2403.07101",
+    "https://github.com/alexliniger/MPCC"
+  ],
+  "proposed_next_steps": [
+    "stage profiling and consistent end-to-end timing",
+    "reuse invariant geometry and consolidate redundant checks while validating freshest observations",
+    "evaluate preparation/feedback RTI split and fewer validated iterations"
+  ],
+  "new_architectural_changes_implemented": false
+}

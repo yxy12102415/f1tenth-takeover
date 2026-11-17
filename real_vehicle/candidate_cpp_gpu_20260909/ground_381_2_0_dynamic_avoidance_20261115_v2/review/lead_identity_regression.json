@@ -1,0 +1,109 @@
+{
+  "passed": true,
+  "physical_motion": false,
+  "scope": "C++ association + same-capture raw-scan holdouts, synthetic motion/ambiguity/ID changes, recorded observation reclassification. Not independent recognition accuracy or full moving-overtake qualification.",
+  "holdouts": [
+    {
+      "view": "rear",
+      "associated": true,
+      "maximum_shape_error_m": 0.0066577875641832835
+    },
+    {
+      "view": "rear_left",
+      "associated": true,
+      "maximum_shape_error_m": 0.005286569815181656
+    },
+    {
+      "view": "left_side",
+      "associated": true,
+      "maximum_shape_error_m": 0.004915579464619836
+    },
+    {
+      "view": "front_left",
+      "associated": true,
+      "maximum_shape_error_m": 0.005569024875701093
+    },
+    {
+      "view": "front",
+      "associated": true,
+      "maximum_shape_error_m": 0.013420762450074664
+    },
+    {
+      "view": "front_right",
+      "associated": true,
+      "maximum_shape_error_m": 0.01562499941225673
+    },
+    {
+      "view": "right_side",
+      "associated": true,
+      "maximum_shape_error_m": 0.005446315590089129
+    },
+    {
+      "view": "rear_right",
+      "associated": true,
+      "maximum_shape_error_m": 0.006571156807920794
+    }
+  ],
+  "changing_ids_preserved": true,
+  "route_0_5mps_preserves_measured_d": true,
+  "ambiguous_acquisition_rejected": true,
+  "temporary_identity_loss_no_direct_stop": true,
+  "crossing_revokes_route_prior": true,
+  "all_geometry_retained": true,
+  "terminal_return_203_static": true,
+  "lead_role_projection_cache_verified": true,
+  "field": {
+    "observations": 257,
+    "ever_associated": true,
+    "final_identity": {
+      "age_s": 0.4011232852935791,
+      "d_m": 0.4232178548780463,
+      "enabled": true,
+      "identity_loss_requests_stop": false,
+      "lateral_speed_mps": -0.21614758750532775,
+      "lead_length_m": 0.32,
+      "lead_width_m": 0.26,
+      "locked": true,
+      "reason": "temporarily_unobserved",
+      "route_aligned": false,
+      "s_m": 2.7624870488756366,
+      "speed_mps": 0.06283094781616624
+    },
+    "classified_terminal_object": {
+      "clear_scans": 0,
+      "fixed_world": true,
+      "has_moved": false,
+      "hits": 16,
+      "id": 203,
+      "map_supported": false,
+      "memory_state": "predicted_hold",
+      "motion_confirmation_scans": 0,
+      "motion_policy": "support_translation_300ms_three_scans_with_static_latch",
+      "observation_age_s": 0.10051321983337402,
+      "original_velocity": [
+        -0.0032827900412392033,
+        -0.41315083476872
+      ],
+      "semantic_role": "declared_static_background",
+      "sensor_x": 4.685994538795904,
+      "sensor_y": 0.34299673470505965,
+      "stamp": 1794893234.8478856,
+      "stationary_history": true,
+      "visibility_hazard": false,
+      "vx": 0,
+      "vy": 0,
+      "xmax": 5.267654363123718,
+      "xmin": 5.106924262335873,
+      "ymax": 2.893401293005268,
+      "ymin": 2.100082542489742
+    }
+  },
+  "source_sha256": {
+    "src/cpp_frenet/lead_identity.hpp": "3790588e041468f18106a8747f0fb5ae9ec85ed768b4af14aac0c19219dd0565",
+    "src/cpp_frenet/node.cpp": "06c8254ae27d344948c224475bfc3b00d71c0c66155a7d2bc0866577d3edfc3c",
+    "src/cpp_frenet/generic_avoidance.hpp": "37c397aaa1e86d2ef28fb6517a7dcf7a99e522e6e229fb92e57f23f9c65afe6b",
+    "src/cpp_frenet/tracked_occupancy.hpp": "7d03141c454bd5db27ef0d95ea1c6799474024e842949c37787f9c8c5889b06b",
+    "compact_config.json": "013e49aff5a0599315919aab8b2bad1f0a044013eed1a4b3a6bd86d0d75411c6",
+    "review/test_lead_identity.py": "e7acf6139f4ac53ef8f0252e34472d2db4fb96afedfbf488549e265f76f58cfe"
+  }
+}

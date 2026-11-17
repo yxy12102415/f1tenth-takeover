@@ -1,0 +1,61 @@
+{
+  "diagnostics": {
+    "coast_cut_distance_m": 0.8715899584791068,
+    "command_headroom_mps": 0.15,
+    "control_remaining_m": 4.9179463133204395,
+    "dynamic_corridor_enabled": true,
+    "effective_command_cap_mps": 1.6937499999999999,
+    "initial_state": [
+      1.0405989355691843,
+      -0.25000495269151685,
+      -0.21298075058376179,
+      0.9023848106995453,
+      0,
+      0.18549755858927872,
+      0.8221114999126783,
+      0.04805810316831936,
+      0.9931363301999045,
+      0.02412414189995808
+    ],
+    "lateral_nominal_limit_mps2": 1.2,
+    "lateral_recovery_active": false,
+    "lateral_recovery_hard_cap_mps2": 2,
+    "lateral_stage_limits_mps2": [
+      1.2,
+      1.2,
+      1.2,
+      1.2,
+      1.2,
+      1.2,
+      1.2,
+      1.2,
+      1.2,
+      1.2,
+      1.2,
+      1.2,
+      1.2,
+      1.2,
+      1.2,
+      1.2,
+      1.2,
+      1.2,
+      1.2,
+      1.2,
+      1.2,
+      1.2,
+      1.2,
+      1.2
+    ],
+    "minimum_drivable_speed_mps": 0.6,
+    "minimum_dynamic_corridor_radius_m": 0.004687500000000001,
+    "speed_target_mps": 1.034375,
+    "terminal_coasting": false,
+    "tracking_costs": {
+      "cross_track_weight": 160,
+      "heading_weight": 140,
+      "steering_change_weight": 180,
+      "yaw_rate_weight": 0.5
+    }
+  },
+  "reason": "joint_prediction_corridor_too_narrow"
+}

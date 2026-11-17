@@ -1,0 +1,29 @@
+{
+  "source_run": "run_logs/20261117_114358-closed-frenet-ground-attempt",
+  "user_report": "No contact; passed opponent, oscillation observed",
+  "route_completed": true,
+  "passed": true,
+  "final_goal_distance_m": 0.09065964514347992,
+  "final_erpm": 0.0,
+  "contact_user_confirmed": false,
+  "return_segment": {
+    "map_x_m": [
+      3,
+      4.5
+    ],
+    "maximum_cross_track_error_m": 0.18307673697057542,
+    "measured_speed_range_mps": [
+      1.0628,
+      1.2613333333333334
+    ],
+    "maximum_abs_steering_rad": 0.2689999999955422
+  },
+  "selected_offsets_m": [
+    -0.3993723704381878
+  ],
+  "maximum_controller_compute_ms": 31.29793800007974,
+  "full_moving_overtake_qualified": false,
+  "trajectory_figure": "/home/f1tenth/f1tenth_real_migration_ws_20260829/candidate_cpp_gpu_20260909/ground_381_2_0_dynamic_avoidance_20261115_v2/review/run_20261117_114358/trajectory_overview.png",
+  "return_figure": "/home/f1tenth/f1tenth_real_migration_ws_20260829/candidate_cpp_gpu_20260909/ground_381_2_0_dynamic_avoidance_20261115_v2/review/run_20261117_114358/return_detail.png",
+  "candidate_switch_count": 1
+}

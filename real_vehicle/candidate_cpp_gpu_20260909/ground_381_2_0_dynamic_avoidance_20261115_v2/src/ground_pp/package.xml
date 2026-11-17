@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<package format="3"><name>ground_pp</name><version>0.1.0</version>
+<description>Controller reused for bounded three-second straight ground calibration.</description>
+<maintainer email="local@example.invalid">F1TENTH local</maintainer><license>MIT</license>
+<buildtool_depend>ament_cmake</buildtool_depend><depend>rclcpp</depend>
+<depend>nav_msgs</depend><depend>sensor_msgs</depend><depend>std_msgs</depend>
+<depend>ackermann_msgs</depend><build_depend>eigen</build_depend>
+<export><build_type>ament_cmake</build_type></export></package>
+
+

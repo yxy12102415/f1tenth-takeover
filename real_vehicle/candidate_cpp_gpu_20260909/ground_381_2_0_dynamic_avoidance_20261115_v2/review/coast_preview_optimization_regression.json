@@ -1,0 +1,108 @@
+{
+  "passed": true,
+  "physical_motion": false,
+  "exact_cap_parity_cases": 60,
+  "map_boundary_cases": 3,
+  "old_median_ms": 16.292560500232867,
+  "new_median_ms": 2.6907505000508536,
+  "speedup": 6.055024611135424,
+  "timings": [
+    {
+      "old_ms": 20.046503000230587,
+      "new_ms": 5.580869999903371,
+      "response": {
+        "cap": 1.6937499999999999,
+        "valid": true
+      }
+    },
+    {
+      "old_ms": 17.195297999933246,
+      "new_ms": 3.7368050002442033,
+      "response": {
+        "cap": 1.51875,
+        "valid": true
+      }
+    },
+    {
+      "old_ms": 15.97752700035926,
+      "new_ms": 1.664187999722344,
+      "response": {
+        "cap": 1.4312500000000001,
+        "valid": true
+      }
+    },
+    {
+      "old_ms": 24.777648000053887,
+      "new_ms": 2.1686850000151026,
+      "response": {
+        "cap": 1.9125,
+        "valid": true
+      }
+    },
+    {
+      "old_ms": 15.550469000118028,
+      "new_ms": 5.307419000018854,
+      "response": {
+        "cap": 1.65,
+        "valid": true
+      }
+    },
+    {
+      "old_ms": 15.795661000083783,
+      "new_ms": 1.9665979998535477,
+      "response": {
+        "cap": 1.4312500000000001,
+        "valid": true
+      }
+    },
+    {
+      "old_ms": 18.07378900002732,
+      "new_ms": 1.6157049999492301,
+      "response": {
+        "cap": 1.51875,
+        "valid": true
+      }
+    },
+    {
+      "old_ms": 14.86369200029003,
+      "new_ms": 4.320311999890691,
+      "response": {
+        "cap": 1.25625,
+        "valid": true
+      }
+    },
+    {
+      "old_ms": 12.602301000242733,
+      "new_ms": 2.6030029998764803,
+      "response": {
+        "cap": 1.16875,
+        "valid": true
+      }
+    },
+    {
+      "old_ms": 17.32368300008602,
+      "new_ms": 3.776548999667284,
+      "response": {
+        "cap": 1.5625,
+        "valid": true
+      }
+    },
+    {
+      "old_ms": 13.812679000238859,
+      "new_ms": 2.778498000225227,
+      "response": {
+        "cap": 1.475,
+        "valid": true
+      }
+    },
+    {
+      "old_ms": 16.607594000106474,
+      "new_ms": 1.7897910001920536,
+      "response": {
+        "cap": 1.51875,
+        "valid": true
+      }
+    }
+  ],
+  "scope": "Exact speed-cap parity and paired captured-state microbenchmark; conservative EDT certificate then unchanged exact body checks; final emergency guard unchanged."
+}

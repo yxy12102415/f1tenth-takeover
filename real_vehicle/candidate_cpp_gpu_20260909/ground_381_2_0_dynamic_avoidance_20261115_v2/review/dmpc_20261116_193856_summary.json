@@ -1,0 +1,43 @@
+{
+  "run": "run_logs/20261116_193856-closed-frenet-ground-attempt",
+  "first_failure": "joint_mpc_solver_4",
+  "elapsed_from_wheel_motion_s": 2.5685160990000213,
+  "measured_speed_mps": 1.1232,
+  "previous_command_mps": 1.1065302685761107,
+  "hard_command_cap_mps": 0.99375,
+  "previous_acceleration_mps2": 0.04242902877010183,
+  "minimum_feasible_next_acceleration_mps2": -0.1575709712298982,
+  "minimum_feasible_next_command_mps": 1.0986517200146158,
+  "required_immediate_acceleration_mps2": -2.2556053715222135,
+  "control_to_rejection_ms": 36.749538999970355,
+  "pure_solver_ms": 2.91741799992451,
+  "solver_status": 4,
+  "qp_status": 2,
+  "dynamic_corridor_radius_m": 0.2,
+  "coast_replays": [
+    {
+      "speed": 1.1232,
+      "result": {
+        "minimum_map_reserve_m": 0.03902552013709064,
+        "valid": true
+      }
+    },
+    {
+      "speed": 1.1065302685761107,
+      "result": {
+        "minimum_map_reserve_m": 0.03902552013709064,
+        "valid": true
+      }
+    },
+    {
+      "speed": 0.99375,
+      "result": {
+        "minimum_map_reserve_m": 0.13902552013709066,
+        "valid": true
+      }
+    }
+  ],
+  "physical_contact": null,
+  "final_erpm": 0,
+  "changes_after_failure": false
+}

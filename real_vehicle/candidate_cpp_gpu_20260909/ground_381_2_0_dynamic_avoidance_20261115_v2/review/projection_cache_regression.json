@@ -1,0 +1,8 @@
+{
+  "passed": true,
+  "physical_motion": false,
+  "pre_lead_identity_baseline_preserved": true,
+  "historical_pre_cache_reference_retained": true,
+  "cached_vs_fresh_cases": 27,
+  "source_age_and_motion_change_invalidation_verified": true
+}

@@ -1,0 +1,511 @@
+{
+  "receipt": 11147.59625333,
+  "blocked_confirmation_scans": 0,
+  "candidate_collision_diagnostics": [],
+  "candidate_reason_counts": {
+    "generic_revalidated_path": 1
+  },
+  "candidate_score": 0.4061995535329963,
+  "candidate_score_terms": {
+    "arrival_time_policy": "shared_controller_geometry_speed_limits",
+    "continuity": 0.003999999999999999,
+    "corridor_extra_reserve_m": 0.02,
+    "corridor_required_edge_m": -0.17569367148777776,
+    "curvature_jerk": 0.27068148179775026,
+    "dense_maximum_curvature_1pm": 0.6500872600842675,
+    "departure_s": 0.34811185186315874,
+    "first_blocking_s": 2.2981118518631587,
+    "generic_held_path": true,
+    "generic_required_body_gap_m": 0.08,
+    "obstacle": 0.18963399607032272,
+    "planner_geometry": "obstacle_relative_envelope_seed",
+    "reference": 0.19569367148777775,
+    "return_start_s": 3.647065086160038,
+    "search_budget_exhausted": false,
+    "wall": 0
+  },
+  "candidate_switch_count": 3,
+  "center_path_reused": false,
+  "command_cap_mps": 2,
+  "commit_age_scans": 0,
+  "complete": false,
+  "confirmed_cluster_count": 1,
+  "confirmed_dynamic_point_count": 28,
+  "confirmed_obstacle_tracks": [
+    {
+      "extent_m": 0.2867881895221635,
+      "hits": 54,
+      "id": 1,
+      "misses": 0,
+      "observation_stamp": 1794811646.2938535,
+      "x": 2.6962600323994614,
+      "y": -0.019229375229014294
+    }
+  ],
+  "control_input_snapshot": {
+    "cap": 2.15,
+    "dt": 0.05,
+    "lateral": 0,
+    "map_speed_ceiling_mps": 1.3297573879775042,
+    "odom_stamp": 1794811646.432327,
+    "plan_id": 15,
+    "pose": [
+      -0.002505638645476709,
+      -0.1101504700843434,
+      -0.031149767750694852
+    ],
+    "pose_stamp": 1794811646.432327,
+    "remaining": 5.973961544135473,
+    "speed": 0,
+    "yaw_rate": 0
+  },
+  "control_period_s": 0.05,
+  "controller": "closed_loop_frenet_cpp_dynamic_mpc",
+  "corridor_seed_reserve_m": 0.02,
+  "desired_body_gap_m": 0.1,
+  "detected_cluster_count": 1,
+  "dynamic_scan_point_count": 28,
+  "ego_body_filter_enabled": true,
+  "ego_body_removed_samples_base_m": [],
+  "ego_body_returns_removed": 0,
+  "ego_filter_box_base_m": [
+    -0.27,
+    0.25,
+    -0.155,
+    0.155
+  ],
+  "endpoint_distance_m": 5.562460348548725,
+  "endpoint_heading_error_rad": -0.8689012987645779,
+  "following_speed_cap_mps": 2,
+  "footprint_collision": false,
+  "frame_id": "map",
+  "generated_mono": 11147.434829732,
+  "generic_avoidance": true,
+  "implementation": "cpp_separate_planner_controller",
+  "input_age": {
+    "odom": {
+      "receipt_age_s": 0.11563431100148591,
+      "source_age_s": 0.11665940284729004,
+      "timeout_s": 0.5
+    },
+    "pose": {
+      "receipt_age_s": 0.11566266299996641,
+      "source_age_s": 0.11665940284729004,
+      "timeout_s": 0.5
+    },
+    "scan": {
+      "receipt_age_s": 0.12513693700020667,
+      "source_age_s": 0.16115450859069824,
+      "timeout_s": 0.5
+    }
+  },
+  "input_pose_stamp": 1794811646.3400426,
+  "input_scan_stamp": 1794811646.2938535,
+  "lap_length_m": 5.845164147568345,
+  "lap_progress_m": 0,
+  "last_plan_duration_s": 0.018475234999641543,
+  "last_plan_stages": {
+    "compute_wall_s": 0.01847920299951511,
+    "lattice_search_s": 0.01789075399938156,
+    "scan_processing_s": 0,
+    "total_wall_s": 0.018480355000065174
+  },
+  "lateral_jerk_cost": 0,
+  "local_path_endpoint_xy": [
+    5.451442218213602,
+    0.9832012134279002
+  ],
+  "max_lateral_offset_m": 0.65,
+  "memory": {
+    "active_lifetime_s": 1,
+    "active_tracks": 1,
+    "occlusion_hazards": 0,
+    "ray_cleared_tracks": 0,
+    "retired_tracks": 0,
+    "shape_history_s": 0.6
+  },
+  "minimum_footprint_point_distance_m": 0.2822650716637758,
+  "minimum_obstacle_clearance_m": 0.2822650716637758,
+  "minimum_static_clearance_m": 0.6000000000000001,
+  "nearest_dynamic_point_m": 2.7000014070102307,
+  "observation_age_s": 0.16117262840270996,
+  "obstacle_motion_model": "bounded_constant_velocity_visibility_memory",
+  "obstacle_points": [
+    [
+      2.6989607463111556,
+      -0.16247853950921556
+    ],
+    [
+      2.698760432455108,
+      -0.15186325858013827
+    ],
+    [
+      2.6985605122277954,
+      -0.14125099809752095
+    ],
+    [
+      2.698360531911431,
+      -0.13064134622503631
+    ],
+    [
+      2.698160510146481,
+      -0.1200338995970558
+    ],
+    [
+      2.6979604611715167,
+      -0.10942825474209679
+    ],
+    [
+      2.6977606332334214,
+      -0.09882400618143428
+    ],
+    [
+      2.697560793333523,
+      -0.08822075019109313
+    ],
+    [
+      2.6973607041042102,
+      -0.07761808720605826
+    ],
+    [
+      2.6971608389493715,
+      -0.06701560668478934
+    ],
+    [
+      2.6969609516814974,
+      -0.05641290812172323
+    ],
+    [
+      2.6967610301116323,
+      -0.045809588136779586
+    ],
+    [
+      2.696561295928615,
+      -0.03520523530996826
+    ],
+    [
+      2.696361251548888,
+      -0.02459946188101325
+    ],
+    [
+      2.6961613480951443,
+      -0.013991847590692982
+    ],
+    [
+      2.6959613174919985,
+      -0.003381997988039495
+    ],
+    [
+      2.6957611255477922,
+      0.007230489279556648
+    ],
+    [
+      2.695560971721597,
+      0.017846029627895707
+    ],
+    [
+      2.695360812857121,
+      0.028465027872578916
+    ],
+    [
+      2.6951606013831797,
+      0.039087888449520644
+    ],
+    [
+      2.6949602853164807,
+      0.049715015380277214
+    ],
+    [
+      2.694759808264641,
+      0.06034681223739473
+    ],
+    [
+      2.6945593471243603,
+      0.07098370067171626
+    ],
+    [
+      2.694358598833651,
+      0.08162606676587002
+    ],
+    [
+      2.694157968827527,
+      0.09227435380751585
+    ],
+    [
+      2.6939571451131945,
+      0.10292894777133728
+    ],
+    [
+      2.6937560489752004,
+      0.11359025256937973
+    ],
+    [
+      2.693554834518389,
+      0.12425869519721248
+    ]
+  ],
+  "occupancies": [
+    {
+      "clear_scans": 0,
+      "fixed_world": false,
+      "has_moved": false,
+      "hits": 54,
+      "id": 1,
+      "map_supported": false,
+      "memory_state": "observed",
+      "observation_age_s": 0,
+      "sensor_x": 0.2673633803618551,
+      "sensor_y": -0.11855954732387476,
+      "stamp": 1794811646.2938535,
+      "stationary_history": true,
+      "visibility_hazard": false,
+      "vx": 0,
+      "vy": 0,
+      "xmax": 2.6989607463111556,
+      "xmin": 2.693554834518389,
+      "ymax": 0.12425869519721248,
+      "ymin": -0.16247853950921556
+    }
+  ],
+  "offset_m": -0.19569367148777775,
+  "plan_id": 15,
+  "plan_interval_s": 0.2,
+  "planning_active": false,
+  "planning_pose": [
+    -0.002505638645476709,
+    -0.1101504700843434,
+    -0.031149767750694852
+  ],
+  "planning_speed_mps": 0,
+  "prearm_path_refreshed": false,
+  "preferred_tracking_reserve_m": 0.03,
+  "progress_index": 0,
+  "raw_scan_point_count": 1059,
+  "reason": "joint_mpc_nonlinear_infeasible eq=0.083530 ineq=0.000000",
+  "rejected_control": {
+    "diagnostics": {
+      "coast_cut_distance_m": 0,
+      "command_headroom_mps": 0.15,
+      "control_remaining_m": 5.973961544135473,
+      "effective_command_cap_mps": 2,
+      "equality_residual": 0.08352985378185085,
+      "independent_dynamics_defect": 0.08352985378185085,
+      "independent_lateral_violation": 0,
+      "inequality_residual": 0,
+      "initial_state": [
+        -0.002505638645476709,
+        -0.1101504700843434,
+        -0.031149767750694852,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "lateral_nominal_limit_mps2": 1.2,
+      "lateral_recovery_active": false,
+      "lateral_recovery_hard_cap_mps2": 2,
+      "lateral_stage_limits_mps2": [
+        1.2,
+        1.2,
+        1.2,
+        1.2,
+        1.2,
+        1.2,
+        1.2,
+        1.2,
+        1.2,
+        1.2,
+        1.2,
+        1.2,
+        1.2,
+        1.2,
+        1.2,
+        1.2,
+        1.2,
+        1.2,
+        1.2,
+        1.2,
+        1.2,
+        1.2,
+        1.2,
+        1.2
+      ],
+      "minimum_drivable_speed_mps": 0.6,
+      "mpc_iterations": 1,
+      "mpc_solve_ms": 49.95995900026173,
+      "mpc_solver_status": 0,
+      "speed_target_mps": 1.1297573879775042,
+      "terminal_coasting": false,
+      "tracking_costs": {
+        "cross_track_weight": 160,
+        "heading_weight": 140,
+        "steering_change_weight": 180,
+        "yaw_rate_weight": 0.5
+      },
+      "warm_start_policy": "cold_reference_seed"
+    },
+    "reason": "joint_mpc_nonlinear_infeasible eq=0.083530 ineq=0.000000"
+  },
+  "return_m": 1.8,
+  "revalidated_on_newest_scan": false,
+  "route_aligned_opponent_prior": true,
+  "route_mode": "open_stop_at_end",
+  "running_floor_mps": 0.6,
+  "runtime_timing": {
+    "publish_mono": 11147.593880554,
+    "sequence": 131,
+    "tick_start_mono": 11147.59347828
+  },
+  "scan_pose": [
+    -0.002505638645476709,
+    -0.1101504700843434,
+    -0.031149767750694852
+  ],
+  "scan_pose_alignment_span_s": 0.04661893844604492,
+  "scan_pose_at_source": [
+    -0.002505638645476709,
+    -0.1101504700843434,
+    -0.031149767750694852
+  ],
+  "scan_pose_source_stamp": 1794811646.2938535,
+  "scan_pose_span_s": 0.04661893844604492,
+  "side": "right",
+  "source_age_at_publication_s": {
+    "pose": 0.05008101463317871,
+    "scan": 0.09627008438110352
+  },
+  "source_pose_stamp": 1794811646.3400426,
+  "source_scan_mono": 11147.37825631,
+  "source_scan_stamp": 1794811646.2938535,
+  "speed_command": 0,
+  "state": "AVOIDING",
+  "static_obstacle_points": [
+    [
+      2.6989607463111556,
+      -0.16247853950921556
+    ],
+    [
+      2.698760432455108,
+      -0.15186325858013827
+    ],
+    [
+      2.6985605122277954,
+      -0.14125099809752095
+    ],
+    [
+      2.698360531911431,
+      -0.13064134622503631
+    ],
+    [
+      2.698160510146481,
+      -0.1200338995970558
+    ],
+    [
+      2.6979604611715167,
+      -0.10942825474209679
+    ],
+    [
+      2.6977606332334214,
+      -0.09882400618143428
+    ],
+    [
+      2.697560793333523,
+      -0.08822075019109313
+    ],
+    [
+      2.6973607041042102,
+      -0.07761808720605826
+    ],
+    [
+      2.6971608389493715,
+      -0.06701560668478934
+    ],
+    [
+      2.6969609516814974,
+      -0.05641290812172323
+    ],
+    [
+      2.6967610301116323,
+      -0.045809588136779586
+    ],
+    [
+      2.696561295928615,
+      -0.03520523530996826
+    ],
+    [
+      2.696361251548888,
+      -0.02459946188101325
+    ],
+    [
+      2.6961613480951443,
+      -0.013991847590692982
+    ],
+    [
+      2.6959613174919985,
+      -0.003381997988039495
+    ],
+    [
+      2.6957611255477922,
+      0.007230489279556648
+    ],
+    [
+      2.695560971721597,
+      0.017846029627895707
+    ],
+    [
+      2.695360812857121,
+      0.028465027872578916
+    ],
+    [
+      2.6951606013831797,
+      0.039087888449520644
+    ],
+    [
+      2.6949602853164807,
+      0.049715015380277214
+    ],
+    [
+      2.694759808264641,
+      0.06034681223739473
+    ],
+    [
+      2.6945593471243603,
+      0.07098370067171626
+    ],
+    [
+      2.694358598833651,
+      0.08162606676587002
+    ],
+    [
+      2.694157968827527,
+      0.09227435380751585
+    ],
+    [
+      2.6939571451131945,
+      0.10292894777133728
+    ],
+    [
+      2.6937560489752004,
+      0.11359025256937973
+    ],
+    [
+      2.693554834518389,
+      0.12425869519721248
+    ]
+  ],
+  "steering_command": 0,
+  "switch_reason": "generic_revalidated_path",
+  "tracker_config": {
+    "state_dimension": 10,
+    "state_source": "vesc_odometry_vy_zero_yaw_estimated_from_speed_and_servo",
+    "type": "dynamic_mpc"
+  },
+  "tracker_diagnostics": null,
+  "tracking_reserve_satisfied": true,
+  "transition_m": 1.8,
+  "valid": false,
+  "wall_margin_m": 0.03
+}

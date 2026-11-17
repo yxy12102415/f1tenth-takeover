@@ -1,0 +1,23 @@
+[
+  {
+    "url": "https://github.com/ForzaETH/race_stack",
+    "path": "/home/f1tenth/f1tenth_real_migration_ws_20260829/reference_sources/forzaeth_ros1_reference",
+    "commit": "e7d07f7f4ffe0d4c30b90340b0f49a76af2877c0",
+    "branch": "ros-noetic",
+    "code_copied": false
+  },
+  {
+    "url": "https://github.com/ForzaETH/predictive-spliner",
+    "path": "/home/f1tenth/f1tenth_real_migration_ws_20260829/reference_sources/forzaeth_predictive_spliner_reference",
+    "commit": "ddbfbb2312eccda7bb5d84469ec0980ddb07a5e9",
+    "branch": null,
+    "code_copied": false
+  },
+  {
+    "url": "https://github.com/ForzaETH/multiopponent-pspliner",
+    "path": "/home/f1tenth/f1tenth_real_migration_ws_20260829/reference_sources/forzaeth_multiopponent_reference",
+    "commit": "c180f2862500f4c482f19b4f5ec5606606f53f40",
+    "branch": null,
+    "code_copied": false
+  }
+]

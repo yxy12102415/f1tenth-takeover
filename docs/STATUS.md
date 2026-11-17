@@ -1,5 +1,17 @@
 # Current status
 
+## Vehicle checkpoint — 2026-11-17
+
+Current C++ dMPC completed the original 381 2.0 open route past a stationary,
+shell-covered lead; the operator confirmed no contact. Final endpoint distance
+was 9.07 cm. Eight-view geometric template association is integrated with the
+controlled-scene assumption that only the lead may move. PID and dMPC stationary
+closed-loop software checks passed; this physical trial used dMPC. Return
+oscillation remains (18.31 cm peak cross-track error). Continuous moving-opponent
+overtaking is not qualified. [Source, evidence, limits and reproduction](VEHICLE_PROGRESS_20261117.md).
+
+Earlier dated checkpoints below retain their original scope.
+
 ## Vehicle checkpoint — 2026-11-08
 
 Current 381 2.0 compact v5 uses a fixed right passing path and C++ dynamic MPC.

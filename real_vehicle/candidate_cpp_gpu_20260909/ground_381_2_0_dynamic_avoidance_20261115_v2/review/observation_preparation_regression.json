@@ -1,0 +1,86 @@
+{
+  "passed": true,
+  "physical_motion": false,
+  "paired_prediction_guard_timings": [
+    {
+      "before_ms": 19.62626999920758,
+      "after_ms": 4.698382999777095
+    },
+    {
+      "before_ms": 20.015966999380908,
+      "after_ms": 4.670383000302536
+    },
+    {
+      "before_ms": 19.437692999417777,
+      "after_ms": 4.675694999605184
+    },
+    {
+      "before_ms": 19.266780999714683,
+      "after_ms": 4.672367000239319
+    },
+    {
+      "before_ms": 19.503772999996727,
+      "after_ms": 4.387950000818819
+    },
+    {
+      "before_ms": 19.24956499988184,
+      "after_ms": 4.6398869999393355
+    }
+  ],
+  "before_warm_prediction_guard_median_ms": 19.437692999417777,
+  "after_warm_prediction_guard_median_ms": 4.670383000302536,
+  "exact_prediction_decision_cases": 19,
+  "identical_held_paths": true,
+  "new_obstacle_revokes_retained_path": true,
+  "paired_held_timings": [
+    {
+      "before_ms": 203.71366600011243,
+      "after_ms": 106.46699100016122
+    },
+    {
+      "before_ms": 107.1024180000677,
+      "after_ms": 15.50817699990148
+    },
+    {
+      "before_ms": 107.90488400016329,
+      "after_ms": 12.27127099991776
+    },
+    {
+      "before_ms": 102.618371999597,
+      "after_ms": 12.62749600027746
+    },
+    {
+      "before_ms": 98.83765599988692,
+      "after_ms": 16.22737900015636
+    },
+    {
+      "before_ms": 99.46008899987646,
+      "after_ms": 12.183685999843874
+    }
+  ],
+  "before_warm_held_median_ms": 102.618371999597,
+  "after_warm_held_median_ms": 12.62749600027746,
+  "cold_search_200ms": [
+    {
+      "elapsed_ms": 173.03523299960943,
+      "valid": true,
+      "reason": "generic_validated",
+      "offset_m": -0.17462789114291083
+    },
+    {
+      "elapsed_ms": 170.5766009999934,
+      "valid": true,
+      "reason": "generic_validated",
+      "offset_m": -0.17462789114291083
+    },
+    {
+      "elapsed_ms": 169.77330299960158,
+      "valid": true,
+      "reason": "generic_validated",
+      "offset_m": -0.17462789114291083
+    }
+  ],
+  "budget_unchanged_ms": 200,
+  "scope": "Paired fixed-input prediction and identical held-path replay. Cold search may choose a different valid preferred-gap path. No physical qualification.",
+  "source_sha256": "37c397aaa1e86d2ef28fb6517a7dcf7a99e522e6e229fb92e57f23f9c65afe6b"
+}

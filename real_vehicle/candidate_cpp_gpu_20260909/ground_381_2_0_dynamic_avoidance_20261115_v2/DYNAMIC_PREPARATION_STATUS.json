@@ -1,0 +1,165 @@
+{
+  "objective": "Dynamic obstacle avoidance software preparation on 381 2.0; no physical launch",
+  "preserved_baselines": [
+    "/home/f1tenth/f1tenth_real_migration_ws_20260829/candidate_cpp_gpu_20260909/ground_381_2_0_generic_avoidance_20261111_v1",
+    "/home/f1tenth/f1tenth_real_migration_ws_20260829/candidate_cpp_gpu_20260909/ground_fitzpatrick_joint_20260927_v8",
+    "/home/f1tenth/f1tenth_real_migration_ws_20260829/candidate_cpp_gpu_20260909/ground_381_2_0_joint_pid_20261115_v6"
+  ],
+  "items": {
+    "bounded_memory_visibility": "implemented_software_verified",
+    "motion_and_reassociation": "implemented_software_verified",
+    "independent_fresh_observation_channel": "implemented_software_verified",
+    "continuous_geometric_path_revalidation": "implemented_software_verified",
+    "terminal_curvature_and_capture": "implemented_software_verified",
+    "pid_mpc_fitzpatrick_parameters": "implemented_software_verified",
+    "native_and_ros_acceptance": "implemented_software_verified",
+    "field_commands_and_report": "implemented_software_verified"
+  },
+  "limits": {
+    "speed_command_max_mps": 2.0,
+    "running_floor_mps": 0.6,
+    "acceleration_max_mps2": 1.0,
+    "source_timeout_s": 0.5,
+    "opponent_assumed_max_speed_mps": 0.65
+  },
+  "physical_motion_started": true,
+  "software_acceptance_passed": true,
+  "evidence": "reports/dynamic_preparation/acceptance.json",
+  "software_qualified_trackers": [
+    "pid",
+    "dynamic_mpc"
+  ],
+  "remaining": [
+    "Physical retest of the refreshed, forecast-aware tight PID path.",
+    "Fix moving dynamic-MPC nonlinear feasibility before its real dynamic test.",
+    "Continuous moving-vehicle overtaking is not qualified."
+  ],
+  "full_dynamic_overtake_passed": false,
+  "physical_commissioning_enabled": true,
+  "current_trial_scope": "stationary_opponent_pid_on_original_381_route",
+  "field_confirmation_received_unix": 1794785577.6197379,
+  "physical_commissioned": false,
+  "latest_field_run": "run_logs/20261116_001639-closed-frenet-ground-attempt",
+  "latest_field_result": "pending_operator_trial_feedback",
+  "current_revision_status": "lead_dimensions_32x26cm_software_verified_physical_pending",
+  "compact_fix_report": "review/COMPACT_FIX.md",
+  "compact_fix_recorded_replay": "review/compact_fix_regression.json",
+  "offline_admission_passed": true,
+  "offline_admission_log": "run_logs/20261115_231253-closed-frenet-offline-window",
+  "physical_retest_pending": true,
+  "READY_observed_unix": 1794803788.0730162,
+  "live_stability_samples": 14,
+  "live_stability_all_valid": true,
+  "additional_dynamic_checks": [
+    {
+      "name": "pid_moving_following_standard_plant",
+      "passed": true,
+      "failure": null,
+      "route_completed": true,
+      "report": "reports/compact_fix/forecast_pid_moving/report.json",
+      "required_for_current_static_scope": false,
+      "physical_motion": false
+    },
+    {
+      "name": "dynamic_mpc_moving_following_standard_plant",
+      "passed": false,
+      "failure": "controller_rejected:joint_mpc_nonlinear_infeasible eq=0.064634 ineq=0.000000",
+      "route_completed": false,
+      "report": "reports/compact_fix/forecast_dynamic_mpc_moving/report.json",
+      "required_for_current_static_scope": false,
+      "physical_motion": false
+    }
+  ],
+  "moving_dynamic_mpc_qualified": false,
+  "latest_live_plan_offset_m": -0.19762496598865706,
+  "latest_live_plan_samples": 11,
+  "latest_live_plan_all_valid": true,
+  "prearm_refresh_observed": true,
+  "ready_observed_unix": 1794806296.4240499,
+  "last_physical_result": "20261116_153449: stopped after 1.79 s of wheel motion; internal compute 103.8 ms >100; reference setup 93.9 ms, pure solver 6.1 ms; final wheel speed 0; contact not yet confirmed",
+  "stationary_settle_regression": "review/stationary_settle_regression.json",
+  "last_physical_diagnosis": "review/dmpc_20261116_153449_summary.json",
+  "route_aligned_opponent_prior": true,
+  "wall_margin_m": 0.03,
+  "route_prior_report": "review/route_prior_regression.json",
+  "wall_margin_report": "review/wall_margin_regression.json",
+  "offline_admission_report": "reports/compact_fix/route_prior_offline_admission_retry.log",
+  "known_remaining_issue": "Last recorded high-speed emergency coast remains map-conflicting at 3 cm margin; longitudinal response/coast calibration not resolved",
+  "qualified_motion_trackers": [
+    "pid",
+    "dynamic_mpc"
+  ],
+  "stationary_controller_regression": "review/both_controller_regression.json",
+  "prediction_tube_regression": "review/prediction_tube_regression.json",
+  "projection_cache_regression": "review/projection_cache_regression.json",
+  "offline_admission_reports": {
+    "pid": "reports/compact_fix/pid_perf_opt_offline.log",
+    "dynamic_mpc": "reports/compact_fix/dynamic_mpc_perf_opt_offline.log"
+  },
+  "timing_observation": "Both optimized closed-loop fixtures and offline window checks passed. dMPC legacy timing median 11.2 ms/max 48.1 ms; full callback to ROS drive publish max 50.5 ms. These are synthetic tests, not real-car timing guarantees.",
+  "physical_motion_started_this_preparation": false,
+  "control_hard_deadline_ms": 200.0,
+  "mpc_soft_budget_ms": 45.0,
+  "mpc_max_consecutive_soft_misses": 3,
+  "performance_analysis": "review/control_performance_optimization.json",
+  "performance_followup_status": "Operator choosing reference-preparation optimization vs PID comparison; no code/threshold changes after failure",
+  "performance_documentation": "review/CONTROL_PERFORMANCE.md",
+  "last_run_no_contact_confirmed": true,
+  "mpc_refinement_budget_ms": 85.0,
+  "latest_revision_physical_motion_started": true,
+  "latest_revision_reports": [
+    "review/speed_transition_regression.json",
+    "review/both_controller_regression.json",
+    "review/control_performance_optimization.json"
+  ],
+  "latest_revision_offline_checks": {
+    "pid": {
+      "passed": true,
+      "code_fingerprint": "57f70bc90ff2b8eb64d0be6d69c689d730693b428a5ace87755f69f193be0765",
+      "physical_motion": false
+    },
+    "dynamic_mpc": {
+      "passed": true,
+      "code_fingerprint": "47f465558798df7415da625142c9badc7373de8ee46195b7c42cd89d4ad0178a",
+      "physical_motion": false
+    }
+  },
+  "last_real_run_summary": "review/dmpc_20261116_201301_prearm_summary.json",
+  "static_process_inflation_m": 0.0,
+  "route_moving_uncertainty_max_m": {
+    "longitudinal": 0.02,
+    "lateral": 0.01
+  },
+  "static_occlusion_scope": "all_confirmed_static_until_reobserved_motion_or_free_ray_clearance",
+  "cold_start_note": "A standstill cold search may exhaust its unchanged 200 ms budget. Persistent prearm checks retain that failure and admit motion only after continuously valid plans. This is not a moving deadline relaxation.",
+  "speed_preview_policy": "jerk_feasible_stage_braking_envelope_with_absolute_speed_and_independent_geometry_guards",
+  "static_occlusion_priority_regression": "review/static_occlusion_priority_regression.json",
+  "last_live_prearm_fixture": "review/dmpc_20261116_203413_live_prearm_failure.json",
+  "last_live_budget_replay": "review/dmpc_20261116_203413_budget_replay.json",
+  "prearm_refresh_policy": "initialization_or_pose_change;revalidate_every_new_scan",
+  "observation_preparation_regression": "review/observation_preparation_regression.json",
+  "prearm_refresh_policy_regression": "review/prearm_refresh_policy_regression.json",
+  "clearance_adjustment": {
+    "desired_body_gap_m": 0.15,
+    "seed_reserve_m": 0.07,
+    "hard_body_gap_m": 0.08,
+    "field_start_replay_d_m": -0.17863331560678222,
+    "report": "review/gap15cm_regression.json"
+  },
+  "known_physical_issue": "Previous run joint_prediction_corridor_unavailable; this profile is not a proven field fix.",
+  "motion_confirmation_regression": "review/motion_confirmation_regression.json",
+  "lead_outer_dimensions_m": {
+    "length": 0.32,
+    "width": 0.26,
+    "source": "operator_corrected_outer_tyres"
+  },
+  "scene_assumption": "only_lead_vehicle_may_move",
+  "lead_identity_regression": "review/lead_identity_regression.json",
+  "latest_physical_trial": "run_logs/20261117_114358-closed-frenet-ground-attempt",
+  "latest_physical_route_completed": true,
+  "latest_physical_stationary_pass_user_confirmed": true,
+  "latest_physical_contact_confirmation_pending": false,
+  "latest_physical_remaining_issue": "User reported oscillation; return-segment CTE peak 0.183 m, no path offset switching",
+  "latest_physical_contact": false,
+  "latest_physical_result": "stationary_opponent_avoided_and_goal_reached_no_contact;return_oscillation_pending_tuning"
+}

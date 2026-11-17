@@ -1,0 +1,248 @@
+{
+  "capture_complete": true,
+  "views": [
+    {
+      "view": "rear",
+      "operator_rotation_deg": 0,
+      "angle_is_approximate": true,
+      "scans": 201,
+      "duration_s": 5.006304740905762,
+      "median_scan_foreground_points": 44,
+      "foreground_count_range": [
+        44,
+        45
+      ],
+      "visible_bounds_laser_m": [
+        1.4405061909572576,
+        -0.15783909166751836,
+        1.9003898414309912,
+        0.19135914684079472
+      ],
+      "visible_span_cm": [
+        45.98836504737336,
+        34.919823850831314
+      ],
+      "groups_with_at_least_two_points": 3,
+      "outside_roi_same_beam_median_m": 0.0009999275207519531,
+      "outside_roi_same_beam_p90_m": 0.062499940395355225,
+      "outside_roi_nearest_background_p90_m": 0.036755304034242,
+      "within_capture_median_point_to_template_p90_m": 0.006512118460346786,
+      "production_approved": false,
+      "background_screen_passed": true
+    },
+    {
+      "view": "rear_left",
+      "operator_rotation_deg": 45,
+      "angle_is_approximate": true,
+      "scans": 201,
+      "duration_s": 5.003563642501831,
+      "median_scan_foreground_points": 59,
+      "foreground_count_range": [
+        59,
+        60
+      ],
+      "visible_bounds_laser_m": [
+        1.4080676089141535,
+        -0.26953664190211507,
+        2.047333689214494,
+        0.25117267853765707
+      ],
+      "visible_span_cm": [
+        63.926608030034046,
+        52.070932043977216
+      ],
+      "groups_with_at_least_two_points": 2,
+      "outside_roi_same_beam_median_m": 0.0009999275207519531,
+      "outside_roi_same_beam_p90_m": 0.08340005874633798,
+      "outside_roi_nearest_background_p90_m": 0.027886914851915037,
+      "within_capture_median_point_to_template_p90_m": 0.006000041961669919,
+      "production_approved": false,
+      "background_screen_passed": true
+    },
+    {
+      "view": "left_side",
+      "operator_rotation_deg": 90,
+      "angle_is_approximate": true,
+      "scans": 201,
+      "duration_s": 5.0056068897247314,
+      "median_scan_foreground_points": 52,
+      "foreground_count_range": [
+        51,
+        52
+      ],
+      "visible_bounds_laser_m": [
+        1.4525085752000015,
+        -0.2259536667889564,
+        2.05670257511453,
+        0.22524551315195546
+      ],
+      "visible_span_cm": [
+        60.41939999145283,
+        45.11991799409118
+      ],
+      "groups_with_at_least_two_points": 2,
+      "outside_roi_same_beam_median_m": 0.0009999275207519531,
+      "outside_roi_same_beam_p90_m": 0.10899996757507324,
+      "outside_roi_nearest_background_p90_m": 0.04148094909565393,
+      "within_capture_median_point_to_template_p90_m": 0.00499999523162848,
+      "production_approved": false,
+      "background_screen_passed": true
+    },
+    {
+      "view": "front_left",
+      "operator_rotation_deg": 135,
+      "angle_is_approximate": true,
+      "scans": 201,
+      "duration_s": 5.006813049316406,
+      "median_scan_foreground_points": 61,
+      "foreground_count_range": [
+        59,
+        62
+      ],
+      "visible_bounds_laser_m": [
+        1.3593656988518794,
+        -0.2846776746522154,
+        2.162341230378555,
+        0.26209653030887886
+      ],
+      "visible_span_cm": [
+        80.29755315266756,
+        54.67742049610942
+      ],
+      "groups_with_at_least_two_points": 1,
+      "outside_roi_same_beam_median_m": 0.0019998550415039062,
+      "outside_roi_same_beam_p90_m": 0.07699990272521973,
+      "outside_roi_nearest_background_p90_m": 0.03906585073006057,
+      "within_capture_median_point_to_template_p90_m": 0.006000041961669913,
+      "production_approved": false,
+      "background_screen_passed": true
+    },
+    {
+      "view": "front",
+      "operator_rotation_deg": 180,
+      "angle_is_approximate": true,
+      "scans": 201,
+      "duration_s": 5.00596284866333,
+      "median_scan_foreground_points": 47,
+      "foreground_count_range": [
+        47,
+        47
+      ],
+      "visible_bounds_laser_m": [
+        1.3589482213084851,
+        -0.18658334498959353,
+        1.7847453708743084,
+        0.1718513880798125
+      ],
+      "visible_span_cm": [
+        42.57971495658233,
+        35.8434733069406
+      ],
+      "groups_with_at_least_two_points": 4,
+      "outside_roi_same_beam_median_m": 0.0009999275207519531,
+      "outside_roi_same_beam_p90_m": 0.0559999942779541,
+      "outside_roi_nearest_background_p90_m": 0.02699995040893554,
+      "within_capture_median_point_to_template_p90_m": 0.006157671894143499,
+      "production_approved": false,
+      "background_screen_passed": true
+    },
+    {
+      "view": "front_right",
+      "operator_rotation_deg": 225,
+      "angle_is_approximate": true,
+      "scans": 201,
+      "duration_s": 5.006734848022461,
+      "median_scan_foreground_points": 59,
+      "foreground_count_range": [
+        58,
+        60
+      ],
+      "visible_bounds_laser_m": [
+        1.4245116395271091,
+        -0.31217996444069007,
+        2.2938546019162893,
+        0.249766916573172
+      ],
+      "visible_span_cm": [
+        86.93429623891802,
+        56.194688101386205
+      ],
+      "groups_with_at_least_two_points": 2,
+      "outside_roi_same_beam_median_m": 0.001000046730041504,
+      "outside_roi_same_beam_p90_m": 0.08930000066757209,
+      "outside_roi_nearest_background_p90_m": 0.03402605716869084,
+      "within_capture_median_point_to_template_p90_m": 0.0069999694824217605,
+      "production_approved": false,
+      "background_screen_passed": true
+    },
+    {
+      "view": "right_side",
+      "operator_rotation_deg": 270,
+      "angle_is_approximate": true,
+      "scans": 201,
+      "duration_s": 5.003876447677612,
+      "median_scan_foreground_points": 50,
+      "foreground_count_range": [
+        49,
+        50
+      ],
+      "visible_bounds_laser_m": [
+        1.5191968941470224,
+        -0.19245830810116937,
+        2.145027958637648,
+        0.25388073469916134
+      ],
+      "visible_span_cm": [
+        62.583106449062576,
+        44.63390428003307
+      ],
+      "groups_with_at_least_two_points": 1,
+      "outside_roi_same_beam_median_m": 0.001000046730041504,
+      "outside_roi_same_beam_p90_m": 0.10939998626708983,
+      "outside_roi_nearest_background_p90_m": 0.03847258352084999,
+      "within_capture_median_point_to_template_p90_m": 0.006000041961669821,
+      "production_approved": false,
+      "background_screen_passed": true
+    },
+    {
+      "view": "rear_right",
+      "operator_rotation_deg": 315,
+      "angle_is_approximate": true,
+      "scans": 201,
+      "duration_s": 5.004991054534912,
+      "median_scan_foreground_points": 56,
+      "foreground_count_range": [
+        55,
+        57
+      ],
+      "visible_bounds_laser_m": [
+        1.5222827661640699,
+        -0.17143317109595857,
+        2.1782643131159682,
+        0.3520261728270183
+      ],
+      "visible_span_cm": [
+        65.59815469518983,
+        52.345934392297686
+      ],
+      "groups_with_at_least_two_points": 1,
+      "outside_roi_same_beam_median_m": 0.001000046730041504,
+      "outside_roi_same_beam_p90_m": 0.07600008249282837,
+      "outside_roi_nearest_background_p90_m": 0.03492452005647821,
+      "within_capture_median_point_to_template_p90_m": 0.006999969482421813,
+      "production_approved": false,
+      "background_screen_passed": true
+    }
+  ],
+  "total_target_scans": 1608,
+  "background_scans": 201,
+  "all_background_screens_passed": true,
+  "coordinate_frame": "LiDAR: +X forward, +Y left",
+  "shell_version": "User reports new shell installed",
+  "dimensions_surveyed": false,
+  "target_presence": "Operator placement plus difference from initial empty background",
+  "independent_recognition_validated": false,
+  "recognizer_installed": false,
+  "runtime_changed": false,
+  "actuator_nodes_started": 0
+}

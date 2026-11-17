@@ -1,0 +1,17 @@
+{
+  "mode": "shadow_only",
+  "scene_assumption": "Only lead vehicle may move; declared background static",
+  "lead_length_m": 0.32,
+  "lead_width_m": 0.26,
+  "dimensions_source": "Operator corrected outer tyre dimensions: length 32 cm x width 26 cm",
+  "dimensions_surveyed": false,
+  "initial_s_ahead_m": [
+    0.6,
+    3.3
+  ],
+  "initial_abs_d_max_m": 0.65,
+  "template_acquisition_error_max_m": 0.06,
+  "prediction_horizon_s": 1.6,
+  "physical_qualified": false,
+  "production_observation_override_enabled": false
+}

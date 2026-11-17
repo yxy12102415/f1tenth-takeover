@@ -1,0 +1,234 @@
+[
+  {
+    "receipt": 2759.971192726,
+    "pose": [
+      -0.028160999894646654,
+      -0.01176140031010426,
+      -0.02004166294207323
+    ],
+    "occupancy": {
+      "clear_scans": 0,
+      "fixed_world": false,
+      "has_moved": false,
+      "hits": 1,
+      "id": 30,
+      "map_supported": false,
+      "memory_state": "observed",
+      "observation_age_s": 0,
+      "sensor_x": 0.2417847767061544,
+      "sensor_y": -0.01717228705725048,
+      "stamp": 1794877992.788858,
+      "stationary_history": false,
+      "visibility_hazard": false,
+      "vx": 0,
+      "vy": 0,
+      "xmax": 2.005467645870585,
+      "xmin": 1.8862264848572723,
+      "ymax": 0.3852004160703615,
+      "ymin": 0.2654050477617828
+    }
+  },
+  {
+    "receipt": 2760.198443467,
+    "pose": [
+      -0.02799005585916653,
+      -0.013553232664787605,
+      -0.019724467970494666
+    ],
+    "occupancy": {
+      "clear_scans": 0,
+      "fixed_world": false,
+      "has_moved": false,
+      "hits": 5,
+      "id": 30,
+      "map_supported": false,
+      "memory_state": "observed",
+      "observation_age_s": 0,
+      "sensor_x": 0.24195742346769383,
+      "sensor_y": -0.01887849369823119,
+      "stamp": 1794877992.9891875,
+      "stationary_history": true,
+      "visibility_hazard": false,
+      "vx": 0,
+      "vy": 0,
+      "xmax": 2.3274130740805066,
+      "xmin": 1.8862264848572723,
+      "ymax": 0.49700724011116043,
+      "ymin": 0.2654050477617828
+    }
+  },
+  {
+    "receipt": 2760.382850081,
+    "pose": [
+      -0.025286382439360072,
+      -0.01656497266397796,
+      -0.019109119419541198
+    ],
+    "occupancy": {
+      "clear_scans": 0,
+      "fixed_world": false,
+      "has_moved": true,
+      "hits": 9,
+      "id": 30,
+      "map_supported": false,
+      "memory_state": "observed",
+      "observation_age_s": 0,
+      "sensor_x": 0.24466432267063074,
+      "sensor_y": -0.02172412090945213,
+      "stamp": 1794877993.190517,
+      "stationary_history": false,
+      "visibility_hazard": false,
+      "vx": 0.4069544977395717,
+      "vy": 0.0674113252319889,
+      "xmax": 2.4502708538520137,
+      "xmin": 1.972945210305962,
+      "ymax": 0.5173584238318455,
+      "ymin": 0.08307113151471857
+    }
+  },
+  {
+    "receipt": 2760.561263229,
+    "pose": [
+      -0.027370286653085107,
+      -0.017882304520787817,
+      -0.017785796553265322
+    ],
+    "occupancy": {
+      "clear_scans": 0,
+      "fixed_world": false,
+      "has_moved": true,
+      "hits": 13,
+      "id": 30,
+      "map_supported": false,
+      "memory_state": "observed",
+      "observation_age_s": 0,
+      "sensor_x": 0.24216799099526526,
+      "sensor_y": -0.02235655236533586,
+      "stamp": 1794877993.4391873,
+      "stationary_history": false,
+      "visibility_hazard": false,
+      "vx": 0.4069544977395717,
+      "vy": 0.0674113252319889,
+      "xmax": 2.6521198456373387,
+      "xmin": 2.195508029342408,
+      "ymax": 0.42698974483465024,
+      "ymin": 0.3113077268972309
+    }
+  },
+  {
+    "receipt": 2760.815711147,
+    "pose": [
+      -0.0275353728314586,
+      -0.017355748719470432,
+      -0.018241798300451226
+    ],
+    "occupancy": {
+      "clear_scans": 0,
+      "fixed_world": false,
+      "has_moved": true,
+      "hits": 15,
+      "id": 30,
+      "map_supported": false,
+      "memory_state": "predicted_hold",
+      "observation_age_s": 0.12543463706970215,
+      "sensor_x": 0.2425870093071934,
+      "sensor_y": -0.022684216412378992,
+      "stamp": 1794877993.539268,
+      "stationary_history": false,
+      "visibility_hazard": false,
+      "vx": 0.4069544977395717,
+      "vy": 0.0674113252319889,
+      "xmax": 2.8358596721558347,
+      "xmin": 2.2059681670365583,
+      "ymax": 0.4725798135549754,
+      "ymin": 0.1601231082799273
+    }
+  },
+  {
+    "receipt": 2761.189026955,
+    "pose": [
+      -0.024759178534857956,
+      -0.01700983684846008,
+      -0.018211713514955975
+    ],
+    "occupancy": {
+      "clear_scans": 0,
+      "fixed_world": false,
+      "has_moved": true,
+      "hits": 18,
+      "id": 30,
+      "map_supported": false,
+      "memory_state": "predicted_hold",
+      "observation_age_s": 0.1000359058380127,
+      "sensor_x": 0.2438553998731949,
+      "sensor_y": -0.021395363241984478,
+      "stamp": 1794877993.8397548,
+      "stationary_history": false,
+      "visibility_hazard": false,
+      "vx": 0.4069544977395717,
+      "vy": 0.0674113252319889,
+      "xmax": 2.9581441281703746,
+      "xmin": 2.328252623051098,
+      "ymax": 0.5821160368926968,
+      "ymin": 0.2933883735139404
+    }
+  },
+  {
+    "receipt": 2761.647487494,
+    "pose": [
+      -0.02613398742989237,
+      -0.018702994543250993,
+      -0.017979458474228226
+    ],
+    "occupancy": {
+      "clear_scans": 0,
+      "fixed_world": false,
+      "has_moved": true,
+      "hits": 19,
+      "id": 30,
+      "map_supported": false,
+      "memory_state": "predicted_hold",
+      "observation_age_s": 0.15017437934875488,
+      "sensor_x": 0.2447296593901029,
+      "sensor_y": -0.022564049351937558,
+      "stamp": 1794877994.0896873,
+      "stationary_history": false,
+      "visibility_hazard": false,
+      "vx": 0.4069544977395717,
+      "vy": 0.0674113252319889,
+      "xmax": 2.81057259312798,
+      "xmin": 2.4299637892657806,
+      "ymax": 0.497411141573017,
+      "ymin": 0.3897941067045611
+    }
+  },
+  {
+    "receipt": 2762.294374888,
+    "pose": [
+      -0.024440181781651055,
+      -0.018938433648724818,
+      -0.018442533384033895
+    ],
+    "occupancy": {
+      "clear_scans": 0,
+      "fixed_world": false,
+      "has_moved": true,
+      "hits": 19,
+      "id": 30,
+      "map_supported": false,
+      "memory_state": "occluded_unknown",
+      "observation_age_s": 1.0003881454467773,
+      "sensor_x": 0.2447296593901029,
+      "sensor_y": -0.022564049351937558,
+      "stamp": 1794877994.0896873,
+      "stationary_history": false,
+      "visibility_hazard": true,
+      "vx": 0,
+      "vy": 0,
+      "xmax": 3.337527090867552,
+      "xmin": 2.7169182870053525,
+      "ymax": 0.6848224668050059,
+      "ymin": 0.33720543193655
+    }
+  }
+]

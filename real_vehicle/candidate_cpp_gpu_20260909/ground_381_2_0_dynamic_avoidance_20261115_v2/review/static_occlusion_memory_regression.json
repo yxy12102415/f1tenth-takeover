@@ -1,0 +1,14 @@
+{
+  "confirmed_unmapped_static_held": true,
+  "map_static_no_occlusion_growth": true,
+  "mapped_moving_history_preserved": true,
+  "passed": true,
+  "physical_motion": false,
+  "source_stamp_preserved": true,
+  "static_reobservation_switches_to_motion": true,
+  "unconfirmed_not_frozen": true,
+  "source_sha256": {
+    "src/cpp_frenet/tracked_occupancy.hpp": "7d03141c454bd5db27ef0d95ea1c6799474024e842949c37787f9c8c5889b06b",
+    "review/test_static_occlusion_memory.cpp": "d86c020197d8ad0ec348f49e914fc810c7ac817048a234781caa66ce7d0fd0a3"
+  }
+}

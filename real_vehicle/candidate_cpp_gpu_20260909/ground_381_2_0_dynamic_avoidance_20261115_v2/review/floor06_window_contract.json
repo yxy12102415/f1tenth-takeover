@@ -1,0 +1,6 @@
+{
+  "passed": true,
+  "minimum_running_output_mps": 0.6,
+  "terminal_zero_latched": true,
+  "physical_motion": false
+}

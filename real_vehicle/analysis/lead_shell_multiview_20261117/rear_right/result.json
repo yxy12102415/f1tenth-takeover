@@ -1,0 +1,16 @@
+{
+  "passed": true,
+  "error": null,
+  "view": "rear_right",
+  "source": "real_LaserScan",
+  "scans": 201,
+  "duration_s": 5.004991054534912,
+  "max_scan_gap_s": 0.02549600601196289,
+  "roi": "laser x=[0.7,2.3], |y|<=0.65 m; presence only, not identity",
+  "roi_returns_median": 56,
+  "body_shell": "User reports new shell installed; dimensions not yet measured",
+  "ego_fixed_required": true,
+  "target_identity_verified": false,
+  "actuator_nodes_started": 0,
+  "scans_sha256": "8676fcf529a9639a0be5128c33744caa741ea740090df1ec5a7b694c4fd68d68"
+}

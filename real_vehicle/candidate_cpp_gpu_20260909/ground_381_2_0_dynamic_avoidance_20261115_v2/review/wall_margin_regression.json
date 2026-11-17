@@ -1,0 +1,33 @@
+{
+  "passed": true,
+  "physical_motion": false,
+  "margin_m": 0.03,
+  "previous_margin_m": 0.05,
+  "algebra_fixture_old": {
+    "minimum_map_reserve_m": null,
+    "reason": "generic_emergency_coast_map_conflict",
+    "valid": false
+  },
+  "algebra_fixture_new": {
+    "minimum_map_reserve_m": 0.014025520137090634,
+    "path": [
+      [
+        -0.004767532556239378,
+        0.009828210671599464,
+        0.018850232249305154
+      ]
+    ],
+    "valid": true
+  },
+  "inside_wall_still_rejected": {
+    "minimum_map_reserve_m": null,
+    "reason": "generic_emergency_coast_map_conflict",
+    "valid": false
+  },
+  "latest_recorded_coast": {
+    "minimum_map_reserve_m": null,
+    "reason": "generic_emergency_coast_map_conflict",
+    "valid": false
+  },
+  "limitation": "Shrinking margin does not alone guarantee acceptance of the last recorded high-speed coast state."
+}

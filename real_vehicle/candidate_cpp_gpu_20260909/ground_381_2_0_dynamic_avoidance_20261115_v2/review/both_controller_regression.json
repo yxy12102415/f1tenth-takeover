@@ -1,0 +1,31 @@
+{
+  "pid": {
+    "passed": true,
+    "route_completed": true,
+    "driving_command_min_mps": 0.6,
+    "minimum_independent_separation_m": 0.23908157592025886,
+    "lead_identity_associated": true,
+    "maximum_lead_identity_ms": 4.767427000047064
+  },
+  "dynamic_mpc": {
+    "passed": true,
+    "route_completed": true,
+    "driving_command_min_mps": 0.600000000035256,
+    "minimum_independent_separation_m": 0.26197932933834783,
+    "lead_identity_associated": true,
+    "maximum_lead_identity_ms": 5.2220509999187925,
+    "minimum_predicted_tube_radius_m": 0.1328125,
+    "maximum_reference_shift_m": 0,
+    "maximum_control_compute_ms": 17.61380300001747,
+    "maximum_equality_residual": 0.0008705117460032774,
+    "maximum_total_control_guard_ms": 26.513551999983065,
+    "warm_start_policies": [
+      "cold_controls_rollout_exact_generated_dynamics_from_measurement",
+      "shift_controls_rollout_exact_generated_dynamics_from_measurement"
+    ]
+  },
+  "passed": true,
+  "physical_motion": false,
+  "scope": "Current C++ nodes, stationary opponent and startup deadzone stress fixture; not physical qualification or full moving overtake",
+  "binary_sha256": "7ddddc772c67cbc99d71287bc1379b6dd1375a489c66c5de0e2f5c4d0b6bf28a"
+}

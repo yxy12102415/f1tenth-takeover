@@ -1,0 +1,13 @@
+{
+  "passed": true,
+  "stationary_jitter_checks": 10000,
+  "timer_refresh_removed": true,
+  "pose_change_refresh_kept": true,
+  "active_path_not_reset": true,
+  "physical_motion": false,
+  "source_sha256": {
+    "src/cpp_frenet/prearm_path_refresh.hpp": "6b8aa6e730cb8bc6b6313e65a03fd4306aebd474478f550ba6b1f91209e715fe",
+    "review/test_prearm_refresh_policy.cpp": "5693aea271b021cc62fb262ad3ef5aac200033b103edef6f3f76459875a36393"
+  },
+  "binary_sha256": "e5c02d9e06b294b72d1fb316b42756a835a737f7546d56ac23b50e24879bd900"
+}

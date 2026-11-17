@@ -1,0 +1,40 @@
+{
+  "run": "run_logs/20261116_201301-closed-frenet-ground-attempt",
+  "physical_motion": false,
+  "max_abs_erpm": 0.0,
+  "final_erpm": 0.0,
+  "prearm_failure": "generic_no_feasible_path",
+  "candidate_reasons": {
+    "generic_corridor_infeasible": 12,
+    "obstacle_footprint": 1
+  },
+  "remembered_moving_occupancy": {
+    "clear_scans": 0,
+    "fixed_world": false,
+    "has_moved": true,
+    "hits": 19,
+    "id": 30,
+    "map_supported": false,
+    "memory_state": "occluded_unknown",
+    "observation_age_s": 59.87501883506775,
+    "sensor_x": 0.2447296593901029,
+    "sensor_y": -0.022564049351937558,
+    "stamp": 1794877994.0896873,
+    "stationary_history": false,
+    "visibility_hazard": true,
+    "vx": 0,
+    "vy": 0,
+    "xmax": 3.337527090867552,
+    "xmin": 2.7169182870053525,
+    "ymax": 0.6848224668050059,
+    "ymin": 0.33720543193655
+  },
+  "current_dynamic_returns_inside_remembered_box": 0,
+  "observed_pre_occlusion_velocity_mps": [
+    0.4069544977395717,
+    0.0674113252319889
+  ],
+  "field_object_identity": "unconfirmed; person or manually moved object possible",
+  "software_changed_after_failure": false,
+  "speed_transition_physical_test_completed": false
+}

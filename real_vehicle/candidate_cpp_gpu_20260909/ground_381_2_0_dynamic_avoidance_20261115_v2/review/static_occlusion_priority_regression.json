@@ -1,0 +1,39 @@
+{
+  "passed": true,
+  "physical_motion": false,
+  "old_inflated_box": [
+    0.5608962833563147,
+    -0.07582032519865012,
+    2.117372914639807,
+    1.3730660672372292
+  ],
+  "new_static_box": [
+    1.0331592890730497,
+    0.3964426805180849,
+    1.645109908923072,
+    0.9008030615204943
+  ],
+  "recorded_false_conflict_cleared": true,
+  "nonfixed_unknown_still_grows": true,
+  "moving_evidence_still_preserved": true,
+  "standstill_prearm": [
+    {
+      "valid": true,
+      "reason": "generic_validated"
+    },
+    {
+      "valid": true,
+      "reason": "generic_validated"
+    },
+    {
+      "valid": true,
+      "reason": "generic_validated"
+    },
+    {
+      "valid": true,
+      "reason": "generic_validated"
+    }
+  ],
+  "search_budget_ms_each": 200,
+  "source_sha256": "37c397aaa1e86d2ef28fb6517a7dcf7a99e522e6e229fb92e57f23f9c65afe6b"
+}
